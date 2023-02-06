@@ -7,13 +7,15 @@ int	main(void)
 	char	*inpt;
 	int		i;
 
+
 	//cımmit
+
 	i = 0;
 	while (1)
 	{
-		inpt = readline("Enter text: ");
+		inpt = readline("minishell: ");
 		add_history(inpt);
-		printf("%s", inpt);
+		printf("%s\n", inpt);
 		++i;
 	}
 	return (0);
