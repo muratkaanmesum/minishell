@@ -6,7 +6,7 @@ int	main(void)
 {
 	char	*inpt;
 	int		i;
-
+//rtes
 	i = 0;
 	while (1)
 	{
