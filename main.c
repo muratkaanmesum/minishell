@@ -8,7 +8,7 @@ int	main(void)
 	int		i;
 
 	i = 0;
-	while (i < 10)
+	while (1)
 	{
 		inpt = readline("Enter text: ");
 		add_history(inpt);
