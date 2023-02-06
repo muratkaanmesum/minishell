@@ -6,7 +6,10 @@ int	main(void)
 {
 	char	*inpt;
 	int		i;
-//rtes
+
+
+	//cımmit
+
 	i = 0;
 	while (1)
 	{
