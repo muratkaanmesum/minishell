@@ -7,6 +7,7 @@ int	main(void)
 	char	*inpt;
 	int		i;
 
+	//cımmit
 	i = 0;
 	while (1)
 	{
