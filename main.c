@@ -1,22 +1,16 @@
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <stdio.h>
+#include "minishell.h"
 
 int	main(void)
 {
 	char	*inpt;
-	int		i;
 
-
-	//cımmit
-
-	i = 0;
 	while (1)
 	{
 		inpt = readline("minishell: ");
 		add_history(inpt);
-		printf("%s\n", inpt);
-		++i;
+		lexer(inpt);
+		free(inpt);
 	}
 	return (0);
 }
+//test"grep test"test < test.txt

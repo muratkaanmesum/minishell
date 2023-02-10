@@ -1,4 +1,3 @@
-#-lreadline
 NAME = minishell
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
@@ -10,7 +9,7 @@ $(NAME): *.o $(LIBFT)
 	$(CC) $(FLAGS) $(LIBFT) -o $(NAME) *.o -lreadline
 
 *.o: *.c
-	$(CC) $(FLAGS) -c *.c
+	$(CC) $(FLAGS) -c *.c lexer/*.c
 
 $(LIBFT):
 	@make -C ./libft
