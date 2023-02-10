@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/10 16:53:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/10 19:56:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,30 @@
 
 void	pass_inside_quotes(char *str, int *i, char kontrol)
 {
-	while (str[*i] != kontrol)
+	while (str[*i] != kontrol && str[*i] != '\0')
 		*i = *i + 1;
 }
 
-char	*find_redirection(char *str)
+int	find_redirection(char *str)
 {
-	char	*array;
-	char	**redirections;
-	int		j;
-	int		i;
-
-	array = "<< < >> > |";
-	redirections = ft_split(array, ' ');
-	i = 0;
-	while (redirections[i] != 0)
-	{
-		j = 0;
-		while (redirections[i][j] != '\0')
-		{
-			if (redirections[i][j] != str[j])
-				break ;
-			j++;
-		}
-		if (redirections[i][j] == '\0')
-			return (redirections[i]);
-		i++;
-	}
-	return (NULL);
+	if (ft_strncmp(str, ">>", 2) == 0)
+		return (1);
+	if (ft_strncmp(str, ">", 1) == 0)
+		return (2);
+	if (ft_strncmp(str, "<", 1) == 0)
+		return (3);
+	if (ft_strncmp(str, "<<", 2) == 0)
+		return (4);
+	if (ft_strncmp(str, "|", 1) == 0)
+		return (5);
+	return (0);
 }
-//grep test < test.txt > test.txt
-int	get_token_count(char *str)
-{
+/*
 	int		i;
 	char	kontrol;
 	int		count;
-	char	*redirection;
 
-	count = 1;
+	count = 0;
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -61,27 +47,87 @@ int	get_token_count(char *str)
 			i++;
 			pass_inside_quotes(str, &i, kontrol);
 		}
-		redirection = find_redirection(&str[i]);
-		if (redirection != NULL)
+		if (str[i] == ' ' || find_redirection(&str[i]) != 0)
 		{
-			count++;
-			i += ft_strlen(redirection);
-			if (str[i] != ' ' && str[i] != '\0')
-			{
-				count++;
+			while (find_redirection(&str[i]) != 0)
 				i++;
-			}
-		}
-		if (str[i] == ' ')
-		{
-			count++;
 			while (str[i] == ' ')
 				i++;
+			count++;
 		}
 		i++;
 	}
+	return (count);*/
+int	handle_command_line(char *str, int i)
+{
+	int		j;
+	char	control;
+	int		count;
+
+	count = 1;
+	j = 0;
+	while (j < i)
+	{
+		if (str[j] == '"' || str[j] == '\'')
+		{
+			control = str[i];
+			i++;
+			pass_inside_quotes(str, &i, control);
+			i++;
+		}
+		if (str[j] == ' ')
+		{
+			count++;
+			while (str[j] == ' ')
+				j++;
+		}
+		j++;
+	}
 	return (count);
 }
+int	get_token_count(char *str)
+{
+	int		i;
+	char	kontrol;
+	int		count;
+
+	count = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		while (find_redirection(&str[i]) == 0 && !(str[i] == '"'
+				|| str[i] == '\'') && str[i] != '\0' && str[i] != ' ')
+			i++;
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			kontrol = str[i];
+			i++;
+			pass_inside_quotes(str, &i, kontrol);
+			i++;
+		}
+		if (str[i] == ' ' || find_redirection(&str[i]) != 0 || str[i] == '\0')
+		{
+			if (find_redirection(&str[i]) != 0)
+			{
+				while (find_redirection(&str[i]) != 0)
+					i++;
+				count++;
+			}
+			if (str[i] == ' ')
+			{
+				while (str[i] == ' ')
+					i++;
+				if (find_redirection(&str[i]) == 0)
+					count++;
+				else
+					while (find_redirection(&str[i]) != 0)
+						i++;
+			}
+		}
+	}
+	return (count);
+}
+//grep"asd"asd"asddasd"asd asd<test
 t_token	*lexer(char *str)
 {
 	char	*t_str;
