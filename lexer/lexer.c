@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/10 19:56:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/10 19:57:44 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,8 @@ int	get_token_count(char *str)
 			{
 				while (str[i] == ' ')
 					i++;
-				if (find_redirection(&str[i]) == 0)
-					count++;
-				else
-					while (find_redirection(&str[i]) != 0)
-						i++;
 			}
+			count++;
 		}
 	}
 	return (count);
