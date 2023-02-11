@@ -21,7 +21,7 @@ int	my_alpha(char c)
 
 int	is_redirection(char c)
 {
-	if (c == '<' || c == '>' || c == '|')
+	if (c == '<' || c == '>' || c == '|' || c == '&')
 		return (1);
 	return (0);
 }
@@ -35,12 +35,12 @@ void	define_character(char *str, int *i, int *count)
 		*count += 1;
 		while (my_alpha(str[*i]) && str[*i] != '\0')
 		{
-			if (str[*i] == '"')
+			if (str[*i] == '"' || str[*i] == '\'')
 			{
 				*i += 1;
-				while (1)
+				while (str[*i] != '\0')
 				{
-					if (str[*i] == '"')
+					if (str[*i] == '"' || str[*i] == '\'')
 						break ;
 					*i += 1;
 				}
