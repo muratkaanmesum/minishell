@@ -14,7 +14,7 @@
 
 int	my_alpha(char c)
 {
-	if (c != 60 && c != 62 && c != 124 && c != ' ')
+	if (c != 60 && c != 62 && c != 124 && c != ' ' && c != '&')
 		return (1);
 	return (0);
 }
