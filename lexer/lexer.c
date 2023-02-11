@@ -12,117 +12,76 @@
 
 #include "../minishell.h"
 
-void	pass_inside_quotes(char *str, int *i, char kontrol)
+int my_alpha(char c)
 {
-	while (str[*i] != kontrol && str[*i] != '\0')
-		*i = *i + 1;
-}
-
-int	find_redirection(char *str)
-{
-	if (ft_strncmp(str, ">>", 2) == 0)
+	if (c != 60 && c != 62 && c != 124 && c != ' ')
 		return (1);
-	if (ft_strncmp(str, ">", 1) == 0)
-		return (2);
-	if (ft_strncmp(str, "<", 1) == 0)
-		return (3);
-	if (ft_strncmp(str, "<<", 2) == 0)
-		return (4);
-	if (ft_strncmp(str, "|", 1) == 0)
-		return (5);
 	return (0);
 }
-/*
-	int		i;
-	char	kontrol;
-	int		count;
 
-	count = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			kontrol = str[i];
-			i++;
-			pass_inside_quotes(str, &i, kontrol);
-		}
-		if (str[i] == ' ' || find_redirection(&str[i]) != 0)
-		{
-			while (find_redirection(&str[i]) != 0)
-				i++;
-			while (str[i] == ' ')
-				i++;
-			count++;
-		}
-		i++;
-	}
-	return (count);*/
-int	handle_command_line(char *str, int i)
+int	is_redirection(char c)
 {
-	int		j;
-	char	control;
-	int		count;
-
-	count = 1;
-	j = 0;
-	while (j < i)
-	{
-		if (str[j] == '"' || str[j] == '\'')
-		{
-			control = str[i];
-			i++;
-			pass_inside_quotes(str, &i, control);
-			i++;
-		}
-		if (str[j] == ' ')
-		{
-			count++;
-			while (str[j] == ' ')
-				j++;
-		}
-		j++;
-	}
-	return (count);
+	if (c == '<' || c == '>' || c == '|')
+		return(1);
+	return(0);
 }
-int	get_token_count(char *str)
+
+
+void define_character(char *str,int *i,int *count)
 {
-	int		i;
-	char	kontrol;
-	int		count;
-
-	count = 0;
-	i = 0;
-	while (str[i] != '\0')
+	if (my_alpha(str[*i]))
 	{
-		while (find_redirection(&str[i]) == 0 && !(str[i] == '"'
-				|| str[i] == '\'') && str[i] != '\0' && str[i] != ' ')
-			i++;
-		if (str[i] == '"' || str[i] == '\'')
+		*count += 1;
+		while(my_alpha(str[*i]) && str[*i] != '\0')
 		{
-			kontrol = str[i];
-			i++;
-			pass_inside_quotes(str, &i, kontrol);
-			i++;
-		}
-		if (str[i] == ' ' || find_redirection(&str[i]) != 0 || str[i] == '\0')
-		{
-			if (find_redirection(&str[i]) != 0)
+			if(str[*i] == '"')
 			{
-				while (find_redirection(&str[i]) != 0)
-					i++;
-				count++;
+				*i+=1;
+				while(1)
+				{
+					if(str[*i] == '"')
+						break;
+					*i+=1;
+				}
 			}
-			if (str[i] == ' ')
-			{
-				while (str[i] == ' ')
-					i++;
-			}
-			count++;
+			*i+=1;
 		}
 	}
-	return (count);
+	if (is_redirection(str[*i]))
+	{
+		*count += 1;
+		int counter = 0;
+		while(is_redirection(str[*i])&& str[*i] != '\0')
+		{
+			*i+=1;
+			counter++;
+			if (counter ==2)
+				break;
+		}
+	}
 }
+
+int get_token_count(char *str)
+{
+	int *i;
+	int *count;
+
+	count = malloc(sizeof(int));
+	i = malloc(sizeof(int));
+	*count = 0;
+	*i = 0;
+	while (str[*i] != '\0')
+	{
+		define_character(str,i,count);
+		if (str[*i] == ' ')
+		{
+			while(str[*i] == ' ' && str[*i] != '\0')
+				*i+=1;
+		}
+	}
+	return (*count);
+}
+
 //grep"asd"asd"asddasd"asd asd<test
 t_token	*lexer(char *str)
 {
