@@ -1,9 +1,12 @@
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	char	*inpt;
 
+	if (argc != 1)
+		return (0);
+	(void)argv;
 	while (1)
 	{
 		inpt = readline("minishell: ");
@@ -13,4 +16,3 @@ int	main(void)
 	}
 	return (0);
 }
-//test"grep test"test < test.txt
