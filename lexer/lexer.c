@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/11 07:48:12 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/12 15:45:47 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,21 @@ void	define_character(char *str, int *i, int *count)
 
 int	get_token_count(char *str)
 {
-	int	*i;
-	int	*count;
-	int	j;
-	int	t_count;
+	int	i;
+	int	count;
 
-	j = 0;
-	t_count = 0;
-	count = &t_count;
-	i = &j;
-	while (str[*i] != '\0')
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
 	{
-		define_character(str, i, count);
-		if (str[*i] == ' ')
+		define_character(str, &i, &count);
+		if (str[i] == ' ')
 		{
-			while (str[*i] == ' ' && str[*i] != '\0')
-				*i += 1;
+			while (str[i] == ' ' && str[i] != '\0')
+				i++;
 		}
 	}
-	return (*count);
+	return (count);
 }
 
 t_token	*lexer(char *str)
