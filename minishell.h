@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/10 16:57:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/12 15:48:29 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,7 @@ typedef struct s_token
 	int			end_index;
 }				t_token;
 t_token			*lexer(char *str);
+int				my_alpha(char c);
+int				is_redirection(char c);
+int				get_token_count(char *str);
 #endif

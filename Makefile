@@ -14,8 +14,7 @@ FLAGS    := -Wall -Wextra -Werror
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS        :=      lexer/lexer.c \
-                          libft/ft_isalnum.c \
+SRCS        :=            libft/ft_isalnum.c \
                           libft/ft_lstsize.c \
                           libft/ft_memmove.c \
                           libft/ft_lstiter.c \
@@ -59,6 +58,9 @@ SRCS        :=      lexer/lexer.c \
                           libft/ft_isalpha.c \
                           libft/ft_calloc.c \
                           main.c \
+                          lexer/lexer.c\
+                          lexer/lexer_utils.c\
+                          lexer/get_token_count.c\
 
 OBJS        := $(SRCS:.c=.o)
 
