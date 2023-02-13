@@ -3,6 +3,7 @@
 int	main(int argc, char **argv)
 {
 	char	*inpt;
+	t_token	*tokens;
 
 	if (argc != 1)
 		return (0);
@@ -11,7 +12,8 @@ int	main(int argc, char **argv)
 	{
 		inpt = readline("minishell: ");
 		add_history(inpt);
-		lexer(inpt);
+		tokens = lexer(inpt);
+		parser(tokens);
 		free(inpt);
 	}
 	return (0);
