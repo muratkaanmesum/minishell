@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 18:39:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/13 19:12:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_command
 	char					*command;
 	char					*option;
 	char					**argument;
-	struct s_redirections	redirections;
+	struct s_redirections	*redirections;
 	struct s_command		*next;
 }							t_command;
 

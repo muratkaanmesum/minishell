@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 19:00:46 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/13 19:12:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ t_command	*open_commands(int count)
 		if (prev == NULL)
 		{
 			prev = new;
+			prev->redirections = malloc(sizeof(t_redirections));
 			start = prev;
 		}
 		else
 		{
 			prev->next = new;
+			new->redirections = malloc(sizeof(t_redirections));
 			prev = new;
 		}
 		i++;
@@ -56,12 +58,15 @@ t_command	*open_commands(int count)
 	return (start);
 }
 
-//test asd < test | test asd "asddsa" && test asd ||ads
+t_command	*fill_command(t_command *commands, t_token *tokens)
+{
+}
+
 void	parser(t_token *tokens)
 {
 	int			i;
 	t_command	*command;
 
 	i = 0;
-	command = open_commands(command_count(tokens));
+	command = fill_command(open_commands(command_count(tokens)), tokens);
 }
