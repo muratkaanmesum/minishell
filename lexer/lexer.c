@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/12 15:47:52 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/13 12:17:29 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 t_token	*lexer(char *str)
 {
 	char	*t_str;
+	t_token	*tokens;
 
 	t_str = ft_strtrim(str, " ");
-	printf("%d\n", get_token_count(t_str));
-	return (NULL);
+	tokens = malloc(sizeof(t_token) * (get_token_count(t_str) + 1));
+	assign_tokens(tokens, t_str);
+	return (0);
 }

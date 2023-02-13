@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/12 15:48:29 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/13 12:51:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
-typedef struct s_struct
+typedef struct s_command
 {
 	char		start[2];
 	char		*command;
@@ -26,7 +26,13 @@ typedef struct s_struct
 	char		*argument;
 	char		end[2];
 }				t_command;
-
+typedef struct s_lexer_args
+{
+	t_token		*tokens;
+	int			index;
+	int			i;
+	char		*str;
+}				t_lexer_args;
 enum			token
 {
 	I_REDIRECTION,
