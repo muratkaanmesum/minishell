@@ -1,59 +1,58 @@
 #include "../minishell.h"
 
-void	assign_token(t_token *tokens, char *str, int *i, int *index)
+void	assign_token(t_lexer_args *args)
 {
-	static int	counter;
-
-	if (counter == 1)
-		tokens[*index].token = COMMAND;
-	else if (counter > 1)
+	if (args->counter == 1)
+		args->tokens[args->index].token = COMMAND;
+	else if (args->counter > 1)
 	{
-		if (str[*i] == '-')
-			tokens[*index].token = OPTION;
+		if (args->str[args->i] == '-')
+			args->tokens[args->index].token = OPTION;
 		else
-			tokens[*index].token = ARG;
+			args->tokens[args->index].token = ARG;
 	}
+	args->index++;
 }
-void	assign_arg(char *str, int *i, t_token *tokens, int *index)
+void	assign_arg(t_lexer_args *args)
 {
-	static int	counter;
-
-	if (my_alpha(str[*i]))
+	if (my_alpha(args->str[args->i]))
 	{
-		counter++;
-		assign_token(tokens, str, i, index);
-		while (my_alpha(str[*i]) && str[*i] != '\0')
+		args->counter++;
+		assign_token(args);
+		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
 		{
-			if (str[*i] == '"' || str[*i] == '\'')
+			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 			{
-				*i += 1;
-				while (str[*i] != '\0')
+				args->i++;
+				while (args->str[args->i] != '\0')
 				{
-					if (str[*i] == '"' || str[*i] == '\'')
+					if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 						break ;
-					*i += 1;
+					args->i++;
 				}
 			}
-			*i += 1;
+			args->i++;
 		}
 	}
 }
 
-void	define_character(char *str, int *i, t_token *tokens, int *index)
+void	assign_character(t_lexer_args *args)
 {
 	int	red_count;
 
-	assign_arg(str, &i, tokens, index);
-	if (is_redirection(str[*i]))
+	assign_arg(args);
+	if (is_redirection(args->str[args->i]))
 	{
 		red_count = 0;
-		while (is_redirection(str[*i]) && str[*i] != '\0')
+		while (is_redirection(args->str[args->i]) && args->str[args->i] != '\0')
 		{
-			*i += 1;
+			args->i++;
 			red_count++;
 			if (red_count == 2)
 				break ;
 		}
+		args->counter = 0;
+		args->index++;
 	}
 }
 //test << test test <tset | test
@@ -66,14 +65,14 @@ void	assign_tokens(t_token *tokens, char *str)
 	args->str = str;
 	args->i = 0;
 	args->index = 0;
-	while (str[i] != '\0')
+	args->counter = 0;
+	while (args->str[args->i] != '\0')
 	{
-		define_character(str, &i, tokens, &index);
-		if (str[i] == ' ')
+		assign_character(args);
+		if (args->str[args->i] == ' ')
 		{
-			while (str[i] == ' ' && str[i] != '\0')
-				i++;
+			while (args->str[args->i] == ' ' && args->str[args->i] != '\0')
+				args->i++;
 		}
-		index++;
 	}
 }
