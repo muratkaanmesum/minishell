@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 13:51:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:07:47 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_token	*lexer(char *str)
 	for (int i = 0; i < get_token_count(t_str); i++)
 	{
 		printf("token : %d start : %d end : %d\n", tokens[i].token,
-				tokens->start_index, tokens->end_index);
+				tokens[i].start_index, tokens[i].end_index);
 	}
 	// for (int i = 0; i < get_token_count(t_str); i++)
 	// {

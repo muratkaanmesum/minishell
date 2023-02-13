@@ -20,14 +20,21 @@ void	assign_token(t_lexer_args *args)
 	}
 	args->index++;
 }
+
 void	assign_arg(t_lexer_args *args)
 {
 	if (my_alpha(args->str[args->i]))
 	{
 		args->counter++;
+		args->tokens[args->index].start_index = args->i;
 		assign_token(args);
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
 		{
+			if (args->str[args->i] == '$' && args->counter == 1)
+			{
+				printf("hello\n");
+				args->tokens[args->index - 1].token = ENV_COMMAND;
+			}
 			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 			{
 				args->i++;
@@ -40,6 +47,7 @@ void	assign_arg(t_lexer_args *args)
 			}
 			args->i++;
 		}
+		args->tokens[args->index - 1].end_index = args->i;
 	}
 }
 
@@ -69,6 +77,7 @@ void	assign_character(t_lexer_args *args)
 	if (is_redirection(args->str[args->i]))
 	{
 		red_count = 0;
+		args->tokens[args->index].start_index = args->i;
 		while (is_redirection(args->str[args->i]) && args->str[args->i] != '\0')
 		{
 			args->i++;
@@ -77,6 +86,7 @@ void	assign_character(t_lexer_args *args)
 				break ;
 		}
 		assign_redirection(args, red_count);
+		args->tokens[args->index].end_index = args->i;
 		args->counter = 0;
 		args->index++;
 	}
