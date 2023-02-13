@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 13:01:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:27:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ enum				token
 	OPTION,
 	AND,
 	OR,
+	ENV_COMMAND,
 	ENV,
 	UNKNOWN
 };

@@ -3,11 +3,18 @@
 void	assign_token(t_lexer_args *args)
 {
 	if (args->counter == 1)
-		args->tokens[args->index].token = COMMAND;
+	{
+		if (args->str[args->i] == '$')
+			args->tokens[args->index].token = ENV_COMMAND;
+		else
+			args->tokens[args->index].token = COMMAND;
+	}
 	else if (args->counter > 1)
 	{
 		if (args->str[args->i] == '-')
 			args->tokens[args->index].token = OPTION;
+		else if (args->str[args->i] == '$')
+			args->tokens[args->index].token = ENV;
 		else
 			args->tokens[args->index].token = ARG;
 	}
@@ -36,6 +43,24 @@ void	assign_arg(t_lexer_args *args)
 	}
 }
 
+void	assign_redirection(t_lexer_args *args, int red_count)
+{
+	if (args->str[args->i - red_count] == '<' && red_count == 1)
+		args->tokens[args->index].token = I_REDIRECTION;
+	else if (args->str[args->i - red_count] == '<' && red_count == 2)
+		args->tokens[args->index].token = HERE_DOC;
+	else if (args->str[args->i - red_count] == '>' && red_count == 1)
+		args->tokens[args->index].token = O_REDIRECTION;
+	else if (args->str[args->i - red_count] == '>' && red_count == 2)
+		args->tokens[args->index].token = APPEND_RED;
+	else if (args->str[args->i - red_count] == '|' && red_count == 1)
+		args->tokens[args->index].token = PIPE;
+	else if (args->str[args->i - red_count] == '|' && red_count == 2)
+		args->tokens[args->index].token = OR;
+	else if (args->str[args->i - red_count] == '&' && red_count == 2)
+		args->tokens[args->index].token = AND;
+}
+
 void	assign_character(t_lexer_args *args)
 {
 	int	red_count;
@@ -51,6 +76,7 @@ void	assign_character(t_lexer_args *args)
 			if (red_count == 2)
 				break ;
 		}
+		assign_redirection(args, red_count);
 		args->counter = 0;
 		args->index++;
 	}
