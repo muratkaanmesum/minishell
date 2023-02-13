@@ -24,8 +24,8 @@ void	assign_arg(t_lexer_args *args)
 {
 	if (my_alpha(args->str[args->i]))
 	{
+		args->tokens[args->index].start_index = args->i;
 		args->counter++;
-		assign_token(args);
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
 		{
 			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
@@ -40,9 +40,11 @@ void	assign_arg(t_lexer_args *args)
 			}
 			args->i++;
 		}
+		args->tokens[args->index].end_index = args->i;
+		assign_token(args);
 	}
 }
-
+//test"asdasd"asd < test test
 void	assign_redirection(t_lexer_args *args, int red_count)
 {
 	if (args->str[args->i - red_count] == '<' && red_count == 1)
