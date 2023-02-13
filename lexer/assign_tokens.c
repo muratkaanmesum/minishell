@@ -3,18 +3,11 @@
 void	assign_token(t_lexer_args *args)
 {
 	if (args->counter == 1)
-	{
-		if (args->str[args->i] == '$')
-			args->tokens[args->index].token = ENV_COMMAND;
-		else
-			args->tokens[args->index].token = COMMAND;
-	}
+		args->tokens[args->index].token = COMMAND;
 	else if (args->counter > 1)
 	{
 		if (args->str[args->i] == '-')
 			args->tokens[args->index].token = OPTION;
-		else if (args->str[args->i] == '$')
-			args->tokens[args->index].token = ENV;
 		else
 			args->tokens[args->index].token = ARG;
 	}
@@ -31,10 +24,9 @@ void	assign_arg(t_lexer_args *args)
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
 		{
 			if (args->str[args->i] == '$' && args->counter == 1)
-			{
-				printf("hello\n");
 				args->tokens[args->index - 1].token = ENV_COMMAND;
-			}
+			else if (args->str[args->i] == '$' && args->counter > 1)
+				args->tokens[args->index - 1].token = ENV;
 			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 			{
 				args->i++;
