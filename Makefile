@@ -62,6 +62,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\
                           lexer/assign_tokens.c\
+                          parser/parser.c\
 
 OBJS        := $(SRCS:.c=.o)
 

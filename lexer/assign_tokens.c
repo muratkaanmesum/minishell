@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   assign_tokens.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
+/*   Updated: 2023/02/13 16:15:22 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	assign_token(t_lexer_args *args)
@@ -83,7 +95,7 @@ void	assign_character(t_lexer_args *args)
 		args->index++;
 	}
 }
-//test << test test <tset | test
+
 void	assign_tokens(t_token *tokens, char *str)
 {
 	t_lexer_args	*args;
@@ -103,4 +115,5 @@ void	assign_tokens(t_token *tokens, char *str)
 				args->i++;
 		}
 	}
+	free(args);
 }

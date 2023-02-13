@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 13:27:19 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/13 18:39:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,29 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+typedef struct s_redirections
+{
+	int						infile;
+	int						outfile;
+}							t_redirections;
 typedef struct s_command
 {
-	char			start[2];
-	char			*command;
-	char			*option;
-	char			*argument;
-	char			end[2];
-}					t_command;
+	char					*command;
+	char					*option;
+	char					**argument;
+	struct s_redirections	redirections;
+	struct s_command		*next;
+}							t_command;
+
 typedef struct s_lexer_args
 {
-	int				index;
-	int				i;
-	char			*str;
-	int				counter;
-	struct s_token	*tokens;
-}					t_lexer_args;
-enum				token
+	int						index;
+	int						i;
+	char					*str;
+	int						counter;
+	struct s_token			*tokens;
+}							t_lexer_args;
+enum						e_token
 {
 	I_REDIRECTION,
 	O_REDIRECTION,
@@ -52,13 +58,15 @@ enum				token
 };
 typedef struct s_token
 {
-	enum token		token;
-	int				start_index;
-	int				end_index;
-}					t_token;
-t_token				*lexer(char *str);
-int					my_alpha(char c);
-int					is_redirection(char c);
-int					get_token_count(char *str);
-void				assign_tokens(t_token *tokens, char *str);
+	enum e_token			token;
+	int						start_index;
+	int						end_index;
+	char					*str;
+}							t_token;
+t_token						*lexer(char *str);
+int							my_alpha(char c);
+int							is_redirection(char c);
+int							get_token_count(char *str);
+void						assign_tokens(t_token *tokens, char *str);
+void						parser(t_token *tokens);
 #endif
