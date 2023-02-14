@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/14 16:51:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:53:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ int							get_token_count(char *str);
 void						assign_tokens(t_token *tokens, char *str);
 void						parser(t_token *tokens);
 t_redirections				*create_redirections(t_token *tokens);
+int							command_count(t_token *tokens);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/14 16:51:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:56:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_command	*open_commands(int count)
 t_command	*fill_command(t_command *commands, t_token *tokens)
 {
 	create_redirections(tokens);
+	return (commands);
 }
 
 //cat <test.txt  | wc -l | ls | ls | uniq < test.txt | grep a <
@@ -69,4 +70,5 @@ void	parser(t_token *tokens)
 	t_command	*command;
 
 	command = fill_command(open_commands(command_count(tokens)), tokens);
+	(void)command;
 }
