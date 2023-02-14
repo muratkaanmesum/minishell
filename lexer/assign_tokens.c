@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 16:15:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:00:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,13 @@ void	assign_character(t_lexer_args *args)
 		}
 		assign_redirection(args, red_count);
 		args->tokens[args->index].end_index = args->i;
-		args->counter = 0;
+		if ((args->str[args->i - red_count] == '<' && red_count == 1)
+			|| (args->str[args->i - red_count] == '<' && red_count == 2)
+			|| (args->str[args->i - red_count] == '>' && red_count == 2)
+			|| (args->str[args->i - red_count] == '>' && red_count == 1))
+			args->counter = 1;
+		else
+			args->counter = 0;
 		args->index++;
 	}
 }
