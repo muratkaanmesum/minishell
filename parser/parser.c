@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 19:44:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:51:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ t_command	*open_commands(int count)
 
 t_command	*fill_command(t_command *commands, t_token *tokens)
 {
+	create_redirections(tokens);
 }
 
+//cat <test.txt  | wc -l | ls | ls | uniq < test.txt | grep a <
 void	parser(t_token *tokens)
 {
-	int			i;
 	t_command	*command;
 
-	i = 0;
 	command = fill_command(open_commands(command_count(tokens)), tokens);
 }

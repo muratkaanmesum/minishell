@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 19:12:35 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:51:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>
 typedef struct s_redirections
 {
-	int						infile;
-	int						outfile;
+	char					*infile;
+	char					*outfile;
 }							t_redirections;
 typedef struct s_command
 {
@@ -69,4 +69,5 @@ int							is_redirection(char c);
 int							get_token_count(char *str);
 void						assign_tokens(t_token *tokens, char *str);
 void						parser(t_token *tokens);
+t_redirections				*create_redirections(t_token *tokens);
 #endif
