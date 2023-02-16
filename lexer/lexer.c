@@ -18,6 +18,7 @@ void	check_tokens(t_token *tokens)
 		|| tokens[0].token == APPEND_RED || tokens[0].token == O_REDIRECTION)
 		tokens[2].token = COMMAND;
 }
+
 t_token	*lexer(char *str)
 {
 	char	*t_str;

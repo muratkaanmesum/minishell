@@ -6,15 +6,12 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/14 19:12:09 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/16 12:41:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// cat < test.txt | wc -l | test > outfile.txt
-// < test.txt cat | wc -l | test > outfile.txt
-// cat < test.txt < test2.txt | wc -l < test.txt | test > outfile.txt
 int	does_include(t_token *tokens, int start, int end)
 {
 	while (start < end)
