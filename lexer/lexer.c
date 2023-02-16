@@ -6,18 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/14 14:38:35 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/16 14:21:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	check_tokens(t_token *tokens)
-{
-	if (tokens[0].token == I_REDIRECTION || tokens[0].token == HERE_DOC
-		|| tokens[0].token == APPEND_RED || tokens[0].token == O_REDIRECTION)
-		tokens[2].token = COMMAND;
-}
 
 t_token	*lexer(char *str)
 {
@@ -37,6 +30,5 @@ t_token	*lexer(char *str)
 		i++;
 	}
 	free(t_str);
-	check_tokens(tokens);
 	return (tokens);
 }

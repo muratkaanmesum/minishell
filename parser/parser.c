@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/14 16:56:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/16 15:09:03 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,16 @@ t_command	*open_commands(int count)
 
 t_command	*fill_command(t_command *commands, t_token *tokens)
 {
-	create_redirections(tokens);
+	t_redirections	*redirections;
+	int				end;
+
+	end = command_count(tokens);
+	printf("end %d\n", end);
+	redirections = create_redirections(tokens);
+	for (int i = 0; i < end; i++)
+	{
+		printf("redirections[%d].input: %s\n", i, redirections[i].infile);
+	}
 	return (commands);
 }
 

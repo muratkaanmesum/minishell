@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/16 12:48:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/16 14:35:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_lexer_args
 	char					*str;
 	int						counter;
 	struct s_token			*tokens;
+	int						is_redirection;
 }							t_lexer_args;
 enum						e_token
 {
@@ -54,6 +55,7 @@ enum						e_token
 	OR,
 	ENV_COMMAND,
 	ENV,
+	RED_FILE,
 	UNKNOWN
 };
 typedef struct s_token
@@ -71,4 +73,6 @@ void						assign_tokens(t_token *tokens, char *str);
 void						parser(t_token *tokens);
 t_redirections				*create_redirections(t_token *tokens);
 int							command_count(t_token *tokens);
+void						handle_redirection(t_redirections *redirection,
+								int start, int end, t_token *tokens);
 #endif
