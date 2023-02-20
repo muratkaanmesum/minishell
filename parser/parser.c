@@ -6,11 +6,28 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 13:59:38 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/20 14:21:24 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int connection_count(t_token *tokens)
+{
+	int count = 0;
+	while(tokens->token  != UNKNOWN)
+	{
+		if (tokens->token == OPEN_PAR)
+			{
+				while(tokens->token != CLOSE_PAR)
+					tokens++;
+			}
+		if (tokens->token == AND || tokens->token == OR)
+			count++;
+		tokens++;
+	}
+	return(count+1);
+}
 
 int	command_count(t_token *tokens)
 {
@@ -74,6 +91,7 @@ void	parser(t_token *tokens)
 {
 	t_command	*command;
 
-	command = fill_command(open_commands(command_count(tokens)), tokens);
+	//command = fill_command(open_commands(command_count(tokens)), tokens);
+	printf("%d\n",connection_count(tokens));
 	(void)command;
 }
