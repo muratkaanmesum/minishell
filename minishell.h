@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/16 15:40:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/20 14:06:20 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ enum						e_token
 	ENV_COMMAND,
 	ENV,
 	RED_FILE,
+	OPEN_PAR,
+	CLOSE_PAR,
 	UNKNOWN
 };
 typedef struct s_redirections
@@ -49,8 +51,12 @@ typedef struct s_command
 	char					**argument;
 	struct s_redirections	*redirections;
 	struct s_command		*next;
+	struct s_command **connections;
 }							t_command;
-
+typedef struct s_tree_node{
+	struct s_command *command;
+	struct s_tree_node **connections;
+}t_tree_node;
 typedef struct s_lexer_args
 {
 	int						index;

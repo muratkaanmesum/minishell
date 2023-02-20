@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/13 15:41:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:14:40 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	define_character(char *str, int *i, int *count)
 			if (counter == 2)
 				break ;
 		}
+	}
+	if (str[*i] == '(' || str[*i] == ')')
+	{
+		*count += 1;
+		*i += 1;
 	}
 }
 

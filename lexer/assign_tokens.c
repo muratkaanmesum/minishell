@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/16 14:37:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:24:08 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,26 @@ void	assign_character(t_lexer_args *args)
 // < test.txt grep e | uniq >outfile.txt
 // < test.txt < test.txt grep
 
+void	assign_parantheses(t_lexer_args *args)
+{
+	if (args->str[args->i] == '(')
+	{
+		args->tokens[args->index].start_index = args->i;
+		args->tokens[args->index].token = OPEN_PAR;
+		args->i++;
+		args->tokens[args->index].end_index = args->i;
+		args->index++;
+	}
+	else if (args->str[args->i] == ')')
+	{
+		args->tokens[args->index].start_index = args->i;
+		args->tokens[args->index].token = CLOSE_PAR;
+		args->i++;
+		args->tokens[args->index].end_index = args->i;
+		args->index++;
+	}
+}
+
 void	assign_tokens(t_token *tokens, char *str)
 {
 	t_lexer_args	*args;
@@ -128,6 +148,7 @@ void	assign_tokens(t_token *tokens, char *str)
 	while (args->str[args->i] != '\0')
 	{
 		assign_character(args);
+		assign_parantheses(args);
 		if (args->str[args->i] == ' ')
 		{
 			while (args->str[args->i] == ' ' && args->str[args->i] != '\0')
