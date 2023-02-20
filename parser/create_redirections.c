@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   create_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/16 16:57:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/20 16:05:25 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+int	command_count(t_token *tokens)
+{
+	int	count;
 
+	count = 0;
+	while (tokens->token != UNKNOWN)
+	{
+		if (tokens->token == PIPE || tokens->token == AND
+			|| tokens->token == OR)
+			count++;
+		tokens++;
+	}
+	count++;
+	return (count);
+}
 int	does_include(t_token *tokens, int start, int end)
 {
 	while (start < end)
@@ -52,6 +66,5 @@ t_redirections	*create_redirections(t_token *tokens)
 		t_index++;
 		i++;
 	}
-
 	return (red);
 }

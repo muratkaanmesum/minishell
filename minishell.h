@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 14:06:20 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/20 16:48:08 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ typedef struct s_command
 	char					*option;
 	char					**argument;
 	struct s_redirections	*redirections;
-	struct s_command		*next;
-	struct s_command **connections;
 }							t_command;
-typedef struct s_tree_node{
-	struct s_command *command;
-	struct s_tree_node **connections;
-}t_tree_node;
+typedef struct s_tree_node
+{
+	struct s_command		*command;
+	struct s_tree_node		**connections;
+	enum e_token			priority;
+}							t_tree_node;
 typedef struct s_lexer_args
 {
 	int						index;
@@ -86,4 +86,8 @@ void	handle_redirection(t_redirections *redirection,
 						int start,
 						int end,
 						t_token *tokens);
+int							connection_count(t_token *tokens);
+int							get_split_tokens(t_token *tokens);
+t_token						**split_token(t_token *tokens);
+
 #endif
