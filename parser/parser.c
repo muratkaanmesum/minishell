@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 19:33:51 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/20 19:37:27 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_token	*check_split(t_token *split)
 	j = 1;
 	while (split[i].token != UNKNOWN)
 		i++;
-	if (split[0].token == OPEN_PAR && split[i].token == CLOSE_PAR)
+	if (split[0].token == OPEN_PAR && split[i - 1].token == CLOSE_PAR)
 	{
 		new_split = malloc(sizeof(t_token) * (i - 1));
 		while (j < i - 1)
@@ -93,7 +93,7 @@ t_tree_node	*handle_connections(t_tree_node *head, t_token *tokens)
 	while (split[i] != NULL)
 	{
 		split[i] = check_split(split[i]);
-		printf("test\n");
+		print(split[i], i);
 		head->connections[i] = handle_connections(malloc(sizeof(t_tree_node)),
 													split[i]);
 		i++;
