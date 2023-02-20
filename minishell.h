@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 16:48:08 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/20 19:56:58 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,5 @@ void	handle_redirection(t_redirections *redirection,
 int							connection_count(t_token *tokens);
 int							get_split_tokens(t_token *tokens);
 t_token						**split_token(t_token *tokens);
-
+t_token						*check_split(t_token *split);
 #endif

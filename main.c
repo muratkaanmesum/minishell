@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 19:30:35 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/20 20:03:18 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 		// 			tokens[i].start_index, tokens[i].end_index, tokens[i].str);
 		// }
 		// split = split_token(tokens);
+		// split = check_split(split[0]);
 		// printf("%d\n", connection_count(tokens));
 		// printf("%d\n", get_split_tokens(tokens));
 		i = 0;

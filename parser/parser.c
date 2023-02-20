@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 19:37:27 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/20 20:02:59 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_token	*check_split(t_token *split)
 			new_split[j - 1] = split[j];
 			j++;
 		}
-		new_split[j].token = UNKNOWN;
+		new_split[j - 1].token = UNKNOWN;
 		free(split);
 		return (new_split);
 	}
