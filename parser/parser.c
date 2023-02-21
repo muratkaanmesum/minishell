@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 20:02:59 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:09:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ t_tree_node	*handle_connections(t_tree_node *head, t_token *tokens)
 	int		i;
 
 	i = 0;
-	if (does_priority(tokens) == 0)
-		return (NULL);
+	// if (does_priority(tokens) == 0)
+	// 	return (NULL);
 	i = 0;
 	head->connections = malloc(sizeof(t_tree_node *)
 			* connection_count(tokens));
@@ -93,7 +93,6 @@ t_tree_node	*handle_connections(t_tree_node *head, t_token *tokens)
 	while (split[i] != NULL)
 	{
 		split[i] = check_split(split[i]);
-		print(split[i], i);
 		head->connections[i] = handle_connections(malloc(sizeof(t_tree_node)),
 													split[i]);
 		i++;
