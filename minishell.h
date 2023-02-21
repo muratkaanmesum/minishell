@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/21 12:51:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:12:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,6 @@ int							connection_count(t_token *tokens);
 int							get_split_tokens(t_token *tokens);
 t_token						**split_token(t_token *tokens);
 t_token						*check_split(t_token *split);
+t_tree_node					*handle_connections(t_tree_node *head,
+								t_token *tokens);
 #endif
