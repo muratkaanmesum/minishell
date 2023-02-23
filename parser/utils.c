@@ -3,110 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/21 11:59:54 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/23 14:45:13 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	connection_count(t_token *tokens)
+
+t_token	*check_split(t_token *split)
 {
-	int	count;
-	int	open_count;
-	int	i;
+	int		i;
+	int		j;
+	t_token	*new_split;
 
 	i = 0;
-	open_count = 0;
-	count = 0;
-	while (tokens[i].token != UNKNOWN)
+	j = 1;
+	while (split[i].token != UNKNOWN)
+		i++;
+	if (split[0].token == OPEN_PAR && split[i].token == CLOSE_PAR)
 	{
-		if (tokens[i].token == OPEN_PAR)
+		new_split = malloc(sizeof(t_token) * (i - 1));
+		while (j < i - 1)
 		{
-			open_count++;
-			i++;
-			while (open_count != 0 && tokens[i].token != UNKNOWN)
-			{
-				if (tokens[i].token == OPEN_PAR)
-					open_count++;
-				if (tokens[i].token == CLOSE_PAR)
-					open_count--;
-				i++;
-			}
-		}
-		if (tokens[i].token == AND || tokens[i].token == OR)
-			count++;
-		if (tokens[i].token != UNKNOWN)
-			i++;
-	}
-	return (count + 1);
-}
-
-int	get_split_tokens(t_token *tokens)
-{
-	int	i;
-	int	open_count;
-	int	sayac;
-
-	i = 0;
-	open_count = 0;
-	sayac = 0;
-	while (tokens[i].token != UNKNOWN)
-	{
-		if (tokens[i].token == OPEN_PAR)
-		{
-			open_count++;
-			sayac++;
-			i++;
-			while (open_count != 0)
-			{
-				if (tokens[i].token == OPEN_PAR)
-					open_count++;
-				if (tokens[i].token == CLOSE_PAR)
-					open_count--;
-				sayac++;
-				i++;
-			}
-		}
-		if (tokens[i].token == AND || tokens[i].token == OR)
-			break ;
-		if (tokens[i].token != UNKNOWN)
-			i++;
-		sayac++;
-	}
-	return (sayac);
-}
-
-t_token	**split_token(t_token *tokens)
-{
-	t_token	**split;
-	t_token	*start;
-	int		t_index;
-
-	int i, j;
-	t_index = 0;
-	split = malloc(sizeof(t_token *) * connection_count(tokens) + 1);
-	i = 0;
-	j = 0;
-	while (i < connection_count(tokens))
-	{
-		j = 0;
-		start = &tokens[t_index];
-		split[i] = malloc(sizeof(t_token) * (get_split_tokens(start) + 1));
-		while (j < get_split_tokens(start))
-		{
-			split[i][j] = tokens[t_index];
-			t_index++;
+			new_split[j - 1] = split[j];
 			j++;
 		}
-		split[i][j].token = UNKNOWN;
-		t_index++;
-		i++;
+		new_split[j].token = UNKNOWN;
+		free(split);
+		return (new_split);
 	}
-	split[i] = NULL;
 	return (split);
 }
-// 0 cmd red file unknown
-//1 test pipe test pipe unknown
+//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls | ls (grep e && ls) || (cat))
+
+//(((cat test.txt) && (echo hello) && (ls | (cat test.txt))))
+//(cat test.txt && test)
+// ls 
+//(cat test.txt || test)
+
+//((cat test.txt) && (echo hello) && (ls | ((cat test.txt))))
+//cat test.txt

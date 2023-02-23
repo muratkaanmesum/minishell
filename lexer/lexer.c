@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 13:26:47 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/23 14:57:35 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_token	*lexer(char *str)
 	{
 		tokens[i].str = ft_substr(t_str, tokens[i].start_index,
 				tokens[i].end_index - tokens[i].start_index);
+		tokens[i].id = i;
 		i++;
 	}
 	free(t_str);

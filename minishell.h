@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/21 13:12:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:31:29 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ typedef struct s_command
 	char					**argument;
 	struct s_redirections	*redirections;
 }							t_command;
-typedef struct s_tree_node
+typedef struct s_node
 {
 	struct s_command		*command;
 	struct s_tree_node		**connections;
 	enum e_token			priority;
-}							t_tree_node;
+	enum e_token			left_operator;
+	struct t_redirections	*redirections;
+}							t_node;
 typedef struct s_lexer_args
 {
 	int						index;
@@ -69,6 +71,7 @@ typedef struct s_lexer_args
 
 typedef struct s_token
 {
+	int						id;
 	enum e_token			token;
 	int						start_index;
 	int						end_index;
@@ -86,10 +89,11 @@ void	handle_redirection(t_redirections *redirection,
 						int start,
 						int end,
 						t_token *tokens);
-int							connection_count(t_token *tokens);
+int	connection_count(t_token *tokens,
+						enum e_token token);
 int							get_split_tokens(t_token *tokens);
-t_token						**split_token(t_token *tokens);
+t_token						**split_token(t_token *tokens, enum e_token token);
 t_token						*check_split(t_token *split);
-t_tree_node					*handle_connections(t_tree_node *head,
-								t_token *tokens);
+t_node	*handle_connections(t_node *head,
+							t_token *tokens);
 #endif

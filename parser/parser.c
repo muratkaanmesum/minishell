@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/21 13:14:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:32:11 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
+//(cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
 
+//(cat test1.txt | grep e && ls)
+//wc -l | ls | ls | ls | ls (grep e && ls)
+
+//(grep e && ls) && cat
+//(grep e && ls)
+//cat
+//grep e
 void	print(t_token *split, int i)
 {
 	while (split->token != UNKNOWN)
@@ -28,10 +37,10 @@ void	print(t_token *split, int i)
 
 void	parser(t_token *tokens)
 {
-	t_tree_node	*head;
-	int			i;
+	t_node	*head;
+	int		i;
 
-	head = malloc(sizeof(t_tree_node));
+	head = malloc(sizeof(t_node));
 	head->command = NULL;
 	i = 0;
 	handle_connections(head, tokens);

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/21 18:08:16 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:31:48 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-int	does_priority(t_token *tokens)
+int	does_priority(t_token *tokens, enum e_token token)
 {
 	int	open_count;
 	int	i;
@@ -33,7 +33,9 @@ int	does_priority(t_token *tokens)
 				i++;
 			}
 		}
-		if (tokens[i].token == AND || tokens[i].token == OR)
+		if ((tokens[i].token == AND || tokens[i].token == OR) && token == -1)
+			return (1);
+		else if (tokens[i].token == token)
 			return (1);
 		if (tokens[i].token != UNKNOWN && (tokens[i].token != OPEN_PAR
 				&& tokens[i].token != CLOSE_PAR))
@@ -44,57 +46,46 @@ int	does_priority(t_token *tokens)
 	return (0);
 }
 
-t_token	*check_split(t_token *split)
+t_node	*handle_connections(t_node *head, t_token *tokens)
 {
-	int		i;
-	int		j;
-	t_token	*new_split;
-
-	i = 0;
-	j = 1;
-	while (split[i].token != UNKNOWN)
-		i++;
-	if (split[0].token == OPEN_PAR && split[i - 1].token == CLOSE_PAR)
-	{
-		new_split = malloc(sizeof(t_token) * (i - 1));
-		while (j < i - 1)
-		{
-			new_split[j - 1] = split[j];
-			j++;
-		}
-		new_split[j - 1].token = UNKNOWN;
-		free(split);
-		return (new_split);
-	}
-	return (split);
-}
-
-void	handle_parantheses(t_token *tokens)
-{
-}
-
-t_tree_node	*handle_connections(t_tree_node *head, t_token *tokens)
-{
-	t_token	**split;
-	int		i;
+	t_token			**split;
+	int				i;
+	enum e_token	split_type;
 
 	i = 0;
 	// if (does_priority(tokens) == 0)
 	// 	return (NULL);
-	i = 0;
-	if (does_priority(tokens) == 0)
-	{
-		handle_parantheses(tokens);
-	}
+	if (does_priority(tokens, -1))
+		split_type = -1;
+	else if (does_priority(tokens, PIPE))
+		split_type = PIPE;
+	else
+		split_type = UNKNOWN;
+	printf("%d\n", split_type);
 	// head->connections = malloc(sizeof(t_tree_node *)
-	// 		* connection_count(tokens));
-	// split = split_token(tokens);
-	// while (split[i] != NULL)
-	// {
-	// 	split[i] = check_split(split[i]);
-	// 	head->connections[i] = handle_connections(malloc(sizeof(t_tree_node)),
-	// 												split[i]);
-	// 	i++;
-	// }
+	// 		* connection_count(tokens,));
+	if (split_type != UNKNOWN) // subshel veya düz komut
+		split = split_token(tokens, split_type);
+	else
+	{
+		if (check_simple_command(tokens))
+			handle_simple_command(tokens);
+		else
+			handle_subshell(tokens);
+	}
+	while (i < connection_count(tokens, split_type))
+	{
+		while (split[i]->token != UNKNOWN)
+		{
+			printf("Token: %d, Start: %d, End: %d, Str: %s\n",
+					split[i]->token,
+					split[i]->start_index,
+					split[i]->end_index,
+					split[i]->str);
+			split[i]++;
+		}
+		i++;
+		printf("************\n");
+	}
 	return (head);
 }
