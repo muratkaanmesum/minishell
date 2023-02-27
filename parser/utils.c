@@ -6,14 +6,13 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/23 14:45:13 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:47:41 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-t_token	*check_split(t_token *split)
+t_token	*check_parantheses(t_token *split)
 {
 	int		i;
 	int		j;
@@ -23,7 +22,7 @@ t_token	*check_split(t_token *split)
 	j = 1;
 	while (split[i].token != UNKNOWN)
 		i++;
-	if (split[0].token == OPEN_PAR && split[i].token == CLOSE_PAR)
+	if (split[0].token == OPEN_PAR && split[i - 1].token == CLOSE_PAR)
 	{
 		new_split = malloc(sizeof(t_token) * (i - 1));
 		while (j < i - 1)
@@ -31,18 +30,29 @@ t_token	*check_split(t_token *split)
 			new_split[j - 1] = split[j];
 			j++;
 		}
-		new_split[j].token = UNKNOWN;
-		free(split);
+		new_split[j - 1].token = UNKNOWN;
+		//free(split);
 		return (new_split);
 	}
 	return (split);
 }
-//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls | ls (grep e && ls) || (cat))
 
-//(((cat test.txt) && (echo hello) && (ls | (cat test.txt))))
-//(cat test.txt && test)
-// ls 
-//(cat test.txt || test)
+void	pass_parantheses(t_token *tokens, int *i)
+{
+	int	open_count;
 
-//((cat test.txt) && (echo hello) && (ls | ((cat test.txt))))
-//cat test.txt
+	open_count = 0;
+	if (tokens[*i].token == OPEN_PAR)
+	{
+		open_count++;
+		*i += 1;
+		while (open_count != 0 && tokens[*i].token != UNKNOWN)
+		{
+			if (tokens[*i].token == OPEN_PAR)
+				open_count++;
+			if (tokens[*i].token == CLOSE_PAR)
+				open_count--;
+			*i += 1;
+		}
+	}
+}

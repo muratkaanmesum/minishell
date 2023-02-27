@@ -24,7 +24,7 @@ int	connection_count(t_token *tokens, enum e_token token)
 				i++;
 			}
 		}
-		if (tokens[i].token == token)
+		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			count++;
 		else if (token == -1 && (tokens[i].token == AND
 					|| tokens[i].token == OR))

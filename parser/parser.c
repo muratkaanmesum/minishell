@@ -6,12 +6,12 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/23 16:32:11 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/27 14:50:22 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
+//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls)
 //(cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
 
 //(cat test1.txt | grep e && ls)
