@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/27 15:01:57 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/27 18:38:25 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@ int	does_priority(t_token *tokens, enum e_token token)
 	int	open_count;
 	int	i;
 
+	if (token == UNKNOWN)
+		return (0);
 	i = 0;
 	open_count = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
 		pass_parantheses(tokens, &i);
-		if ((tokens[i].token == AND || tokens[i].token == OR) && token == -1)
+		if ((tokens[i].token == AND || tokens[i].token == OR) && token == -1
+			&& tokens[i].token != UNKNOWN)
 			return (1);
-		else if (tokens[i].token == token)
+		else if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			return (1);
 		if (tokens[i].token != UNKNOWN && (tokens[i].token != OPEN_PAR
 				&& tokens[i].token != CLOSE_PAR))
@@ -33,44 +36,61 @@ int	does_priority(t_token *tokens, enum e_token token)
 	}
 	return (0);
 }
-
+//(cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
 t_node	*handle_connections(t_node *head, t_token *tokens)
 {
 	t_token			**split;
 	int				i;
 	enum e_token	split_type;
+	int				j;
+	int				t;
 
+	split_type = -5;
+	head->is_subshell = 0;
+	split = NULL;
 	i = 0;
-	if (does_priority(tokens, -1))
+	if (check_parantheses(tokens) == 1)
+	{
+		tokens = remove_parantheses(tokens);
+		head->is_subshell = 1;
+	}
+	if (does_priority(tokens, -1) == 1)
 		split_type = -1;
-	else if (does_priority(tokens, PIPE))
+	else if (does_priority(tokens, PIPE) == 1)
 		split_type = PIPE;
 	else
 		split_type = UNKNOWN;
-	// head->connections = malloc(sizeof(t_tree_node *)
-	// 		* connection_count(tokens,));
-	if (split_type != UNKNOWN) // subshel veya düz komut
+	if (split_type != UNKNOWN)
+	{
+		j = 0;
+		t = 0;
 		split = split_token(tokens, split_type);
-	else
-	{
-		split = malloc(sizeof(t_token *));
-		split[0] = tokens;
-	}
-	while (i < connection_count(tokens, split_type))
-	{
-		printf("%d\n", connection_count(tokens, split_type));
-		split[i] = check_parantheses(split[i]);
-		while (split[i]->token != UNKNOWN)
+		while (split[j] != NULL)
 		{
-			printf("Token: %d, Start: %d, End: %d, Str: %s\n",
-					split[i]->token,
-					split[i]->start_index,
-					split[i]->end_index,
-					split[i]->str);
-			split[i]++;
+			t = 0;
+			while (split[j][t].token != UNKNOWN)
+			{
+				printf("%s", split[j][t].str);
+				t++;
+			}
+			printf("\n************\n");
+			j++;
 		}
-		i++;
-		printf("************\n");
+	}
+	else
+		return (NULL);
+	i = 0;
+	if (split != NULL)
+	{
+		head->connections = malloc(sizeof(t_node *) * connection_count(tokens,
+					split_type));
+		printf("%d\n", connection_count(tokens, split_type));
+		while (i < connection_count(tokens, split_type))
+		{
+			head->connections[i] = handle_connections(malloc(sizeof(t_node)),
+														split[i]);
+			i++;
+		}
 	}
 	return (head);
 }

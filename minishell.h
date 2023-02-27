@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/27 14:49:19 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/27 18:35:26 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ typedef struct s_command
 typedef struct s_node
 {
 	struct s_command		*command;
-	struct s_tree_node		**connections;
-	enum e_token			priority;
-	enum e_token			left_operator;
+	struct s_node			**connections;
+	int						is_subshell;
 	struct t_redirections	*redirections;
 }							t_node;
 typedef struct s_lexer_args
@@ -93,8 +92,10 @@ int	connection_count(t_token *tokens,
 						enum e_token token);
 int							get_split_tokens(t_token *tokens);
 t_token						**split_token(t_token *tokens, enum e_token token);
-t_token						*check_parantheses(t_token *split);
+
+int							check_parantheses(t_token *tokens);
 t_node	*handle_connections(t_node *head,
 							t_token *tokens);
 void						pass_parantheses(t_token *tokens, int *i);
+t_token						*remove_parantheses(t_token *tokens);
 #endif

@@ -9,6 +9,7 @@ int	connection_count(t_token *tokens, enum e_token token)
 	i = 0;
 	open_count = 0;
 	count = 0;
+	//printf("%s\n", tokens[0].str);
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == OPEN_PAR)
@@ -61,7 +62,7 @@ int	split_token_count(t_token *tokens, enum e_token token)
 				i++;
 			}
 		}
-		if (tokens[i].token == token)
+		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			break ;
 		else if (token == -1 && (tokens[i].token == AND
 					|| tokens[i].token == OR))
@@ -73,12 +74,14 @@ int	split_token_count(t_token *tokens, enum e_token token)
 	return (token_count);
 }
 
+// (cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
 t_token	**split_token(t_token *tokens, enum e_token token)
 {
 	t_token **split;
 	t_token *start;
 	int t_index;
-
+	if (token == UNKNOWN)
+		return (NULL);
 	int i, j;
 	t_index = 0;
 	split = malloc(sizeof(t_token *) * connection_count(tokens, token) + 1);
