@@ -3,78 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:55:12 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/16 16:55:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/02/28 11:01:56 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	handle_input(t_token *tokens, int start, int end,
-		t_redirections *redirection)
+void	find_count(t_node *node, int flag)
 {
-	int	last_token;
-	int	does_include;
+	int	i;
+	int	count;
 
-	does_include = 0;
-	while (start < end)
+	count = 0;
+	if (flag == 1)
 	{
-		if (tokens[start].token == RED_FILE && (tokens[start
-				- 1].token == I_REDIRECTION || tokens[start
-				- 1].token == HERE_DOC))
+		i = 0;
+		while (node->tokens[i].token != UNKNOWN)
 		{
-			does_include = 1;
-			last_token = start;
+			pass_parantheses(node->tokens, &i);
+			if (node->tokens[i].token == HERE_DOC
+				|| node->tokens[i].token == I_REDIRECTION)
+				count++;
+			i++;
 		}
-		start++;
+		node->redirections->infile_count = count;
 	}
-	if (does_include == 1)
+	if (flag == 2)
 	{
-		redirection->infile = tokens[last_token].str;
-		redirection->infile_type = tokens[last_token - 1].token;
+		i = 0;
+		while (node->tokens[i].token != UNKNOWN)
+		{
+			pass_parantheses(node->tokens, &i);
+			if (node->tokens[i].token == APPEND_RED
+				|| node->tokens[i].token == O_REDIRECTION)
+				count++;
+			i++;
+		}
+		node->redirections->outfile_count = count;
 	}
-	else
-		redirection->infile = "null";
 }
-void	handle_output(t_token *tokens, int start, int end,
-		t_redirections *redirection)
-{
-	int	last_token;
-	int	does_include;
 
-	does_include = 0;
-	while (start < end)
-	{
-		if (tokens[start].token == RED_FILE && (tokens[start
-				- 1].token == O_REDIRECTION || tokens[start
-				- 1].token == APPEND_RED))
-		{
-			does_include = 1;
-			last_token = start;
-		}
-		start++;
-	}
-	if (does_include == 1)
-	{
-		redirection->outfile = tokens[last_token].str;
-		redirection->outfile_type = tokens[last_token - 1].token;
-	}
-	else
-		redirection->outfile = "null";
-}
-/*
-	if (tokens[last_token - 1].token == HERE_DOC || tokens[last_token
-		- 1].token == I_REDIRECTION)
-		redirection->infile = tokens[last_token].str;
-	if (tokens[last_token - 1].token == O_REDIRECTION || tokens[last_token
-		- 1].token == APPEND_RED)
-		redirection->outfile = tokens[last_token].str;
-*/
-void	handle_redirection(t_redirections *redirection, int start, int end,
-		t_token *tokens)
+void	handle_input(t_node *node)
 {
-	handle_input(tokens, start, end, redirection);
-	handle_output(tokens, start, end, redirection);
+	int	i;
+	int	index;
+
+	i = 0;
+	index = 0;
+	find_count(node, 1);
+	node->redirections->infile = malloc(node->redirections->infile_count
+			* sizeof(char *));
+	node->redirections->infile_type = malloc(node->redirections->infile_count
+			* sizeof(enum e_token));
+	while (node->tokens[i].token != UNKNOWN)
+	{
+		pass_parantheses(node->tokens, &i);
+		if (node->tokens[i].token == I_REDIRECTION
+			|| node->tokens[i].token == HERE_DOC)
+		{
+			node->redirections->infile[index] = node->tokens[i + 1].str;
+			node->redirections->infile_type[index] = node->tokens[i].token;
+			index++;
+		}
+		i++;
+	}
+}
+//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls)
+// grep e || test.txt < test.txt  && test
+void	handle_output(t_node *node)
+{
+	int	i;
+	int	index;
+
+	i = 0;
+	index = 0;
+	find_count(node, 2);
+	node->redirections->outfile = malloc(node->redirections->outfile_count
+			* sizeof(char *));
+	node->redirections->outfile_type = malloc(node->redirections->outfile_count
+			* sizeof(enum e_token));
+	while (node->tokens[i].token != UNKNOWN)
+	{
+		pass_parantheses(node->tokens, &i);
+		if (node->tokens[i].token == O_REDIRECTION
+			|| node->tokens[i].token == APPEND_RED)
+		{
+			node->redirections->outfile[index] = node->tokens[i + 1].str;
+			node->redirections->outfile_type[index] = node->tokens[i].token;
+			index++;
+		}
+		i++;
+	}
+}
+
+void	handle_redirection(t_node *node)
+{
+	handle_input(node);
+	handle_output(node);
 }

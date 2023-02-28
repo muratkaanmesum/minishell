@@ -6,66 +6,42 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 09:21:29 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/28 10:08:59 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	command_count(t_token *tokens)
-{
-	int	count;
+// test
+//test < test.txt
+// (test || ls || grep e)
 
-	count = 0;
-	while (tokens->token != UNKNOWN)
-	{
-		if (tokens->token == PIPE || tokens->token == AND
-			|| tokens->token == OR)
-			count++;
-		tokens++;
-	}
-	count++;
-	return (count);
-}
-int	does_include(t_token *tokens, int start, int end)
+int	does_include(t_token *tokens)
 {
-	while (start < end)
+	int	i;
+
+	i = 0;
+	while (tokens[i].token != UNKNOWN)
 	{
-		if (tokens[start].token == I_REDIRECTION
-			|| tokens[start].token == O_REDIRECTION
-			|| tokens[start].token == HERE_DOC
-			|| tokens[start].token == APPEND_RED)
+		pass_parantheses(tokens, &i);
+		if (tokens[i].token == I_REDIRECTION || tokens[i].token == O_REDIRECTION
+			|| tokens[i].token == APPEND_RED || tokens[i].token == HERE_DOC)
 			return (1);
-		start++;
+		i++;
 	}
 	return (0);
 }
-t_redirections	*create_redirections(t_token *tokens)
-{
-	int				i;
-	t_redirections	*red;
-	int				t_index;
-	int				start;
 
-	start = 0;
-	i = 0;
-	t_index = 0;
-	red = malloc(command_count(tokens) * sizeof(t_redirections));
-	while (i < command_count(tokens))
+// (test.txt test | asd < test.txt) < test.txt > test.txt
+void	create_redirections(t_node *node)
+{
+	t_redirections	*red;
+
+	if (does_include(node->tokens))
 	{
-		while (tokens[t_index].token != PIPE && tokens[t_index].token != AND
-			&& tokens[t_index].token != OR && tokens[t_index].token != UNKNOWN)
-			t_index++;
-		if (does_include(tokens, start, t_index) == 1)
-			handle_redirection(&red[i], start, t_index, tokens);
-		else
-		{
-			red[i].infile = "none";
-			red[i].outfile = "none";
-		}
-		start = t_index;
-		t_index++;
-		i++;
+		node->redirections = malloc(sizeof(t_redirections));
+		handle_redirection(node);
 	}
-	return (red);
+	else
+		node->redirections = NULL;
 }
