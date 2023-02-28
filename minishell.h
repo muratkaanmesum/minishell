@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/27 18:35:26 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/28 08:53:59 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ typedef struct s_node
 {
 	struct s_command		*command;
 	struct s_node			**connections;
+	int						connection_count;
 	int						is_subshell;
+	struct s_token			*tokens;
 	struct t_redirections	*redirections;
 }							t_node;
 typedef struct s_lexer_args
@@ -98,4 +100,5 @@ t_node	*handle_connections(t_node *head,
 							t_token *tokens);
 void						pass_parantheses(t_token *tokens, int *i);
 t_token						*remove_parantheses(t_token *tokens);
+void						print_token(t_token *token);
 #endif

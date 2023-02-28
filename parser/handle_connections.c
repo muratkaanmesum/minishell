@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/27 18:38:25 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/28 09:16:22 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 int	does_priority(t_token *tokens, enum e_token token)
 {
 	int	open_count;
@@ -36,7 +37,7 @@ int	does_priority(t_token *tokens, enum e_token token)
 	}
 	return (0);
 }
-//(cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
+// (cat test1.txt | grep e && ls) < test.txt
 t_node	*handle_connections(t_node *head, t_token *tokens)
 {
 	t_token			**split;
@@ -47,6 +48,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 
 	split_type = -5;
 	head->is_subshell = 0;
+	head->tokens = tokens;
 	split = NULL;
 	i = 0;
 	if (check_parantheses(tokens) == 1)
@@ -60,31 +62,19 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 		split_type = PIPE;
 	else
 		split_type = UNKNOWN;
+	head->connection_count = connection_count(tokens, split_type);
 	if (split_type != UNKNOWN)
 	{
 		j = 0;
-		t = 0;
 		split = split_token(tokens, split_type);
-		while (split[j] != NULL)
-		{
-			t = 0;
-			while (split[j][t].token != UNKNOWN)
-			{
-				printf("%s", split[j][t].str);
-				t++;
-			}
-			printf("\n************\n");
-			j++;
-		}
 	}
 	else
-		return (NULL);
+		return (head);
 	i = 0;
 	if (split != NULL)
 	{
 		head->connections = malloc(sizeof(t_node *) * connection_count(tokens,
 					split_type));
-		printf("%d\n", connection_count(tokens, split_type));
 		while (i < connection_count(tokens, split_type))
 		{
 			head->connections[i] = handle_connections(malloc(sizeof(t_node)),

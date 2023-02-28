@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 16:05:25 by eablak           ###   ########.fr       */
+/*   Updated: 2023/02/28 09:21:29 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 int	command_count(t_token *tokens)
 {
 	int	count;
