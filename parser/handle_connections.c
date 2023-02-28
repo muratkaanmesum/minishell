@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 10:21:12 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/28 12:04:36 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	does_priority(t_token *tokens, enum e_token token)
 	}
 	return (0);
 }
-// (cat test1.txt | grep e && ls) < test.txt
+// (cat test1.txt | grep e && ls) < test.txt |
 t_node	*handle_connections(t_node *head, t_token *tokens)
 {
 	t_token			**split;
@@ -52,7 +52,9 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	head->tokens = tokens;
 	split = NULL;
 	i = 0;
+	//test.txt test | asd < test.txt < test.txt > test.txt
 	create_redirections(head);
+	print_token(head->tokens);
 	if (check_parantheses(tokens) == 1)
 	{
 		tokens = remove_parantheses(tokens);

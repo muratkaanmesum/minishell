@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 10:52:30 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/28 12:18:17 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_redirections(t_redirections *redirection)
 	int	i;
 
 	i = 0;
-	printf("\n-----------\n");
+	printf("--------\n");
 	while (i < redirection->infile_count)
 	{
 		printf("infile: %s ", redirection->infile[i]);

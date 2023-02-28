@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 11:01:48 by kali             ###   ########.fr       */
+/*   Updated: 2023/02/28 12:03:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ t_node	*handle_connections(t_node *head,
 void						pass_parantheses(t_token *tokens, int *i);
 t_token						*remove_parantheses(t_token *tokens);
 void						print_token(t_token *token);
+int							does_priority(t_token *tokens, enum e_token token);
 #endif
