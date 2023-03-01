@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/01 14:18:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/01 19:27:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	head->is_subshell = 0;
 	split = NULL;
 	i = 0;
-	//test.txt test | asd < test.txt < test.txt > test.txt
 	cleared_tokens = create_redirections(head);
 	if (cleared_tokens != NULL)
 	{
@@ -77,8 +76,11 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 		j = 0;
 		split = split_token(head->tokens, split_type);
 	}
-	else
+	else if (split_type == UNKNOWN)
+	{
+		handle_simple_command(head);
 		return (head);
+	}
 	i = 0;
 	if (split != NULL)
 	{
