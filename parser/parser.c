@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/01 15:19:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/01 19:24:22 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,27 @@ void	print_redirections(t_redirections *redirection)
 void	print_tree(t_node *head)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	if (head->connection_count == 1)
 	{
-		print_token(head->tokens);
+		j = 0;
+		printf("command : %s ", head->command->command);
+		printf("\n");
+		while (j < head->command->argument_count)
+		{
+			printf("argument : %s ", head->command->arguments[j]);
+			j++;
+		}
+		printf("\n");
+		j = 0;
+		while (j < head->command->option_count)
+		{
+			printf("option : %s : ", head->command->options[j]);
+			j++;
+		}
+		printf("\n");
 		if (head->redirections != NULL)
 			print_redirections(head->redirections);
 		printf("\n*************\n");
