@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 12:03:09 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:02:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int							is_redirection(char c);
 int							get_token_count(char *str);
 void						assign_tokens(t_token *tokens, char *str);
 void						parser(t_token *tokens);
-void						create_redirections(t_node *node);
+t_token						*create_redirections(t_node *node);
 int							command_count(t_token *tokens);
 void						handle_redirection(t_node *node);
 int	connection_count(t_token *tokens,
@@ -101,4 +101,5 @@ void						pass_parantheses(t_token *tokens, int *i);
 t_token						*remove_parantheses(t_token *tokens);
 void						print_token(t_token *token);
 int							does_priority(t_token *tokens, enum e_token token);
+t_token						*clear_redirections(t_node *node);
 #endif

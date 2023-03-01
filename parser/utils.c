@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 12:21:43 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:26:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_token	*remove_parantheses(t_token *tokens)
 			j++;
 		}
 		new_split[j - 1].token = UNKNOWN;
-		//free(split);
+		//free(tokens);
 		return (new_split);
 	}
 	return (tokens);

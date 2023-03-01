@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 12:18:17 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:19:06 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls)
+//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls) <testt.xt
 //(cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
 
 //(cat test1.txt | grep e && ls)
@@ -84,8 +84,11 @@ void	print_tree(t_node *head)
 		{
 			if (i == 0)
 			{
+				getchar();
+				print_token(head->tokens);
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
+				getchar();
 				printf("\n*************\n");
 			}
 			print_tree(head->connections[i]);
