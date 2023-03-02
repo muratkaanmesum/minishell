@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 12:25:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 13:47:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	print_tree(t_node *head)
 		}
 }
 
-void	parser(t_token *tokens)
+t_node	*parser(t_token *tokens)
 {
 	t_node	*head;
 
@@ -108,4 +108,5 @@ void	parser(t_token *tokens)
 	head->command = NULL;
 	handle_connections(head, tokens);
 	print_tree(head);
+	return (head);
 }

@@ -70,6 +70,9 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/split_token.c\
                           parser/clear_redirections.c\
                           parser/handle_simple_command.c\
+                          expander/expander.c\
+                          expander/handle_env.c\
+                          expander/expander_utils.c\
 
 OBJS        := $(SRCS:.c=.o)
 
