@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 17:16:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 20:06:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*find_env_variable(char *value, t_env *env)
 	while (value[size] != '\0' && value[size] != '\'' && value[size] != '"'
 		&& value[size] != ' ')
 		size++;
-	while (env[i].name)
+	while (env[i].name != NULL)
 	{
 		if (ft_strncmp(value, env[i].name, size) == 0)
 			return (env[i].value);
@@ -118,9 +118,9 @@ t_env	*get_env_variables(char **env)
 
 	count = 0;
 	i = 0;
-	while (env[count])
+	while (env[count] != NULL)
 		count++;
-	env_variables = malloc(sizeof(t_env) * count);
+	env_variables = malloc(sizeof(t_env) * count + 1);
 	while (env[i])
 	{
 		value = ft_split(env[i], '=');
