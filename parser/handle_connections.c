@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/01 19:27:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 19:05:19 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,13 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	}
 	if (check_parantheses(head->tokens) == 1)
 	{
-		head->tokens = remove_parantheses(head->tokens);
-		head->is_subshell = 1;
+		if (is_arithmetic(head->tokens) == 1)
+			head->is_arithmetic = 1;
+		else
+		{
+			head->tokens = remove_parantheses(head->tokens);
+			head->is_subshell = 1;
+		}
 	}
 	if (does_priority(head->tokens, -1) == 1)
 		split_type = -1;
@@ -71,12 +76,12 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	else
 		split_type = UNKNOWN;
 	head->connection_count = connection_count(head->tokens, split_type);
-	if (split_type != UNKNOWN)
+	if (split_type != UNKNOWN && head->is_arithmetic != 1)
 	{
 		j = 0;
 		split = split_token(head->tokens, split_type);
 	}
-	else if (split_type == UNKNOWN)
+	else if (split_type == UNKNOWN && head->is_arithmetic != 1)
 	{
 		handle_simple_command(head);
 		return (head);
