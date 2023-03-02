@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/23 14:57:35 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/02 13:39:38 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_token	*lexer(char *str)
 	t_token	*tokens;
 	int		i;
 
+	if (ft_strlen(str) == 0)
+		return (NULL);
 	t_str = ft_strtrim(str, " ");
 	tokens = malloc(sizeof(t_token) * (get_token_count(t_str) + 1));
 	assign_tokens(tokens, t_str);
