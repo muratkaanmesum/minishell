@@ -73,6 +73,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/expander.c\
                           expander/handle_env.c\
                           expander/expander_utils.c\
+                          expander/env_utils.c\
 
 OBJS        := $(SRCS:.c=.o)
 

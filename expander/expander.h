@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 13:29:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 16:39:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,7 @@ typedef struct s_env
 }			t_env;
 void		handle_env(t_node *node, char **env);
 t_env		*get_env_variables(char **env);
+char		*find_env_variable(char *value, t_env *env);
+char		*get_env_location(char *str);
+char		*assign_env(char *str, char *env_value);
 #endif
