@@ -6,24 +6,12 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/01 19:24:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 12:25:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls) <testt.xt
-//(cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
-
-//(cat test1.txt | grep e && ls)
-//wc -l | ls | ls | ls | ls (grep e && ls)
-
-//(grep e && ls) && cat
-//(grep e && ls)
-//cat
-//grep e
-
-// asd | test
 void	print_redirections(t_redirections *redirection)
 {
 	int	i;
