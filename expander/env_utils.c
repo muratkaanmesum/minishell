@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 16:50:20 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 17:16:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*change_str(char *str, char *env_value, int size)
 			flag = 1;
 			while (env_value[j] != '\0')
 				new_str[index++] = env_value[j++];
-			j = 0;
 			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
 				&& str[i] != ' ')
 				i++;
@@ -41,6 +40,7 @@ char	*change_str(char *str, char *env_value, int size)
 		new_str[index++] = str[i++];
 	}
 	new_str[index] = '\0';
+	free(str);
 	return (new_str);
 }
 
