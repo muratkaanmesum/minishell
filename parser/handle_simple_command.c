@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:41:00 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 12:23:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 13:52:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	handle_args(t_node *node)
 	count = 0;
 	while (node->tokens[i].token != UNKNOWN)
 	{
-		if (node->tokens[i].token == ARG)
+		if (node->tokens[i].token == ARG || node->tokens[i].token == ENV)
 			count++;
 		i++;
 	}
@@ -71,7 +71,7 @@ void	handle_args(t_node *node)
 	j = 0;
 	while (node->tokens[i].token != UNKNOWN)
 	{
-		if (node->tokens[i].token == ARG)
+		if (node->tokens[i].token == ARG || node->tokens[i].token == ENV)
 			node->command->arguments[j++] = node->tokens[i].str;
 		i++;
 	}

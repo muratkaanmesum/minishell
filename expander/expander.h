@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 15:43:37 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/02 19:54:54 by mmesum           ###   ########.fr       */
+/*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/02 16:39:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+#ifndef EXPANDER_H
+# define EXPANDER_H
+# include "../minishell.h"
+typedef struct s_env
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n && (s1[i] || s2[i]))
-	{
-		if (s1[i] == s2[i])
-			i++;
-		else if (s1[i] < s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		else if (s2[i] < s1[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	}
-	return (0);
-}
+	char	*name;
+	char	*value;
+}			t_env;
+void		handle_env(t_node *node, char **env);
+t_env		*get_env_variables(char **env);
+char		*find_env_variable(char *value, t_env *env);
+char		*get_env_location(char *str);
+char		*assign_env(char *str, char *env_value);
+#endif
