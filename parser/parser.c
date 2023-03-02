@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 12:25:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 19:06:51 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void	print_tree(t_node *head)
 	int	j;
 
 	i = 0;
-	if (head->connection_count == 1)
+	if (head->is_arithmetic == 1)
+		print_token(head->tokens);
+	else if (head->connection_count == 1)
 	{
 		j = 0;
 		printf("command : %s ", head->command->command);
