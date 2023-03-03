@@ -128,7 +128,7 @@ int	main(int argc, char **argv, char **env)
 		free(inpt);
 		continue;
 		}
-			expander(head, env);
+		expander(head, env);
 		print_tree(head);
 		free(inpt);
 	}

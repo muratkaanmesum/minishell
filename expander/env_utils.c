@@ -66,7 +66,7 @@ t_env	*get_env_variables(char **env)
 	i = 0;
 	while (env[count] != NULL)
 		count++;
-	env_variables = malloc(sizeof(t_env) * count + 1);
+	env_variables = malloc(sizeof(t_env) * (count + 1));
 	while (env[i])
 	{
 		value = ft_split(env[i], '=');
