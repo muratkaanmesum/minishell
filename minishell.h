@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 17:12:29 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/03 13:31:17 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,14 @@ t_token						*clear_redirections(t_node *node);
 void						handle_simple_command(t_node *node);
 
 int							parse_error(t_token *tokens);
-void						print_error(t_token *tokens, int count, int i);
+void						print_error(t_token *tokens);
 int							tokens_count(t_token *tokens);
 int	search_token_count(t_token *tokens,
 						enum e_token type_token);
 int							open_parantheses(t_token *tokens);
 int							is_real_subshell(t_token *tokens);
 int							out_of_use(t_token *tokens);
+int							less_quotes(t_token *tokens);
+int							check_red(t_token *tokens);
+int							token_error(t_token *tokens);
 #endif

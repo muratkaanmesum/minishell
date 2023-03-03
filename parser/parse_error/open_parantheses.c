@@ -53,7 +53,6 @@ int	out_of_use(t_token *tokens)
 	if (open_par == close_par && open_par != 1)
 	{
 		if (tokens[open_par + 1].token == CLOSE_PAR)
-
 			return (1);
 	}
 	return (0);

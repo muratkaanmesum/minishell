@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:42:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 19:28:58 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/03 12:53:23 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ void	parser(t_token *tokens)
 	if (parse_error(tokens) == 0)
 	{
 		handle_connections(head, tokens);
-		print_tree(head);
+		//print_tree(head);
 	}
 }
