@@ -17,8 +17,11 @@ int	token_error(t_token *tokens)
 		if (tokens[i].token == CLOSE_PAR)
 		{
 			if (is_command(tokens, i))
+			{
 				printf("bash: syntax error near unexpected token %s\n", tokens[i
 						+ 1].str);
+				return (1);
+			}
 		}
 		i++;
 	}

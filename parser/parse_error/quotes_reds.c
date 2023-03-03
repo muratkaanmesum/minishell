@@ -58,16 +58,11 @@ int	less_quotes(t_token *tokens)
 
 int	is_red(t_token *tokens, int start)
 {
-	while (tokens[start].token != CLOSE_PAR)
-	{
-		if ((tokens[start].token == HERE_DOC
-				|| tokens[start].token == I_REDIRECTION
-				|| tokens[start].token == O_REDIRECTION
-				|| tokens[start].token == APPEND_RED) && (tokens[start
-				+ 1].token == CLOSE_PAR))
-			return (1);
-		start++;
-	}
+	if ((tokens[start].token == HERE_DOC || tokens[start].token == I_REDIRECTION
+			|| tokens[start].token == O_REDIRECTION
+			|| tokens[start].token == APPEND_RED) && (tokens[start
+			+ 1].token == CLOSE_PAR))
+		return (1);
 	return (0);
 }
 
@@ -81,10 +76,17 @@ int	check_red(t_token *tokens)
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == OPEN_PAR)
+		{
 			ret = is_red(tokens, i++);
+			if (ret == 1)
+			{
+				printf("bash: syntax error near unexpected token `)'\n");
+				return (1);
+			}
+			else
+				i--;
+		}
 		i++;
 	}
-	if (ret == 1)
-		printf("bash: syntax error near unexpected token `)'\n");
-	return (ret);
+	return (0);
 }

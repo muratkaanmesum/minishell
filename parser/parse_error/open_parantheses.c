@@ -12,7 +12,7 @@ int	open_parantheses(t_token *tokens)
 		printf("minishell: syntax error near unexpected token `)'\n");
 		return (1);
 	}
-	if (open_par > close_par)
+	else if (open_par > close_par)
 	{
 		printf("minishell: syntax error near unexpected token `('\n");
 		return (1);
@@ -52,7 +52,7 @@ int	out_of_use(t_token *tokens)
 	close_par = search_token_count(tokens, CLOSE_PAR);
 	if (open_par == close_par && open_par != 1)
 	{
-		if (tokens[open_par + 1].token == CLOSE_PAR)
+		if (tokens[open_par + 1].token == CLOSE_PAR )
 			return (1);
 	}
 	return (0);
