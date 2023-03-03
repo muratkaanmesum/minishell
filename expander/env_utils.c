@@ -6,69 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 20:06:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/03 12:25:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
-char	*change_str(char *str, char *env_value, int size)
-{
-	char	*new_str;
-	int		i;
-	int		j;
-	int		index;
-	int		flag;
-
-	index = 0;
-	new_str = malloc(sizeof(char) * size);
-	if (new_str == NULL)
-		return (NULL);
-	i = 0;
-	flag = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$' && flag == 0)
-		{
-			flag = 1;
-			while (env_value[j] != '\0')
-				new_str[index++] = env_value[j++];
-			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ')
-				i++;
-		}
-		new_str[index++] = str[i++];
-	}
-	new_str[index] = '\0';
-	free(str);
-	return (new_str);
-}
-
-char	*assign_env(char *str, char *env_value)
-{
-	int	value_size;
-	int	node_size;
-	int	i;
-	int	flag;
-
-	flag = 0;
-	value_size = (int)ft_strlen(env_value);
-	node_size = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$' && flag == 0)
-		{
-			flag = 1;
-			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ')
-				i++;
-		}
-		node_size++;
-		i++;
-	}
-	return (change_str(str, env_value, value_size + node_size + 1));
-}
 
 char	*find_env_variable(char *value, t_env *env)
 {
