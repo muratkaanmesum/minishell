@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 20:06:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/03 15:58:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ void	assign_arg(t_lexer_args *args)
 		assign_token(args);
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
 		{
-			if (args->str[args->i] == '$' && args->counter == 1)
-				args->tokens[args->index - 1].token = ENV_COMMAND;
-			else if (args->str[args->i] == '$' && args->counter > 1)
-				args->tokens[args->index - 1].token = ENV;
+			// if (args->str[args->i] == '$' && args->counter == 1
+			// 	&& args->is_redirection != 1)
+			// 	args->tokens[args->index - 1].token = ENV_COMMAND;
+			// else if (args->str[args->i] == '$' && args->counter > 1
+			// 		&& args->is_redirection != 1)
+			// 	args->tokens[args->index - 1].token = ENV;
 			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 			{
 				args->i++;
