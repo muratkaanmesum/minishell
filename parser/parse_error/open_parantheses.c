@@ -55,5 +55,10 @@ int	out_of_use(t_token *tokens)
 		if (tokens[open_par + 1].token == CLOSE_PAR )
 			return (1);
 	}
+	if(tokens[0].token == OPEN_PAR && tokens[1].token == CLOSE_PAR && tokens[2].token == UNKNOWN)
+	{
+		printf("minishell: syntax error near unexpected token `('\n");
+		return (1);
+	}
 	return (0);
 }

@@ -118,12 +118,18 @@ int	main(int argc, char **argv, char **env)
 		inpt = readline("minishell: ");
 		add_history(inpt);
 		tokens = lexer(inpt);
-		if (tokens == NULL)
+		if (tokens == NULL){
+			free(inpt);
 			continue ;
-		parser(tokens);
+		}
 		head = parser(tokens);
-		expander(head, env);
-		//print_tree(head);
+		if(head == NULL)
+		{
+		free(inpt);
+		continue;
+		}
+			expander(head, env);
+		print_tree(head);
 		free(inpt);
 	}
 	return (0);

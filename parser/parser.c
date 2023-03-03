@@ -22,12 +22,13 @@ t_node	*parser(t_token *tokens)
 {
 	t_node	*head;
 
-	head = malloc(sizeof(t_node));
-	head->command = NULL;
 	if (parse_error(tokens) == 0)
 	{
+		head = malloc(sizeof(t_node));
+		head->command = NULL;
 		handle_connections(head, tokens);
-		//print_tree(head);
 	}
+	else
+		return NULL;
 	return (head);
 }

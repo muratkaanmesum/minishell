@@ -9,8 +9,7 @@ int	empty_line(t_token *tokens)
 
 int	parse_error(t_token *tokens)
 {
-	printf("parse erırr geldi\n");
-	print_token(tokens);
+	//print_token(tokens);
 	if (empty_line(tokens) == 0)
 	{
 		if (out_of_use(tokens))
@@ -26,5 +25,6 @@ int	parse_error(t_token *tokens)
 		if (token_error(tokens))
 			return (1);
 	}
+	getchar();
 	return (0);
 }
