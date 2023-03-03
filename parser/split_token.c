@@ -9,7 +9,6 @@ int	connection_count(t_token *tokens, enum e_token token)
 	i = 0;
 	open_count = 0;
 	count = 0;
-	//printf("%s\n", tokens[0].str);
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == OPEN_PAR)
