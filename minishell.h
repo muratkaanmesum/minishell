@@ -3,10 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
+
 /*   Updated: 2023/03/02 12:57:45 by mmesum           ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +62,7 @@ typedef struct s_node
 	struct s_node			**connections;
 	int						connection_count;
 	int						is_subshell;
+	int						is_arithmetic;
 	struct s_token			*tokens;
 	struct s_redirections	*redirections;
 }							t_node;
@@ -105,5 +108,6 @@ int							does_priority(t_token *tokens, enum e_token token);
 t_token						*clear_redirections(t_node *node);
 void						handle_simple_command(t_node *node);
 void						expander(t_node *head, char **env);
+int							is_arithmetic(t_token *tokens);
 
 #endif

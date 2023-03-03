@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/01 14:26:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/02 18:58:54 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,32 @@ void	pass_parantheses(t_token *tokens, int *i)
 			*i += 1;
 		}
 	}
+}
+
+//(cat test.txt (test.txt))
+int	is_arithmetic(t_token *tokens)
+{
+	int open_count = 0;
+	int close_count = 0;
+	int i = 0;
+	while (tokens[i].token != UNKNOWN && tokens[i].token == OPEN_PAR)
+	{
+		open_count++;
+		i++;
+	}
+	i = 0;
+	while (tokens[i].token != UNKNOWN)
+		i++;
+	i--;
+	while (i >= 0 && tokens[i].token == CLOSE_PAR)
+	{
+		close_count++;
+		i--;
+	}
+	if (open_count == close_count && open_count > 1)
+	{
+		printf("INSIDE OF SOMETHING\n");
+		return (1);
+	}
+	return (0);
 }
