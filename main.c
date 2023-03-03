@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 13:42:42 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/03 14:38:57 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int argc, char **argv, char **env)
 		parser(tokens);
 		head = parser(tokens);
 		expander(head, env);
-		print_tree(head);
+		//print_tree(head);
 		free(inpt);
 	}
 	return (0);

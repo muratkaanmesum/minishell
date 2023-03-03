@@ -18,7 +18,6 @@
 
 #include "../minishell.h"
 
-
 t_node	*parser(t_token *tokens)
 {
 	t_node	*head;
@@ -30,7 +29,5 @@ t_node	*parser(t_token *tokens)
 		handle_connections(head, tokens);
 		//print_tree(head);
 	}
-	handle_connections(head, tokens);
 	return (head);
-
 }
