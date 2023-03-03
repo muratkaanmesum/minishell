@@ -6,9 +6,8 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-
+/*   Updated: 2023/03/03 14:31:31 by eablak           ###   ########.fr       */
 /*   Updated: 2023/03/02 12:57:45 by mmesum           ###   ########.fr       */
-
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +106,7 @@ void						print_token(t_token *token);
 int							does_priority(t_token *tokens, enum e_token token);
 t_token						*clear_redirections(t_node *node);
 void						handle_simple_command(t_node *node);
+int							parse_error(t_token *tokens);
 void						expander(t_node *head, char **env);
 int							is_arithmetic(t_token *tokens);
-
 #endif
