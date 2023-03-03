@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/03 16:46:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/03 16:53:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	handle_env_command(t_node *node, t_env *env)
 	if (env_value == NULL)
 		env_value = "";
 	node->command->command = assign_env(node->command->command, env_value);
+	printf("%s\n", node->command->command);
 }
 
 void	handle_env_arg(t_node *node, t_env *env, int i)

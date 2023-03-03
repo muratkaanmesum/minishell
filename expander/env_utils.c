@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/03 16:08:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/03 16:49:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*find_env_variable(char *value, t_env *env)
 	i = 0;
 	size = 0;
 	while (value[size] != '\0' && value[size] != '\'' && value[size] != '"'
-		&& value[size] != ' ')
+		&& value[size] != ' ' && value[size] != '$')
 		size++;
 	while (env[i].name != NULL)
 	{
