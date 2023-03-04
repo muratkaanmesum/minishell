@@ -16,6 +16,19 @@
 
 #include "expander.h"
 
+void	free_env(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i].name != NULL)
+	{
+		free(env[i].name);
+		free(env[i].value);
+		i++;
+	}
+	free(env);
+}
 char	*find_env_variable(char *value, t_env *env)
 {
 	int	i;
