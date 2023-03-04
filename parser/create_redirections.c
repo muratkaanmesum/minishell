@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/01 15:38:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/04 05:09:07 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// test
-//test < test.txt
-// (test || ls || grep e)
-
-//  (test.txt test | asd < test.txt)
-// (TEST < asd | test && (testt.txt | wc -l <test2.txt)) < test.txt > test.txt
 int	does_include(t_token *tokens)
 {
 	int	i;
