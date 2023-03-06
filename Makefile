@@ -70,11 +70,13 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/split_token.c\
                           parser/clear_redirections.c\
                           parser/handle_simple_command.c\
+                          parser/parse_error/uses_of_parantheses.c\
                           parser/parse_error/error_utils.c\
                           parser/parse_error/parse_error.c\
-                          parser/parse_error/open_parantheses.c\
+                          parser/parse_error/check_parantheses.c\
                           parser/parse_error/quotes_reds.c\
                           parser/parse_error/token_error.c\
+                          parser/parse_error/check_first.c\
                           expander/expander.c\
                           expander/handle_env.c\
                           expander/env_utils.c\

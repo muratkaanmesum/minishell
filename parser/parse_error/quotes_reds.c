@@ -4,7 +4,7 @@ void	print_error(t_token *tokens)
 {
 	int	i;
 
-	printf("minishell : ");
+	printf("print_error minishell : ");
 	i = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
@@ -47,7 +47,6 @@ int	less_quotes(t_token *tokens)
 			double_q += in_count(tokens[i].str, '"');
 		i++;
 	}
-	//printf("\n\ntek: %d çift: %d\n", single_q, double_q);
 	if (single_q % 2 != 0 || double_q % 2 != 0)
 	{
 		print_error(tokens);
@@ -77,14 +76,12 @@ int	check_red(t_token *tokens)
 	{
 		if (tokens[i].token == OPEN_PAR)
 		{
-			ret = is_red(tokens, i++);
+			ret = is_red(tokens, i + 1);
 			if (ret == 1)
 			{
-				printf("bash: syntax error near unexpected token `)'\n");
+				printf("check_red bash: syntax error near unexpected token `)'\n");
 				return (1);
 			}
-			else
-				i--;
 		}
 		i++;
 	}

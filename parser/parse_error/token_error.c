@@ -3,7 +3,7 @@
 int	is_command(t_token *tokens, int start)
 {
 	if (tokens[start + 1].token != PIPE && tokens[start + 1].token != AND
-		&& tokens[start + 1].token != OR && tokens[start + 1].token != UNKNOWN)
+		&& tokens[start + 1].token != OR && tokens[start + 1].token != UNKNOWN && tokens[start + 1].token != CLOSE_PAR)
 		return (1);
 	return (0);
 }
@@ -18,12 +18,11 @@ int	token_error(t_token *tokens)
 		{
 			if (is_command(tokens, i))
 			{
-				printf("bash: syntax error near unexpected token %s\n", tokens[i
-						+ 1].str);
+				printf("token_error bash: syntax error near unexpected token %s\n", tokens[i + 1].str);
 				return (1);
 			}
 		}
 		i++;
 	}
-	return (ret);
+	return (0);
 }
