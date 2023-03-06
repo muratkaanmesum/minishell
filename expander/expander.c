@@ -6,11 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:46:11 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/06 14:12:04 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/06 18:15:07 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../expander.h"
+#include "expander.h"
 
 void	expander(t_node *head, char **env)
 {
