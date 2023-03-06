@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_env.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/04 05:19:22 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:12:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
+#include "../expander.h"
 
 void	handle_env_command(t_node *node, t_env *env)
 {

@@ -13,7 +13,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
+#include "../expander.h"
 
 void	assign_node_env(t_node *node, t_env *env)
 {

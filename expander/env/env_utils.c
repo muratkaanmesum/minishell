@@ -14,7 +14,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
+#include "../expander.h"
 
 void	free_env(t_env *env)
 {
