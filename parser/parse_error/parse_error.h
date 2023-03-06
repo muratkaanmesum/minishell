@@ -13,18 +13,4 @@ int						check_red(t_token *tokens);
 int						token_error(t_token *tokens);
 int						misuse_parantheses(t_token *tokens);
 
-enum					e_error_type
-{
-	PARANTHESES_ERROR,
-	TOKEN_ERROR,
-	COMMAND_ERROR,
-	SYNTAX_ERROR,
-	NONE
-};
-
-typedef struct s_error
-{
-	enum e_error_type	type;
-	char				*error_str;
-}						t_error;
 #endif

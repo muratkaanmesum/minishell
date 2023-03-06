@@ -48,10 +48,7 @@ int	less_quotes(t_token *tokens)
 		i++;
 	}
 	if (single_q % 2 != 0 || double_q % 2 != 0)
-	{
-		print_error(tokens);
 		return (1);
-	}
 	return (0);
 }
 
@@ -78,10 +75,7 @@ int	check_red(t_token *tokens)
 		{
 			ret = is_red(tokens, i + 1);
 			if (ret == 1)
-			{
-				printf("check_red bash: syntax error near unexpected token `)'\n");
 				return (1);
-			}
 		}
 		i++;
 	}
