@@ -26,12 +26,7 @@ void	assign_node_env(t_node *node, t_env *env)
 		while (i < node->connection_count)
 			assign_node_env(node->connections[i++], env);
 }
-void	handle_env(t_node *node, char **env)
+void	handle_env(t_node *node, t_env *variables)
 {
-	t_env	*variables;
-
-	//empty string segfaults
-	variables = get_env_variables(env);
 	assign_node_env(node, variables);
-	free_env(variables);
 }

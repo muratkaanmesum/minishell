@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/04 05:27:11 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/06 14:08:47 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_env
 	char	*name;
 	char	*value;
 }			t_env;
-void		handle_env(t_node *node, char **env);
+void		handle_env(t_node *node, t_env *variables);
 t_env		*get_env_variables(char **env);
 char		*find_env_variable(char *value, t_env *env);
 char		*get_env_location(char *str);
