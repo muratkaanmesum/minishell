@@ -19,7 +19,7 @@ void	print_redirections(t_redirections *redirection)
 {
 	int	i;
 
-	//test
+	//testasd
 	i = 0;
 	printf("--------\n");
 	while (i < redirection->infile_count)
