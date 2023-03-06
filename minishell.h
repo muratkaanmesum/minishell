@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/06 10:55:54 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/06 18:18:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -65,16 +64,6 @@ typedef struct s_node
 	struct s_token			*tokens;
 	struct s_redirections	*redirections;
 }							t_node;
-typedef struct s_lexer_args
-{
-	int						index;
-	int						i;
-	char					*str;
-	int						counter;
-	struct s_token			*tokens;
-	int						is_redirection;
-}							t_lexer_args;
-
 typedef struct s_token
 {
 	int						id;
@@ -84,10 +73,6 @@ typedef struct s_token
 	char					*str;
 }							t_token;
 t_token						*lexer(char *str);
-int							my_alpha(char c);
-int							is_redirection(char c);
-int							get_token_count(char *str);
-void						assign_tokens(t_token *tokens, char *str);
 t_node						*parser(t_token *tokens);
 t_token						*create_redirections(t_node *node);
 int							command_count(t_token *tokens);
@@ -96,7 +81,6 @@ int	connection_count(t_token *tokens,
 						enum e_token token);
 int							get_split_tokens(t_token *tokens);
 t_token						**split_token(t_token *tokens, enum e_token token);
-
 int							check_parantheses(t_token *tokens);
 t_node	*handle_connections(t_node *head,
 							t_token *tokens);

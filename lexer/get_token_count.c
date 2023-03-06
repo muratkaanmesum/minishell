@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_token_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/20 13:14:40 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/06 18:18:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 void	define_character(char *str, int *i, int *count)
 {
