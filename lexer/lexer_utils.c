@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "lexer.h"
 
 int	my_alpha(char c)
 {

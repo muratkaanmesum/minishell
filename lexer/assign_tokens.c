@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/03 18:53:00 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/06 18:17:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lexer.h"
 
 void	assign_token(t_lexer_args *args)
 {
@@ -35,8 +35,8 @@ void	assign_arg(t_lexer_args *args)
 {
 	if (my_alpha(args->str[args->i]))
 	{
-			if (args->is_redirection != 1 &&  args->tokens[args->index
-				- 1].token != RED_FILE)
+		if (args->is_redirection != 1 && args->tokens[args->index
+			- 1].token != RED_FILE)
 			args->counter++;
 		args->tokens[args->index].start_index = args->i;
 		assign_token(args);

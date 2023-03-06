@@ -91,11 +91,9 @@ void	print_tree(t_node *head)
 		{
 			if (i == 0)
 			{
-				// getchar();
-				//print_token(head->tokens);
+				print_token(head->tokens);
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
-				// getchar();
 				printf("\n*************\n");
 			}
 			print_tree(head->connections[i]);
