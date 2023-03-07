@@ -4,4 +4,5 @@
 int	echo(char *args, char *option);
 int	cd(char *args, char **env);
 int	pwd(char **env);
+int	print_env(char **env);
 #endif

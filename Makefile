@@ -87,6 +87,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           execute/builtins/cd.c\
                             execute/builtins/echo.c\
                             execute/builtins/pwd.c\
+                            execute/builtins/env.c\
 
 
 OBJS        := $(SRCS:.c=.o)

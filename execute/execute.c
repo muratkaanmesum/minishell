@@ -6,4 +6,8 @@ int	execute(t_node *head, char **env)
 		pwd(env);
 	if (ft_strncmp(head->command->command, "cd", 2) == 0)
 		cd(head->command->arguments[0], env);
+	if (ft_strncmp(head->command->command, "echo", 4) == 0)
+		echo(head->command->arguments[0], head->command->options[0]);
+	if (ft_strncmp(head->command->command, "env", 3) == 0)
+		print_env(env);
 }
