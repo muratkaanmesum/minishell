@@ -15,6 +15,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 void	print_redirections(t_redirections *redirection)
 {
 	int	i;
@@ -100,17 +101,36 @@ void	print_tree(t_node *head)
 			i++;
 		}
 }
+char	**init_env(char **env)
+{
+	int		i;
+	char	**new_env;
 
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	new_env = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i] != NULL)
+	{
+		new_env[i] = ft_strdup(env[i]);
+		i++;
+	}
+	new_env[i] = NULL;
+	return (new_env);
+}
 int	main(int argc, char **argv, char **env)
 {
 	char	*inpt;
 	t_token	*tokens;
 	int		i;
 	t_node	*head;
+	char	**new_env;
 
 	if (argc != 1)
 		return (0);
 	(void)argv;
+	new_env = init_env(env);
 	while (1)
 	{
 		inpt = readline("minishell: ");
@@ -129,11 +149,12 @@ int	main(int argc, char **argv, char **env)
 			{
 				//free(inpt);
 				//continue ;
-				expander(head, env);
+				expander(head, new_env);
 				print_tree(head);
-				free(inpt);
+				execute(head, new_env);
 			}
 		}
+		free(inpt);
 	}
 	return (0);
 }

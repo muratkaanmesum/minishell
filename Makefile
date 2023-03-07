@@ -83,6 +83,10 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/assign_env.c\
                           expander/env/handle_node_env.c\
                           expander/env/delete_quotes.c\
+                          execute/execute.c\
+                          execute/builtins/cd.c\
+                            execute/builtins/echo.c\
+                            execute/builtins/pwd.c\
 
 
 OBJS        := $(SRCS:.c=.o)

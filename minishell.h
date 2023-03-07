@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/06 18:18:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/07 04:42:44 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,6 @@ int							parse_error(t_token *tokens);
 void						expander(t_node *head, char **env);
 int							is_arithmetic(t_token *tokens);
 int							check_first(t_token *tokens);
+
+int							execute(t_node *head, char **env);
 #endif
