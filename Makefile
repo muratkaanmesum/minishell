@@ -85,9 +85,13 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/delete_quotes.c\
                           execute/execute.c\
                           execute/builtins/cd.c\
-                            execute/builtins/echo.c\
-                            execute/builtins/pwd.c\
-                            execute/builtins/env.c\
+                          execute/builtins/echo.c\
+                          execute/builtins/pwd.c\
+                          execute/builtins/env.c\
+                          execute/builtins/export.c\
+                            execute/builtins/unset.c\
+                            execute/builtins/exit.c\
+                            execute/builtins/utils.c\
 
 
 OBJS        := $(SRCS:.c=.o)

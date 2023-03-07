@@ -10,4 +10,8 @@ int	execute(t_node *head, char **env)
 		echo(head->command->arguments, head->command->options);
 	if (ft_strncmp(head->command->command, "env", 3) == 0)
 		print_env(env);
+	if (ft_strncmp(head->command->command, "export", 6) == 0)
+		export(head->command->arguments, env);
+	if (ft_strncmp(head->command->command, "unset", 5) == 0)
+		unset(env, head->command->arguments);
 }
