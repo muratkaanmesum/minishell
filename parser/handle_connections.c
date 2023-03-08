@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 19:05:19 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:36:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 		split_type = UNKNOWN;
 	head->connection_count = connection_count(head->tokens, split_type);
 	if (split_type != UNKNOWN && head->is_arithmetic != 1)
-	{
-		j = 0;
 		split = split_token(head->tokens, split_type);
-	}
 	else if (split_type == UNKNOWN && head->is_arithmetic != 1)
 	{
 		handle_simple_command(head);

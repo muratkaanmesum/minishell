@@ -23,17 +23,17 @@ int	print_args(char **args)
 	printf("%s", args[i]);
 	return (1);
 }
-int	echo(char **args, char **option)
+int	echo(t_node *head)
 {
 	int	i;
 
-	if (does_have_option(option) == 0)
+	if (does_have_option(head->command->options) == 0)
 	{
 		i = 0;
-		print_args(args);
+		print_args(head->command->arguments);
 		printf("\n");
 	}
 	else
-		print_args(args);
+		print_args(head->command->arguments);
 	return (1);
 }

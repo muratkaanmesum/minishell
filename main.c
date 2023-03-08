@@ -143,14 +143,14 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (check_first(tokens) != 1)
 		{
-			//print_token(tokens);
 			head = parser(tokens);
 			if (head != NULL)
 			{
-				//free(inpt);
-				//continue ;
+				print_token(head->tokens);
 				expander(head, new_env);
-				print_tree(head);
+				printf("*********\n");
+				print_token(head->tokens);
+				// print_tree(head);
 				execute(head, new_env);
 			}
 		}
