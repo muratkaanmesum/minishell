@@ -29,6 +29,21 @@ void	free_env(t_env *env)
 	}
 	free(env);
 }
+t_token	*get_token(t_node *node, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (node->tokens[i].token != UNKNOWN)
+	{
+		if (ft_strncmp(node->tokens[i].str, str,
+				ft_strlen(node->tokens[i].str)) == 0)
+			return (&node->tokens[i]);
+		i++;
+	}
+	return (NULL);
+}
+
 char	*find_env_variable(char *value, t_env *env)
 {
 	int	i;

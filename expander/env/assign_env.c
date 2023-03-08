@@ -53,7 +53,6 @@ void	change_str(char *str, char *env_value, char *new_str)
 		new_str[index++] = str[i++];
 	}
 	new_str[index] = '\0';
-	free(str);
 }
 
 int	get_node_size(char *str)
@@ -92,10 +91,15 @@ char	*assign_env(char *str, char *env_value, t_node *node)
 	int		value_size;
 	char	*new_str;
 	int		node_size;
+	t_token	*token;
 
 	node_size = get_node_size(str);
 	value_size = (int)ft_strlen(env_value);
 	new_str = malloc(sizeof(char) * (value_size + node_size + 1));
 	change_str(str, env_value, new_str);
+	token = get_token(node, str);
+	if (token->str != NULL)
+		token->str = new_str;
+	free(str);
 	return (new_str);
 }

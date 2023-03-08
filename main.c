@@ -92,7 +92,6 @@ void	print_tree(t_node *head)
 		{
 			if (i == 0)
 			{
-				print_token(head->tokens);
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
 				printf("\n*************\n");
@@ -146,11 +145,8 @@ int	main(int argc, char **argv, char **env)
 			head = parser(tokens);
 			if (head != NULL)
 			{
-				print_token(head->tokens);
 				expander(head, new_env);
-				printf("*********\n");
-				print_token(head->tokens);
-				// print_tree(head);
+				//print_tree(head);
 				execute(head, new_env);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/08 16:39:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/08 18:20:10 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ int	get_length(char *str)
 	}
 	return (count);
 }
-char	*delete_quotes(char *str)
+char	*delete_quotes(char *str, t_node *node)
 {
 	char	*new_str;
 	int		i;
 	int		j;
+	t_token	*token;
 
 	new_str = malloc(sizeof(char) * (get_length(str) + 1));
 	i = 0;
@@ -52,6 +53,9 @@ char	*delete_quotes(char *str)
 		}
 	}
 	new_str[j] = '\0';
+	token = get_token(node, str);
+	if (token != NULL)
+		token->str = new_str;
 	free(str);
 	return (new_str);
 }
