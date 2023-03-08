@@ -77,12 +77,17 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/parse_error/quotes_reds.c\
                           parser/parse_error/token_error.c\
                           parser/parse_error/check_first.c\
-                          expander/env/expander.c\
+                          expander/expander.c\
                           expander/env/handle_env.c\
                           expander/env/env_utils.c\
                           expander/env/assign_env.c\
                           expander/env/handle_node_env.c\
                           expander/env/delete_quotes.c\
+                          expander/wildcard/wildcard.c\
+                          expander/wildcard/handle_node_wildcard.c\
+                          expander/wildcard/command.c\
+                          expander/wildcard/args.c\
+                          expander/wildcard/utils.c\
 
 
 OBJS        := $(SRCS:.c=.o)

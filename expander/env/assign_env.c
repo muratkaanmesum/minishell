@@ -89,6 +89,7 @@ int	get_node_size(char *str)
 
 char	*assign_env(char *str, char *env_value)
 {
+
 	int		value_size;
 	char	*new_str;
 	int		node_size;
