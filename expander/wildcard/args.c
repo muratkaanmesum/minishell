@@ -13,7 +13,7 @@ int	search_files_count(char **files, char *find)
 	total = 0;
 	while (files[i] != NULL)
 	{
-		printf("files : %s\n", files[i]);
+		//printf("files : %s\n", files[i]);
 		j = 0;
 		while (files[i][j])
 		{
@@ -27,10 +27,10 @@ int	search_files_count(char **files, char *find)
 					if (find[k] == '\0')
 					{
 						total++;
-						printf("totati arttıran dosay :%s\n",files[i]);
+						printf("totati arttıran dosay :%s\n", files[i]);
 					}
 					if (files[i][j] == '\0')
-						break;
+						break ;
 				}
 			}
 			j++;
@@ -40,44 +40,180 @@ int	search_files_count(char **files, char *find)
 	return (total);
 }
 
-void	take_file(char **files, char *command)
+int	is_right_side(char *str, int index)
 {
-	int		i;
 	int		count;
-	char	*find;
+	char	*ret_str;
 	int		j;
 
-	i = 0;
 	count = 0;
-	while (command[i])
+	if (index == 0)
 	{
-		if (command[i] == '*')
+		while (str[index] != '\0' && str[index] != '*')
 		{
-			right_side();
-			left_side();
-			middle();
-			i++;
-			while (command[i] != '*')
+			count++;
+			index += 1;
+		}
+		if (count > 0)
+			return (1);
+		else
+			return (0);
+	}
+	return (0);
+}
+
+char	*right_side(char *str, int *index)
+{
+	int		count;
+	char	*ret_str;
+	int		j;
+
+	count = 0;
+	if (*index == 0)
+	{
+		while (str[*index] != '\0' && str[*index] != '*')
+		{
+			count++;
+			*index += 1;
+		}
+		ret_str = malloc(sizeof(char) * (count + 1));
+		*index -= count;
+		j = 0;
+		while (str[*index] != '\0' && str[*index] != '*')
+		{
+			ret_str[j] = str[*index];
+			j++;
+			*index += 1;
+		}
+		ret_str[j] = '\0';
+		return (ret_str);
+	}
+	return (NULL);
+}
+
+int	is_left_side(char *str, int index)
+{
+	char	*new_str;
+	int		count;
+	int		j;
+
+	if (index != 0)
+	{
+		if (str[index - 1] == '*')
+		{
+			while (str[index] != '\0')
 			{
-				i++;
+				if (str[index] == '*')
+					return (0);
+				index += 1;
 				count++;
 			}
-			find = malloc(sizeof(char) * (count + 1));
-			i -= count;
-			j = 0;
-			while (command[i] != '*')
+			if (count > 0)
+				return (1);
+			else
+				return (0);
+		}
+	}
+	return (0);
+}
+
+char	*left_side(char *str, int *index)
+{
+	char	*new_str;
+	int		count;
+	int		j;
+
+	// while (str[*index])
+	// {
+	// 	printf("%c", str[*index]);
+	// 	*index += 1;
+	// }
+	// printf("\n");
+	count = 0;
+	if (*index != 0)
+	{
+		if (str[*index - 1] == '*')
+		{
+			while (str[*index] != '\0')
 			{
-				find[j] = command[i];
-				j++;
-				i++;
+				if (str[*index] == '*')
+					return (NULL);
+				*index += 1;
+				count++;
 			}
-			find[j] = '\0';
-			printf("find : %s\n", find);
-			printf("dosya sayısı: %d\n", search_files_count(files, find));
+			new_str = malloc(sizeof(char) * (count + 1));
+			*index -= count;
+			j = 0;
+			while (str[*index] != '\0')
+			{
+				new_str[j] = str[*index];
+				j++;
+				*index += 1;
+			}
+			new_str[j] = '\0';
+		}
+		return (new_str);
+	}
+	return (NULL);
+}
+
+int	is_middle(char *str, int index)
+{
+	if (str[index - 1] == '*')
+	{
+		while (str[index] != '\0')
+		{
+			if (str[index] == '*')
+				return (1);
+			index++;
+		}
+	}
+	return (0);
+}
+
+char	*middle(char *str, int *index)
+{
+	int		count;
+	char	*new_str;
+	int		j;
+
+	count = 0;
+	while (str[*index] != '*')
+	{
+		count++;
+		*index += 1;
+	}
+	new_str = malloc(sizeof(char) * (count + 1));
+	*index -= count;
+	j = 0;
+	while (str[*index] != '*')
+	{
+		new_str[j] = str[*index];
+		j++;
+		*index += 1;
+	}
+	new_str[j] = '\0';
+	return (new_str);
+}
+
+void	take_file(char **files, char *command)
+{
+	int	i;
+
+	i = 0;
+	while (command[i])
+	{
+		if (command[i] != '\0')
+		{
+			if (is_right_side(command, i))
+				printf("right side: %s\n", right_side(command, &i));
+			if (is_left_side(command, i))
+				printf("left side: %s\n", left_side(command, &i));
+			if (is_middle(command, i))
+				printf("middle: %s\n", middle(command, &i));
 		}
 		i++;
 	}
-	// printf("command: %s\n", command);
 }
 
 void	just_asterisk(char *command)
@@ -90,11 +226,11 @@ void	just_asterisk(char *command)
 	my_files = get_files();
 	count = get_path_count();
 	i = 0;
-	while (my_files[i])
-	{
-		printf("%i. %s\n", i + 1, my_files[i]);
-		i++;
-	}
+	// while (my_files[i])
+	// {
+	// 	printf("%i. %s\n", i + 1, my_files[i]);
+	// 	i++;
+	// }
 	take_file(my_files, command);
 }
 
