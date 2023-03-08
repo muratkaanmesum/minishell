@@ -32,14 +32,24 @@ void	free_env(t_env *env)
 t_token	*get_token(t_node *node, char *str)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (node->tokens[i].token != UNKNOWN)
 	{
-		if (ft_strncmp(node->tokens[i].str, str,
-				ft_strlen(node->tokens[i].str)) == 0)
+		j = 0;
+		while (node->tokens[i].str[j] != '\0')
+		{
+			if (node->tokens[i].str[j] == str[j])
+				j++;
+			else
+				break ;
+		}
+		if (node->tokens[i].str[j] == '\0'
+			&& ft_strlen(node->tokens[i].str) == ft_strlen(str))
 			return (&node->tokens[i]);
-		i++;
+		else
+			i++;
 	}
 	return (NULL);
 }

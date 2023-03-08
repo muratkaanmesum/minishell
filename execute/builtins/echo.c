@@ -2,6 +2,8 @@
 
 int	check_option(char *str)
 {
+	if (ft_strlen(str) != 2)
+		return (0);
 	if (str[0] == '-' && str[1] == 'n' && str[2] == '\0' && str != NULL)
 		return (1);
 	return (0);
@@ -12,7 +14,9 @@ int	does_have_option(t_node *node)
 	int	i;
 
 	i = 0;
-	if (check_option(node->tokens[1].str) == 1)
+	if (node->tokens[1].token == UNKNOWN)
+		return (0);
+	else if (check_option(node->tokens[1].str) == 1)
 		return (1);
 	return (0);
 }
@@ -24,7 +28,8 @@ int	print_args(t_node *head)
 	i = 0;
 	while (head->tokens[i].token != UNKNOWN)
 	{
-		if (ft_strncmp(head->tokens[i].str, "echo", 4) != 0)
+		if (ft_strncmp(head->tokens[i].str, "echo", 4) != 0
+			&& check_option(head->tokens[i].str) != 1)
 		{
 			if (head->tokens[i + 1].token != UNKNOWN)
 				printf("%s ", head->tokens[i].str);
@@ -38,11 +43,8 @@ int	print_args(t_node *head)
 
 int	echo(t_node *head)
 {
-	int	i;
-
 	if (does_have_option(head) == 0)
 	{
-		i = 0;
 		print_args(head);
 		printf("\n");
 	}

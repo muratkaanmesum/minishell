@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/08 18:20:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/08 20:02:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*delete_quotes(char *str, t_node *node)
 	token = get_token(node, str);
 	if (token != NULL)
 		token->str = new_str;
+	else
+		printf("token is NULL\n");
 	free(str);
 	return (new_str);
 }
