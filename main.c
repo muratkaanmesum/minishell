@@ -124,7 +124,7 @@ int	main(int argc, char **argv, char **env)
 			free(inpt);
 			continue ;
 		}
-		if (check_first(tokens) != 1)
+		if (check_first(tokens) != 1) //(a) command not found
 		{
 			//print_token(tokens);
 			head = parser(tokens);
