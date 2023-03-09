@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/09 04:40:23 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/09 08:35:19 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ char	*delete_quotes(char *str, t_node *node, int index,
 		}
 	}
 	new_str[j] = '\0';
+	if (token_type == RED_FILE)
+	{
+		free(str);
+		return (new_str);
+	}
 	token = get_token(node, str, token_type, index);
 	if (token != NULL)
 		token->str = new_str;
