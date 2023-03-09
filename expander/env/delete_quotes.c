@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/09 08:35:19 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/09 09:38:02 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ char	*delete_quotes(char *str, t_node *node, int index,
 	else
 		printf("token is NULL\n");
 	free(str);
-	printf("token : %s\n", token->str);
 	return (new_str);
 }

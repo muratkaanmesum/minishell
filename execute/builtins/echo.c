@@ -28,8 +28,12 @@ int	print_args(t_node *head)
 	i = 0;
 	while (head->tokens[i].token != UNKNOWN)
 	{
-		if (ft_strncmp(head->tokens[i].str, "echo", 4) != 0
-			&& check_option(head->tokens[i].str) != 1)
+		if (check_option(head->tokens[i].str) == 1 && i == 1)
+		{
+			i++;
+			continue ;
+		}
+		if (ft_strncmp(head->tokens[i].str, "echo", 4) != 0)
 		{
 			if (head->tokens[i + 1].token != UNKNOWN)
 				printf("%s ", head->tokens[i].str);
