@@ -29,27 +29,32 @@ void	free_env(t_env *env)
 	}
 	free(env);
 }
-t_token	*get_token(t_node *node, char *str)
+t_token	*get_token(t_node *node, char *str, enum e_token token, int index)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
+	while (index > 0)
+	{
+		while (node->tokens[i].token != token)
+			i++;
+		index--;
+		i++;
+	}
 	while (node->tokens[i].token != UNKNOWN)
 	{
 		j = 0;
-		while (node->tokens[i].str[j] != '\0')
+		k = 0;
+		while (str[k] != '\0' && node->tokens[i].str[j] == str[k])
 		{
-			if (node->tokens[i].str[j] == str[j])
-				j++;
-			else
-				break ;
+			k++;
+			j++;
 		}
-		if (node->tokens[i].str[j] == '\0'
-			&& ft_strlen(node->tokens[i].str) == ft_strlen(str))
+		if (str[k] == '\0')
 			return (&node->tokens[i]);
-		else
-			i++;
+		i++;
 	}
 	return (NULL);
 }

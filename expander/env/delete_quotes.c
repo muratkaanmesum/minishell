@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/08 20:02:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/09 04:40:23 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	get_length(char *str)
 	}
 	return (count);
 }
-char	*delete_quotes(char *str, t_node *node)
+char	*delete_quotes(char *str, t_node *node, int index,
+		enum e_token token_type)
 {
 	char	*new_str;
 	int		i;
@@ -53,11 +54,12 @@ char	*delete_quotes(char *str, t_node *node)
 		}
 	}
 	new_str[j] = '\0';
-	token = get_token(node, str);
+	token = get_token(node, str, token_type, index);
 	if (token != NULL)
 		token->str = new_str;
 	else
 		printf("token is NULL\n");
 	free(str);
+	printf("token : %s\n", token->str);
 	return (new_str);
 }
