@@ -28,9 +28,7 @@ void	print_arg(char **arg)
 
 // file gelmiyosa klendini ata!!!!!!  +tamam
 
-//.. için .... verirsen yanlış alır!!!    ----tekrar kontrol
-
-// ** için tek * gibi davranmalı!!!
+//.. için .... verirsen yanlış alır!!!    +tamam
 
 // *er** tekrar bak
 
