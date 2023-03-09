@@ -39,7 +39,7 @@ int	search_files_count(char **files, char *find)
 	return (total);
 }
 
-void	take_file(char **files, char *command)
+char	**take_file(char **files, char *command)
 {
 	int		i;
 	char	*str;
@@ -69,34 +69,38 @@ void	take_file(char **files, char *command)
 		}
 		i++;
 	}
-	if (files[0] != NULL)
-	{
-		printf("eşelşen dosyalar\n");
-		print_files(files);
-	}
+	return (files);
 }
 
-void	just_asterisk(char *command)
+char	**just_asterisk(char *command)
 {
 	int		count;
 	char	**my_files;
 	int		i;
 
-	//gelen yıldızlının nasıl olduğuna bak ona uyumlu olan ilk dosyayı al
 	my_files = get_files();
 	count = get_path_count();
 	i = 0;
-	// while (my_files[i])
-	// {
-	// 	printf("%i. %s\n", i + 1, my_files[i]);
-	// 	i++;
-	// }
-	take_file(my_files, command);
+	my_files = take_file(my_files, command);
+	return (my_files);
 }
 
 void	handle_arg_asterisk(t_command *command, int index)
 {
-	if (is_asterisk(command->arguments[0])
-		&& asterisk_slash(command->arguments[0]) == 0)
-		just_asterisk(command->arguments[0]);
+	char **match_files;
+	int i = 0;
+	printf("arg count :%d\n", command->argument_count);
+	getchar();
+	while (i < command->argument_count)
+	{
+		if (is_asterisk(command->arguments[i])
+			&& asterisk_slash(command->arguments[i]) == 0)
+		{
+			match_files = just_asterisk(command->arguments[i]);
+			printf("eşelşen dosyalar\n");
+			print_files(match_files);
+			match_arg_files(match_files, command, i);
+		}
+		i++;
+	}
 }

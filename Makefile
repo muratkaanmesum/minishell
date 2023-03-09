@@ -91,6 +91,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/right_side.c\
                           expander/wildcard/left_side.c\
                           expander/wildcard/middle.c\
+                          expander/wildcard/match_arg_files.c\
 
 
 OBJS        := $(SRCS:.c=.o)

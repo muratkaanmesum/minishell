@@ -26,4 +26,5 @@ void	print_files(char **files);
 char	**right_side_files(char **files, char *str);
 char	**left_side_files(char **files, char *str);
 char	**middle_files(char **files, char *str);
+void	match_arg_files(char **files, t_command *command, int i);
 #endif
