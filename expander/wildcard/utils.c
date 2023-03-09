@@ -48,6 +48,18 @@ char	**get_files(void)
 	return (files);
 }
 
+void	print_files(char **files)
+{
+	int	i;
+
+	i = 0;
+	while (files[i])
+	{
+		printf("%s\n", files[i]);
+		i++;
+	}
+}
+
 int	is_asterisk(char *str)
 {
 	if (ft_strchr(str, '*') != NULL && ft_strchr(str, '/') == NULL)

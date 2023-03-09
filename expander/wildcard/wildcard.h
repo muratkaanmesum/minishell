@@ -16,4 +16,13 @@ void	handle_arg_asterisk(t_command *command, int index);
 void	handle_command_asterisk(t_command *command);
 int		get_path_count(void);
 char	**get_files(void);
+int		is_right_side(char *str, int index);
+char	*right_side(char *str, int *index);
+int		is_left_side(char *str, int index);
+char	*left_side(char *str, int *index);
+int		is_middle(char *str, int index);
+char	*middle(char *str, int *index);
+void	print_files(char **files);
+char	**right_side_files(char **files, char *str);
+char	**left_side_files(char **files, char *str);
 #endif

@@ -40,180 +40,38 @@ int	search_files_count(char **files, char *find)
 	return (total);
 }
 
-int	is_right_side(char *str, int index)
-{
-	int		count;
-	char	*ret_str;
-	int		j;
-
-	count = 0;
-	if (index == 0)
-	{
-		while (str[index] != '\0' && str[index] != '*')
-		{
-			count++;
-			index += 1;
-		}
-		if (count > 0)
-			return (1);
-		else
-			return (0);
-	}
-	return (0);
-}
-
-char	*right_side(char *str, int *index)
-{
-	int		count;
-	char	*ret_str;
-	int		j;
-
-	count = 0;
-	if (*index == 0)
-	{
-		while (str[*index] != '\0' && str[*index] != '*')
-		{
-			count++;
-			*index += 1;
-		}
-		ret_str = malloc(sizeof(char) * (count + 1));
-		*index -= count;
-		j = 0;
-		while (str[*index] != '\0' && str[*index] != '*')
-		{
-			ret_str[j] = str[*index];
-			j++;
-			*index += 1;
-		}
-		ret_str[j] = '\0';
-		return (ret_str);
-	}
-	return (NULL);
-}
-
-int	is_left_side(char *str, int index)
-{
-	char	*new_str;
-	int		count;
-	int		j;
-
-	if (index != 0)
-	{
-		if (str[index - 1] == '*')
-		{
-			while (str[index] != '\0')
-			{
-				if (str[index] == '*')
-					return (0);
-				index += 1;
-				count++;
-			}
-			if (count > 0)
-				return (1);
-			else
-				return (0);
-		}
-	}
-	return (0);
-}
-
-char	*left_side(char *str, int *index)
-{
-	char	*new_str;
-	int		count;
-	int		j;
-
-	// while (str[*index])
-	// {
-	// 	printf("%c", str[*index]);
-	// 	*index += 1;
-	// }
-	// printf("\n");
-	count = 0;
-	if (*index != 0)
-	{
-		if (str[*index - 1] == '*')
-		{
-			while (str[*index] != '\0')
-			{
-				if (str[*index] == '*')
-					return (NULL);
-				*index += 1;
-				count++;
-			}
-			new_str = malloc(sizeof(char) * (count + 1));
-			*index -= count;
-			j = 0;
-			while (str[*index] != '\0')
-			{
-				new_str[j] = str[*index];
-				j++;
-				*index += 1;
-			}
-			new_str[j] = '\0';
-		}
-		return (new_str);
-	}
-	return (NULL);
-}
-
-int	is_middle(char *str, int index)
-{
-	if (str[index - 1] == '*')
-	{
-		while (str[index] != '\0')
-		{
-			if (str[index] == '*')
-				return (1);
-			index++;
-		}
-	}
-	return (0);
-}
-
-char	*middle(char *str, int *index)
-{
-	int		count;
-	char	*new_str;
-	int		j;
-
-	count = 0;
-	while (str[*index] != '*')
-	{
-		count++;
-		*index += 1;
-	}
-	new_str = malloc(sizeof(char) * (count + 1));
-	*index -= count;
-	j = 0;
-	while (str[*index] != '*')
-	{
-		new_str[j] = str[*index];
-		j++;
-		*index += 1;
-	}
-	new_str[j] = '\0';
-	return (new_str);
-}
-
 void	take_file(char **files, char *command)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	i = 0;
+	print_files(files);
+	printf("\n");
 	while (command[i])
 	{
 		if (command[i] != '\0')
 		{
-			if (is_right_side(command, i))
-				printf("right side: %s\n", right_side(command, &i));
 			if (is_left_side(command, i))
-				printf("left side: %s\n", left_side(command, &i));
+			{
+				str = left_side(command, &i);
+				files = left_side_files(files, str);
+			}
 			if (is_middle(command, i))
-				printf("middle: %s\n", middle(command, &i));
+			{
+				str = middle(command, &i);
+				files = middle_files(files,str);
+			}
+			if (is_right_side(command, i))
+			{
+				str = right_side(command, &i);
+				files = right_side_files(files, str);
+			}
 		}
 		i++;
 	}
+	printf("eşelşen dosyalar\n");
+	print_files(files);
 }
 
 void	just_asterisk(char *command)

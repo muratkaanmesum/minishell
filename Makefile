@@ -88,6 +88,9 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/command.c\
                           expander/wildcard/args.c\
                           expander/wildcard/utils.c\
+                          expander/wildcard/right_side.c\
+                          expander/wildcard/left_side.c\
+                          expander/wildcard/middle.c\
 
 
 OBJS        := $(SRCS:.c=.o)
