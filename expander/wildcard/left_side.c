@@ -98,6 +98,7 @@ char	**left_side_files(char **files, char *str)
 	i = 0;
 	k = 0;
 	j = 0;
+
 	while (files[i])
 	{
 		k = 0;

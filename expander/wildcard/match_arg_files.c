@@ -26,6 +26,10 @@ void	print_arg(char **arg)
 
 //SIRALAMA YAPMADIM!!!!!!!!
 
+// file gelmiyosa klendini ata!!!!!!  +tamam
+
+//.. için .... verirsen yanlış alır!!!    ----tekrar kontrol
+
 void	match_arg_files(char **files, t_command *command, int i)
 {
 	int match_files_count = files_count(files);
@@ -33,23 +37,26 @@ void	match_arg_files(char **files, t_command *command, int i)
 	char **new_args = malloc(sizeof(char *) * (new_len));
 	int k = 0;
 	int m;
-	while (k < i)
+	if (files[0] != NULL)
 	{
-		new_args[k] = command->arguments[k];
-		k++;
+		while (k < i)
+		{
+			new_args[k] = command->arguments[k];
+			k++;
+		}
+		m = 0;
+		while (m < match_files_count)
+		{
+			new_args[k + m] = files[m];
+			m++;
+		}
+		while (command->arguments[k + 1])
+		{
+			new_args[k + m] = command->arguments[k + 1];
+			k++;
+		}
+		new_args[k + m] = NULL;
+		command->arguments = new_args;
+		command->argument_count = k + m;
 	}
-	m = 0;
-	while (m < match_files_count)
-	{
-		new_args[k + m] = files[m];
-		m++;
-	}
-	while (command->arguments[k + 1])
-	{
-		new_args[k + m] = command->arguments[k + 1];
-		k++;
-	}
-	new_args[k + m] = NULL;
-	command->arguments = new_args;
-	command->argument_count = k + m;
 }

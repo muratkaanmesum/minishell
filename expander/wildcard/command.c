@@ -8,6 +8,14 @@ void	command_file(void)
 
 void	handle_command_asterisk(t_command *command)
 {
+	// if (is_asterisk(node->command->command)
+	// 	|| asterisk_slash(node->command->command))
+
+
+	//yukarıdandewam
+
+
+
 	//get_path();
 	// if (is_asterisk(command->command) && asterisk_slash(command->command) == 0)
 	// 	just_asterisk(command->command);

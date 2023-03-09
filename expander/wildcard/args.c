@@ -83,6 +83,58 @@ char	**just_asterisk(char *command)
 	return (my_files);
 }
 
+char	**sort_files(char **files, char *str)
+{
+	int		i;
+	int		m;
+	int		j;
+	int		count;
+	char	**sorted_files;
+	int		x;
+
+	i = 0;
+	m = 0;
+	j = 0;
+	count = 0;
+	while (files[i])
+	{
+		m = 0;
+		j = 0;
+		while (files[i][j])
+		{
+			if (str[m] == '*')
+				m++;
+			if (str[m] == files[i][j++])
+				m++;
+		}
+		if (str[m] == '\0')
+			count++;
+		i++;
+	}
+	sorted_files = malloc(sizeof(char *) * (count + 1));
+	i = 0;
+	m = 0;
+	j = 0;
+	x = 0;
+	while (files[i])
+	{
+		m = 0;
+		j = 0;
+		while (files[i][j])
+		{
+			if (str[m] == '*')
+				m++;
+			if (str[m] == files[i][j++])
+				m++;
+		}
+		if (str[m] == '\0')
+			sorted_files[x++] = files[i];
+		i++;
+	}
+	sorted_files[x] = NULL;
+	return (sorted_files);
+}
+
 void	handle_arg_asterisk(t_command *command)
 {
 	char **match_files;
@@ -93,6 +145,7 @@ void	handle_arg_asterisk(t_command *command)
 			&& asterisk_slash(command->arguments[i]) == 0)
 		{
 			match_files = just_asterisk(command->arguments[i]);
+			match_files = sort_files(match_files, command->arguments[i]);
 			match_arg_files(match_files, command, i);
 			print_arg(command->arguments);
 			printf("\n");
