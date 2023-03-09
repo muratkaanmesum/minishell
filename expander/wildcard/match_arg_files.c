@@ -30,7 +30,7 @@ void	print_arg(char **arg)
 
 //.. için .... verirsen yanlış alır!!!    +tamam
 
-// *er** tekrar bak
+// *er** tekrar bak !! BİRDEN FAZLA * YANYANAYSA YANLIŞ ALIR
 
 void	match_arg_files(char **files, t_command *command, int i)
 {
