@@ -85,12 +85,10 @@ char	**just_asterisk(char *command)
 	return (my_files);
 }
 
-void	handle_arg_asterisk(t_command *command, int index)
+void	handle_arg_asterisk(t_command *command)
 {
 	char **match_files;
 	int i = 0;
-	printf("arg count :%d\n", command->argument_count);
-	getchar();
 	while (i < command->argument_count)
 	{
 		if (is_asterisk(command->arguments[i])

@@ -11,11 +11,12 @@ void	handle_node_wildcard(t_node *node)
 	if (is_asterisk(node->command->command)
 		|| asterisk_slash(node->command->command))
 		handle_command_asterisk(node->command);
-	while (i < node->command->argument_count)
-	{
-		if (is_asterisk(node->command->arguments[i])
-			|| asterisk_slash(node->command->arguments[i]))
-			handle_arg_asterisk(node->command, i);
-		i++;
-	}
+	// while (i < node->command->argument_count)
+	// {
+	// 	if (is_asterisk(node->command->arguments[i])
+	// 		|| asterisk_slash(node->command->arguments[i]))
+	// 		handle_arg_asterisk(node->command, i);
+	// 	i++;
+	// }
+	handle_arg_asterisk(node->command);
 }

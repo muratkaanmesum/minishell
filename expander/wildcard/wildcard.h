@@ -12,7 +12,7 @@
 void	handle_node_wildcard(t_node *node);
 int		is_asterisk(char *str);
 int		asterisk_slash(char *str);
-void	handle_arg_asterisk(t_command *command, int index);
+void	handle_arg_asterisk(t_command *command);
 void	handle_command_asterisk(t_command *command);
 int		get_path_count(void);
 char	**get_files(void);
