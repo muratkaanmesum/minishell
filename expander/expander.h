@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/09 04:37:37 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/09 04:43:35 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void		handle_env(t_node *node, t_env *variables);
 t_env		*get_env_variables(char **env);
 char		*find_env_variable(char *value, t_env *env);
 char		*get_env_location(char *str);
-char		*assign_env(char *str, char *env_value, t_node *node);
+char		*assign_env(char *str, char *env_value, t_node *node,
+				enum e_token token_type, int index);
 void		handle_node_env(t_node *node, t_env *env);
 void		free_env(t_env *env);
 char		*delete_quotes(char *str, t_node *node, int i, enum e_token token);

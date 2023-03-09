@@ -86,7 +86,8 @@ int	get_node_size(char *str)
 	return (node_size);
 }
 
-char	*assign_env(char *str, char *env_value, t_node *node)
+char	*assign_env(char *str, char *env_value, t_node *node,
+		enum e_token token_type, int index)
 {
 	int		value_size;
 	char	*new_str;
@@ -97,7 +98,7 @@ char	*assign_env(char *str, char *env_value, t_node *node)
 	value_size = (int)ft_strlen(env_value);
 	new_str = malloc(sizeof(char) * (value_size + node_size + 1));
 	change_str(str, env_value, new_str);
-	token = get_token(node, str);
+	token = get_token(node, str, token_type, index);
 	if (token->str != NULL)
 		token->str = new_str;
 	free(str);
