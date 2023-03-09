@@ -13,7 +13,6 @@ int	search_files_count(char **files, char *find)
 	total = 0;
 	while (files[i] != NULL)
 	{
-		//printf("files : %s\n", files[i]);
 		j = 0;
 		while (files[i][j])
 		{
@@ -70,8 +69,11 @@ void	take_file(char **files, char *command)
 		}
 		i++;
 	}
-	printf("eşelşen dosyalar\n");
-	print_files(files);
+	if (files[0] != NULL)
+	{
+		printf("eşelşen dosyalar\n");
+		print_files(files);
+	}
 }
 
 void	just_asterisk(char *command)

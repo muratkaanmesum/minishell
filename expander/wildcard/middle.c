@@ -96,6 +96,7 @@ char	**middle_files(char **files, char *str)
 		}
 		i++;
 	}
+    free(files);
 	new_files[k] = NULL;
 	return (new_files);
 }

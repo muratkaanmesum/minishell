@@ -128,7 +128,7 @@ char	**right_side_files(char **files, char *str)
 		}
 		i++;
 	}
-	//free(files);
+	free(files);
 	new_files[t] = NULL;
 	return (new_files);
 }
