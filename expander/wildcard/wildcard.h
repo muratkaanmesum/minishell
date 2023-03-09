@@ -28,4 +28,5 @@ char	**left_side_files(char **files, char *str);
 char	**middle_files(char **files, char *str);
 void	match_arg_files(char **files, t_command *command, int i);
 void	print_arg(char **arg);
+char	**just_asterisk(char *command);
 #endif

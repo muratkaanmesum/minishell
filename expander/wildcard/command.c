@@ -1,6 +1,5 @@
 #include "wildcard.h"
 
-
 void	command_file(void)
 {
 	printf("commanfd file\n");
@@ -8,21 +7,13 @@ void	command_file(void)
 
 void	handle_command_asterisk(t_command *command)
 {
-	// if (is_asterisk(node->command->command)
-	// 	|| asterisk_slash(node->command->command))
+	char	**files;
 
-
-	//yukarıdandewam
-
-
-
-	//get_path();
-	// if (is_asterisk(command->command) && asterisk_slash(command->command) == 0)
-	// 	just_asterisk(command->command);
-	// else if (is_asterisk(command->command) == 0
-	// 		&& asterisk_slash(command->command))
-	// 	command_file();
-	//printf("handle command\n");
+	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0)
+		files = just_asterisk(command->command);
+	if (files[0] != NULL)
+		command->command = files[0];
+	printf("%s	",command->command);
 }
 
 // void	take_file(char **files, char *command)
