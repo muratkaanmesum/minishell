@@ -24,11 +24,15 @@ void	print_arg(char **arg)
 	}
 }
 
-//SIRALAMA YAPMADIM!!!!!!!!
+//SIRALAMA YAPMADIM!!!!!!!!   +tamam
 
 // file gelmiyosa klendini ata!!!!!!  +tamam
 
 //.. için .... verirsen yanlış alır!!!    ----tekrar kontrol
+
+// ** için tek * gibi davranmalı!!!
+
+// *er** tekrar bak
 
 void	match_arg_files(char **files, t_command *command, int i)
 {

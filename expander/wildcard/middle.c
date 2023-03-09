@@ -50,7 +50,7 @@ int	search_str(char *file, char *str)
 	count = 0;
 	while (file[i])
 	{
-		while (str[j] == file[i])
+		while (str[j] == file[i] && file[i] && str[j])
 		{
 			j++;
 			i++;
@@ -96,7 +96,7 @@ char	**middle_files(char **files, char *str)
 		}
 		i++;
 	}
-    free(files);
+	free(files);
 	new_files[k] = NULL;
 	return (new_files);
 }

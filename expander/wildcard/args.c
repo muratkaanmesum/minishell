@@ -102,9 +102,9 @@ char	**sort_files(char **files, char *str)
 		j = 0;
 		while (files[i][j])
 		{
-			if (str[m] == '*')
-				m++;
 			if (str[m] == files[i][j++])
+				m++;
+			if (str[m] == '*')
 				m++;
 		}
 		if (str[m] == '\0')
@@ -122,9 +122,9 @@ char	**sort_files(char **files, char *str)
 		j = 0;
 		while (files[i][j])
 		{
-			if (str[m] == '*')
-				m++;
 			if (str[m] == files[i][j++])
+				m++;
+			if (str[m] == '*')
 				m++;
 		}
 		if (str[m] == '\0')
