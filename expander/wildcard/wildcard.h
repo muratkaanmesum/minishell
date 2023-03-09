@@ -25,4 +25,5 @@ char	*middle(char *str, int *index);
 void	print_files(char **files);
 char	**right_side_files(char **files, char *str);
 char	**left_side_files(char **files, char *str);
+char	**middle_files(char **files, char *str);
 #endif

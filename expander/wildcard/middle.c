@@ -39,8 +39,63 @@ char	*middle(char *str, int *index)
 	return (new_str);
 }
 
+int	search_str(char *file, char *str)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	j = 0;
+	count = 0;
+	while (file[i])
+	{
+		while (str[j] == file[i])
+		{
+			j++;
+			i++;
+			count++;
+		}
+		if (count == ft_strlen(str))
+			return (1);
+		i++;
+		j = 0;
+		count = 0;
+	}
+	return (0);
+}
+
 int	middle_files_count(char **files, char *str)
 {
-	int count = 0;
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (files[i])
+	{
+		if (search_str(files[i], str))
+			count++;
+		i++;
+	}
 	return (count);
+}
+
+char	**middle_files(char **files, char *str)
+{
+	int count = middle_files_count(files, str);
+	char **new_files = malloc(sizeof(char *) * (count + 1));
+	int i = 0;
+	int k = 0;
+	while (files[i])
+	{
+		if (search_str(files[i], str))
+		{
+			new_files[k] = files[i];
+			k++;
+		}
+		i++;
+	}
+	new_files[k] = NULL;
+	return (new_files);
 }

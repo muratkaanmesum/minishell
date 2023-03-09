@@ -60,7 +60,7 @@ void	take_file(char **files, char *command)
 			if (is_middle(command, i))
 			{
 				str = middle(command, &i);
-				files = middle_files(files,str);
+				files = middle_files(files, str);
 			}
 			if (is_right_side(command, i))
 			{
