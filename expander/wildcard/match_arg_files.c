@@ -12,27 +12,42 @@ int	files_count(char **files)
 	return (i);
 }
 
+void	print_arg(char **arg)
+{
+	int	k;
+
+	k = 0;
+	while (arg[k])
+	{
+		printf(" %s  ", arg[k]);
+		k++;
+	}
+}
+
+//SIRALAMA YAPMADIM!!!!!!!!
+
 void	match_arg_files(char **files, t_command *command, int i)
 {
 	int match_files_count = files_count(files);
-	char **new_args = malloc(sizeof(char *) * (command->argument_count
-				+ match_files_count));
+	int new_len = command->argument_count + match_files_count;
+	char **new_args = malloc(sizeof(char *) * (new_len));
 	int k = 0;
+	int m;
 	while (k < i)
 	{
 		new_args[k] = command->arguments[k];
 		k++;
 	}
-	int m = 0;
+	m = 0;
 	while (m < match_files_count)
 	{
 		new_args[k + m] = files[m];
 		m++;
 	}
-	while (k + m < command->argument_count)
+	while (command->arguments[k + 1])
 	{
-		new_args[k + m] = command->arguments[k + m];
-		m++;
+		new_args[k + m] = command->arguments[k + 1];
+		k++;
 	}
 	new_args[k + m] = NULL;
 	command->arguments = new_args;

@@ -45,8 +45,6 @@ char	**take_file(char **files, char *command)
 	char	*str;
 
 	i = 0;
-	print_files(files);
-	printf("\n");
 	while (command[i])
 	{
 		if (command[i] != '\0')
@@ -95,10 +93,11 @@ void	handle_arg_asterisk(t_command *command)
 			&& asterisk_slash(command->arguments[i]) == 0)
 		{
 			match_files = just_asterisk(command->arguments[i]);
-			printf("eşelşen dosyalar\n");
-			print_files(match_files);
 			match_arg_files(match_files, command, i);
+			print_arg(command->arguments);
+			printf("\n");
 		}
 		i++;
 	}
+	//print_arg(command->arguments);
 }
