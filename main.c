@@ -134,7 +134,7 @@ int	main(int argc, char **argv, char **env)
 				//continue ;
 				expander(head, env);
 				wildcard(head);
-				//print_tree(head);
+				print_tree(head);
 				free(inpt);
 			}
 		}
