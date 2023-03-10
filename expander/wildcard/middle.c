@@ -36,6 +36,7 @@ char	*middle(char *str, int *index)
 		*index += 1;
 	}
 	new_str[j] = '\0';
+	printf("middle: %s\n", new_str);
 	return (new_str);
 }
 
@@ -83,10 +84,15 @@ int	middle_files_count(char **files, char *str)
 
 char	**middle_files(char **files, char *str)
 {
-	int count = middle_files_count(files, str);
-	char **new_files = malloc(sizeof(char *) * (count + 1));
-	int i = 0;
-	int k = 0;
+	int		count;
+	char	**new_files;
+	int		i;
+	int		k;
+
+	count = middle_files_count(files, str);
+	new_files = malloc(sizeof(char *) * (count + 1));
+	i = 0;
+	k = 0;
 	while (files[i])
 	{
 		if (search_str(files[i], str))
