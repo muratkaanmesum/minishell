@@ -28,7 +28,9 @@ int	ft_exit(char **args)
 	int	count;
 
 	count = get_arg_count(args);
-	if (count > 1)
+	if (count == 0)
+		exit(0);
+	else if (count > 1)
 	{
 		printf("exit\nminishell: exit: too many arguments\n");
 		return (1);

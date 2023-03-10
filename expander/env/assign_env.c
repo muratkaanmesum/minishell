@@ -47,7 +47,8 @@ void	change_str(char *str, char *env_value, char *new_str)
 			flag = 1;
 			assign_env_value(new_str, env_value, &index);
 			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ' && (str[i] != '$' || i == start_index))
+				&& str[i] != ' ' && (str[i] != '$' || i == start_index)
+				&& str[i] != '?')
 				i++;
 		}
 		new_str[index++] = str[i++];
@@ -77,7 +78,8 @@ int	get_node_size(char *str)
 			start_index = i;
 			flag = 1;
 			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ' && (str[i] != '$' || i == start_index))
+				&& str[i] != ' ' && (str[i] != '$' || i == start_index)
+				&& str[i] != '?')
 				i++;
 		}
 		node_size++;
