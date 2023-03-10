@@ -30,6 +30,6 @@ void	match_arg_files(char **files, t_command *command, int i);
 void	print_arg(char **arg);
 char	**just_asterisk(char *command);
 char	**sort_files(char **files, char *str);
-void	command_file(t_command *command);
-
+char	**command_file(char *prefix, char *suffix);
+char	**only_files(char *path);
 #endif

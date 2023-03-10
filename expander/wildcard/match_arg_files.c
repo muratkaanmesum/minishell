@@ -35,9 +35,11 @@ void	print_arg(char **arg)
 void	match_arg_files(char **files, t_command *command, int i)
 {
 	int match_files_count = files_count(files);
+	
 	int new_len = command->argument_count + match_files_count;
 	char **new_args = malloc(sizeof(char *) * (new_len));
 	int k = 0;
+	
 	int m;
 	if (files[0] != NULL)
 	{

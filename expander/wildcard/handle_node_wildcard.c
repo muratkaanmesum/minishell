@@ -14,8 +14,8 @@ void	handle_forarg(t_command *command)
 			match_files = just_asterisk(command->arguments[i]);
 			match_files = sort_files(match_files, command->arguments[i]);
 			match_arg_files(match_files, command, i);
-			print_arg(command->arguments);
-			printf("\n");
+			// print_arg(command->arguments);
+			// printf("\n");
 		}
 		i++;
 	}
@@ -25,16 +25,15 @@ void	handle_forcommand(t_command *command)
 {
 	char	**files;
 
-	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0)
+	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0) // && ?
 	{
 		files = just_asterisk(command->command);
 		if (files[0] != NULL)
 			command->command = files[0];
 	}
-	if (asterisk_slash(command->command) == 1
-		&& is_asterisk(command->command) == 0)
+	if (asterisk_slash(command->command) == 1)
 	{
-		command_file(command);
+		command_file(NULL, command->command);
 	}
 }
 
