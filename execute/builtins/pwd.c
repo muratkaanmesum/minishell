@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 12:46:11 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/08 15:43:50 by mmesum           ###   ########.fr       */
+/*   Created: 2023/03/07 05:10:28 by kali              #+#    #+#             */
+/*   Updated: 2023/03/07 05:22:23 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
+#include "../execute.h"
 
-void	expander(t_node *head, char **env)
+int	pwd(char **env)
 {
-	t_env	*variables;
+	int	i;
 
-	variables = get_env_variables(env);
-	handle_env(head, variables);
-	free_env(variables);
+	i = 0;
+	while (env[i] != NULL)
+	{
+		if (ft_strncmp(env[i], "PWD=", 4) == 0)
+		{
+			printf("%s\n", env[i] + 4);
+			return (1);
+		}
+		i++;
+	}
+	return (1);
 }

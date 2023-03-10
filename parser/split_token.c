@@ -76,9 +76,10 @@ int	split_token_count(t_token *tokens, enum e_token token)
 // (cat test1.txt | grep e && ls) && wc -l | ls | ls | ls
 t_token	**split_token(t_token *tokens, enum e_token token)
 {
-	t_token **split;
-	t_token *start;
-	int t_index;
+	t_token	**split;
+	t_token	*start;
+	int		t_index;
+
 	if (token == UNKNOWN)
 		return (NULL);
 	int i, j;

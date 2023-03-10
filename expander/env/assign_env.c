@@ -47,13 +47,13 @@ void	change_str(char *str, char *env_value, char *new_str)
 			flag = 1;
 			assign_env_value(new_str, env_value, &index);
 			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ' && (str[i] != '$' || i == start_index))
+				&& str[i] != ' ' && (str[i] != '$' || i == start_index)
+				&& str[i] != '?')
 				i++;
 		}
 		new_str[index++] = str[i++];
 	}
 	new_str[index] = '\0';
-	free(str);
 }
 
 int	get_node_size(char *str)
@@ -78,7 +78,8 @@ int	get_node_size(char *str)
 			start_index = i;
 			flag = 1;
 			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ' && (str[i] != '$' || i == start_index))
+				&& str[i] != ' ' && (str[i] != '$' || i == start_index)
+				&& str[i] != '?')
 				i++;
 		}
 		node_size++;
@@ -87,15 +88,26 @@ int	get_node_size(char *str)
 	return (node_size);
 }
 
-char	*assign_env(char *str, char *env_value)
+char	*assign_env(char *str, char *env_value, t_node *node,
+		enum e_token token_type, int index)
 {
 	int		value_size;
 	char	*new_str;
 	int		node_size;
+	t_token	*token;
 
 	node_size = get_node_size(str);
 	value_size = (int)ft_strlen(env_value);
 	new_str = malloc(sizeof(char) * (value_size + node_size + 1));
 	change_str(str, env_value, new_str);
+	if (token_type == RED_FILE)
+	{
+		free(str);
+		return (new_str);
+	}
+	token = get_token(node, str, token_type, index);
+	if (token->str != NULL)
+		token->str = new_str;
+	free(str);
 	return (new_str);
 }
