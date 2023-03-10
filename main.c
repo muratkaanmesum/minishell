@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/03 15:52:16 by mmesum           ###   ########.fr       */
-
-/*   Updated: 2023/03/03 14:38:57 by eablak           ###   ########.fr       */
-
+/*   Updated: 2023/03/10 13:49:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 void	print_redirections(t_redirections *redirection)
 {
 	int	i;
