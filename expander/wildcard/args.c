@@ -134,23 +134,3 @@ char	**sort_files(char **files, char *str)
 	sorted_files[x] = NULL;
 	return (sorted_files);
 }
-
-void	handle_arg_asterisk(t_command *command)
-{
-	char **match_files;
-	int i = 0;
-	while (i < command->argument_count)
-	{
-		if (is_asterisk(command->arguments[i])
-			&& asterisk_slash(command->arguments[i]) == 0)
-		{
-			match_files = just_asterisk(command->arguments[i]);
-			match_files = sort_files(match_files, command->arguments[i]);
-			match_arg_files(match_files, command, i);
-			print_arg(command->arguments);
-			printf("\n");
-		}
-		i++;
-	}
-	//print_arg(command->arguments);
-}
