@@ -92,7 +92,11 @@ char	*get_env_location(char *str)
 		if (str[i] == '\'')
 			in_quote = in_quote != 1;
 		if (in_quote == 0 && str[i] == '$')
+		{
+			if (str[i + 1] == '\0')
+				return (NULL);
 			return (&str[i]);
+		}
 		i++;
 	}
 	return (NULL);
