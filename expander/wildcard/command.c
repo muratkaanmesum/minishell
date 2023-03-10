@@ -143,6 +143,8 @@ char	*cut_suffix(char *suffix)
 		i++;
 	if (suffix[i] == '\0')
 		return (NULL);
+	else if (suffix[i + 1] == '\0')
+		return (NULL);
 	return (&suffix[i + 1]);
 }
 char	*edit_new_file(char *file)
@@ -215,6 +217,9 @@ char	**get_all_files(char *path)
 char	**command_file(char *prefix, char *suffix, char *path)
 {
 	char **new_files;
+	
+	if (suffix == NULL)
+		return (NULL);
 	if (ft_strchr(suffix, '/') != NULL)
 		new_files = get_only_files(path);
 	else
@@ -222,10 +227,10 @@ char	**command_file(char *prefix, char *suffix, char *path)
 	prefix = find_prefix(suffix);
 	prefix = edit_prefix(prefix);
 	new_files = take_file(new_files, prefix);
-
+	printf("\n");
 	print_files(new_files);
-	if (ft_strchr(suffix, '/') == NULL)
-		return (NULL);
+	printf("\n");
+
 	int i = 0;
 	char *cut_suffix_char;
 	while (new_files[i])

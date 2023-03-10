@@ -9,6 +9,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 
+
 void	handle_node_wildcard(t_node *node);
 int		is_asterisk(char *str);
 int		asterisk_slash(char *str);

@@ -36,7 +36,6 @@ char	*middle(char *str, int *index)
 		*index += 1;
 	}
 	new_str[j] = '\0';
-	printf("middle: %s\n", new_str);
 	return (new_str);
 }
 
