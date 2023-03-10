@@ -16,7 +16,7 @@ int	is_match(char *file, char *str)
 	return (1);
 }
 
-int	get_files_count(char *path)
+int	get_dir_count(char *path)
 {
 	char			buf[1024];
 	DIR				*d;
@@ -24,15 +24,12 @@ int	get_files_count(char *path)
 	int				i;
 
 	i = 0;
-	getcwd(path, 1024);
 	d = opendir(path); //gelen pwd için
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
 			if (dir->d_type == DT_DIR)
-			{
 				i++;
-			}
 		closedir(d);
 	}
 	free(dir);
@@ -41,7 +38,6 @@ int	get_files_count(char *path)
 
 char	**get_only_files(char *path)
 {
-	char			buf[1024];
 	DIR				*d;
 	struct dirent	*dir;
 	int				count;
@@ -49,27 +45,9 @@ char	**get_only_files(char *path)
 	int				i;
 	int				j;
 
-	getcwd(buf, 1024);
-	if (path != NULL)
-	{
-		i = 0;
-		while (buf[i])
-			i++;
-		buf[i] = '/';
-		i++;
-		j = 0;
-		while (path[j])
-		{
-			buf[i] = path[j];
-			i++;
-			j++;
-		}
-		buf[i] = '\0';
-	}
-	printf("pathim :%s\n", buf);
-	count = get_files_count(buf);
+	count = get_dir_count(path);
 	files = (char **)malloc(sizeof(char *) * (count + 1));
-	d = opendir(buf); //gelen pwd için
+	d = opendir(path); //gelen pwd için
 	if (d)
 	{
 		i = 0;
@@ -83,7 +61,6 @@ char	**get_only_files(char *path)
 	}
 	free(dir);
 	files[i] = NULL;
-	getchar();
 	return (files);
 }
 
@@ -154,45 +131,109 @@ char	*edit_prefix(char *prefix)
 		i++;
 	}
 	new_prefix[i] = '\0';
-	free(prefix);
 	return (new_prefix);
 }
 
 char	*cut_suffix(char *suffix)
 {
-	int		i;
-	char	*new_suffix;
+	int	i;
 
 	i = 0;
-	while (suffix[i] != '/')
+	while (suffix[i] != '/' && suffix[i] != '\0')
 		i++;
-	new_suffix = malloc(sizeof(char) * (i + 1));
+	if (suffix[i] == '\0')
+		return (NULL);
+	return (&suffix[i + 1]);
+}
+char	*edit_new_file(char *file)
+{
+	int		i;
+	char	*new_file;
+	int		j;
+
 	i = 0;
-	while (suffix[i] != '/')
-	{
-		new_suffix[i] = suffix[i];
+	while (file[i])
 		i++;
+	new_file = malloc(sizeof(char) * (i + 2));
+	new_file[0] = '/';
+	j = 1;
+	i = 0;
+	while (file[i])
+	{
+		new_file[j] = file[i];
+		i++;
+		j++;
 	}
-	free(suffix);
-	return (new_suffix);
+	new_file[j] = '\0';
+	return (new_file);
+}
+int	get_files_count(char *path)
+{
+	char			buf[1024];
+	DIR				*d;
+	struct dirent	*dir;
+	int				i;
+
+	i = 0;
+	d = opendir(path); //gelen pwd için
+	if (d)
+	{
+		while ((dir = readdir(d)) != NULL)
+			i++;
+		closedir(d);
+	}
+	free(dir);
+	return (i);
+}
+char	**get_all_files(char *path)
+{
+	DIR				*d;
+	struct dirent	*dir;
+	int				count;
+	char			**files;
+	int				i;
+	int				j;
+
+	count = get_files_count(path);
+	files = (char **)malloc(sizeof(char *) * (count + 1));
+	d = opendir(path); //gelen pwd için
+	if (d)
+	{
+		i = 0;
+		while ((dir = readdir(d)) != NULL)
+		{
+			files[i] = dir->d_name;
+			i++;
+		}
+		closedir(d);
+	}
+	free(dir);
+	files[i] = NULL;
+	return (files);
 }
 
-char	**command_file(char *prefix, char *suffix)
+char	**command_file(char *prefix, char *suffix, char *path)
 {
 	char **new_files;
-	new_files = get_only_files(prefix);
-	print_files(new_files);
-	// if suffix
-	// 	== NULL return (prefix);
+	if (ft_strchr(suffix, '/') != NULL)
+		new_files = get_only_files(path);
+	else
+		new_files = get_all_files(path);
 	prefix = find_prefix(suffix);
 	prefix = edit_prefix(prefix);
-	//new_files = get_only_files(prefix);
 	new_files = take_file(new_files, prefix);
-	int i = 0;
 
+	print_files(new_files);
+	if (ft_strchr(suffix, '/') == NULL)
+		return (NULL);
+	int i = 0;
+	char *cut_suffix_char;
 	while (new_files[i])
 	{
-		command_file(new_files[i], cut_suffix(suffix));
+		cut_suffix_char = cut_suffix(suffix);
+		new_files[i] = edit_new_file(new_files[i]);
+		char *new_path = ft_strjoin(path, new_files[i]);
+		command_file(new_files[i], cut_suffix_char, new_path);
 		i++;
 	}
 
