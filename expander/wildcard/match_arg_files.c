@@ -95,6 +95,7 @@ void	match_without_dot(char **files, t_command *command, int i)
 
 void	match_arg_files(char **files, t_command *command, int i)
 {
+
 	int		match_files_count;
 	int		new_len;
 	char	**new_args;
@@ -110,6 +111,7 @@ void	match_arg_files(char **files, t_command *command, int i)
 	new_len = command->argument_count + match_files_count;
 	new_args = malloc(sizeof(char *) * (new_len));
 	k = 0;
+
 	if (files[0] != NULL)
 	{
 		while (k < i)
