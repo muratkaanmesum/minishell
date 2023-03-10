@@ -85,12 +85,12 @@ char	**just_asterisk(char *command)
 
 char	**sort_files(char **files, char *str)
 {
-	int		i;
-	int		m;
-	int		j;
-	int		count;
-	char	**sorted_files;
-	int		x;
+	int i;
+	int m;
+	int j;
+	int count;
+	char **sorted_files;
+	int x;
 
 	i = 0;
 	m = 0;

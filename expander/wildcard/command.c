@@ -67,7 +67,6 @@ char	**get_only_files(char *path)
 		buf[i] = '\0';
 	}
 	printf("pathim :%s\n", buf);
-	getchar();
 	count = get_files_count(buf);
 	files = (char **)malloc(sizeof(char *) * (count + 1));
 	d = opendir(buf); //gelen pwd için
@@ -129,50 +128,73 @@ char	*find_prefix(char *suffix)
 	return (prefix);
 }
 
-char	*cut_pre(char *prefix, char *suffix)
+// char	*cut_pre(char *prefix, char *suffix)
+// {
+// 	prefix = find_prefix(suffix);
+// 	printf("kesilecek prefix %s\n", prefix);
+// 	return (NULL);
+// }
+
+char	*edit_prefix(char *prefix)
 {
-	prefix = find_prefix(suffix);
-	printf("kesilecek prefix %s\n", prefix);
-	return (NULL);
+	char	*new_prefix;
+	int		i;
+
+	i = 0;
+	while (prefix[i] != '\0')
+		i++;
+	if (prefix[i - 1] == '/')
+		new_prefix = malloc(sizeof(char) * (i));
+	else
+		return (prefix);
+	i = 0;
+	while (prefix[i] != '/')
+	{
+		new_prefix[i] = prefix[i];
+		i++;
+	}
+	new_prefix[i] = '\0';
+	free(prefix);
+	return (new_prefix);
 }
 
-// char	*edit_prefix(char *prefix)
-// {
-// 	char	*new_prefix;
-// 	int		i;
+char	*cut_suffix(char *suffix)
+{
+	int		i;
+	char	*new_suffix;
 
-// 	i = 0;
-// 	while (prefix[i] != '\0')
-// 		i++;
-// 	if (prefix[i - 1] == '/')
-// 		new_prefix = malloc(sizeof(char) * (i));
-// }
+	i = 0;
+	while (suffix[i] != '/')
+		i++;
+	new_suffix = malloc(sizeof(char) * (i + 1));
+	i = 0;
+	while (suffix[i] != '/')
+	{
+		new_suffix[i] = suffix[i];
+		i++;
+	}
+	free(suffix);
+	return (new_suffix);
+}
 
 char	**command_file(char *prefix, char *suffix)
 {
-	printf("gelen prefix : %s\n", prefix);
-	printf("gelen sufix : %s\n", suffix);
 	char **new_files;
+	new_files = get_only_files(prefix);
+	print_files(new_files);
 	// if suffix
 	// 	== NULL return (prefix);
 	prefix = find_prefix(suffix);
-	printf("yeni prefix %s\n", prefix);
-	new_files = get_only_files(prefix);
-	print_files(new_files);
-	printf("\n");
-	if (is_left_side(prefix, 0) == 1)
+	prefix = edit_prefix(prefix);
+	//new_files = get_only_files(prefix);
+	new_files = take_file(new_files, prefix);
+	int i = 0;
+
+	while (new_files[i])
 	{
-		//edit_prefix(prefix);
-		printf("left de %s\n", prefix);
-		new_files = left_side_files(new_files, prefix);
-		printf("eşeleşen dosyalar \n");
-		print_files(new_files);
+		command_file(new_files[i], cut_suffix(suffix));
+		i++;
 	}
-	if (is_middle(prefix, 0) == 1)
-		printf("ortda %s\n", prefix);
-	if (is_right_side(prefix, 0) == 1)
-		printf("right da %s\n", prefix);
-	//prefix = cut_prefix(prefix, suffix);
 
 	return (NULL);
 }

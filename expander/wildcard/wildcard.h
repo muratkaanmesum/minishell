@@ -32,4 +32,5 @@ char	**just_asterisk(char *command);
 char	**sort_files(char **files, char *str);
 char	**command_file(char *prefix, char *suffix);
 char	**only_files(char *path);
+char	**take_file(char **files, char *command);
 #endif
