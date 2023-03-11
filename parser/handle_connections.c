@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/08 16:36:15 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/11 09:56:51 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	head->tokens = tokens;
 	head->redirections = NULL;
 	split_type = -5;
+	head->is_arithmetic = 0;
 	head->is_subshell = 0;
 	split = NULL;
 	i = 0;
