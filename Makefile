@@ -79,6 +79,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/parse_error/quotes_reds.c\
                           parser/parse_error/token_error.c\
                           parser/parse_error/check_first.c\
+                          parser/assign_operators.c\
                             parser/connection_utils.c\
                           expander/expander.c\
                           expander/env/handle_env.c\

@@ -149,7 +149,6 @@ int	main(int argc, char **argv, char **env)
 				execute(head, new_env);
 			}
 		}
-		print_tree(head);
 		free(inpt);
 	}
 	return (0);
