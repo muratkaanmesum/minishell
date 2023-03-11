@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 18:58:54 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/11 12:30:57 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	print_token(t_token *token)
 		i++;
 	}
 }
+
 t_token	*remove_parantheses(t_token *tokens)
 {
 	int		i;
@@ -98,6 +99,7 @@ t_token	*remove_parantheses(t_token *tokens)
 	}
 	return (tokens);
 }
+
 int	check_parantheses(t_token *tokens)
 {
 	int	i;
@@ -111,6 +113,7 @@ int	check_parantheses(t_token *tokens)
 		return (1);
 	return (0);
 }
+
 void	pass_parantheses(t_token *tokens, int *i)
 {
 	int	open_count;
@@ -131,17 +134,17 @@ void	pass_parantheses(t_token *tokens, int *i)
 	}
 }
 
-//(cat test.txt (test.txt))
 int	is_arithmetic(t_token *tokens)
 {
-	int open_count = 0;
-	int close_count = 0;
-	int i = 0;
-	while (tokens[i].token != UNKNOWN && tokens[i].token == OPEN_PAR)
-	{
+	int	open_count;
+	int	close_count;
+	int	i;
+
+	open_count = 0;
+	close_count = 0;
+	i = -1;
+	while (tokens[++i].token != UNKNOWN && tokens[i].token == OPEN_PAR)
 		open_count++;
-		i++;
-	}
 	i = 0;
 	while (tokens[i].token != UNKNOWN)
 		i++;
@@ -152,9 +155,6 @@ int	is_arithmetic(t_token *tokens)
 		i--;
 	}
 	if (open_count == close_count && open_count > 1)
-	{
-		printf("INSIDE OF SOMETHING\n");
 		return (1);
-	}
 	return (0);
 }

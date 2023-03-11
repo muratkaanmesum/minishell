@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/09 04:43:35 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/11 12:40:07 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,7 @@ void		handle_node_env(t_node *node, t_env *env);
 void		free_env(t_env *env);
 char		*delete_quotes(char *str, t_node *node, int i, enum e_token token);
 t_token		*get_token(t_node *node, char *str, enum e_token token, int index);
+void		assign_env_value(char *new_str, char *env_value, int *index);
+void		assign_default_values(int *i, int *in_quote, int *flag);
+void		pass_env(char *str, int start_index, int *i);
 #endif
