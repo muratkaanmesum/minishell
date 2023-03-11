@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clear_redirections.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/11 10:37:17 by kali              #+#    #+#             */
+/*   Updated: 2023/03/11 10:41:51 by kali             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
 int	is_printable(t_token tokens)
 {
 	if (tokens.token == I_REDIRECTION || tokens.token == O_REDIRECTION
@@ -7,6 +20,7 @@ int	is_printable(t_token tokens)
 		return (1);
 	return (0);
 }
+
 void	get_new_token(t_token *removed_tokens, t_token *new_token)
 {
 	int	i;
@@ -23,25 +37,37 @@ void	get_new_token(t_token *removed_tokens, t_token *new_token)
 		if (removed_tokens[i].token == CLOSE_PAR)
 			open_count--;
 		if (open_count > 0)
-		{
-			new_token[j] = removed_tokens[i];
-			j++;
-		}
+			new_token[j++] = removed_tokens[i];
 		else if (open_count == 0 && is_printable(removed_tokens[i]) == 0)
-		{
-			new_token[j] = removed_tokens[i];
-			j++;
-		}
+			new_token[j++] = removed_tokens[i];
 		i++;
 	}
 	new_token[j].token = UNKNOWN;
+}
+
+int	count_redirections(t_token *tokens)
+{
+	int	i;
+	int	red_count;
+
+	i = 0;
+	red_count = 0;
+	while (tokens[i].token != UNKNOWN)
+	{
+		pass_parantheses(tokens, &i);
+		if (tokens[i].token == HERE_DOC || tokens[i].token == I_REDIRECTION
+			|| tokens[i].token == O_REDIRECTION || tokens[i].token == APPEND_RED
+			|| tokens[i].token == RED_FILE)
+			red_count++;
+		i++;
+	}
+	return (red_count);
 }
 
 t_token	*clear_redirections(t_node *node)
 {
 	int		i;
 	int		j;
-	int		red_count;
 	int		all;
 	t_token	*new_token;
 	t_token	*removed_tokens;
@@ -54,22 +80,11 @@ t_token	*clear_redirections(t_node *node)
 	while (removed_tokens[all].token != UNKNOWN)
 		all++;
 	i = 0;
-	red_count = 0;
-	while (removed_tokens[i].token != UNKNOWN)
-	{
-		pass_parantheses(removed_tokens, &i);
-		if (removed_tokens[i].token == HERE_DOC
-			|| removed_tokens[i].token == I_REDIRECTION
-			|| removed_tokens[i].token == O_REDIRECTION
-			|| removed_tokens[i].token == APPEND_RED
-			|| removed_tokens[i].token == RED_FILE)
-			red_count++;
-		i++;
-	}
-	new_token = malloc(sizeof(t_token) * (all - red_count + 1));
+	new_token = malloc(sizeof(t_token) * (all
+				- count_redirections(removed_tokens) + 1));
 	get_new_token(removed_tokens, new_token);
 	if (check_parantheses(node->tokens) == 1)
 		free(removed_tokens);
-	//free(node->tokens);
+	free(node->tokens);
 	return (new_token);
 }

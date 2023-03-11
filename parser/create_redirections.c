@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/04 05:09:07 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/11 10:42:23 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	does_include(t_token *tokens)
 	}
 	return (0);
 }
-//((cat cat.txt | grep e > grep.txt && ls) < sub1.txt
-//cat cat.txt | grep e > grep.txt
-// && wc -l | ls > ls1 | ls | ls < ls2.txt)
+
 t_token	*create_redirections(t_node *node)
 {
 	t_redirections	*red;
