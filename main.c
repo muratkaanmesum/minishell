@@ -135,7 +135,6 @@ int	main(int argc, char **argv, char **env)
 		inpt = readline("minishell: ");
 		add_history(inpt);
 		tokens = lexer(inpt);
-		print_token(tokens);
 		if (tokens == NULL)
 		{
 			free(inpt);
@@ -150,6 +149,7 @@ int	main(int argc, char **argv, char **env)
 				execute(head, new_env);
 			}
 		}
+		print_tree(head);
 		free(inpt);
 	}
 	return (0);
