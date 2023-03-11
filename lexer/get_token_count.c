@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   get_token_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/06 18:18:43 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/11 10:30:47 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+void	pass_alpha(char *str, int *i)
+{
+	while (my_alpha(str[*i]) && str[*i] != '\0')
+	{
+		if (str[*i] == '"' || str[*i] == '\'')
+		{
+			*i += 1;
+			while (str[*i] != '\0')
+			{
+				if (str[*i] == '"' || str[*i] == '\'')
+					break ;
+				*i += 1;
+			}
+		}
+		*i += 1;
+	}
+}
 
 void	define_character(char *str, int *i, int *count)
 {
@@ -19,20 +37,7 @@ void	define_character(char *str, int *i, int *count)
 	if (my_alpha(str[*i]))
 	{
 		*count += 1;
-		while (my_alpha(str[*i]) && str[*i] != '\0')
-		{
-			if (str[*i] == '"' || str[*i] == '\'')
-			{
-				*i += 1;
-				while (str[*i] != '\0')
-				{
-					if (str[*i] == '"' || str[*i] == '\'')
-						break ;
-					*i += 1;
-				}
-			}
-			*i += 1;
-		}
+		pass_alpha(str, i);
 	}
 	if (is_redirection(str[*i]))
 	{
