@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/06 18:17:19 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/11 09:34:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,15 @@ void	assign_arg(t_lexer_args *args)
 {
 	if (my_alpha(args->str[args->i]))
 	{
-		if (args->is_redirection != 1 && args->tokens[args->index
-			- 1].token != RED_FILE)
+		if (args->index - 1 < 0 && args->is_redirection != 1)
+			args->counter++;
+		else if (args->tokens[args->index - 1].token != RED_FILE
+				&& args->is_redirection != 1)
 			args->counter++;
 		args->tokens[args->index].start_index = args->i;
 		assign_token(args);
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
 		{
-			// if (args->str[args->i] == '$' && args->counter == 1
-			// 	&& args->is_redirection != 1)
-			// 	args->tokens[args->index - 1].token = ENV_COMMAND;
-			// else if (args->str[args->i] == '$' && args->counter > 1
-			// 		&& args->is_redirection != 1)
-			// 	args->tokens[args->index - 1].token = ENV;
 			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 			{
 				args->i++;
@@ -58,7 +54,8 @@ void	assign_arg(t_lexer_args *args)
 					args->i++;
 				}
 			}
-			args->i++;
+			else
+				args->i++;
 		}
 		args->tokens[args->index - 1].end_index = args->i;
 	}
