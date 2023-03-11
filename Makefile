@@ -79,6 +79,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/parse_error/quotes_reds.c\
                           parser/parse_error/token_error.c\
                           parser/parse_error/check_first.c\
+                            parser/connection_utils.c\
                           expander/expander.c\
                           expander/env/handle_env.c\
                           expander/env/env_utils.c\
@@ -94,7 +95,6 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/unset.c\
                             execute/builtins/exit.c\
                             execute/builtins/utils.c\
-
 
 OBJS        := $(SRCS:.c=.o)
 

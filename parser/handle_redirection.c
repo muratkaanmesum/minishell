@@ -6,44 +6,46 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:55:12 by mmesum            #+#    #+#             */
-/*   Updated: 2023/02/28 11:09:37 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/11 11:54:06 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	find_count(t_node *node, int flag)
+void	find_input_count(t_node *node)
 {
-	int	i;
 	int	count;
+	int	i;
 
 	count = 0;
-	if (flag == 1)
+	i = 0;
+	while (node->tokens[i].token != UNKNOWN)
 	{
-		i = 0;
-		while (node->tokens[i].token != UNKNOWN)
-		{
-			pass_parantheses(node->tokens, &i);
-			if (node->tokens[i].token == HERE_DOC
-				|| node->tokens[i].token == I_REDIRECTION)
-				count++;
-			i++;
-		}
-		node->redirections->infile_count = count;
+		pass_parantheses(node->tokens, &i);
+		if (node->tokens[i].token == HERE_DOC
+			|| node->tokens[i].token == I_REDIRECTION)
+			count++;
+		i++;
 	}
-	if (flag == 2)
+	node->redirections->infile_count = count;
+}
+
+void	find_output_count(t_node *node)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (node->tokens[i].token != UNKNOWN)
 	{
-		i = 0;
-		while (node->tokens[i].token != UNKNOWN)
-		{
-			pass_parantheses(node->tokens, &i);
-			if (node->tokens[i].token == APPEND_RED
-				|| node->tokens[i].token == O_REDIRECTION)
-				count++;
-			i++;
-		}
-		node->redirections->outfile_count = count;
+		pass_parantheses(node->tokens, &i);
+		if (node->tokens[i].token == APPEND_RED
+			|| node->tokens[i].token == O_REDIRECTION)
+			count++;
+		i++;
 	}
+	node->redirections->outfile_count = count;
 }
 
 void	handle_input(t_node *node)
@@ -53,7 +55,7 @@ void	handle_input(t_node *node)
 
 	i = 0;
 	index = 0;
-	find_count(node, 1);
+	find_input_count(node);
 	node->redirections->infile = malloc(node->redirections->infile_count
 			* sizeof(char *));
 	node->redirections->infile_type = malloc(node->redirections->infile_count
@@ -71,8 +73,7 @@ void	handle_input(t_node *node)
 		i++;
 	}
 }
-//((cat test1.txt | grep e && ls) && wc -l | ls | ls | ls)
-// grep e || test.txt < test.txt  && test
+
 void	handle_output(t_node *node)
 {
 	int	i;
@@ -80,7 +81,7 @@ void	handle_output(t_node *node)
 
 	i = 0;
 	index = 0;
-	find_count(node, 2);
+	find_output_count(node);
 	node->redirections->outfile = malloc(node->redirections->outfile_count
 			* sizeof(char *));
 	node->redirections->outfile_type = malloc(node->redirections->outfile_count
