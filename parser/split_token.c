@@ -84,7 +84,7 @@ t_token	**split_token(t_token *tokens, enum e_token token)
 		return (NULL);
 	int i, j;
 	t_index = 0;
-	split = malloc(sizeof(t_token *) * connection_count(tokens, token) + 1);
+	split = malloc(sizeof(t_token *) * (connection_count(tokens, token) + 1));
 	i = 0;
 	j = 0;
 	while (i < connection_count(tokens, token))

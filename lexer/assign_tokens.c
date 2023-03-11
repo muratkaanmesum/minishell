@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 09:34:09 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/11 10:09:27 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,7 @@ void	assign_arg(t_lexer_args *args)
 		args->tokens[args->index].start_index = args->i;
 		assign_token(args);
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
-		{
-			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
-			{
-				args->i++;
-				while (args->str[args->i] != '\0')
-				{
-					if (args->str[args->i] == '"' || args->str[args->i] == '\'')
-						break ;
-					args->i++;
-				}
-			}
-			else
-				args->i++;
-		}
+			pass_character(args);
 		args->tokens[args->index - 1].end_index = args->i;
 	}
 }

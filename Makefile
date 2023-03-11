@@ -10,6 +10,7 @@
 NAME        := minishell
 CC        := gcc
 #FLAGS    := -fsanitize=address
+FLAGS       := -g -O0
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -62,6 +63,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\
                           lexer/assign_tokens.c\
+                          lexer/assign_tokens_utils.c\
                           parser/parser.c\
                           parser/create_redirections.c\
                           parser/handle_redirection.c\

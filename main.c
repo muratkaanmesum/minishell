@@ -146,7 +146,6 @@ int	main(int argc, char **argv, char **env)
 			if (head != NULL)
 			{
 				expander(head, new_env);
-				print_tree(head);
 				execute(head, new_env);
 			}
 		}
