@@ -40,6 +40,7 @@ char	**get_dir(char *path)
 
 	count = get_dir_count(path);
 	files = (char **)malloc(sizeof(char *) * (count + 1));
+	i = 0;
 	d = opendir(path); //gelen pwd için
 	if (d)
 	{
@@ -179,6 +180,7 @@ char	*new_path(char *path, char *prefix)
 	int		i;
 	int		j;
 
+	printf("!!!!eklemem gereken prefix %s\n", prefix);
 	if (!prefix)
 		return (path);
 	len_prefix = ft_strlen(prefix);
@@ -198,6 +200,7 @@ char	*new_path(char *path, char *prefix)
 		j++;
 	}
 	new_path[i] = '\0';
+	printf("!!new pathim %s\n", new_path);
 	return (new_path);
 }
 
@@ -215,7 +218,7 @@ char	*cut_suffix(char *suffix)
 	return (&suffix[i + 1]);
 }
 
-char	*prefix_add_file(char *file, char *prefix)
+char	*prefix_add_file(char *prefix, char *file)
 {
 	int		len_file;
 	int		len_prefix;
@@ -223,8 +226,6 @@ char	*prefix_add_file(char *file, char *prefix)
 	char	*new_prefix;
 	int		j;
 
-	printf("FILE %s\n", file);
-	printf("PREFIX %s\n", prefix);
 	if (!prefix)
 		return (file);
 	len_file = ft_strlen(file);
@@ -273,12 +274,19 @@ void	expandWildcard(char *prefix, char *suffix)
 		path = new_path(path, prefix);
 		printf("new path %s\n", path);
 		files = get_all(path);
-		print_files(files);
-		printf("%s\n", data);
 		files = take_file(files, data);
+		printf("son değerim \n");
 		print_files(files);
+		printf("\n");
 		suffix = cut_suffix(suffix);
-
+		int i = 0;
+		printf("\n\n");
+		while (files[i])
+		{
+			printf("DÖNDÜR %s\n", prefix_add_file(prefix, files[i]));
+			i++;
+		}
+		printf("\n\n");
 		return ;
 	}
 	path = add_slash(path);
@@ -294,7 +302,7 @@ void	expandWildcard(char *prefix, char *suffix)
 	int i = 0;
 	while (files[i])
 	{
-		files[i] = prefix_add_file(files[i], prefix);
+		files[i] = prefix_add_file(prefix, files[i]);
 		printf("bir sonraki adım için giden\n");
 		printf("prefix %s\n", files[i]);
 		printf("suffix %s\n", suffix);
