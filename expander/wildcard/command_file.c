@@ -180,7 +180,6 @@ char	*new_path(char *path, char *prefix)
 	int		i;
 	int		j;
 
-	printf("!!!!eklemem gereken prefix %s\n", prefix);
 	if (!prefix)
 		return (path);
 	len_prefix = ft_strlen(prefix);
@@ -193,6 +192,8 @@ char	*new_path(char *path, char *prefix)
 		i++;
 	}
 	j = 0;
+	if (prefix[0] == '/')
+		j++;
 	while (j < len_prefix)
 	{
 		new_path[i] = prefix[j];
@@ -200,7 +201,6 @@ char	*new_path(char *path, char *prefix)
 		j++;
 	}
 	new_path[i] = '\0';
-	printf("!!new pathim %s\n", new_path);
 	return (new_path);
 }
 
@@ -256,56 +256,31 @@ void	expandWildcard(char *prefix, char *suffix)
 	char *path;
 	char **files;
 
-	printf("\n********\n");
 	if (suffix == NULL)
 	{
-		printf("\n\nişlem sonuna geldi \n");
+		printf("RETURN %s\n", prefix);
 		return ;
 	}
 	data = find_data(suffix);
-	printf("data : %s\n", data);
 	path = getcwd(buf, 1024);
-	if (ft_strchr(data, '/') != NULL)
-		data = edit_data(data);
-	else
-	{
-		printf("ELSE GİRDİ\n");
-		path = add_slash(path);
-		path = new_path(path, prefix);
-		printf("new path %s\n", path);
-		files = get_all(path);
-		files = take_file(files, data);
-		printf("son değerim \n");
-		print_files(files);
-		printf("\n");
-		suffix = cut_suffix(suffix);
-		int i = 0;
-		printf("\n\n");
-		while (files[i])
-		{
-			printf("DÖNDÜR %s\n", prefix_add_file(prefix, files[i]));
-			i++;
-		}
-		printf("\n\n");
-		return ;
-	}
 	path = add_slash(path);
 	path = new_path(path, prefix);
-	printf("new path %s\n", path);
-	files = get_dir(path);
-	files = take_file(files, data);
-	printf("\neşelşen dosyalar \n");
-	print_files(files);
-	printf("\n");
+	if (ft_strchr(data, '/') != NULL)
+	{
+		data = edit_data(data);
+		files = get_dir(path);
+		files = take_file(files, data);
+	}
+	else
+	{
+		files = get_all(path);
+		files = take_file(files, data);
+	}
 	suffix = cut_suffix(suffix);
-	printf("cut suffix %s\n", suffix);
 	int i = 0;
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
-		printf("bir sonraki adım için giden\n");
-		printf("prefix %s\n", files[i]);
-		printf("suffix %s\n", suffix);
 		expandWildcard(files[i], suffix);
 		i++;
 	}
