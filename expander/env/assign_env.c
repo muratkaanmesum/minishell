@@ -68,6 +68,7 @@ int	get_node_size(char *str)
 char	*assign_env(char *str, char *env_value, t_node *node,
 		enum e_token token_type, int index)
 {
+
 	int		value_size;
 	char	*new_str;
 	int		node_size;
