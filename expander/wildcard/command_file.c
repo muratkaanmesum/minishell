@@ -51,7 +51,7 @@ char	**get_dir(char *path)
 				files[i] = dir->d_name;
 				i++;
 			}
-		closedir(d);
+		//closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;
@@ -251,10 +251,11 @@ char	*prefix_add_file(char *prefix, char *file)
 
 void	expandWildcard(char *prefix, char *suffix)
 {
-	char *data;
-	char buf[1024];
-	char *path;
-	char **files;
+	char	*data;
+	char	buf[1024];
+	char	*path;
+	char	**files;
+	int		i;
 
 	if (suffix == NULL)
 	{
@@ -277,7 +278,7 @@ void	expandWildcard(char *prefix, char *suffix)
 		files = take_file(files, data);
 	}
 	suffix = cut_suffix(suffix);
-	int i = 0;
+	i = 0;
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
