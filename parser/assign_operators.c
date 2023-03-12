@@ -82,7 +82,6 @@ void	handle_operators(t_node *head, t_token *tokens)
 			head->is_subshell);
 	head->left_operator = get_left_operator(head->tokens[0], tokens,
 			head->is_subshell);
-	printf("left: %d, right: %d\n,", head->left_operator, head->right_operator);
 }
 
 void	assign_operators(t_node *head, t_token *tokens)
