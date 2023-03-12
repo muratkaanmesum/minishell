@@ -46,7 +46,8 @@ void	handle_forarg(t_command *command)
 void	handle_forcommand(t_command *command)
 {
 	char	**files;
-		char buf[1024];
+	char	buf[1024];
+		static char *prefix;
 
 	fix_str(command->command);
 	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0)
@@ -57,7 +58,8 @@ void	handle_forcommand(t_command *command)
 	}
 	if (asterisk_slash(command->command) == 1)
 	{
-		command_file(NULL, command->command, getcwd(buf, 1024));
+		//command_file(NULL, command->command, getcwd(buf, 1024));
+		expandWildcard(NULL, command->command);
 	}
 }
 

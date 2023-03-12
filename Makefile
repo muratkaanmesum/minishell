@@ -9,7 +9,7 @@
 
 NAME        := minishell
 CC        := gcc
-#FLAGS    := -fsanitize=address
+#FLAGS    := -fsanitize=address -g
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -92,7 +92,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/left_side.c\
                           expander/wildcard/middle.c\
                           expander/wildcard/match_arg_files.c\
-
+                          expander/wildcard/command_file.c\
 
 OBJS        := $(SRCS:.c=.o)
 

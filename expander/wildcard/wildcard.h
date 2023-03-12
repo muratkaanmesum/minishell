@@ -34,4 +34,33 @@ char	**sort_files(char **files, char *str);
 char	**command_file(char *prefix, char *suffix, char *path);
 char	**only_files(char *path);
 char	**take_file(char **files, char *command);
+
+
+
+// new command için
+void	expandWildcard(char *prefix, char *suffix);
 #endif
+
+	// if (ft_strchr(suffix, '/') == NULL)
+	// 	return ;
+// if (ft_strchr(data, '/') != NULL)
+	// {
+	// 	path = add_slash(path);
+	// 	path = new_path(path, prefix);
+	// 	printf("new path %s\n", path);
+	// 	files = get_dir(path);
+	// 	data = edit_data(data);
+	// 	printf("edit data %s\n", data);
+	// 	files = take_file(files, data);
+	// 	printf("if için files\n");
+	// 	print_files(files);
+	// }
+	// else
+	// {
+	// 	//EN SON ADIMDA GİRMELİ
+	// 	printf("else\n");
+	// 	files = get_all(path);
+	// 	files = take_file(files, data);
+	// 	printf("else için files\n");
+	// 	print_files(files);
+	// }

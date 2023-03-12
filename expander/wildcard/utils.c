@@ -54,7 +54,10 @@ void	print_files(char **files)
 
 	i = 0;
 	if (files[0] == NULL)
+	{
+		printf("dosya yok\n");
 		return ;
+	}
 	while (files[i])
 	{
 		printf("%s\n", files[i]);
