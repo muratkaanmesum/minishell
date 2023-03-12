@@ -60,6 +60,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           libft/ft_isalpha.c \
                           libft/ft_calloc.c \
                           main.c \
+                          free_tree.c \
                           lexer/lexer.c\
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:16:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/12 15:04:42 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/12 16:29:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,8 @@ int	incorrect_parantheses(t_token *tokens)
 	return (0);
 }
 
-int	missing_tokens(t_token *tokens)
+int	check_first_token(t_token *tokens)
 {
-	int	i;
-
-	i = 0;
 	if (tokens[0].token == AND || tokens[0].token == OR
 		|| tokens[0].token == PIPE)
 	{
@@ -42,6 +39,16 @@ int	missing_tokens(t_token *tokens)
 		printf("syntax error near unexpected token %s\n", tokens[0].str);
 		return (1);
 	}
+	return (0);
+}
+
+int	missing_tokens(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	if (check_first_token(tokens))
+		return (1);
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == AND || tokens[i].token == OR
@@ -51,7 +58,7 @@ int	missing_tokens(t_token *tokens)
 			{
 				printf("missing_tokens minishell: ");
 				printf("syntax error near unexpected token %s\n",
-						tokens[i].str);
+					tokens[i].str);
 				return (1);
 			}
 		}
@@ -59,6 +66,7 @@ int	missing_tokens(t_token *tokens)
 	}
 	return (0);
 }
+
 int	check_unknown_tokens(t_token *tokens)
 {
 	int	i;
@@ -76,6 +84,7 @@ int	check_unknown_tokens(t_token *tokens)
 	}
 	return (0);
 }
+
 int	check_first(t_token *tokens)
 {
 	if (incorrect_parantheses(tokens))

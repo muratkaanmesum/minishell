@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 15:31:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/12 16:26:06 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	assign_character(t_lexer_args *args)
 	}
 }
 
-// < test.txt grep e | uniq >outfile.txt
-// < test.txt < test.txt grep
 
 void	assign_parantheses(t_lexer_args *args)
 {

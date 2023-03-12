@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_error.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 16:29:48 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/12 16:30:03 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_ERROR_H
 # define PARSE_ERROR_H
 # include "../../minishell.h"
+
 void	print_error(t_token *tokens);
 int		tokens_count(t_token *tokens);
-int	search_token_count(t_token *tokens,
-						enum e_token type_token);
+int		search_token_count(t_token *tokens, enum e_token type_token);
 int		open_parantheses(t_token *tokens);
 int		is_real_subshell(t_token *tokens);
 int		out_of_use(t_token *tokens);
