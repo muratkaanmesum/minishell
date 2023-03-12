@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:26:19 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 15:26:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/12 15:54:47 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	token_error_handle(t_token *tokens)
 
 int	parse_error(t_token *tokens)
 {
-	print_token(tokens);
 	if (empty_line(tokens) == 0)
 	{
 		if (less_quotes(tokens))
@@ -88,7 +87,7 @@ int	parse_error(t_token *tokens)
 			return (1);
 		if (misuse_parantheses(tokens))
 			return (1);
-		if (check_redirections(tokens))
+		if (check_operators(tokens))
 			return (1);
 	}
 	return (0);

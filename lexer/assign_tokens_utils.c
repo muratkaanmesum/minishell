@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:08:50 by kali              #+#    #+#             */
-/*   Updated: 2023/03/12 14:58:34 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/12 15:42:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ void	pass_character(t_lexer_args *args)
 		args->i++;
 }
 
+int	check_if_command(t_lexer_args *args)
+{
+	int	i;
+
+	i = args->index - 1;
+	while (i >= 0 && args->tokens[i].token != PIPE
+		&& args->tokens[i].token != CLOSE_PAR
+		&& args->tokens[i].token != OPEN_PAR && args->tokens[i].token != AND
+		&& args->tokens[i].token != OR)
+	{
+		if (args->tokens[i].token == COMMAND)
+		{
+			args->counter = args->counter + 1;
+			return (0);
+		}
+		i--;
+	}
+	return (1);
+}
+
 void	assign_token(t_lexer_args *args)
 {
 	if (args->is_redirection == 1)
@@ -35,7 +55,7 @@ void	assign_token(t_lexer_args *args)
 		args->tokens[args->index].token = RED_FILE;
 		args->is_redirection = 0;
 	}
-	else if (args->counter == 1)
+	else if (args->counter == 1 && check_if_command(args))
 		args->tokens[args->index].token = COMMAND;
 	else if (args->counter > 1)
 	{

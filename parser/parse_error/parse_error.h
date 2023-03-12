@@ -12,5 +12,5 @@ int		less_quotes(t_token *tokens);
 int		check_red(t_token *tokens);
 int		token_error(t_token *tokens);
 int		misuse_parantheses(t_token *tokens);
-int		check_redirections(t_token *tokens);
+int		check_operators(t_token *tokens);
 #endif
