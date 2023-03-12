@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:10:55 by eablak            #+#    #+#             */
 /*   Updated: 2023/03/12 13:11:33 by eablak           ###   ########.fr       */
@@ -80,6 +80,6 @@ char	**ft_split(char const *s, char c)
 				i++;
 		}
 	}
-	split[j] = 0;
+	split[j] = NULL;
 	return (split);
 }

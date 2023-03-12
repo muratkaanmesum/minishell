@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   handle_simple_command.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:41:00 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 13:52:34 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/11 11:54:31 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 void	handle_command(t_node *node)
 {
 	int	i;
@@ -24,6 +25,7 @@ void	handle_command(t_node *node)
 		i++;
 	}
 }
+
 void	handle_option(t_node *node)
 {
 	int	i;
@@ -77,6 +79,7 @@ void	handle_args(t_node *node)
 	}
 	node->command->arguments[j] = NULL;
 }
+
 void	handle_simple_command(t_node *node)
 {
 	node->command = malloc(sizeof(t_command));

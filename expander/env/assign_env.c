@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/03 17:05:33 by mmesum           ###   ########.fr       */
-
-/*   Updated: 2023/03/03 13:03:38 by mmesum           ###   ########.fr       */
-
+/*   Updated: 2023/03/11 12:39:47 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expander.h"
-
-void	assign_env_value(char *new_str, char *env_value, int *index)
-{
-	int	i;
-
-	i = 0;
-	while (env_value[i] != '\0')
-		new_str[(*index)++] = env_value[i++];
-}
 
 void	change_str(char *str, char *env_value, char *new_str)
 {
@@ -34,9 +21,7 @@ void	change_str(char *str, char *env_value, char *new_str)
 	int	start_index;
 
 	index = 0;
-	in_quote = 0;
-	i = 0;
-	flag = 0;
+	assign_default_values(&i, &in_quote, &flag);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
@@ -46,14 +31,11 @@ void	change_str(char *str, char *env_value, char *new_str)
 			start_index = i;
 			flag = 1;
 			assign_env_value(new_str, env_value, &index);
-			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ' && (str[i] != '$' || i == start_index))
-				i++;
+			pass_env(str, start_index, &i);
 		}
 		new_str[index++] = str[i++];
 	}
 	new_str[index] = '\0';
-	free(str);
 }
 
 int	get_node_size(char *str)
@@ -66,9 +48,7 @@ int	get_node_size(char *str)
 
 	start_index = 0;
 	node_size = 0;
-	i = 0;
-	flag = 0;
-	in_quote = 0;
+	assign_default_values(&i, &in_quote, &flag);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
@@ -77,9 +57,7 @@ int	get_node_size(char *str)
 		{
 			start_index = i;
 			flag = 1;
-			while (str[i] != '\0' && str[i] != '\'' && str[i] != '"'
-				&& str[i] != ' ' && (str[i] != '$' || i == start_index))
-				i++;
+			pass_env(str, start_index, &i);
 		}
 		node_size++;
 		i++;
@@ -87,16 +65,27 @@ int	get_node_size(char *str)
 	return (node_size);
 }
 
-char	*assign_env(char *str, char *env_value)
+char	*assign_env(char *str, char *env_value, t_node *node,
+		enum e_token token_type, int index)
 {
 
 	int		value_size;
 	char	*new_str;
 	int		node_size;
+	t_token	*token;
 
 	node_size = get_node_size(str);
 	value_size = (int)ft_strlen(env_value);
 	new_str = malloc(sizeof(char) * (value_size + node_size + 1));
 	change_str(str, env_value, new_str);
+	if (token_type == RED_FILE)
+	{
+		free(str);
+		return (new_str);
+	}
+	token = get_token(node, str, token_type, index);
+	if (token->str != NULL)
+		token->str = new_str;
+	free(str);
 	return (new_str);
 }

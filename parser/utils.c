@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 18:58:54 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/12 06:31:25 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	print_token(t_token *token)
 		i++;
 	}
 }
+
 t_token	*remove_parantheses(t_token *tokens)
 {
 	int		i;
@@ -93,24 +94,11 @@ t_token	*remove_parantheses(t_token *tokens)
 			j++;
 		}
 		new_split[j - 1].token = UNKNOWN;
-		//free(tokens);
 		return (new_split);
 	}
 	return (tokens);
 }
-int	check_parantheses(t_token *tokens)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	j = 1;
-	while (tokens[i].token != UNKNOWN)
-		i++;
-	if (tokens[0].token == OPEN_PAR && tokens[i - 1].token == CLOSE_PAR)
-		return (1);
-	return (0);
-}
 void	pass_parantheses(t_token *tokens, int *i)
 {
 	int	open_count;
@@ -131,30 +119,24 @@ void	pass_parantheses(t_token *tokens, int *i)
 	}
 }
 
-//(cat test.txt (test.txt))
+int	check_parantheses(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	pass_parantheses(tokens, &i);
+	if (tokens[i].token == UNKNOWN)
+		return (1);
+	return (0);
+}
+
 int	is_arithmetic(t_token *tokens)
 {
-	int open_count = 0;
-	int close_count = 0;
-	int i = 0;
-	while (tokens[i].token != UNKNOWN && tokens[i].token == OPEN_PAR)
-	{
-		open_count++;
-		i++;
-	}
-	i = 0;
-	while (tokens[i].token != UNKNOWN)
-		i++;
-	i--;
-	while (i >= 0 && tokens[i].token == CLOSE_PAR)
-	{
-		close_count++;
-		i--;
-	}
-	if (open_count == close_count && open_count > 1)
-	{
-		printf("INSIDE OF SOMETHING\n");
+	int	i;
+
+	i = 1;
+	pass_parantheses(tokens, &i);
+	if (tokens[i].token == UNKNOWN)
 		return (1);
-	}
 	return (0);
 }

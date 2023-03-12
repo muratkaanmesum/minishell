@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 10:36:10 by kali              #+#    #+#             */
-/*   Updated: 2023/03/11 10:36:10 by kali             ###   ########.fr       */
+/*   Created: 2023/03/07 05:10:28 by kali              #+#    #+#             */
+/*   Updated: 2023/03/07 05:22:23 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../execute.h"
 
-int	my_alpha(char c)
+int	pwd(char **env)
 {
-	if (c != '<' && c != '>' && c != '|' && c != ' ' && c != '&' && c != '('
-		&& c != ')')
-		return (1);
-	return (0);
-}
+	int	i;
 
-int	is_redirection(char c)
-{
-	if (c == '<' || c == '>' || c == '|' || c == '&')
-		return (1);
-	return (0);
+	i = 0;
+	while (env[i] != NULL)
+	{
+		if (ft_strncmp(env[i], "PWD=", 4) == 0)
+		{
+			printf("%s\n", env[i] + 4);
+			return (1);
+		}
+		i++;
+	}
+	return (1);
 }

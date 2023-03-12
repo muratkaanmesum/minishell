@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/02 19:05:19 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/12 06:27:24 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,9 @@ int	does_priority(t_token *tokens, enum e_token token)
 	}
 	return (0);
 }
-// (cat test1.txt | grep e && ls) < test.txt |
-t_node	*handle_connections(t_node *head, t_token *tokens)
-{
-	t_token			**split;
-	int				i;
-	enum e_token	split_type;
-	int				j;
-	int				t;
-	t_token			*cleared_tokens;
 
-	head->tokens = tokens;
-	head->redirections = NULL;
-	split_type = -5;
-	head->is_subshell = 0;
-	split = NULL;
-	i = 0;
-	cleared_tokens = create_redirections(head);
-	if (cleared_tokens != NULL)
-	{
-		//free(tokens);
-		head->tokens = cleared_tokens;
-	}
+void	check_if_subshell(t_node *head)
+{
 	if (check_parantheses(head->tokens) == 1)
 	{
 		if (is_arithmetic(head->tokens) == 1)
@@ -69,34 +50,52 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 			head->is_subshell = 1;
 		}
 	}
+}
+
+void	assign_head_values(t_node *head, t_token *tokens)
+{
+	head->tokens = tokens;
+	head->redirections = NULL;
+	head->is_arithmetic = 0;
+	head->is_subshell = 0;
+}
+
+int	assign_split_type(t_node *head)
+{
+	int	split_type;
+
 	if (does_priority(head->tokens, -1) == 1)
 		split_type = -1;
 	else if (does_priority(head->tokens, PIPE) == 1)
 		split_type = PIPE;
 	else
 		split_type = UNKNOWN;
-	head->connection_count = connection_count(head->tokens, split_type);
-	if (split_type != UNKNOWN && head->is_arithmetic != 1)
-	{
-		j = 0;
-		split = split_token(head->tokens, split_type);
-	}
-	else if (split_type == UNKNOWN && head->is_arithmetic != 1)
-	{
-		handle_simple_command(head);
+	return (split_type);
+}
+
+t_node	*handle_connections(t_node *head, t_token *tokens)
+{
+	t_token			**split;
+	int				i;
+	enum e_token	split_type;
+	t_token			*cleared_tokens;
+
+	split_type = -5;
+	assign_head_values(head, tokens);
+	cleared_tokens = create_redirections(head);
+	if (cleared_tokens != NULL)
+		head->tokens = cleared_tokens;
+	if (check_parantheses(head->tokens) == 1)
+		check_if_subshell(head);
+	split_type = assign_split_type(head);
+	if (handle_split_type(split_type, head, &split) == 0)
 		return (head);
-	}
 	i = 0;
 	if (split != NULL)
 	{
-		head->connections = malloc(sizeof(t_node *)
-				* connection_count(head->tokens, split_type));
 		while (i < connection_count(head->tokens, split_type))
-		{
-			head->connections[i] = handle_connections(malloc(sizeof(t_node)),
+			head->connections[i++] = handle_connections(malloc(sizeof(t_node)),
 														split[i]);
-			i++;
-		}
 	}
 	return (head);
 }

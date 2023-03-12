@@ -9,7 +9,9 @@
 
 NAME        := minishell
 CC        := gcc
-#FLAGS    := -fsanitize=address -g
+#FLAGS    := -fsanitize=address
+FLAGS       := -g -O0
+
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -62,6 +64,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\
                           lexer/assign_tokens.c\
+                          lexer/assign_tokens_utils.c\
                           parser/parser.c\
                           parser/create_redirections.c\
                           parser/handle_redirection.c\
@@ -77,6 +80,9 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/parse_error/quotes_reds.c\
                           parser/parse_error/token_error.c\
                           parser/parse_error/check_first.c\
+                          parser/assign_operators.c\
+                            parser/connection_utils.c\
+                            parser/operators_utils.c\
                           expander/expander.c\
                           expander/env/handle_env.c\
                           expander/env/env_utils.c\
@@ -93,6 +99,17 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/middle.c\
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
+                          expander/env/assign_env_utils.c\
+                          execute/execute.c\
+                          execute/builtins/cd.c\
+                          execute/builtins/echo.c\
+                          execute/builtins/pwd.c\
+                          execute/builtins/env.c\
+                          execute/builtins/export.c\
+                            execute/builtins/unset.c\
+                            execute/builtins/exit.c\
+                            execute/builtins/utils.c\
+
 
 OBJS        := $(SRCS:.c=.o)
 

@@ -3,83 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/03 18:53:00 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/11 10:34:54 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-void	assign_token(t_lexer_args *args)
-{
-	if (args->is_redirection == 1)
-	{
-		args->tokens[args->index].token = RED_FILE;
-		args->is_redirection = 0;
-	}
-	else if (args->counter == 1)
-		args->tokens[args->index].token = COMMAND;
-	else if (args->counter > 1)
-	{
-		if (args->str[args->i] == '-')
-			args->tokens[args->index].token = OPTION;
-		else
-			args->tokens[args->index].token = ARG;
-	}
-	args->index++;
-}
+#include "lexer.h"
 
 void	assign_arg(t_lexer_args *args)
 {
 	if (my_alpha(args->str[args->i]))
 	{
-			if (args->is_redirection != 1 &&  args->tokens[args->index
-				- 1].token != RED_FILE)
+		if (args->index - 1 < 0 && args->is_redirection != 1)
+			args->counter++;
+		else if (args->tokens[args->index - 1].token != RED_FILE
+			&& args->is_redirection != 1)
 			args->counter++;
 		args->tokens[args->index].start_index = args->i;
 		assign_token(args);
 		while (my_alpha(args->str[args->i]) && args->str[args->i] != '\0')
-		{
-			// if (args->str[args->i] == '$' && args->counter == 1
-			// 	&& args->is_redirection != 1)
-			// 	args->tokens[args->index - 1].token = ENV_COMMAND;
-			// else if (args->str[args->i] == '$' && args->counter > 1
-			// 		&& args->is_redirection != 1)
-			// 	args->tokens[args->index - 1].token = ENV;
-			if (args->str[args->i] == '"' || args->str[args->i] == '\'')
-			{
-				args->i++;
-				while (args->str[args->i] != '\0')
-				{
-					if (args->str[args->i] == '"' || args->str[args->i] == '\'')
-						break ;
-					args->i++;
-				}
-			}
-			args->i++;
-		}
+			pass_character(args);
 		args->tokens[args->index - 1].end_index = args->i;
 	}
-}
-
-void	assign_redirection(t_lexer_args *args, int red_count)
-{
-	if (args->str[args->i - red_count] == '<' && red_count == 1)
-		args->tokens[args->index].token = I_REDIRECTION;
-	else if (args->str[args->i - red_count] == '<' && red_count == 2)
-		args->tokens[args->index].token = HERE_DOC;
-	else if (args->str[args->i - red_count] == '>' && red_count == 1)
-		args->tokens[args->index].token = O_REDIRECTION;
-	else if (args->str[args->i - red_count] == '>' && red_count == 2)
-		args->tokens[args->index].token = APPEND_RED;
-	else if (args->str[args->i - red_count] == '|' && red_count == 1)
-		args->tokens[args->index].token = PIPE;
-	else if (args->str[args->i - red_count] == '|' && red_count == 2)
-		args->tokens[args->index].token = OR;
-	else if (args->str[args->i - red_count] == '&' && red_count == 2)
-		args->tokens[args->index].token = AND;
 }
 
 void	assign_character(t_lexer_args *args)
@@ -100,16 +47,7 @@ void	assign_character(t_lexer_args *args)
 		}
 		assign_redirection(args, red_count);
 		args->tokens[args->index].end_index = args->i;
-		if ((args->str[args->i - red_count] == '<' && red_count == 1)
-			|| (args->str[args->i - red_count] == '<' && red_count == 2)
-			|| (args->str[args->i - red_count] == '>' && red_count == 2)
-			|| (args->str[args->i - red_count] == '>' && red_count == 1))
-		{
-			args->is_redirection = 1;
-			args->counter = 1;
-		}
-		else
-			args->counter = 0;
+		assign_red_arg(args, red_count);
 		args->index++;
 	}
 }

@@ -64,6 +64,11 @@ void	print_tree(t_node *head)
 	if (head->connection_count == 1)
 	{
 		j = 0;
+		if (head->command == NULL)
+		{
+			print_token(head->tokens);
+			return ;
+		}
 		printf("command : %s ", head->command->command);
 		printf("\n");
 		while (j < head->command->argument_count)
@@ -89,28 +94,45 @@ void	print_tree(t_node *head)
 		{
 			if (i == 0)
 			{
-				// getchar();
-				//print_token(head->tokens);
+				print_token(head->tokens);
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
-				// getchar();
 				printf("\n*************\n");
 			}
 			print_tree(head->connections[i]);
 			i++;
 		}
 }
+char	**init_env(char **env)
+{
+	int		i;
+	char	**new_env;
 
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	new_env = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i] != NULL)
+	{
+		new_env[i] = ft_strdup(env[i]);
+		i++;
+	}
+	new_env[i] = NULL;
+	return (new_env);
+}
 int	main(int argc, char **argv, char **env)
 {
 	char	*inpt;
 	t_token	*tokens;
 	int		i;
 	t_node	*head;
+	char	**new_env;
 
 	if (argc != 1)
 		return (0);
 	(void)argv;
+	new_env = init_env(env);
 	while (1)
 	{
 		inpt = readline("minishell: ");
@@ -121,20 +143,16 @@ int	main(int argc, char **argv, char **env)
 			free(inpt);
 			continue ;
 		}
-		if (check_first(tokens) != 1) //(a) command not found
+		if (check_first(tokens) != 1)
 		{
-			//print_token(tokens);
 			head = parser(tokens);
 			if (head != NULL)
 			{
-				//free(inpt);
-				//continue ;
 				expander(head, env);
 				wildcard(head);
-				//print_tree(head);
-				free(inpt);
 			}
 		}
+		free(inpt);
 	}
 	return (0);
 }
