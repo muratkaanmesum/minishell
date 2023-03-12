@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quotes_reds.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 14:31:22 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/12 14:31:33 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse_error.h"
 
 void	print_error(t_token *tokens)
@@ -64,8 +76,8 @@ int	is_red(t_token *tokens, int start)
 
 int	check_red(t_token *tokens)
 {
-	int i;
-	int ret;
+	int	i;
+	int	ret;
 
 	i = 0;
 	ret = 0;

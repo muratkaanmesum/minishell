@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 14:31:46 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/12 14:31:46 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse_error.h"
 
 int	is_command(t_token *tokens, int start)
@@ -13,8 +25,11 @@ int	is_command(t_token *tokens, int start)
 
 int	token_error(t_token *tokens)
 {
-	int i = 0;
-	int ret = 0;
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == CLOSE_PAR)

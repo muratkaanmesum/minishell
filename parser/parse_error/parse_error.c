@@ -1,9 +1,72 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 14:26:19 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/12 14:28:53 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse_error.h"
 
 int	empty_line(t_token *tokens)
 {
 	if (!tokens)
 		return (1);
+	return (0);
+}
+
+int	parantheses_error(t_token *tokens)
+{
+	if (open_parantheses(tokens) == 1)
+	{
+		printf("open_parantheses minishell: ");
+		printf("syntax error near unexpected token `)'\n");
+		return (1);
+	}
+	if (open_parantheses(tokens) == 2)
+	{
+		printf("open_parantheses minishell: ");
+		printf("syntax error near unexpected token `('\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	misuse_parantheses_handle(t_token *tokens)
+{
+	if (misuse_parantheses(tokens) == 1)
+		return (1);
+	if (misuse_parantheses(tokens) == 2)
+	{
+		printf("misuse_parantheses minishell: ");
+		printf("syntax error near unexpected token `('\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	token_error_handle(t_token *tokens)
+{
+	if (is_real_subshell(tokens) && token_error(tokens) == 0)
+	{
+		printf("is_real_subshell minishell: ");
+		printf("syntax error near unexpected token `('\n");
+		return (1);
+	}
+	if (check_red(tokens))
+	{
+		printf("check_red bash: syntax error near unexpected token `)'\n");
+		return (1);
+	}
+	if (token_error(tokens))
+	{
+		printf("token_error bash: syntax error near unexpected token\n");
+		return (1);
+	}
 	return (0);
 }
 
@@ -16,40 +79,14 @@ int	parse_error(t_token *tokens)
 			print_error(tokens);
 			return (1);
 		}
-		if (open_parantheses(tokens) == 1)
-		{
-			printf("open_parantheses minishell: syntax error near unexpected token `)'\n");
+		if (token_error(tokens))
 			return (1);
-		}
-		if (open_parantheses(tokens) == 2)
-		{
-			printf("open_parantheses minishell: syntax error near unexpected token `('\n");
+		if (parantheses_error(tokens))
 			return (1);
-		}
 		if (out_of_use(tokens))
 			return (1);
-		if (is_real_subshell(tokens) && token_error(tokens) == 0)
-		{
-			printf("is_real_subshell minishell: syntax error near unexpected token `('\n");
+		if (misuse_parantheses(tokens))
 			return (1);
-		}
-		if (check_red(tokens))
-		{
-			printf("check_red bash: syntax error near unexpected token `)'\n");
-			return (1);
-		}
-		if (token_error(tokens))
-		{
-			printf("token_error bash: syntax error near unexpected token\n");
-			return (1);
-		}
-		if (misuse_parantheses(tokens) == 1)
-			return (1);
-		if (misuse_parantheses(tokens) == 2)
-		{
-			printf("misuse_parantheses minishell: syntax error near unexpected token `('\n");
-			return (1);
-		}
 	}
 	return (0);
 }
