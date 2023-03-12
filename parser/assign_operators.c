@@ -1,18 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   assign_operators.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
+/*   Updated: 2023/03/12 07:12:14 by kali             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-
-int	get_in_all_tokens(t_token token, t_token *tokens)
-{
-	int	i;
-
-	i = 0;
-	while (tokens[i].token != UNKNOWN)
-	{
-		if (token.id == tokens[i].id)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 int	get_right_operator(t_token token, t_token *tokens, int is_subshell)
 {
@@ -46,14 +44,7 @@ int	get_left_operator(t_token token, t_token *tokens, int is_subshell)
 
 	i = get_in_all_tokens(token, tokens);
 	if (is_subshell == 1)
-	{
-		while (i >= 0 && tokens[i].token != UNKNOWN && tokens[i].token != PIPE
-			&& tokens[i].token != AND && tokens[i].token != OR)
-			i--;
-		if (i < 0)
-			return (UNKNOWN);
-		return (tokens[i].token);
-	}
+		left_is_subshell_handle(token, tokens, i);
 	else
 	{
 		while (tokens[i].token != UNKNOWN && tokens[i].token != PIPE
