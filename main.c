@@ -67,6 +67,11 @@ void	print_tree(t_node *head)
 	if (head->connection_count == 1)
 	{
 		j = 0;
+		if (head->command == NULL)
+		{
+			print_token(head->tokens);
+			return ;
+		}
 		printf("command : %s ", head->command->command);
 		printf("\n");
 		while (j < head->command->argument_count)
@@ -92,6 +97,7 @@ void	print_tree(t_node *head)
 		{
 			if (i == 0)
 			{
+				print_token(head->tokens);
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
 				printf("\n*************\n");
@@ -143,13 +149,12 @@ int	main(int argc, char **argv, char **env)
 		if (check_first(tokens) != 1)
 		{
 			head = parser(tokens);
-			if (head != NULL)
-			{
-				expander(head, new_env);
-				execute(head, new_env);
-			}
+			// if (head != NULL)
+			// {
+			// 	expander(head, new_env);
+			// 	execute(head, new_env);
+			// }
 		}
-		print_tree(head);
 		free(inpt);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 11:33:34 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/11 14:06:58 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_node
 	int						is_arithmetic;
 	struct s_token			*tokens;
 	struct s_redirections	*redirections;
+	enum e_token			left_operator;
+	enum e_token			right_operator;
 }							t_node;
 typedef struct s_token
 {
@@ -90,11 +92,13 @@ void						print_token(t_token *token);
 int							does_priority(t_token *tokens, enum e_token token);
 t_token						*clear_redirections(t_node *node);
 void						handle_simple_command(t_node *node);
+void						assign_operators(t_node *head, t_token *tokens);
 int							parse_error(t_token *tokens);
 void						expander(t_node *head, char **env);
 int							is_arithmetic(t_token *tokens);
 int							check_first(t_token *tokens);
-int							handle_split_type(enum e_token split_type,
-								t_node *head, t_token ***split);
+int	handle_split_type(enum e_token split_type,
+						t_node *head,
+						t_token ***split);
 int							execute(t_node *head, char **env);
 #endif

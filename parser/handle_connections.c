@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 11:46:02 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 06:27:24 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	cleared_tokens = create_redirections(head);
 	if (cleared_tokens != NULL)
 		head->tokens = cleared_tokens;
+	if (check_parantheses(head->tokens) == 1)
+		check_if_subshell(head);
 	split_type = assign_split_type(head);
-	check_if_subshell(head);
 	if (handle_split_type(split_type, head, &split) == 0)
 		return (head);
 	i = 0;
