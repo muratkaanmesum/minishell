@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 06:31:25 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 14:59:12 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ void	print_token(t_token *token)
 			break ;
 		case CLOSE_PAR:
 			printf("CLOSE_PAR\n");
+			break ;
+		case UNKNOWN_TOKEN:
+			printf("UNKNOWN_TOKEN\n");
+			break ;
+		default:
+			printf("UNKNOWN\n");
 			break ;
 		}
 		i++;

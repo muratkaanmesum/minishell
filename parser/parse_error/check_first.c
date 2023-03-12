@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:16:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/12 14:29:31 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/12 15:04:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,30 @@ int	missing_tokens(t_token *tokens)
 	}
 	return (0);
 }
+int	check_unknown_tokens(t_token *tokens)
+{
+	int	i;
 
+	i = 0;
+	while (tokens[i].token != UNKNOWN)
+	{
+		if (tokens[i].token == UNKNOWN_TOKEN)
+		{
+			printf("unknown_tokens minishell: ");
+			printf("syntax error near unexpected token %s\n", tokens[i].str);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 int	check_first(t_token *tokens)
 {
 	if (incorrect_parantheses(tokens))
 		return (1);
 	if (missing_tokens(tokens))
+		return (1);
+	if (check_unknown_tokens(tokens))
 		return (1);
 	return (0);
 }

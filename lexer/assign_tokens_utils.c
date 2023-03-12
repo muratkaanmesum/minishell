@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:08:50 by kali              #+#    #+#             */
-/*   Updated: 2023/03/11 10:34:27 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 14:58:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	assign_redirection(t_lexer_args *args, int red_count)
 		args->tokens[args->index].token = OR;
 	else if (args->str[args->i - red_count] == '&' && red_count == 2)
 		args->tokens[args->index].token = AND;
+	else
+		args->tokens[args->index].token = UNKNOWN_TOKEN;
 }
 
 void	assign_red_arg(t_lexer_args *args, int red_count)
