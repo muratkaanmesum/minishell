@@ -6,11 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/03 15:52:16 by mmesum           ###   ########.fr       */
-
-/*   Updated: 2023/03/03 14:38:57 by eablak           ###   ########.fr       */
-
+/*   Updated: 2023/03/10 15:45:57 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +16,7 @@ void	print_redirections(t_redirections *redirection)
 {
 	int	i;
 
+	//testasd
 	i = 0;
 	printf("--------\n");
 	while (i < redirection->infile_count)
@@ -151,8 +148,8 @@ int	main(int argc, char **argv, char **env)
 			head = parser(tokens);
 			if (head != NULL)
 			{
-				expander(head, new_env);
-				execute(head, new_env);
+				expander(head, env);
+				wildcard(head);
 			}
 		}
 		free(inpt);
