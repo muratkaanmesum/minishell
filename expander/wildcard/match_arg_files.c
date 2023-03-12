@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   match_arg_files.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/12 19:22:23 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wildcard.h"
 
 int	files_count(char **files)
@@ -23,14 +35,6 @@ void	print_arg(char **arg)
 		k++;
 	}
 }
-
-//SIRALAMA YAPMADIM!!!!!!!!   +tamam
-
-// file gelmiyosa klendini ata!!!!!!  +tamam
-
-//.. için .... verirsen yanlış alır!!!    +tamam
-
-// *er** tekrar bak !! BİRDEN FAZLA * YANYANAYSA YANLIŞ ALIR
 
 int	files_w_dot_count(char **files)
 {

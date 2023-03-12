@@ -1,111 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/12 19:43:46 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wildcard.h"
-
-/*
-    1) suffix'ten işlenecek olan kısmı al ve str'ye ata
-    2) str'de '/' var mı yok mu bak ona göre dosyaları al
-    3) dosyaları path + prefix'e göre al
-    4) aldığın dosyaları take file'e gönder (files,prefix)
-    5) suffix'te cut işlemi
-    6) recursice için; prefix -> new file değerleri, suffix -> kesilmiş suffix
-    7) suffix nullsa prefixleri dön
-*/
-int	get_dir_count(char *path)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				i;
-
-	i = 0;
-	d = opendir(path); //gelen pwd için
-	if (d)
-	{
-		while ((dir = readdir(d)) != NULL)
-			if (dir->d_type == DT_DIR)
-				i++;
-		closedir(d);
-	}
-	free(dir);
-	return (i);
-}
-
-char	**get_dir(char *path)
-{
-	DIR				*d;
-	struct dirent	*dir;
-	int				count;
-	char			**files;
-	int				i;
-	int				j;
-
-	count = get_dir_count(path);
-	files = (char **)malloc(sizeof(char *) * (count + 1));
-	i = 0;
-	d = opendir(path); //gelen pwd için
-	if (d)
-	{
-		i = 0;
-		while ((dir = readdir(d)) != NULL)
-			if (dir->d_type == DT_DIR)
-			{
-				files[i] = dir->d_name;
-				i++;
-			}
-		//closedir(d);
-	}
-	free(dir);
-	files[i] = NULL;
-	return (files);
-}
-
-int	get_all_count(char *path)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				i;
-
-	i = 0;
-	//getcwd(buf, 1024);
-	d = opendir(path); //gelen pwd için
-	if (d)
-	{
-		while ((dir = readdir(d)) != NULL)
-			i++;
-		closedir(d);
-	}
-	free(dir);
-	return (i);
-}
-
-char	**get_all(char *path)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				count;
-	char			**files;
-	int				i;
-
-	//getcwd(buf, 1024);
-	i = 0;
-	count = get_all_count(path);
-	files = (char **)malloc(sizeof(char *) * (count + 1));
-	d = opendir(path); //gelen pwd için
-	if (d)
-	{
-		i = 0;
-		while ((dir = readdir(d)) != NULL)
-		{
-			files[i] = dir->d_name;
-			i++;
-		}
-		closedir(d);
-	}
-	free(dir);
-	files[i] = NULL;
-	return (files);
-}
 
 char	*find_data(char *suffix)
 {
@@ -249,7 +154,7 @@ char	*prefix_add_file(char *prefix, char *file)
 	return (new_prefix);
 }
 
-void	expandWildcard(char *prefix, char *suffix)
+void expandWildcard(char *prefix, char *suffix)
 {
 	char	*data;
 	char	buf[1024];

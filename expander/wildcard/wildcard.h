@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wildcard.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/12 19:43:53 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WILDCARD_H
 # define WILDCARD_H
 
@@ -8,7 +20,6 @@
 # include <string.h>
 # include <sys/types.h>
 # include <unistd.h>
-
 
 void	handle_node_wildcard(t_node *node);
 int		is_asterisk(char *str);
@@ -35,32 +46,9 @@ char	**command_file(char *prefix, char *suffix, char *path);
 char	**only_files(char *path);
 char	**take_file(char **files, char *command);
 
-
-
-// new command için
 void	expandWildcard(char *prefix, char *suffix);
+int		get_dir_count(char *path);
+char	**get_dir(char *path);
+int		get_all_count(char *path);
+char	**get_all(char *path);
 #endif
-
-	// if (ft_strchr(suffix, '/') == NULL)
-	// 	return ;
-// if (ft_strchr(data, '/') != NULL)
-	// {
-	// 	path = add_slash(path);
-	// 	path = new_path(path, prefix);
-	// 	printf("new path %s\n", path);
-	// 	files = get_dir(path);
-	// 	data = edit_data(data);
-	// 	printf("edit data %s\n", data);
-	// 	files = take_file(files, data);
-	// 	printf("if için files\n");
-	// 	print_files(files);
-	// }
-	// else
-	// {
-	// 	//EN SON ADIMDA GİRMELİ
-	// 	printf("else\n");
-	// 	files = get_all(path);
-	// 	files = take_file(files, data);
-	// 	printf("else için files\n");
-	// 	print_files(files);
-	// }

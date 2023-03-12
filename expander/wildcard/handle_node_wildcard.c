@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_node_wildcard.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/12 19:45:58 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wildcard.h"
 
 void	fix_str(char *str)
@@ -36,18 +48,20 @@ void	handle_forarg(t_command *command)
 			match_files = just_asterisk(command->arguments[i]);
 			match_files = sort_files(match_files, command->arguments[i]);
 			match_arg_files(match_files, command, i);
-			print_arg(command->arguments);
-			printf("\n");
+			// print_arg(command->arguments);
+			// printf("\n");
 		}
+		if (asterisk_slash(command->arguments[i]) == 1)
+			expandWildcard(NULL, command->arguments[i]);
 		i++;
 	}
 }
 
 void	handle_forcommand(t_command *command)
 {
-	char	**files;
-	char	buf[1024];
-		static char *prefix;
+	char		**files;
+	char		buf[1024];
+	static char	*prefix;
 
 	fix_str(command->command);
 	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0)
@@ -55,11 +69,12 @@ void	handle_forcommand(t_command *command)
 		files = just_asterisk(command->command);
 		if (files[0] != NULL)
 			command->command = files[0];
+		printf("%s\n", command->command);
 	}
 	if (asterisk_slash(command->command) == 1)
 	{
-		//command_file(NULL, command->command, getcwd(buf, 1024));
 		expandWildcard(NULL, command->command);
+		//atama işlemini yapmadım!
 	}
 }
 
