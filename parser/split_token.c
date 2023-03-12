@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/11 15:23:57 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 07:06:00 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	connection_count(t_token *tokens, enum e_token token)
 	}
 	return (count + 1);
 }
+
 void	pass_parantheses_count(t_token *tokens, int *i, int *token_count)
 {
 	int	open_count;
@@ -55,6 +56,7 @@ void	pass_parantheses_count(t_token *tokens, int *i, int *token_count)
 		}
 	}
 }
+
 int	split_token_count(t_token *tokens, enum e_token token)
 {
 	int	i;
@@ -66,21 +68,7 @@ int	split_token_count(t_token *tokens, enum e_token token)
 	token_count = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
-		if (tokens[i].token == OPEN_PAR)
-		{
-			open_count++;
-			token_count++;
-			i++;
-			while (open_count != 0)
-			{
-				if (tokens[i].token == OPEN_PAR)
-					open_count++;
-				if (tokens[i].token == CLOSE_PAR)
-					open_count--;
-				token_count++;
-				i++;
-			}
-		}
+		pass_parantheses_count(tokens, &i, &token_count);
 		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			break ;
 		else if (token == -1 && (tokens[i].token == AND
@@ -92,6 +80,7 @@ int	split_token_count(t_token *tokens, enum e_token token)
 	}
 	return (token_count);
 }
+
 void	assign_values(t_token *tokens, enum e_token token, int *i,
 		t_token **split)
 {
