@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/12 07:12:14 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 10:29:38 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	get_left_operator(t_token token, t_token *tokens, int is_subshell)
 		left_is_subshell_handle(token, tokens, i);
 	else
 	{
-		while (tokens[i].token != UNKNOWN && tokens[i].token != PIPE
-			&& tokens[i].token != AND && tokens[i].token != OR && i >= 0)
+		while (i >= 0 && tokens[i].token != UNKNOWN && tokens[i].token != PIPE
+			&& tokens[i].token != AND && tokens[i].token != OR)
 		{
 			if (tokens[i].token == CLOSE_PAR || tokens[i].token == OPEN_PAR)
 				return (UNKNOWN);
