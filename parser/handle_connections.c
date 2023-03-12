@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 15:23:45 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 06:27:24 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void	check_if_subshell(t_node *head)
 	if (check_parantheses(head->tokens) == 1)
 	{
 		if (is_arithmetic(head->tokens) == 1)
-		{
 			head->is_arithmetic = 1;
-		}
 		else
 		{
 			head->tokens = remove_parantheses(head->tokens);
@@ -88,9 +86,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	if (cleared_tokens != NULL)
 		head->tokens = cleared_tokens;
 	if (check_parantheses(head->tokens) == 1)
-	{
 		check_if_subshell(head);
-	}
 	split_type = assign_split_type(head);
 	if (handle_split_type(split_type, head, &split) == 0)
 		return (head);

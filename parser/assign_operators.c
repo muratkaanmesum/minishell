@@ -47,9 +47,11 @@ int	get_left_operator(t_token token, t_token *tokens, int is_subshell)
 	i = get_in_all_tokens(token, tokens);
 	if (is_subshell == 1)
 	{
-		while (tokens[i].token != UNKNOWN && tokens[i].token != PIPE
+		while (i >= 0 && tokens[i].token != UNKNOWN && tokens[i].token != PIPE
 			&& tokens[i].token != AND && tokens[i].token != OR)
 			i--;
+		if (i < 0)
+			return (UNKNOWN);
 		return (tokens[i].token);
 	}
 	else
@@ -80,7 +82,7 @@ void	handle_operators(t_node *head, t_token *tokens)
 			head->is_subshell);
 	head->left_operator = get_left_operator(head->tokens[0], tokens,
 			head->is_subshell);
-	printf("left: %d, right: %d\n ", head->left_operator, head->right_operator);
+	printf("left: %d, right: %d\n,", head->left_operator, head->right_operator);
 }
 
 void	assign_operators(t_node *head, t_token *tokens)
