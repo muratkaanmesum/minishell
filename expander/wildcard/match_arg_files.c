@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   match_arg_files.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/13 14:47:55 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wildcard.h"
 
 int	files_count(char **files)
@@ -24,20 +36,13 @@ void	print_arg(char **arg)
 	}
 }
 
-//SIRALAMA YAPMADIM!!!!!!!!   +tamam
-
-// file gelmiyosa klendini ata!!!!!!  +tamam
-
-//.. için .... verirsen yanlış alır!!!    +tamam
-
-// *er** tekrar bak !! BİRDEN FAZLA * YANYANAYSA YANLIŞ ALIR
-
 int	files_w_dot_count(char **files)
 {
 	int	i;
 	int	count;
 
 	i = 0;
+	count = 0;
 	if (files[0] == 0)
 		return (0);
 	while (files[i])
@@ -61,6 +66,7 @@ void	match_without_dot(char **files, t_command *command, int i)
 	file_count = 0;
 	m = 0;
 	k = 0;
+	count = 0;
 	count = files_w_dot_count(files);
 	new_len = command->argument_count + count;
 	new_args = malloc(sizeof(char *) * (new_len));
@@ -95,7 +101,6 @@ void	match_without_dot(char **files, t_command *command, int i)
 
 void	match_arg_files(char **files, t_command *command, int i)
 {
-
 	int		match_files_count;
 	int		new_len;
 	char	**new_args;
@@ -111,7 +116,6 @@ void	match_arg_files(char **files, t_command *command, int i)
 	new_len = command->argument_count + match_files_count;
 	new_args = malloc(sizeof(char *) * (new_len));
 	k = 0;
-
 	if (files[0] != NULL)
 	{
 		while (k < i)

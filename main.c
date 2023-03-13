@@ -6,7 +6,9 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 12:28:41 by mmesum           ###   ########.fr       */
+
+/*   Updated: 2023/03/13 17:40:30 by eablak           ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +75,7 @@ void	print_tree(t_node *head)
 		printf("\n");
 		while (j < head->command->argument_count)
 		{
-			printf("argument : %s ", head->command->arguments[j]);
+			printf("argument : %s \n", head->command->arguments[j]);
 			j++;
 		}
 		printf("\n");

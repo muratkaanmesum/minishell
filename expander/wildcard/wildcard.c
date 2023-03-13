@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 19:22:33 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/12 19:22:34 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wildcard.h"
 
 void handle_wildcard(t_node *node)
@@ -18,5 +30,4 @@ void handle_wildcard(t_node *node)
 void wildcard(t_node *node)
 {
     handle_wildcard(node);
-    //print_tree(node);
 }
