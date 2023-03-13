@@ -21,6 +21,7 @@ void	execute_node(t_node *node, char **env)
 
 int	execute(t_node *head, char **env)
 {
+
 	int	i;
 
 	i = 0;

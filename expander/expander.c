@@ -21,5 +21,5 @@ void	expander(t_node *head, char **env)
 	variables = get_env_variables(env);
 	wildcard(head);
 	handle_env(head, variables);
-	free_env(variables);
+	//free_env(variables);
 }

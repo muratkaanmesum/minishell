@@ -3,42 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 18:52:53 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:11:09 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
-int get_env_count(char **env)
+int	get_env_count(char **env)
 {
-	int i = 0;
-	while(env[i])
-	i++;
-	return i;
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	return (i);
 }
 
-int	add_env(char *args, char **env)
+void	add_env(char **args, char **env)
 {
 	int		i;
-	
-	int env_count;
+	char	**new_env;
+	int		j;
+
+	new_env = malloc(sizeof(char *) * (get_env_count(env) + get_env_count(args)
+				+ 1));
+	printf("%d\n %d \n", get_env_count(env), get_env_count(args));
 	i = 0;
-	while (env[i] != NULL)
+	j = 0;
+	getchar();
+	while (env[i])
 	{
-		if (ft_strncmp(env[i], args, ft_strchr(env[i], '=') - env[i]) == 0)
-		{
-			free(env[i]);
-			env[i] = ft_strdup(args);
-			return (0);
-		}
+		new_env[i] = ft_strdup(env[i]);
+		//free(env[i]);
 		i++;
 	}
-	env[i] = ft_strdup(args);
-	env[i + 1] = NULL;
-	return (0);
+	while (args[j])
+	{
+		new_env[i] = ft_strdup(args[j]);
+		i++;
+		j++;
+	}
+	new_env[i] = NULL;
+	env = new_env;
 }
 
 int	export(char **args, char **env)
@@ -50,7 +59,7 @@ int	export(char **args, char **env)
 		if (ft_strchr(args[0], '=') == NULL)
 			return (1);
 		else
-			add_env(args[0], env);
+			add_env(args, env);
 	}
 	return (0);
 }

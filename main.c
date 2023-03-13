@@ -105,6 +105,7 @@ void	print_tree(t_node *head)
 			i++;
 		}
 }
+
 char	**init_env(char **env)
 {
 	int		i;
