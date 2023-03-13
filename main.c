@@ -18,7 +18,6 @@ void	print_redirections(t_redirections *redirection)
 {
 	int	i;
 
-	//testasd
 	i = 0;
 	printf("--------\n");
 	while (i < redirection->infile_count)
@@ -157,6 +156,7 @@ int	main(int argc, char **argv, char **env)
 			}
 		}
 		print_tree(head);
+		free_tree(head);
 		free(inpt);
 	}
 	return (0);

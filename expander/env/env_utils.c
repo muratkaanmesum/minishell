@@ -6,11 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/03 16:49:57 by mmesum           ###   ########.fr       */
-
-/*   Updated: 2023/03/03 12:25:41 by mmesum           ###   ########.fr       */
-
+/*   Updated: 2023/03/13 15:39:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +25,7 @@ void	free_env(t_env *env)
 	}
 	free(env);
 }
+
 t_token	*get_token(t_node *node, char *str, enum e_token token, int index)
 {
 	int	i;
@@ -119,6 +116,8 @@ t_env	*get_env_variables(char **env)
 		value = ft_split(env[i], '=');
 		env_variables[i].name = value[0];
 		env_variables[i].value = value[1];
+		free_split(value);
+
 		i++;
 	}
 	env_variables[i].name = NULL;
