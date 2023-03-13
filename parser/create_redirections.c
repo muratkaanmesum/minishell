@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 10:42:41 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/13 13:58:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_token	*create_redirections(t_node *node)
 		node->redirections = malloc(sizeof(t_redirections));
 		handle_redirection(node);
 		token = clear_redirections(node);
+		return (token);
 	}
 	else
 		return (NULL);
-	return (token);
 }

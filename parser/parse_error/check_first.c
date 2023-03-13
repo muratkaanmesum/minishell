@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 19:22:46 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:22:47 by eablak           ###   ########.fr       */
+/*   Created: 2023/03/12 14:16:13 by kali              #+#    #+#             */
+/*   Updated: 2023/03/13 17:29:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,8 @@ int	incorrect_parantheses(t_token *tokens)
 	return (0);
 }
 
-int	missing_tokens(t_token *tokens)
+int	check_first_token(t_token *tokens)
 {
-	int	i;
-
-	i = 0;
 	if (tokens[0].token == AND || tokens[0].token == OR
 		|| tokens[0].token == PIPE)
 	{
@@ -42,6 +39,16 @@ int	missing_tokens(t_token *tokens)
 		printf("syntax error near unexpected token %s\n", tokens[0].str);
 		return (1);
 	}
+	return (0);
+}
+
+int	missing_tokens(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	if (check_first_token(tokens))
+		return (1);
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == AND || tokens[i].token == OR
@@ -60,11 +67,31 @@ int	missing_tokens(t_token *tokens)
 	return (0);
 }
 
+int	check_unknown_tokens(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i].token != UNKNOWN)
+	{
+		if (tokens[i].token == UNKNOWN_TOKEN)
+		{
+			printf("unknown_tokens minishell: ");
+			printf("syntax error near unexpected token %s\n", tokens[i].str);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_first(t_token *tokens)
 {
 	if (incorrect_parantheses(tokens))
 		return (1);
 	if (missing_tokens(tokens))
+		return (1);
+	if (check_unknown_tokens(tokens))
 		return (1);
 	return (0);
 }

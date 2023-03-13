@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 06:27:24 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/13 12:41:46 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,11 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	if (split != NULL)
 	{
 		while (i < connection_count(head->tokens, split_type))
-			head->connections[i++] = handle_connections(malloc(sizeof(t_node)),
+		{
+			head->connections[i] = handle_connections(malloc(sizeof(t_node)),
 														split[i]);
+			i++;
+		}
 	}
 	return (head);
 }

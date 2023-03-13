@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:08:50 by kali              #+#    #+#             */
-/*   Updated: 2023/03/11 10:34:27 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/13 17:53:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,30 @@ void	pass_character(t_lexer_args *args)
 				break ;
 			args->i++;
 		}
+		args->i++;
 	}
 	else
 		args->i++;
+}
+
+int	check_if_command(t_lexer_args *args)
+{
+	int	i;
+
+	i = args->index - 1;
+	while (i >= 0 && args->tokens[i].token != PIPE
+		&& args->tokens[i].token != CLOSE_PAR
+		&& args->tokens[i].token != OPEN_PAR && args->tokens[i].token != AND
+		&& args->tokens[i].token != OR)
+	{
+		if (args->tokens[i].token == COMMAND)
+		{
+			args->counter = args->counter + 1;
+			return (0);
+		}
+		i--;
+	}
+	return (1);
 }
 
 void	assign_token(t_lexer_args *args)
@@ -35,7 +56,7 @@ void	assign_token(t_lexer_args *args)
 		args->tokens[args->index].token = RED_FILE;
 		args->is_redirection = 0;
 	}
-	else if (args->counter == 1)
+	else if (args->counter == 1 && check_if_command(args))
 		args->tokens[args->index].token = COMMAND;
 	else if (args->counter > 1)
 	{
@@ -63,6 +84,8 @@ void	assign_redirection(t_lexer_args *args, int red_count)
 		args->tokens[args->index].token = OR;
 	else if (args->str[args->i - red_count] == '&' && red_count == 2)
 		args->tokens[args->index].token = AND;
+	else
+		args->tokens[args->index].token = UNKNOWN_TOKEN;
 }
 
 void	assign_red_arg(t_lexer_args *args, int red_count)

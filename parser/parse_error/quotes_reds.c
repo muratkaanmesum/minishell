@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 19:22:59 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:23:00 by eablak           ###   ########.fr       */
+/*   Created: 2023/03/12 14:31:22 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/12 16:30:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	is_red(t_token *tokens, int start)
 	if ((tokens[start].token == HERE_DOC || tokens[start].token == I_REDIRECTION
 			|| tokens[start].token == O_REDIRECTION
 			|| tokens[start].token == APPEND_RED) && (tokens[start
-			+ 1].token == CLOSE_PAR))
+				+ 1].token == CLOSE_PAR))
 		return (1);
 	return (0);
 }

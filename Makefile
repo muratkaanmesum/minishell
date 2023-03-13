@@ -9,6 +9,7 @@
 
 NAME        := minishell
 CC        := gcc
+
 #FLAGS    := -fsanitize=address
 # FLAGS       := -g -O0
 
@@ -60,6 +61,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           libft/ft_isalpha.c \
                           libft/ft_calloc.c \
                           main.c \
+                          free_tree.c \
                           lexer/lexer.c\
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\
@@ -80,6 +82,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/parse_error/quotes_reds.c\
                           parser/parse_error/token_error.c\
                           parser/parse_error/check_first.c\
+                          parser/parse_error/check_operators.c\
                           parser/assign_operators.c\
                             parser/connection_utils.c\
                             parser/operators_utils.c\
@@ -100,6 +103,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/command_file.c\
                           expander/env/assign_env_utils.c\
                           execute/execute.c\
+                          execute/utils.c\
                           execute/builtins/cd.c\
                           execute/builtins/echo.c\
                           execute/builtins/pwd.c\

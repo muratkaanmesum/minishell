@@ -7,7 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
 
-/*   Updated: 2023/03/13 17:40:30 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 17:28:59 by mmesum           ###   ########.fr       */
 
 /*                                                                            */
 /* ************************************************************************** */
@@ -140,6 +140,7 @@ int	main(int argc, char **argv, char **env)
 		inpt = readline("minishell: ");
 		add_history(inpt);
 		tokens = lexer(inpt);
+		print_token(tokens);
 		if (tokens == NULL)
 		{
 			free(inpt);
@@ -148,7 +149,6 @@ int	main(int argc, char **argv, char **env)
 		if (check_first(tokens) != 1)
 		{
 			head = parser(tokens);
-			print_tree(head);
 			if (head != NULL)
 				expander(head, env);
 		}

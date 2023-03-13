@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_simple_command.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:41:00 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 11:54:31 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/12 16:58:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_command(t_node *node)
 	{
 		if (node->tokens[i].token == COMMAND
 			|| node->tokens[i].token == ENV_COMMAND)
-			node->command->command = node->tokens[i].str;
+			node->command->command = ft_strdup(node->tokens[i].str);
 		i++;
 	}
 }
@@ -47,7 +47,7 @@ void	handle_option(t_node *node)
 	while (node->tokens[i].token != UNKNOWN)
 	{
 		if (node->tokens[i].token == OPTION)
-			node->command->options[j++] = node->tokens[i].str;
+			node->command->options[j++] = ft_strdup(node->tokens[i].str);
 		i++;
 	}
 	node->command->options[count] = NULL;
@@ -74,7 +74,7 @@ void	handle_args(t_node *node)
 	while (node->tokens[i].token != UNKNOWN)
 	{
 		if (node->tokens[i].token == ARG || node->tokens[i].token == ENV)
-			node->command->arguments[j++] = node->tokens[i].str;
+			node->command->arguments[j++] = ft_strdup(node->tokens[i].str);
 		i++;
 	}
 	node->command->arguments[j] = NULL;

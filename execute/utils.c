@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 14:15:23 by mmesum           ###   ########.fr       */
+/*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/13 17:53:12 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "execute.h"
 
-t_node	*parser(t_token *tokens)
+char	*get_path(char *path)
 {
-	t_node	*head;
+	char	buff[1024];
+	char	*tmp;
 
-	if (parse_error(tokens) == 1)
+	getcwd(buff, 1024);
+	if (path != NULL)
 	{
-		return (NULL);
+		tmp = ft_strjoin(buff, "/");
+		path = ft_strjoin(tmp, path);
+		free(tmp);
+		return (path);
 	}
-	head = malloc(sizeof(t_node));
-	head->command = NULL;
-	handle_connections(head, tokens);
-	assign_operators(head, tokens);
-	return (head);
+	return (ft_strdup(buff));
 }
