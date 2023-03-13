@@ -25,8 +25,11 @@ int	is_command(t_token *tokens, int start)
 
 int	token_error(t_token *tokens)
 {
-	int i = 0;
-	int ret = 0;
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == CLOSE_PAR)

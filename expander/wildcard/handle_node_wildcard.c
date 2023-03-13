@@ -117,6 +117,7 @@ void	handle_forcommand(t_command *command)
 	int count;
 	int index = 0;
 
+
 	fix_str(command->command);
 	if (quotes_control(command->command) == 1)
 	{	

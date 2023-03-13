@@ -76,8 +76,8 @@ int	is_red(t_token *tokens, int start)
 
 int	check_red(t_token *tokens)
 {
-	int i;
-	int ret;
+	int	i;
+	int	ret;
 
 	i = 0;
 	ret = 0;

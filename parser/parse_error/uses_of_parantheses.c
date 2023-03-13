@@ -29,10 +29,22 @@ int	misuse_parantheses(t_token *tokens)
 	return (0);
 }
 
+int	check_out_of_use(t_token *tokens, int i)
+{
+	if (tokens[i].token == OPEN_PAR && tokens[i + 1].token == OPEN_PAR
+		&& tokens[i + 2].token == CLOSE_PAR && tokens[i + 3].token == CLOSE_PAR)
+		return (1);
+	if (tokens[i].token == OPEN_PAR && tokens[i + 1].token == OPEN_PAR
+		&& tokens[i + 2].token == COMMAND && tokens[i + 3].token == CLOSE_PAR
+		&& tokens[i + 4].token == CLOSE_PAR)
+		return (1);
+	return (0);
+}
+
 int	out_of_use(t_token *tokens)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	while (tokens[i].token != UNKNOWN)
@@ -48,14 +60,7 @@ int	out_of_use(t_token *tokens)
 			if (count == 2)
 			{
 				i -= count;
-				if (tokens[i].token == OPEN_PAR && tokens[i
-					+ 1].token == OPEN_PAR && tokens[i + 2].token == CLOSE_PAR
-					&& tokens[i + 3].token == CLOSE_PAR)
-					return (1);
-				if (tokens[i].token == OPEN_PAR && tokens[i
-					+ 1].token == OPEN_PAR && tokens[i + 2].token == COMMAND
-					&& tokens[i + 3].token == CLOSE_PAR && tokens[i
-					+ 4].token == CLOSE_PAR)
+				if (check_out_of_use(tokens, i) == 1)
 					return (1);
 			}
 		}
