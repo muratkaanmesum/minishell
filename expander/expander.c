@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:46:11 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 17:40:59 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 17:49:56 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@ void	expander(t_node *head, char **env)
 	t_env	*variables;
 
 	variables = get_env_variables(env);
-	getchar();
 	wildcard(head);
 
-	//handle_env(head, variables);
-	//print_tree(head);
-		getchar();
+	
 	//free_env(variables);
-		getchar();
 
 }

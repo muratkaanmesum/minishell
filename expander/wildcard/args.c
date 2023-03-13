@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 15:47:42 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:08:58 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,66 @@ char	**take_file(char **files, char *command)
 	}
 	return (files);
 }
+int	get_w_path_count(void)
+{
+	char			buf[1024];
+	DIR				*d;
+	struct dirent	*dir;
+	int				i;
 
+	i = 0;
+	getcwd(buf, 1024);
+	d = opendir(buf); //gelen pwd için
+	if (d)
+	{
+		while ((dir = readdir(d)) != NULL)
+		if(dir->d_name[0] != '.')
+			i++;
+		closedir(d);
+	}
+	free(dir);
+	return (i);
+}
+
+char	**get_w_dot_files(void)
+{
+	char			buf[1024];
+	DIR				*d;
+	struct dirent	*dir;
+	int				count;
+	char			**files;
+	int				i;
+
+	getcwd(buf, 1024);
+	count = get_w_path_count();
+	files = (char **)malloc(sizeof(char *) * (count + 1));
+	d = opendir(buf); //gelen pwd için
+	if (d)
+	{
+		i = 0;
+		while ((dir = readdir(d)) != NULL)
+		{
+			if(dir->d_name[0] != '.')
+			{
+				files[i] = dir->d_name;
+				i++;
+			}
+		}
+		closedir(d);
+	}
+	free(dir);
+	files[i] = NULL;
+	return (files);
+}
 char	**just_asterisk(char *command)
 {
 	int		count;
 	char	**my_files;
 	int		i;
-
-	my_files = get_files();
+	if(command[0] == '.')
+		my_files = get_files();
+	else
+		my_files = get_w_dot_files();
 	count = get_path_count();
 	i = 0;
 	my_files = take_file(my_files, command);

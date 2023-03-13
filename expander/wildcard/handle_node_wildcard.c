@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 17:38:31 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:06:49 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void add_command_to_arg(t_command *command,char **files)
 {
 	int count_files = files_count(files);
 	int total_arg = count_files - 1 + command->argument_count;
-	// printf("yeni arg sayım %d\n",total_arg);
 	char **new_args = malloc(sizeof(char) * (total_arg + 1));
 	int i = 1;
 	int k = 0;
@@ -125,9 +124,10 @@ void	handle_forcommand(t_command *command)
 		if (is_asterisk(str) && asterisk_slash(str) == 0)
 		{
 			files = just_asterisk(str);
+			print_files(files);
 			int count_files = files_count(files);
 			if (files[0] != NULL)
-				command->command = files[0]; //!
+				command->command = files[0];
 			add_command_to_arg(command,files);
 		}
 		else if (asterisk_slash(str) == 1)
@@ -139,7 +139,7 @@ void	handle_forcommand(t_command *command)
 				char **command_files = malloc(sizeof(char *) * (count + 1));
 				expandWildcard(NULL,str,command_files,&index);
 				command->command = command_files[0];
-				// match_arg_files(&command_files[1],command,1);
+				add_command_to_arg(command,command_files);
 			}
 		}
 	}
@@ -153,8 +153,9 @@ void	handle_forarg(t_command *command)
 
 	i = 0;
 	count = 0;
-	while (i < command->argument_count -1)
+	while (i < command->argument_count)
 	{
+		printf("işelenecek arg %s\n",command->arguments[i]);
 		if (quotes_control(command->arguments[i]) == 1)
 		{	
 			char *str = delete_quote(command->arguments[i]);
@@ -187,5 +188,10 @@ void	handle_forarg(t_command *command)
 void	handle_node_wildcard(t_node *node)
 {
 	handle_forcommand(node->command);
-	//handle_forarg(node->command);
+	print_tree(node);
+	getchar();
+	handle_forarg(node->command);
+	getchar();
+	printf("\n\n TREE \n");
+	print_tree(node);
 }
