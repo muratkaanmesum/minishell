@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:55:03 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 16:26:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 12:42:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ int	check_right_redirections(t_token *tokens)
 		if (tokens[i].token == AND && ft_strncmp(tokens[i].str, "&&", 2) != 0)
 			return (1);
 		else if (tokens[i].token == OR && ft_strncmp(tokens[i].str, "||",
-				2) != 0)
+					2) != 0)
 			return (1);
 		else if (tokens[i].token == I_REDIRECTION && ft_strncmp(tokens[i].str,
-				"<", 1) != 0)
+					"<", 1) != 0)
 			return (1);
 		else if (tokens[i].token == O_REDIRECTION && ft_strncmp(tokens[i].str,
-				">", 1) != 0)
+					">", 1) != 0)
 			return (1);
 		else if (tokens[i].token == APPEND_RED && ft_strncmp(tokens[i].str,
-				">>", 2) != 0)
+					">>", 2) != 0)
 			return (1);
 		else if (tokens[i].token == HERE_DOC && ft_strncmp(tokens[i].str, "<<",
-				2) != 0)
+					2) != 0)
 			return (1);
 		i++;
 	}
@@ -77,6 +77,7 @@ int	check_all_redirections(t_token *tokens)
 	}
 	else if (check_missing_redirections(tokens))
 		return (1);
+	return (0);
 }
 
 int	check_all_operators(t_token *tokens)
@@ -93,7 +94,7 @@ int	check_all_operators(t_token *tokens)
 				|| tokens[i + 1].token == PIPE)
 			{
 				printf("minishell: syntax error near unexpected token `%s'\n",
-					tokens[i].str);
+						tokens[i].str);
 				return (1);
 			}
 		}
@@ -108,4 +109,5 @@ int	check_operators(t_token *tokens)
 		return (1);
 	if (check_all_operators(tokens) == 1)
 		return (1);
+	return (0);
 }

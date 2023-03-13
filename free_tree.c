@@ -82,6 +82,7 @@ void	free_tree(t_node *head)
 			free(head->connections[i]);
 			i++;
 		}
-		free(head->connections);
 	}
+	free(head->connections);
+	free(head);
 }

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 16:49:04 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 14:52:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,23 +138,19 @@ int	main(int argc, char **argv, char **env)
 		inpt = readline("minishell: ");
 		add_history(inpt);
 		tokens = lexer(inpt);
-		if (tokens == NULL)
-		{
-			free(inpt);
-			continue ;
-		}
-		if (check_first(tokens) != 1)
-		{
-			head = parser(tokens);
-			print_tree(head);
-			if (head != NULL)
-			{
-				expander(head, env);
-				wildcard(head);
-			}
-		}
+		print_token(tokens);
+		// if (tokens == NULL)
+		// {
+		// 	free(inpt);
+		// 	continue ;
+		// }
+		// if (check_first(tokens) != 1)
+		// {
+		// 	head = parser(tokens);
+		// 	if (head != NULL)
+		// 		expander(head, env);
+		// }
 		free(inpt);
-		free_tree(head);
 	}
 	return (0);
 }

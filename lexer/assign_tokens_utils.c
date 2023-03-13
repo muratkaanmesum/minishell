@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:08:50 by kali              #+#    #+#             */
-/*   Updated: 2023/03/12 15:42:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 16:08:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	pass_character(t_lexer_args *args)
 {
+	printf("IN PASS %c \n", args->str[args->i]);
 	if (args->str[args->i] == '"' || args->str[args->i] == '\'')
 	{
 		args->i++;
@@ -23,6 +24,7 @@ void	pass_character(t_lexer_args *args)
 				break ;
 			args->i++;
 		}
+		args->i++;
 	}
 	else
 		args->i++;

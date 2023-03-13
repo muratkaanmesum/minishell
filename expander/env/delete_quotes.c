@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/09 09:38:02 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/13 12:55:52 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*delete_quotes(char *str, t_node *node, int index,
 	}
 	token = get_token(node, str, token_type, index);
 	if (token != NULL)
-		token->str = new_str;
+		token->str = ft_strdup(new_str);
 	else
 		printf("token is NULL\n");
 	free(str);
