@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:22:08 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 15:47:42 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	**just_asterisk(char *command)
 	my_files = take_file(my_files, command);
 	return (my_files);
 }
+
 
 char	**sort_files(char **files, char *str)
 {

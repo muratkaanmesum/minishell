@@ -6,11 +6,37 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:45:58 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 16:07:14 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
+
+int quotes_control(char *command)
+{
+	int i = 0;
+	int start = 0,end = 0;
+	while(command[i])
+	{
+		if (command[i] == '\'' || command[i] == '"')
+		{
+			start = i;
+			i++;
+			while(command[i] != '\'' && command[i] != '"')
+				i++;
+			end = i;		
+		}
+		i++;
+	}
+	while(start < end)
+	{
+		if (command[start] == '*')
+			return (0);
+		start++;
+	}
+	return (1);
+}
+
 
 void	fix_str(char *str)
 {
@@ -33,28 +59,56 @@ void	fix_str(char *str)
 	str[j] = '\0';
 }
 
-void	handle_forarg(t_command *command)
+char	*delete_quote(char *str)
 {
-	char	**match_files;
+	char	*new_str;
 	int		i;
+	int		j;
 
+	new_str = malloc(sizeof(char) * (get_length(str) + 1));
 	i = 0;
-	while (i < command->argument_count)
+	j = 0;
+	while (str[i] != '\0')
 	{
-		if (is_asterisk(command->arguments[i])
-			&& asterisk_slash(command->arguments[i]) == 0)
+		if (str[i] == '\'' || str[i] == '"')
+			i++;
+		else
 		{
-			fix_str(command->arguments[i]);
-			match_files = just_asterisk(command->arguments[i]);
-			match_files = sort_files(match_files, command->arguments[i]);
-			match_arg_files(match_files, command, i);
-			// print_arg(command->arguments);
-			// printf("\n");
+			new_str[j] = str[i];
+			i++;
+			j++;
 		}
-		if (asterisk_slash(command->arguments[i]) == 1)
-			expandWildcard(NULL, command->arguments[i]);
-		i++;
 	}
+	new_str[j] = '\0';
+	return (new_str);
+}
+
+void add_command_to_arg(t_command *command,char **files)
+{
+	int count_files = files_count(files);
+	int total_arg = count_files - 1 + command->argument_count;
+	// printf("yeni arg sayım %d\n",total_arg);
+	char **new_args = malloc(sizeof(char) * (total_arg + 1));
+	int i = 1;
+	int k = 0;
+	while(files[i])
+	{
+		new_args[k] = files[i];
+		i++;
+		k++;
+	}
+	int j = 0;
+	while(j < command->argument_count)
+	{
+		new_args[k] = command->arguments[j];
+		k++;
+		j++;
+	}
+	new_args[k] = NULL;
+	command->argument_count = total_arg + 1;
+	free(command->arguments); // içindekileri de freele
+	command->arguments = new_args;
+	
 }
 
 void	handle_forcommand(t_command *command)
@@ -62,19 +116,73 @@ void	handle_forcommand(t_command *command)
 	char		**files;
 	char		buf[1024];
 	static char	*prefix;
+	int count;
+	int index = 0;
 
 	fix_str(command->command);
-	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0)
-	{
-		files = just_asterisk(command->command);
-		if (files[0] != NULL)
-			command->command = files[0];
-		printf("%s\n", command->command);
+	if (quotes_control(command->command) == 1)
+	{	
+		char *str = delete_quote(command->command);
+		if (is_asterisk(str) && asterisk_slash(str) == 0)
+		{
+			files = just_asterisk(str);
+			int count_files = files_count(files);
+			if (files[0] != NULL)
+				command->command = files[0]; //!
+			add_command_to_arg(command,files);
+		}
+		else if (asterisk_slash(str) == 1)
+		{
+			count = 0;
+			count = countWildcard(NULL, str,&count);
+			if (count >= 1)
+			{
+				char **command_files = malloc(sizeof(char *) * (count + 1));
+				expandWildcard(NULL,str,command_files,&index);
+				command->command = command_files[0];
+				// match_arg_files(&command_files[1],command,1);
+			}
+		}
 	}
-	if (asterisk_slash(command->command) == 1)
+}
+
+void	handle_forarg(t_command *command)
+{
+	char	**match_files;
+	int		i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (i < command->argument_count -1)
 	{
-		expandWildcard(NULL, command->command);
-		//atama işlemini yapmadım!
+		getchar();
+		if (quotes_control(command->arguments[i]) == 1)
+		{	
+			char *str = delete_quote(command->arguments[i]);
+			if (is_asterisk(str)
+				&& asterisk_slash(str) == 0)
+			{
+				fix_str(str);
+				match_files = just_asterisk(str);
+				match_files = sort_files(match_files, str);
+				match_arg_files(match_files, command, i);
+			}
+			if (asterisk_slash(str) == 1)
+			{
+				count = countWildcard(NULL, str,&count);
+				if (count >= 1)
+				{
+					int index = 0;
+					char **arg_files = malloc(sizeof(char *) * (count + 1));
+					expandWildcard(NULL,str,arg_files,&index);
+					arg_files[count] = NULL;
+					match_arg_files(arg_files,command,i);
+				}
+			}
+			free(str);
+		}
+		i++;
 	}
 }
 
@@ -82,4 +190,5 @@ void	handle_node_wildcard(t_node *node)
 {
 	handle_forcommand(node->command);
 	handle_forarg(node->command);
+	getchar();
 }

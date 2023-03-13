@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 19:08:50 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 15:13:05 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_tree(t_node *head)
 		printf("\n");
 		while (j < head->command->argument_count)
 		{
-			printf("argument : %s ", head->command->arguments[j]);
+			printf("argument : %s \n", head->command->arguments[j]);
 			j++;
 		}
 		printf("\n");
@@ -147,10 +147,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			head = parser(tokens);
 			if (head != NULL)
-			{
 				expander(head, env);
-				wildcard(head);
-			}
 		}
 		free(inpt);
 	}
