@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_reds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:31:22 by mmesum            #+#    #+#             */
 /*   Updated: 2023/03/12 16:30:39 by mmesum           ###   ########.fr       */

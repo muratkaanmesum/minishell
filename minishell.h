@@ -110,4 +110,6 @@ int	handle_split_type(enum e_token split_type,
 int							execute(t_node *head, char **env);
 int							free_token(t_token *tokens);
 void						free_tree(t_node *head);
+int	get_length(char *str);
+
 #endif

@@ -9,8 +9,9 @@
 
 NAME        := minishell
 CC        := gcc
-FLAGS    := -fsanitize=address
-#FLAGS       := -g -O0
+
+#FLAGS    := -fsanitize=address
+# FLAGS       := -g -O0
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -93,7 +94,6 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/delete_quotes.c\
                           expander/wildcard/wildcard.c\
                           expander/wildcard/handle_node_wildcard.c\
-                          expander/wildcard/command.c\
                           expander/wildcard/args.c\
                           expander/wildcard/utils.c\
                           expander/wildcard/right_side.c\
@@ -112,6 +112,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/unset.c\
                             execute/builtins/exit.c\
                             execute/builtins/utils.c\
+                            expander/wildcard/readdir.c\
 
 
 OBJS        := $(SRCS:.c=.o)
