@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:16:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 14:14:46 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 17:29:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,5 @@ int	check_first(t_token *tokens)
 		return (1);
 	if (check_unknown_tokens(tokens))
 		return (1);
-	printf("INSIDE\n");
 	return (0);
 }

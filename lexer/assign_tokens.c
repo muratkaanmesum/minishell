@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 15:53:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 17:29:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	assign_character(t_lexer_args *args)
 	assign_arg(args);
 	if (is_redirection(args->str[args->i]))
 	{
-		printf("IN %c \n", args->str[args->i]);
-		getchar();
 		red_count = 0;
 		args->tokens[args->index].start_index = args->i;
 		while (is_redirection(args->str[args->i]) && args->str[args->i] != '\0')
@@ -87,8 +85,6 @@ void	assign_tokens(t_token *tokens, char *str)
 	args->is_redirection = 0;
 	while (args->str[args->i] != '\0')
 	{
-		printf("IN %c \n", args->str[args->i]);
-		getchar();
 		assign_character(args);
 		assign_parantheses(args);
 		if (args->str[args->i] == ' ')
