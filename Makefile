@@ -103,6 +103,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/command_file.c\
                           expander/env/assign_env_utils.c\
                           execute/execute.c\
+                          execute/utils.c\
                           execute/builtins/cd.c\
                           execute/builtins/echo.c\
                           execute/builtins/pwd.c\
