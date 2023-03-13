@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 19:23:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:25:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_env(char **args, char ***env)
 		j++;
 	}
 	new_env[i] = NULL;
-	//free(*env);
+	free(*env);
 	*env = new_env;
 }
 
