@@ -24,12 +24,12 @@ int	find_env(char **env, char *arg)
 	}
 	return (0);
 }
-int	unset(char **env, char **args)
+int	unset(char **args, char ***env)
 {
 	int	i;
 
 	i = 0;
 	while (args[i] != NULL)
-		find_env(env, args[i++]);
+		find_env(*env, args[i++]);
 	return (0);
 }

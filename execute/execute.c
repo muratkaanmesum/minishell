@@ -1,15 +1,15 @@
 #include "execute.h"
 
-void	execute_node(t_node *node, char **env)
+void	execute_node(t_node *node, char ***env)
 {
 	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
-		pwd(env);
+		pwd(*env);
 	if (ft_strncmp(node->command->command, "cd", 2) == 0)
-		cd(node->command->arguments[0], env);
+		cd(node->command->arguments[0], *env);
 	if (ft_strncmp(node->command->command, "echo", 4) == 0)
 		echo(node);
 	if (ft_strncmp(node->command->command, "env", 3) == 0)
-		print_env(env);
+		print_env(*env);
 	if (ft_strncmp(node->command->command, "export", 6) == 0)
 		export(node->command->arguments, env);
 	if (ft_strncmp(node->command->command, "unset", 5) == 0)
@@ -19,7 +19,7 @@ void	execute_node(t_node *node, char **env)
 	return ;
 }
 
-int	execute(t_node *head, char **env)
+int	execute(t_node *head, char ***env)
 {
 
 	int	i;

@@ -151,8 +151,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			head = parser(tokens);
 			if (head != NULL){
-				expander(head, env);
-				execute(head,new_env);
+				expander(head, new_env);
+				execute(head,&new_env);
 			}
 		}
 		free(inpt);

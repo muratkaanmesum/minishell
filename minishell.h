@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 16:48:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:19:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void						print_tree(t_node *head);
 int	handle_split_type(enum e_token split_type,
 						t_node *head,
 						t_token ***split);
-int							execute(t_node *head, char **env);
+int							execute(t_node *head, char ***env);
 int							free_token(t_token *tokens);
 void						free_tree(t_node *head);
-int	get_length(char *str);
+int							get_length(char *str);
 
 #endif
