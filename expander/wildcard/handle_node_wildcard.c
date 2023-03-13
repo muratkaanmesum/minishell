@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 16:07:14 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 17:38:31 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,9 @@ void add_command_to_arg(t_command *command,char **files)
 		j++;
 	}
 	new_args[k] = NULL;
-	command->argument_count = total_arg + 1;
-	free(command->arguments); // içindekileri de freele
+	command->argument_count = total_arg;
+	//free(command->arguments); // içindekileri de freele
 	command->arguments = new_args;
-	
 }
 
 void	handle_forcommand(t_command *command)
@@ -156,7 +155,6 @@ void	handle_forarg(t_command *command)
 	count = 0;
 	while (i < command->argument_count -1)
 	{
-		getchar();
 		if (quotes_control(command->arguments[i]) == 1)
 		{	
 			char *str = delete_quote(command->arguments[i]);
@@ -189,6 +187,5 @@ void	handle_forarg(t_command *command)
 void	handle_node_wildcard(t_node *node)
 {
 	handle_forcommand(node->command);
-	handle_forarg(node->command);
-	getchar();
+	//handle_forarg(node->command);
 }
