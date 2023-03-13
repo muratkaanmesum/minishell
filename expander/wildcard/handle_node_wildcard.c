@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_wildcard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 18:47:07 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:55:07 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int quotes_control(char *command)
 			i++;
 			while(command[i] != '\'' && command[i] != '"')
 				i++;
-			end = i;		
+			end = i;
 		}
 		i++;
 	}
@@ -87,19 +87,19 @@ void add_command_to_arg(t_command *command,char **files)
 {
 	int count_files = files_count(files);
 	int total_arg = count_files - 1 + command->argument_count;
-	char **new_args = malloc(sizeof(char) * (total_arg + 1));
+	char **new_args = malloc(sizeof(char*) * (total_arg + 1));
 	int i = 1;
 	int k = 0;
-	while(files[i])
+	while(i < count_files)
 	{
-		new_args[k] = files[i];
+		new_args[k] = ft_strdup(files[i]);
 		i++;
 		k++;
 	}
 	int j = 0;
 	while(j < command->argument_count)
 	{
-		new_args[k] = command->arguments[j];
+		new_args[k] = ft_strdup(command->arguments[j]);
 		k++;
 		j++;
 	}
@@ -120,7 +120,7 @@ void	handle_forcommand(t_command *command)
 
 	fix_str(command->command);
 	if (quotes_control(command->command) == 1)
-	{	
+	{
 		char *str = delete_quote(command->command);
 		if (is_asterisk(str) && asterisk_slash(str) == 0)
 		{
@@ -157,7 +157,7 @@ void	handle_forarg(t_command *command)
 	while (i < command->argument_count)
 	{
 		if (quotes_control(command->arguments[i]) == 1)
-		{	
+		{
 			char *str = delete_quote(command->arguments[i]);
 			if (is_asterisk(str)
 				&& asterisk_slash(str) == 0)
@@ -187,6 +187,15 @@ void	handle_forarg(t_command *command)
 
 void	handle_node_wildcard(t_node *node)
 {
+	if(node->command->command[0] == '/')
+		return;
+	int i = 0;
+	while(node->command->arguments[i])
+	{
+		if(node->command->arguments[i][0] == '/')
+			return;
+		i++;
+	}
 	handle_forcommand(node->command);
 	handle_forarg(node->command);
 }

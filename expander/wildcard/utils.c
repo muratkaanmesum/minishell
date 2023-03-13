@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 18:02:56 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:44:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_path_count(void)
 	{
 		while ((dir = readdir(d)) != NULL)
 			i++;
-		closedir(d);
+		// closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -53,7 +53,7 @@ char	**get_files(void)
 			files[i] = dir->d_name;
 			i++;
 		}
-		closedir(d);
+		// closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;

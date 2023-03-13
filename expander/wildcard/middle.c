@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   middle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:24 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 18:44:33 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:46:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 int	is_middle(char *str, int index)
 {
-	int i = index;
-		if(index - 1 < 0 && str[index] == '*')
+	int	i;
+
+	i = index;
+	if (index - 1 < 0 && str[index] == '*')
+	{
+		while (str[index] != '\0')
 		{
-			while (str[index] != '\0')
-			{
-				if (str[index] == '*')
-					return (1);
-				index++;
-			}
+			if (str[index] == '*')
+				return (1);
+			index++;
 		}
-		index = i;
-		if (str[index - 1] == '*')
+	}
+	index = i;
+	if (str[index - 1] == '*')
+	{
+		while (str[index] != '\0')
 		{
-			while (str[index] != '\0')
-			{
-				if (str[index] == '*')
-					return (1);
-				index++;
-			}
+			if (str[index] == '*')
+				return (1);
+			index++;
 		}
+	}
 	return (0);
 }
 

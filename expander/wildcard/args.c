@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 18:45:09 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:46:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ char	**take_file(char **files, char *command)
 				files = right_side_files(files, str);
 			}
 		}
-		i++;
+		if (command[i] != '\0')
+			i++;
 	}
 	return (files);
 }
@@ -94,9 +95,9 @@ int	get_w_path_count(void)
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
-		if(dir->d_name[0] != '.')
-			i++;
-		closedir(d);
+			if (dir->d_name[0] != '.')
+				i++;
+		// closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -120,7 +121,7 @@ char	**get_w_dot_files(void)
 		i = 0;
 		while ((dir = readdir(d)) != NULL)
 		{
-			if(dir->d_name[0] != '.')
+			if (dir->d_name[0] != '.')
 			{
 				files[i] = dir->d_name;
 				i++;
@@ -136,7 +137,8 @@ char	**just_asterisk(char *command)
 	int		count;
 	char	**my_files;
 	int		i;
-	if(command[0] == '.')
+
+	if (command[0] == '.')
 		my_files = get_files();
 	else
 		my_files = get_w_dot_files();
@@ -146,15 +148,14 @@ char	**just_asterisk(char *command)
 	return (my_files);
 }
 
-
 char	**sort_files(char **files, char *str)
 {
-	int i;
-	int m;
-	int j;
-	int count;
-	char **sorted_files;
-	int x;
+	int		i;
+	int		m;
+	int		j;
+	int		count;
+	char	**sorted_files;
+	int		x;
 
 	i = 0;
 	m = 0;

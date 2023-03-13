@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:22:27 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 19:44:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_dir_count(char *path)
 		while ((dir = readdir(d)) != NULL)
 			if (dir->d_type == DT_DIR)
 				i++;
-		closedir(d);
+		// closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -75,7 +75,7 @@ int	get_all_count(char *path)
 	{
 		while ((dir = readdir(d)) != NULL)
 			i++;
-		closedir(d);
+		// closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -83,12 +83,12 @@ int	get_all_count(char *path)
 
 char	**get_all(char *path)
 {
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				count;
-	char			**files;
-	int				i;
+	char buf[1024];
+	DIR *d;
+	struct dirent *dir;
+	int count;
+	char **files;
+	int i;
 
 	//getcwd(buf, 1024);
 	i = 0;
@@ -103,7 +103,7 @@ char	**get_all(char *path)
 			files[i] = dir->d_name;
 			i++;
 		}
-		closedir(d);
+		//closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;

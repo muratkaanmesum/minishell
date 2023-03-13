@@ -150,11 +150,13 @@ int	main(int argc, char **argv, char **env)
 		if (check_first(tokens) != 1)
 		{
 			head = parser(tokens);
-			if (head != NULL){
+			if (head != NULL)
+			{
 				expander(head, new_env);
-				execute(head,&new_env);
+				execute(head, &new_env);
 			}
 		}
+		print_tree(head);
 		free(inpt);
 	}
 	return (0);
