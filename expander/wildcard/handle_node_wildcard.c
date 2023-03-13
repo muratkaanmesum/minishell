@@ -45,9 +45,9 @@ void	handle_forarg(t_command *command)
 
 void	handle_forcommand(t_command *command)
 {
-	char	**files;
-	char	buf[1024];
-		static char *prefix;
+	char		**files;
+	char		buf[1024];
+	static char	*prefix;
 
 	fix_str(command->command);
 	if (is_asterisk(command->command) || asterisk_slash(command->command) == 0)

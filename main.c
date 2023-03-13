@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 14:11:46 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/13 12:28:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,7 @@ int	main(int argc, char **argv, char **env)
 			head = parser(tokens);
 			print_tree(head);
 			if (head != NULL)
-			{
 				expander(head, env);
-				wildcard(head);
-			}
 		}
 		free(inpt);
 	}
