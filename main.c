@@ -123,6 +123,7 @@ char	**init_env(char **env)
 	new_env[i] = NULL;
 	return (new_env);
 }
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*inpt;
@@ -140,7 +141,6 @@ int	main(int argc, char **argv, char **env)
 		inpt = readline("minishell: ");
 		add_history(inpt);
 		tokens = lexer(inpt);
-		print_token(tokens);
 		if (tokens == NULL)
 		{
 			free(inpt);
@@ -149,8 +149,10 @@ int	main(int argc, char **argv, char **env)
 		if (check_first(tokens) != 1)
 		{
 			head = parser(tokens);
-			if (head != NULL)
+			if (head != NULL){
 				expander(head, env);
+				execute(head,new_env);
+			}
 		}
 		free(inpt);
 	}

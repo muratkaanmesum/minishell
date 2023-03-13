@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:26:19 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 13:22:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:48:55 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	token_error_handle(t_token *tokens)
 
 int	parse_error(t_token *tokens)
 {
-	print_token(tokens);
 	if (empty_line(tokens) == 0)
 	{
 		if (less_quotes(tokens))

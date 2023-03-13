@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 12:55:52 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:46:24 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ char	*delete_quotes(char *str, t_node *node, int index,
 		}
 	}
 	new_str[j] = '\0';
-	if (token_type == RED_FILE)
-	{
-		free(str);
-		return (new_str);
-	}
-	token = get_token(node, str, token_type, index);
-	if (token != NULL)
-		token->str = ft_strdup(new_str);
-	else
-		printf("token is NULL\n");
-	free(str);
+	// if (token_type == RED_FILE)
+	// {
+	// 	free(str);
+	// 	return (new_str);
+	// }
+	// token = get_token(node, str, token_type, index);
+	// if (token != NULL)
+	// 	token->str = ft_strdup(new_str);
+	// else
+	// 	printf("token is NULL\n");
+	// //free(str);
 	return (new_str);
 }

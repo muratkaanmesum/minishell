@@ -3,22 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/08 12:09:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:52:53 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
+int get_env_count(char **env)
+{
+	int i = 0;
+	while(env[i])
+	i++;
+	return i;
+}
+
 int	add_env(char *args, char **env)
 {
 	int		i;
-	char	**tmp;
-
+	
+	int env_count;
 	i = 0;
-	tmp = env;
 	while (env[i] != NULL)
 	{
 		if (ft_strncmp(env[i], args, ft_strchr(env[i], '=') - env[i]) == 0)

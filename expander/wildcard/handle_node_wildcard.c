@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 18:06:49 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:47:07 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ void	handle_forarg(t_command *command)
 	count = 0;
 	while (i < command->argument_count)
 	{
-		printf("işelenecek arg %s\n",command->arguments[i]);
 		if (quotes_control(command->arguments[i]) == 1)
 		{	
 			char *str = delete_quote(command->arguments[i]);
@@ -189,10 +188,5 @@ void	handle_forarg(t_command *command)
 void	handle_node_wildcard(t_node *node)
 {
 	handle_forcommand(node->command);
-	print_tree(node);
-	getchar();
 	handle_forarg(node->command);
-	getchar();
-	printf("\n\n TREE \n");
-	print_tree(node);
 }

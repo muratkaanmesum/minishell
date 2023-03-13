@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 18:08:58 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/13 18:45:09 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ char	**get_w_dot_files(void)
 				i++;
 			}
 		}
-		closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;
