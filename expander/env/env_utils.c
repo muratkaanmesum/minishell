@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 15:39:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 13:27:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_env	*get_env_variables(char **env)
 		value = ft_split(env[i], '=');
 		env_variables[i].name = value[0];
 		env_variables[i].value = value[1];
-		free_split(value);
+		//free_split(value);
 
 		i++;
 	}

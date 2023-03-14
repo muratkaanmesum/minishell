@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:55:03 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 13:23:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 13:44:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,13 @@ int	check_operators(t_token *tokens)
 		return (1);
 	if (check_all_operators(tokens) == 1)
 		return (1);
+		execve()
 	return (0);
 }
+//echo  test test2 -n asd test -na
+//command -> echo
+//argument[0] -> test
+//option[0]-> -n
+//argument[1] -> asd
+//argument[2] -> test
+//option[1] -> -na

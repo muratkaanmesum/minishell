@@ -26,7 +26,7 @@ int	print_args(t_node *head)
 	int	i;
 
 	i = 0;
-	while (head->tokens[i].token != UNKNOWN)
+	while ()
 	{
 		if (check_option(head->tokens[i].str) == 1 && i == 1)
 		{
