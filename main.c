@@ -154,7 +154,9 @@ int	main(int argc, char **argv, char **env)
 		expander(head, new_env);
 		execute(head, &new_env);
 		free_tree(head);
+		free_new_env(new_env);
 		free(inpt);
+		system("leaks minishell");
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 17:20:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 19:07:07 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-void	free_env(char **env)
+void	free_new_env(char **env)
 {
 	int	i;
 
