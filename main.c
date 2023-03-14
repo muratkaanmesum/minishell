@@ -156,7 +156,7 @@ int	main(int argc, char **argv, char **env)
 			}
 		}
 		print_tree(head);
-		free_tree(head);
+		//free_tree(head);
 		free(inpt);
 	}
 	return (0);

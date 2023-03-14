@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 19:55:07 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:51:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	handle_forcommand(t_command *command)
 		if (is_asterisk(str) && asterisk_slash(str) == 0)
 		{
 			files = just_asterisk(str);
-			print_files(files);
+
 			int count_files = files_count(files);
 			if (files[0] != NULL)
 				command->command = files[0];
@@ -139,7 +139,9 @@ void	handle_forcommand(t_command *command)
 			{
 				char **command_files = malloc(sizeof(char *) * (count + 1));
 				expandWildcard(NULL,str,command_files,&index);
+				command_files[index] = NULL;
 				command->command = command_files[0];
+
 				add_command_to_arg(command,command_files);
 			}
 		}

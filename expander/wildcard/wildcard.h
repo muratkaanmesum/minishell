@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 15:48:46 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:58:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ char	**command_file(char *prefix, char *suffix, char *path);
 char	**only_files(char *path);
 char	**take_file(char **files, char *command);
 
-int	countWildcard(char *prefix, char *suffix,int *count);
+int		countWildcard(char *prefix, char *suffix, int *count);
 int		get_dir_count(char *path);
 char	**get_dir(char *path);
 int		get_all_count(char *path);
 char	**get_all(char *path);
-void expandWildcard(char *prefix, char *suffix,char **return_files,int *index);
-int	files_count(char **files);
+void	expandWildcard(char *prefix, char *suffix, char **return_files,
+			int *index);
+int		files_count(char **files);
+char	**get_w_dot_files2(char *path, unsigned char d_type);
+
+int		get_w_path_count2(char *path, unsigned char d_type);
 
 #endif

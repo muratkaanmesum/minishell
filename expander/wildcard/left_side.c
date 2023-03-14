@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_side.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:19 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:22:20 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:33:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	left_side_files_count(char **files, char *str)
 					count++;
 			}
 			k = 0;
-			j++;
+			if (str[j] != '\0')
+				j++;
 		}
 		i++;
 	}
@@ -100,17 +101,19 @@ int	left_side_files_count(char **files, char *str)
 
 char	**left_side_files(char **files, char *str)
 {
-	int count = left_side_files_count(files, str);
-	char **new_files = malloc(sizeof(char *) * (count + 1));
-	int i;
-	int j;
-	int k;
-	int t = 0;
+	int		count;
+	char	**new_files;
+	int		i;
+	int		j;
+	int		k;
+	int		t;
 
+	count = left_side_files_count(files, str);
+	new_files = malloc(sizeof(char *) * (count + 1));
+	t = 0;
 	i = 0;
 	k = 0;
 	j = 0;
-
 	while (files[i])
 	{
 		k = 0;
@@ -131,7 +134,8 @@ char	**left_side_files(char **files, char *str)
 					t++;
 				}
 			}
-			k++;
+			if (str[k] != '\0')
+				k++;
 		}
 		i++;
 	}

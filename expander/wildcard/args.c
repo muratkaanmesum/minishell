@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 19:46:19 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:47:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ char	**get_w_dot_files(void)
 	files[i] = NULL;
 	return (files);
 }
+
 char	**just_asterisk(char *command)
 {
 	int		count;

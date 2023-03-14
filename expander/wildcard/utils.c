@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 19:44:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:30:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_files(char **files)
 	int	i;
 
 	i = 0;
-	if (files[0] == NULL)
+	if (files[0] == NULL || files == NULL)
 	{
 		printf("dosya yok\n");
 		return ;

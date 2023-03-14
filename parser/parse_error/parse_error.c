@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:26:19 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 18:48:55 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:22:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	parse_error(t_token *tokens)
 			return (1);
 		if (out_of_use(tokens))
 			return (1);
-		if (misuse_parantheses(tokens))
-			return (1);
+		// if (misuse_parantheses(tokens))
+		// 	return (1);
 		if (check_operators(tokens))
 			return (1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 14:30:23 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/14 12:59:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ char	*prefix_add_file(char *prefix, char *file)
 	return (new_prefix);
 }
 
-int countWildcard(char *prefix, char *suffix,int *count)
+int	countWildcard(char *prefix, char *suffix, int *count)
 {
 	char	*data;
 	char	buf[1024];
@@ -187,13 +187,14 @@ int countWildcard(char *prefix, char *suffix,int *count)
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
-		countWildcard(files[i], suffix,count);
+		countWildcard(files[i], suffix, count);
 		i++;
 	}
 	return (*count);
 }
 
-void expandWildcard(char *prefix, char *suffix,char **return_files,int *index)
+void	expandWildcard(char *prefix, char *suffix, char **return_files,
+		int *index)
 {
 	char	*data;
 	char	buf[1024];
@@ -204,7 +205,7 @@ void expandWildcard(char *prefix, char *suffix,char **return_files,int *index)
 	if (suffix == NULL)
 	{
 		return_files[*index] = prefix;
-		*index+=1;
+		*index += 1;
 		return ;
 	}
 	data = find_data(suffix);
@@ -214,12 +215,18 @@ void expandWildcard(char *prefix, char *suffix,char **return_files,int *index)
 	if (ft_strchr(data, '/') != NULL)
 	{
 		data = edit_data(data);
-		files = get_dir(path);
+		if (data[0] == '.')
+			files = get_dir(path);
+		else
+			files = get_w_dot_files2(path, DT_DIR);
 		files = take_file(files, data);
 	}
 	else
 	{
-		files = get_all(path);
+		if (data[0] == '.')
+			files = get_all(path);
+		else
+			files = get_w_dot_files2(path, 100);
 		files = take_file(files, data);
 	}
 	suffix = cut_suffix(suffix);
@@ -227,7 +234,7 @@ void expandWildcard(char *prefix, char *suffix,char **return_files,int *index)
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
-		expandWildcard(files[i], suffix,return_files,index);
+		expandWildcard(files[i], suffix, return_files, index);
 		i++;
 	}
 	return ;
