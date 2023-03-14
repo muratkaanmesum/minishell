@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/14 12:51:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 13:12:01 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char	*delete_quote(char *str)
 
 void add_command_to_arg(t_command *command,char **files)
 {
+	if (files == NULL)
+		return ;
 	int count_files = files_count(files);
 	int total_arg = count_files - 1 + command->argument_count;
 	char **new_args = malloc(sizeof(char*) * (total_arg + 1));
@@ -127,7 +129,9 @@ void	handle_forcommand(t_command *command)
 			files = just_asterisk(str);
 
 			int count_files = files_count(files);
-			if (files[0] != NULL)
+			if (files[0] == NULL)
+				return;
+				if(files[0] != NULL)
 				command->command = files[0];
 			add_command_to_arg(command,files);
 		}
@@ -140,9 +144,10 @@ void	handle_forcommand(t_command *command)
 				char **command_files = malloc(sizeof(char *) * (count + 1));
 				expandWildcard(NULL,str,command_files,&index);
 				command_files[index] = NULL;
-				command->command = command_files[0];
-
-				add_command_to_arg(command,command_files);
+				if(command_files == NULL)
+					return;
+					command->command = command_files[0];
+					add_command_to_arg(command,command_files);
 			}
 		}
 	}

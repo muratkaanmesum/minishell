@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:08:50 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 17:53:27 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 13:14:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	pass_character(t_lexer_args *args)
 				break ;
 			args->i++;
 		}
-		args->i++;
+		if (args->str[args->i] != '\0')
+			args->i++;
 	}
 	else
 		args->i++;
