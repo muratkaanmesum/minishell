@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 13:34:46 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:06:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,6 @@ char	*assign_env(char *str, char *env_value, t_node *node,
 	value_size = (int)ft_strlen(env_value);
 	new_str = malloc(sizeof(char) * (value_size + node_size + 1));
 	change_str(str, env_value, new_str);
-	// if (token_type == RED_FILE)
-	// {
-	// 	free(str);
-	// 	return (new_str);
-	// }
-	// token = get_token(node, str, token_type, index);
-	// if (token->str != NULL)
-	// 	token->str = ft_strdup(new_str);
-	//free(str);
+	free(str);
 	return (new_str);
 }

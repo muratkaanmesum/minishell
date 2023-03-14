@@ -79,14 +79,11 @@ void	print_tree(t_node *head)
 		}
 		printf("\n");
 		j = 0;
-		while (j < head->command->option_count)
-		{
-			printf("option : %s : ", head->command->options[j]);
-			j++;
-		}
-		printf("\n");
 		if (head->redirections != NULL)
 			print_redirections(head->redirections);
+		printf("\n*************\n");
+		printf("%d\n", head->left_operator);
+		printf("%d\n", head->right_operator);
 		printf("\n*************\n");
 		return ;
 	}
@@ -95,9 +92,12 @@ void	print_tree(t_node *head)
 		{
 			if (i == 0)
 			{
-				print_token(head->tokens);
+				// 	print_token(head->tokens);
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
+				printf("\n*************\n");
+				printf("%d\n", head->left_operator);
+				printf("%d\n", head->right_operator);
 				printf("\n*************\n");
 			}
 			print_tree(head->connections[i]);

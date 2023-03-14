@@ -38,13 +38,7 @@ void	free_command(t_command *command)
 		i++;
 	}
 	i = 0;
-	while (i < command->option_count)
-	{
-		free(command->options[i]);
-		i++;
-	}
 	free(command->arguments);
-	free(command->options);
 }
 void	free_redirections(t_redirections *redirections)
 {
