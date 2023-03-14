@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:41:00 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 16:58:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 13:58:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,6 @@ void	handle_command(t_node *node)
 	}
 }
 
-void	handle_option(t_node *node)
-{
-	int	i;
-	int	count;
-	int	j;
-
-	i = 0;
-	j = 0;
-	count = 0;
-	while (node->tokens[i].token != UNKNOWN)
-	{
-		if (node->tokens[i].token == OPTION)
-			count++;
-		i++;
-	}
-	node->command->option_count = count;
-	i = 0;
-	node->command->options = malloc(sizeof(char *) * (count + 1));
-	while (node->tokens[i].token != UNKNOWN)
-	{
-		if (node->tokens[i].token == OPTION)
-			node->command->options[j++] = ft_strdup(node->tokens[i].str);
-		i++;
-	}
-	node->command->options[count] = NULL;
-}
-
 void	handle_args(t_node *node)
 {
 	int	i;
@@ -63,7 +36,7 @@ void	handle_args(t_node *node)
 	count = 0;
 	while (node->tokens[i].token != UNKNOWN)
 	{
-		if (node->tokens[i].token == ARG || node->tokens[i].token == ENV)
+		if (node->tokens[i].token == ARG || node->tokens[i].token == OPTION)
 			count++;
 		i++;
 	}
@@ -73,7 +46,7 @@ void	handle_args(t_node *node)
 	j = 0;
 	while (node->tokens[i].token != UNKNOWN)
 	{
-		if (node->tokens[i].token == ARG || node->tokens[i].token == ENV)
+		if (node->tokens[i].token == ARG || node->tokens[i].token == OPTION)
 			node->command->arguments[j++] = ft_strdup(node->tokens[i].str);
 		i++;
 	}
@@ -84,6 +57,5 @@ void	handle_simple_command(t_node *node)
 {
 	node->command = malloc(sizeof(t_command));
 	handle_command(node);
-	handle_option(node);
 	handle_args(node);
 }

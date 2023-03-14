@@ -14,11 +14,9 @@ int	does_have_option(t_node *node)
 	int	i;
 
 	i = 0;
-	if (node->tokens[1].token == UNKNOWN)
+	if (ft_strncmp(node->command->arguments[0], "-n", ft_strlen(node->command->arguments[0])) == 0)
 		return (0);
-	else if (check_option(node->tokens[1].str) == 1)
-		return (1);
-	return (0);
+	return (1);
 }
 
 int	print_args(t_node *head)
@@ -26,20 +24,12 @@ int	print_args(t_node *head)
 	int	i;
 
 	i = 0;
-	while ()
+	while (i < head->command->argument_count)
 	{
-		if (check_option(head->tokens[i].str) == 1 && i == 1)
-		{
-			i++;
-			continue ;
-		}
-		if (ft_strncmp(head->tokens[i].str, "echo", 4) != 0)
-		{
-			if (head->tokens[i + 1].token != UNKNOWN)
-				printf("%s ", head->tokens[i].str);
-			else
-				printf("%s", head->tokens[i].str);
-		}
+		if (head->command->arguments[i + 1] != NULL)
+			printf("%s ", head->command->arguments[i]);
+		else
+			printf("%s", head->command->arguments[i]);
 		i++;
 	}
 	return (1);
@@ -47,7 +37,7 @@ int	print_args(t_node *head)
 
 int	echo(t_node *head)
 {
-	if (does_have_option(head) == 0)
+	if (does_have_option(head))
 	{
 		print_args(head);
 		printf("\n");
