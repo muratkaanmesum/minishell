@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 13:58:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 19:07:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int							get_in_all_tokens(t_token token, t_token *tokens);
 int	left_is_subshell_handle(t_token token,
 							t_token *tokens,
 							int i);
+void						free_new_env(char **env);
 int							parse_error(t_token *tokens);
 void						expander(t_node *head, char **env);
 int							is_arithmetic(t_token *tokens);

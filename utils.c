@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 12:46:11 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/13 17:49:56 by eablak           ###   ########.fr       */
-
+/*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/14 19:07:07 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expander.h"
+#include "minishell.h"
 
-void	expander(t_node *head, char **env)
+void	free_split(char **split)
 {
-	t_env	*variables;
+	int	i;
 
-	variables = get_env_variables(env);
-	wildcard(head);
-	handle_env(head, variables);
-	free_env(variables);
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+void	free_new_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
 }

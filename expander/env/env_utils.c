@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 13:27:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 17:08:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,13 @@ t_env	*get_env_variables(char **env)
 	env_variables = malloc(sizeof(t_env) * (count + 1));
 	while (env[i])
 	{
+		count = 0;
 		value = ft_split(env[i], '=');
-		env_variables[i].name = value[0];
-		env_variables[i].value = value[1];
-		//free_split(value);
-
+		while (value[count])
+			count++;
+		env_variables[i].name = ft_strdup(value[0]);
+		env_variables[i].value = ft_strdup(value[1]);
+		free_split(value);
 		i++;
 	}
 	env_variables[i].name = NULL;
