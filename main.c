@@ -82,8 +82,8 @@ void	print_tree(t_node *head)
 		if (head->redirections != NULL)
 			print_redirections(head->redirections);
 		printf("\n*************\n");
-		printf("%d\n", head->left_operator);
-		printf("%d\n", head->right_operator);
+		printf("left_operator : %d\n", head->left_operator);
+		printf("right_operator : %d\n", head->right_operator);
 		printf("\n*************\n");
 		return ;
 	}
@@ -96,8 +96,8 @@ void	print_tree(t_node *head)
 				if (head->redirections != NULL)
 					print_redirections(head->redirections);
 				printf("\n*************\n");
-				printf("%d\n", head->left_operator);
-				printf("%d\n", head->right_operator);
+				printf("left_operator : %d\n", head->left_operator);
+				printf("right_operator : %d\n", head->right_operator);
 				printf("\n*************\n");
 			}
 			print_tree(head->connections[i]);

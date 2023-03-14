@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_operators.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/12 10:29:38 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/14 14:19:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_left_operator(t_token token, t_token *tokens, int is_subshell)
 
 	i = get_in_all_tokens(token, tokens);
 	if (is_subshell == 1)
-		left_is_subshell_handle(token, tokens, i);
+		return (left_is_subshell_handle(token, tokens, i));
 	else
 	{
 		while (i >= 0 && tokens[i].token != UNKNOWN && tokens[i].token != PIPE
