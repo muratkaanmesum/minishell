@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/10 15:25:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 16:03:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	handle_env_command(t_node *node, t_env *env)
 		env_value = find_env_variable(str, env);
 	if (env_value == NULL)
 		env_value = "";
-	node->command->command = assign_env(node->command->command, env_value, node,
-			COMMAND, -1);
+	node->command->command = assign_env(node->command->command, env_value,
+			node);
 }
 
 void	handle_env_arg(t_node *node, t_env *env, int i)
@@ -39,9 +39,7 @@ void	handle_env_arg(t_node *node, t_env *env, int i)
 		env_value = "";
 	node->command->arguments[i] = assign_env(node->command->arguments[i],
 												env_value,
-												node,
-												ARG,
-												i);
+												node);
 }
 
 void	handle_env_infile(t_node *node, t_env *env, int i)
@@ -56,9 +54,7 @@ void	handle_env_infile(t_node *node, t_env *env, int i)
 		env_value = "";
 	node->redirections->infile[i] = assign_env(node->redirections->infile[i],
 												env_value,
-												node,
-												RED_FILE,
-												i);
+												node);
 }
 void	handle_env_outfile(t_node *node, t_env *env, int i)
 {
@@ -72,9 +68,7 @@ void	handle_env_outfile(t_node *node, t_env *env, int i)
 		env_value = "";
 	node->redirections->outfile[i] = assign_env(node->redirections->outfile[i],
 												env_value,
-												node,
-												RED_FILE,
-												i);
+												node);
 }
 void	handle_node_env(t_node *node, t_env *env)
 {
@@ -82,17 +76,14 @@ void	handle_node_env(t_node *node, t_env *env)
 
 	while (get_env_location(node->command->command) != NULL)
 		handle_env_command(node, env);
-	node->command->command = delete_quotes(node->command->command, node, -1,
-			COMMAND);
+	node->command->command = delete_quotes(node->command->command, node);
 	i = 0;
 	while (i < node->command->argument_count)
 	{
 		while (get_env_location(node->command->arguments[i]) != NULL)
 			handle_env_arg(node, env, i);
 		node->command->arguments[i] = delete_quotes(node->command->arguments[i],
-													node,
-													i,
-													ARG);
+													node);
 		i++;
 	}
 	i = 0;
@@ -103,9 +94,7 @@ void	handle_node_env(t_node *node, t_env *env)
 		while (get_env_location(node->redirections->infile[i]) != NULL)
 			handle_env_infile(node, env, i);
 		node->redirections->infile[i] = delete_quotes(node->redirections->infile[i],
-														node,
-														i,
-														RED_FILE);
+														node);
 		i++;
 	}
 	i = 0;
@@ -114,9 +103,7 @@ void	handle_node_env(t_node *node, t_env *env)
 		while (get_env_location(node->redirections->outfile[i]) != NULL)
 			handle_env_outfile(node, env, i);
 		node->redirections->outfile[i] = delete_quotes(node->redirections->outfile[i],
-														node,
-														i,
-														RED_FILE);
+														node);
 		i++;
 	}
 }

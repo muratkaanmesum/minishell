@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 14:06:20 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/14 17:06:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	get_node_size(char *str)
 	return (node_size);
 }
 
-char	*assign_env(char *str, char *env_value, t_node *node,
-		enum e_token token_type, int index)
+char	*assign_env(char *str, char *env_value, t_node *node)
 {
 	int		value_size;
 	char	*new_str;
