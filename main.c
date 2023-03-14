@@ -146,16 +146,14 @@ int	main(int argc, char **argv, char **env)
 			free(inpt);
 			continue ;
 		}
-		if (check_first(tokens) != 1)
-		{
-			head = parser(tokens);
-			if (head == NULL)
-				continue ;
-			expander(head, new_env);
-			execute(head, &new_env);
-		}
+		if (check_first(tokens) == 1)
+			continue ;
+		head = parser(tokens);
+		if (head == NULL)
+			continue ;
+		expander(head, new_env);
+		execute(head, &new_env);
 		print_tree(head);
-		//free_tree(head);
 		free(inpt);
 	}
 	return (0);
