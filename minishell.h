@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 19:07:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 06:16:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int							free_token(t_token *tokens);
 void						free_tree(t_node *head);
 void						free_split(char **split);
 int							get_length(char *str);
+void						free_double_ptr(char **arr);
 
 #endif

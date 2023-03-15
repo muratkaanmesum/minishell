@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-
-
 int	free_token(t_token *tokens)
 {
 	int	i;
@@ -18,16 +16,6 @@ int	free_token(t_token *tokens)
 
 void	free_command(t_command *command)
 {
-	int	i;
-
-	i = 0;
-	while (i < command->argument_count)
-	{
-		free(command->arguments[i]);
-		i++;
-	}
-	i = 0;
-	free(command->arguments);
 }
 void	free_redirections(t_redirections *redirections)
 {
@@ -54,10 +42,16 @@ void	free_redirections(t_redirections *redirections)
 
 void	free_simple_command(t_node *node)
 {
-	free_command(node->command);
-	free_token(node->tokens);
-	if (node->redirections != NULL)
-		free_redirections(node->redirections);
+	int	i;
+
+	i = 0;
+	while (i < command->argument_count)
+	{
+		free(command->arguments[i]);
+		i++;
+	}
+	i = 0;
+	free(command->arguments);
 }
 
 void	free_tree(t_node *head)
@@ -66,7 +60,7 @@ void	free_tree(t_node *head)
 
 	i = 0;
 	if (head->connection_count == 1)
-		free_simple_command(head);
+		free_simple_command(head->command);
 	else
 	{
 		while (i < head->connection_count)

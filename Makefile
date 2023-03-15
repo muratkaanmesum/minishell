@@ -11,7 +11,7 @@ NAME        := minishell
 CC        := gcc
 
 #FLAGS    := -fsanitize=address
-#FLAGS       := -g -O0
+FLAGS       := -g -O0
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -102,6 +102,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/middle.c\
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
+                          expander/wildcard/readdir.c\
                           expander/env/assign_env_utils.c\
                           execute/execute.c\
                           execute/utils.c\
@@ -113,7 +114,8 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/unset.c\
                             execute/builtins/exit.c\
                             execute/builtins/utils.c\
-                            expander/wildcard/readdir.c\
+                            execute/exec_builtins.c\
+
 
 
 OBJS        := $(SRCS:.c=.o)

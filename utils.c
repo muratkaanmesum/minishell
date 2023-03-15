@@ -6,34 +6,21 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 19:07:07 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 06:16:12 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_split(char **split)
+void	free_double_ptr(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (split[i] != NULL)
+	while (arr[i] != NULL)
 	{
-		free(split[i]);
+		free(arr[i]);
 		i++;
 	}
-	free(split);
-}
-
-void	free_new_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i] != NULL)
-	{
-		free(env[i]);
-		i++;
-	}
-	free(env);
+	free(arr);
 }

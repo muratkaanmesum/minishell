@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/15 05:22:50 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "execute.h"
 
 void	execute_node(t_node *node, char ***env)
@@ -17,7 +29,7 @@ void	execute_node(t_node *node, char ***env)
 	else if (ft_strncmp(node->command->command, "exit", 4) == 0)
 		exit(0);
 	else
-		return ;
+		exec_builtin(node, *env);
 }
 
 int	execute(t_node *head, char ***env)
