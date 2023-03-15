@@ -14,9 +14,6 @@ int	free_token(t_token *tokens)
 	return (0);
 }
 
-void	free_command(t_command *command)
-{
-}
 void	free_redirections(t_redirections *redirections)
 {
 	int	i;
@@ -40,7 +37,7 @@ void	free_redirections(t_redirections *redirections)
 	free(redirections);
 }
 
-void	free_simple_command(t_node *node)
+void	free_simple_command(t_command *command)
 {
 	int	i;
 
@@ -52,6 +49,8 @@ void	free_simple_command(t_node *node)
 	}
 	i = 0;
 	free(command->arguments);
+	free(command->command);
+	free(command);
 }
 
 void	free_tree(t_node *head)
@@ -66,13 +65,12 @@ void	free_tree(t_node *head)
 		while (i < head->connection_count)
 		{
 			free_tree(head->connections[i]);
-			free_token(head->tokens);
-			if (head->redirections != NULL)
-				free_redirections(head->redirections);
-			free(head->connections[i]);
 			i++;
 		}
 	}
+	if (head->redirections != NULL)
+		free_redirections(head->redirections);
 	free(head->connections);
+	free_token(head->tokens);
 	free(head);
 }

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 06:18:05 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 07:07:31 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ char	*find_in_path(char *command, char **env)
 		tmp = ft_strjoin(path[i], "/");
 		tmp2 = ft_strjoin(tmp, command);
 		if (access(tmp2, F_OK) == 0)
+		{
+			free(tmp);
+			free_double_ptr(path);
 			return (tmp2);
+		}
 		i++;
 		free(tmp);
+		free(tmp2);
 	}
+	free_double_ptr(path);
 	return (NULL);
 }
 void	print_new_arg(char **arg)
@@ -85,13 +91,12 @@ void	exec_builtin(t_node *node, char **env)
 	path = NULL;
 	if (ft_strchr(node->command->command, '/') == NULL)
 		path = find_in_path(node->command->command, env);
-	if (path == NULL)
+	else
 		path = ft_strdup(node->command->command);
 	pid = fork();
 	if (pid == 0)
 		execve(path, new_args, env);
 	waitpid(pid, &return_value, 0);
-	printf("return_val %d\n", return_value);
 	free(path);
 	free_double_ptr(new_args);
 }
