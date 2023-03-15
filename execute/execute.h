@@ -6,16 +6,15 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 09:52:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 13:19:29 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 # include "../minishell.h"
+# include <fcntl.h>
 # include <sys/wait.h>
-
-
 int		echo(t_node *head);
 int		cd(char *args, char **env);
 int		pwd(char **env);
@@ -25,5 +24,5 @@ int		unset(char **args, char ***env);
 int		get_env_len(char *env);
 int		ft_exit(char **args);
 void	exec_builtin(t_node *node, char **env);
-
+void	handle_files(t_node *head);
 #endif

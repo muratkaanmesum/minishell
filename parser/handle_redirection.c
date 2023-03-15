@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:55:12 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/11 11:54:06 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/15 14:39:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	handle_input(t_node *node)
 	i = 0;
 	index = 0;
 	find_input_count(node);
-	node->redirections->infile = malloc(node->redirections->infile_count
+	node->redirections->infile = malloc((node->redirections->infile_count + 1)
 			* sizeof(char *));
 	node->redirections->infile_type = malloc(node->redirections->infile_count
 			* sizeof(enum e_token));
@@ -72,6 +72,7 @@ void	handle_input(t_node *node)
 		}
 		i++;
 	}
+	node->redirections->infile[index] = NULL;
 }
 
 void	handle_output(t_node *node)
@@ -82,7 +83,7 @@ void	handle_output(t_node *node)
 	i = 0;
 	index = 0;
 	find_output_count(node);
-	node->redirections->outfile = malloc(node->redirections->outfile_count
+	node->redirections->outfile = malloc((node->redirections->outfile_count + 1)
 			* sizeof(char *));
 	node->redirections->outfile_type = malloc(node->redirections->outfile_count
 			* sizeof(enum e_token));
@@ -98,6 +99,7 @@ void	handle_output(t_node *node)
 		}
 		i++;
 	}
+	node->redirections->outfile[index] = NULL;
 }
 
 void	handle_redirection(t_node *node)

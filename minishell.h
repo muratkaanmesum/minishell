@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 12:23:52 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 14:09:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,6 @@ typedef struct s_command
 	char					**arguments;
 	int						argument_count;
 }							t_command;
-typedef struct s_execute
-{
-	int						prev_fd[2];
-}							t_execute;
 typedef struct s_node
 {
 	struct s_command		*command;
@@ -68,7 +64,8 @@ typedef struct s_node
 	struct s_redirections	*redirections;
 	enum e_token			left_operator;
 	enum e_token			right_operator;
-	int						pipe_fd[2];
+	int						in_fd;
+	int						out_fd;
 }							t_node;
 typedef struct s_token
 {

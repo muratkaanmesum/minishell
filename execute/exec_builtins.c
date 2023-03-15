@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 12:51:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 14:44:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,27 +96,19 @@ void	exec_builtin(t_node *node, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (node->right_operator == PIPE)
-		{
-			dup2(node->pipe_fd[1], STDOUT_FILENO);
-			close(node->pipe_fd[1]);
-		}
-		if (node->left_operator == PIPE)
-		{
-			dup2(node->pipe_fd[0], STDIN_FILENO);
-			close(node->pipe_fd[0]);
-		}
+		dup2(node->in_fd, 0);
+		dup2(node->out_fd, 1);
 		execve(path, new_args, env);
 	}
 	if (node->right_operator == PIPE && node->left_operator == PIPE)
 	{
-		close(node->pipe_fd[1]);
-		close(node->pipe_fd[0]);
+		close(node->in_fd);
+		close(node->out_fd);
 	}
 	if (node->right_operator == PIPE)
-		close(node->pipe_fd[1]);
+		close(node->out_fd);
 	if (node->left_operator == PIPE)
-		close(node->pipe_fd[0]);
+		close(node->in_fd);
 	free(path);
 	waitpid(pid, &return_value, 0);
 	free_double_ptr(new_args);
