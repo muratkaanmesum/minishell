@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 10:48:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 12:46:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,33 @@ void	execute_node(t_node *node, char ***env)
 	// else
 	exec_builtin(node, *env);
 }
-
+// cat test.txt | grep e | wc -l | wc -l
+// wc -l | wc -l
+//test2.txt | (wc -l | test | wc -l2)
 void	handle_pipes(t_node *node)
 {
 	int	i;
-	int	pipefd[2];
+	int	fd[2];
 
+	i = 0;
 	if (node->connection_count == 1)
+		return ;
+	while (i < node->connection_count - 1)
 	{
-		if (node->right_operator == PIPE)
-			pipe(node->pipe_fd);
-	}
-	else
-	{
-		i = 0;
-		while (i < node->connection_count)
+		if (node->connections[i]->connection_count == 1 && node->connections[i
+			+ 1]->left_operator == PIPE)
 		{
-			handle_pipes(node->connections[i]);
-			i++;
+			pipe(fd);
+			node->connections[i]->pipe_fd[1] = fd[1];
+			node->connections[i + 1]->pipe_fd[0] = fd[0];
 		}
+		i++;
+	}
+	i = 0;
+	while (i < node->connection_count)
+	{
+		handle_pipes(node->connections[i]);
+		i++;
 	}
 }
 
@@ -69,9 +77,6 @@ int	execute_rec(t_node *head, char ***env)
 }
 int	execute(t_node *head, char ***env)
 {
-	t_execute *exec_struct;
-
-	exec_struct = malloc(sizeof(t_execute));
 	handle_pipes(head);
 	execute_rec(head, env);
 	return (0);

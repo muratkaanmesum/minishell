@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 10:30:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 12:41:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	exec_builtin(t_node *node, char **env)
 	int		return_value;
 	char	**new_args;
 
-	printf("fd[0] = %d, fd[1] = %d\n", node->pipe_fd[0], node->pipe_fd[1]);
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;
@@ -100,17 +99,19 @@ void	exec_builtin(t_node *node, char **env)
 		if (node->right_operator == PIPE)
 		{
 			dup2(node->pipe_fd[1], STDOUT_FILENO);
-			close(node->pipe_fd[0]);
 			close(node->pipe_fd[1]);
 		}
 		if (node->left_operator == PIPE)
 		{
 			dup2(node->pipe_fd[0], STDIN_FILENO);
 			close(node->pipe_fd[0]);
-			close(node->pipe_fd[1]);
 		}
 		execve(path, new_args, env);
 	}
+	if (node->right_operator == PIPE)
+		close(node->pipe_fd[1]);
+	if (node->left_operator == PIPE)
+		close(node->pipe_fd[0]);
 	free(path);
 	waitpid(pid, &return_value, 0);
 	free_double_ptr(new_args);

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 06:59:05 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 12:25:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	assign_head_values(t_node *head, t_token *tokens)
 	head->redirections = NULL;
 	head->is_arithmetic = 0;
 	head->is_subshell = 0;
+	head->pipe_fd[0] = 0;
+	head->pipe_fd[1] = 0;
 }
 
 int	assign_split_type(t_node *head)

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 10:47:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 12:23:52 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_command
 }							t_command;
 typedef struct s_execute
 {
-	int prev_fd[2];
+	int						prev_fd[2];
 }							t_execute;
 typedef struct s_node
 {
