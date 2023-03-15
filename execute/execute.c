@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 10:07:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 10:48:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,7 @@ void	handle_pipes(t_node *node)
 	if (node->connection_count == 1)
 	{
 		if (node->right_operator == PIPE)
-		{
-			pipe(pipefd);
-			node->pipe_fd[0] = pipefd[0];
-			node->pipe_fd[1] = pipefd[1];
-			close(pipefd[0]);
-			close(pipefd[1]);
-			return ;
-		}
+			pipe(node->pipe_fd);
 	}
 	else
 	{
@@ -76,7 +69,10 @@ int	execute_rec(t_node *head, char ***env)
 }
 int	execute(t_node *head, char ***env)
 {
-	//handle_pipes(head);
+	t_execute *exec_struct;
+
+	exec_struct = malloc(sizeof(t_execute));
+	handle_pipes(head);
 	execute_rec(head, env);
 	return (0);
 }
