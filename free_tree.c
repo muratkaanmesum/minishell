@@ -71,6 +71,6 @@ void	free_tree(t_node *head)
 	if (head->redirections != NULL)
 		free_redirections(head->redirections);
 	free(head->connections);
-	free_token(head->tokens);
+	free(head->tokens);
 	free(head);
 }

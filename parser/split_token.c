@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/15 07:12:34 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 07:20:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	assign_values(t_token *tokens, enum e_token token, int *i,
 					+ 1));
 		while (j < split_token_count(start, token))
 		{
-			assign_token(&split[*i][j], &tokens[t_index]);
+			split[*i][j] = tokens[t_index];
 			t_index++;
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 06:16:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 07:17:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void						handle_redirection(t_node *node);
 int	connection_count(t_token *tokens,
 						enum e_token token);
 int							get_split_tokens(t_token *tokens);
+void						assign_values(t_token *tokens, enum e_token token,
+								int *i, t_token **split);
 t_token						**split_token(t_token *tokens, enum e_token token);
 int							check_parantheses(t_token *tokens);
 t_node	*handle_connections(t_node *head,
@@ -112,5 +114,5 @@ void						free_tree(t_node *head);
 void						free_split(char **split);
 int							get_length(char *str);
 void						free_double_ptr(char **arr);
-
+void						free_tokens_str(t_token *token);
 #endif

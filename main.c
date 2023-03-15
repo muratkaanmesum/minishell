@@ -153,6 +153,7 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		expander(head, new_env);
 		execute(head, &new_env);
+		free_tokens_str(tokens);
 		free_tree(head);
 		//free_new_env(new_env);
 		free(inpt);
