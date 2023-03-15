@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 08:25:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 09:34:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	execute_rec(t_node *head, char ***env)
 }
 int	execute(t_node *head, char ***env)
 {
+	int	d_fdin;
+	int	d_fdout;
+
+	d_fdin = dup(STDIN_FILENO);
+	d_fdout = dup(STDOUT_FILENO);
 	execute_rec(head, env);
 	waitpid(-1, NULL, 0);
 	return (0);

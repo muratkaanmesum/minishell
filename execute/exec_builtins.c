@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 08:24:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 09:30:54 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void	exec_builtin(t_node *node, char **env)
 	int		return_value;
 	char	**new_args;
 	int		fd[2];
-
-
 
 	pipe(fd);
 	new_args = modified_args(node);
