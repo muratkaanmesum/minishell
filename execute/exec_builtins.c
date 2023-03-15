@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 07:07:31 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 07:43:09 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	exec_builtin(t_node *node, char **env)
 	int		pid;
 	int		return_value;
 	char	**new_args;
+	int		fd[2];
 
+	pipe(fd);
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;
@@ -95,8 +97,21 @@ void	exec_builtin(t_node *node, char **env)
 		path = ft_strdup(node->command->command);
 	pid = fork();
 	if (pid == 0)
+	{
+		if (node->right_operator == PIPE)
+		{
+			dup2(fd[1], STDOUT_FILENO);
+			close(fd[0]);
+			close(fd[1]);
+		}
+		else if (node->left_operator == PIPE)
+		{
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+			close(fd[1]);
+		}
 		execve(path, new_args, env);
-	waitpid(pid, &return_value, 0);
+	}
 	free(path);
 	free_double_ptr(new_args);
 }
