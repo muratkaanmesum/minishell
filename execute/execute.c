@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 07:53:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 08:25:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	execute_node(t_node *node, char ***env)
 	// else if (ft_strncmp(node->command->command, "exit", 4) == 0)
 	// 	exit(0);
 	// else
-		exec_builtin(node, *env);
+	exec_builtin(node, *env);
 }
 int	execute_rec(t_node *head, char ***env)
 {
 	int	i;
 
 	i = 0;
-	if (head->connection_count > 1)
+	if (head->connection_count == 1)
 		execute_node(head, env);
 	else if (head->connection_count > 1)
 		while (i < head->connection_count)
