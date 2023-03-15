@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 14:46:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 15:17:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	handle_outfiles(t_redirections *redirections)
 	int	i;
 	int	fd;
 
-	fd = 0;
+	fd = 1;
 	i = 0;
 	while (redirections->outfile[i] != NULL)
 	{
@@ -52,15 +52,19 @@ int	handle_outfiles(t_redirections *redirections)
 
 void	handle_node_files(t_node *head)
 {
-	int	fd;
+	int	in_fd;
+	int	out_fd;
 
-	fd = 0;
+	in_fd = 0;
+	out_fd = 1;
 	if (head->redirections->infile_count > 0)
-		fd = handle_infiles(head->redirections);
-	head->in_fd = fd;
+		in_fd = handle_infiles(head->redirections);
+	if (in_fd != 0)
+		head->in_fd = in_fd;
 	if (head->redirections->outfile_count > 0)
-		fd = handle_outfiles(head->redirections);
-	head->out_fd = fd;
+		out_fd = handle_outfiles(head->redirections);
+	if (out_fd != 1)
+		head->out_fd = out_fd;
 }
 void	handle_files(t_node *head)
 {
@@ -68,9 +72,7 @@ void	handle_files(t_node *head)
 
 	i = 0;
 	if (head->connection_count == 1 && head->redirections != NULL)
-	{
 		handle_node_files(head);
-	}
 	else if (head->connection_count > 1)
 	{
 		if (head->redirections != NULL)
