@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 12:41:42 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 12:51:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,11 @@ void	exec_builtin(t_node *node, char **env)
 			close(node->pipe_fd[0]);
 		}
 		execve(path, new_args, env);
+	}
+	if (node->right_operator == PIPE && node->left_operator == PIPE)
+	{
+		close(node->pipe_fd[1]);
+		close(node->pipe_fd[0]);
 	}
 	if (node->right_operator == PIPE)
 		close(node->pipe_fd[1]);
