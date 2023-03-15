@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 09:30:54 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 10:08:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	exec_builtin(t_node *node, char **env)
 	char	**new_args;
 	int		fd[2];
 
-	pipe(fd);
+	if (node->right_operator == PIPE)
+		pipe(fd);
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;
@@ -113,5 +114,10 @@ void	exec_builtin(t_node *node, char **env)
 		execve(path, new_args, env);
 	}
 	free(path);
+	if (node->right_operator == PIPE)
+		close(fd[1]);
+	else if (node->left_operator == PIPE)
+		close(fd[0]);
+	waitpid(pid, &return_value, 0);
 	free_double_ptr(new_args);
 }

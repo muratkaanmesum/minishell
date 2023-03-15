@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 09:34:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/15 10:07:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,35 @@ void	execute_node(t_node *node, char ***env)
 	// else
 	exec_builtin(node, *env);
 }
+
+void	handle_pipes(t_node *node)
+{
+	int	i;
+	int	pipefd[2];
+
+	if (node->connection_count == 1)
+	{
+		if (node->right_operator == PIPE)
+		{
+			pipe(pipefd);
+			node->pipe_fd[0] = pipefd[0];
+			node->pipe_fd[1] = pipefd[1];
+			close(pipefd[0]);
+			close(pipefd[1]);
+			return ;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < node->connection_count)
+		{
+			handle_pipes(node->connections[i]);
+			i++;
+		}
+	}
+}
+
 int	execute_rec(t_node *head, char ***env)
 {
 	int	i;
@@ -47,12 +76,7 @@ int	execute_rec(t_node *head, char ***env)
 }
 int	execute(t_node *head, char ***env)
 {
-	int	d_fdin;
-	int	d_fdout;
-
-	d_fdin = dup(STDIN_FILENO);
-	d_fdout = dup(STDOUT_FILENO);
+	//handle_pipes(head);
 	execute_rec(head, env);
-	waitpid(-1, NULL, 0);
 	return (0);
 }
