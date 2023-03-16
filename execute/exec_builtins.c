@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 14:03:50 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 16:09:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,11 @@ void	exec_builtin(t_node *node, char **env)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
+		clear_all_fds(node);
 		execve(path, new_args, env);
 	}
 	if (pid == 0)
 		exit(0);
-	if (node->in_fd > 0)
-		close(node->in_fd);
-	if (node->out_fd > 1)
-		close(node->out_fd);
 	free(path);
 	waitpid(pid, &return_value, 0);
 	free_double_ptr(new_args);
