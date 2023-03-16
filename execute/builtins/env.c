@@ -10,8 +10,7 @@ int	print_env(char **env, t_node *node)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
-		// close(node->in_fd);
-		// close(node->out_fd);
+		close_all_fds(node->execute->top_node);
 		i = 0;
 		while (env[i] != NULL)
 		{
@@ -20,6 +19,6 @@ int	print_env(char **env, t_node *node)
 		}
 		exit(0);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &node->execute->last_exit_code, 0);
 	return (1);
 }

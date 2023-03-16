@@ -53,16 +53,13 @@ int	echo(t_node *head)
 	{
 		dup2(head->in_fd, 0);
 		dup2(head->out_fd, 1);
-		if (head->in_fd != 0)
-			close(head->in_fd);
-		if (head->out_fd != 1)
-			close(head->out_fd);
+		close_all_fds(head);
 		if (does_have_option(head))
 			print_with_option(head);
 		else
 			print_args(head);
 		exit(0);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &head->execute->last_exit_code, 0);
 	return (0);
 }

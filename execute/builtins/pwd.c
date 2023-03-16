@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 05:10:28 by kali              #+#    #+#             */
-/*   Updated: 2023/03/16 15:11:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 16:20:52 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	pwd(char **env, t_node *node)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
-		// close(node->out_fd);
-		// close(node->in_fd);
+		close_all_fds(node->execute->top_node);
 		i = 0;
 		while (env[i] != NULL)
 		{

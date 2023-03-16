@@ -34,8 +34,7 @@ int	unset(char **args, char ***env, t_node *node)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
-		close(node->out_fd);
-		close(node->in_fd);
+		close_all_fds(node->execute->top_node);
 		i = 0;
 		while (args[i] != NULL)
 			find_env(*env, args[i++]);
