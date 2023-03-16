@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 14:09:27 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:16:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,15 @@ typedef struct s_node
 	enum e_token			right_operator;
 	int						in_fd;
 	int						out_fd;
+	struct s_execute		*execute;
 }							t_node;
+
+typedef struct s_execute
+{
+	int						last_exit_code;
+	struct s_node			*top_node;
+}							t_execute;
+
 typedef struct s_token
 {
 	int						id;
@@ -87,8 +95,8 @@ void						assign_values(t_token *tokens, enum e_token token,
 								int *i, t_token **split);
 t_token						**split_token(t_token *tokens, enum e_token token);
 int							check_parantheses(t_token *tokens);
-t_node	*handle_connections(t_node *head,
-							t_token *tokens);
+t_node						*handle_connections(t_node *head, t_token *tokens,
+								t_execute *execute);
 void						pass_parantheses(t_token *tokens, int *i);
 t_token						*remove_parantheses(t_token *tokens);
 void						print_token(t_token *token);

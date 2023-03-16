@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 14:27:50 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:17:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_if_subshell(t_node *head)
 	}
 }
 
-void	assign_head_values(t_node *head, t_token *tokens)
+void	assign_head_values(t_node *head, t_token *tokens, t_execute *execute)
 {
 	head->tokens = tokens;
 	head->redirections = NULL;
@@ -60,6 +60,7 @@ void	assign_head_values(t_node *head, t_token *tokens)
 	head->is_subshell = 0;
 	head->in_fd = STDIN_FILENO;
 	head->out_fd = STDOUT_FILENO;
+	head->execute = execute;
 }
 
 int	assign_split_type(t_node *head)
@@ -75,7 +76,7 @@ int	assign_split_type(t_node *head)
 	return (split_type);
 }
 
-t_node	*handle_connections(t_node *head, t_token *tokens)
+t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 {
 	t_token			**split;
 	int				i;
@@ -83,7 +84,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 	t_token			*cleared_tokens;
 
 	split_type = -5;
-	assign_head_values(head, tokens);
+	assign_head_values(head, tokens, execute);
 	cleared_tokens = create_redirections(head);
 	if (cleared_tokens != NULL)
 		head->tokens = cleared_tokens;
@@ -98,7 +99,8 @@ t_node	*handle_connections(t_node *head, t_token *tokens)
 		while (i < connection_count(head->tokens, split_type))
 		{
 			head->connections[i] = handle_connections(malloc(sizeof(t_node)),
-														split[i]);
+														split[i],
+														execute);
 			i++;
 		}
 		free(split);

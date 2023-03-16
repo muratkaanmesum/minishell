@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:57:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:04:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	handle_infiles(t_redirections *redirections)
 
 	fd = 0;
 	i = 0;
-	while (redirections->infile[i] != NULL)
+	while (i < redirections->infile_count)
 	{
 		fd = open(redirections->infile[i], O_RDONLY, 0777);
 		if (redirections->infile[i + 1] != NULL)
@@ -36,7 +36,7 @@ int	handle_outfiles(t_redirections *redirections)
 
 	fd = 1;
 	i = 0;
-	while (redirections->outfile[i] != NULL)
+	while (i < redirections->outfile_count)
 	{
 		if (redirections->outfile_type[i] == O_REDIRECTION)
 			fd = open(redirections->outfile[i], O_WRONLY | O_CREAT, 0777);
@@ -62,7 +62,8 @@ void	handle_node_files(t_node *head)
 		in_fd = handle_infiles(head->redirections);
 		if (in_fd > 0)
 		{
-			close(head->in_fd);
+			if (head->in_fd != 0)
+				close(head->in_fd);
 			head->in_fd = in_fd;
 		}
 	}
@@ -71,7 +72,8 @@ void	handle_node_files(t_node *head)
 		out_fd = handle_outfiles(head->redirections);
 		if (out_fd > 1)
 		{
-			close(head->out_fd);
+			if (head->out_fd != 1)
+				close(head->out_fd);
 			head->out_fd = out_fd;
 		}
 	}
@@ -82,7 +84,10 @@ void	handle_files(t_node *head)
 
 	i = 0;
 	if (head->connection_count == 1 && head->redirections != NULL)
+	{
 		handle_node_files(head);
+		return ;
+	}
 	else if (head->connection_count > 1)
 	{
 		if (head->redirections != NULL)

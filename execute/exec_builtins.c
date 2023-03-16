@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 17:02:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:47:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,14 @@ void	clear_all_fds(t_node *top)
 		}
 	}
 }
-void	exec_builtin(t_node *node, char **env, t_node *top)
+void	exec_builtin(t_node *node, char **env)
 {
 	char	*path;
 	int		pid;
 	int		return_value;
 	char	**new_args;
 
+	printf("fd_in %d | fd_out %d\n", node->in_fd, node->out_fd);
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;
@@ -120,9 +121,15 @@ void	exec_builtin(t_node *node, char **env, t_node *top)
 		path = find_in_path(node->command->command, env);
 	else
 		path = ft_strdup(node->command->command);
-	if (access(path, F_OK) == -1)
+	if (access(path, F_OK) == -1 || path == NULL)
 	{
 		printf("command not found %s\n", node->command->command);
+		free(path);
+		free_double_ptr(new_args);
+		if (node->in_fd != 0)
+			close(node->in_fd);
+		if (node->out_fd != 1)
+			close(node->out_fd);
 		return ; // exit code
 	}
 	pid = fork();
@@ -130,10 +137,10 @@ void	exec_builtin(t_node *node, char **env, t_node *top)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
-		clear_all_fds(top);
+		clear_all_fds(node->execute->top_node);
 		execve(path, new_args, env);
 	}
 	free(path);
-	waitpid(pid, &return_value, 0);
 	free_double_ptr(new_args);
+	waitpid(pid, &return_value, 0);
 }

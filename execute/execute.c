@@ -6,13 +6,13 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:42:16 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:05:04 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-void	execute_node(t_node *node, char ***env, t_node *top)
+void	execute_node(t_node *node, char ***env)
 {
 	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
 		pwd(*env, node);
@@ -29,10 +29,10 @@ void	execute_node(t_node *node, char ***env, t_node *top)
 	else if (ft_strncmp(node->command->command, "exit", 4) == 0)
 		exit(0);
 	else
-		exec_builtin(node, *env, top);
-	if (node->in_fd != 0)
+		exec_builtin(node, *env);
+	if (node->in_fd > 0)
 		close(node->in_fd);
-	if (node->out_fd != 1)
+	if (node->out_fd > 1)
 		close(node->out_fd);
 }
 
@@ -63,18 +63,18 @@ void	handle_pipes(t_node *node)
 	}
 }
 
-void	execute_rec(t_node *head, char ***env, t_node *top)
+void	execute_rec(t_node *head, char ***env)
 {
 	int	i;
 
 	i = 0;
 	if (head->connection_count == 1)
-		execute_node(head, env, top);
+		execute_node(head, env);
 	else if (head->connection_count > 1)
 	{
 		while (i < head->connection_count)
 		{
-			execute_rec(head->connections[i], env, top);
+			execute_rec(head->connections[i], env);
 			i++;
 		}
 	}
@@ -83,6 +83,6 @@ int	execute(t_node *head, char ***env)
 {
 	handle_pipes(head);
 	handle_files(head);
-	execute_rec(head, env, head);
+	execute_rec(head, env);
 	return (0);
 }

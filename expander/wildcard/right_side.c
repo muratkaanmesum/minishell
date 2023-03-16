@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   right_side.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:29 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:22:30 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:33:05 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,19 @@ int	right_side_files_count(char **files, char *str)
 
 char	**right_side_files(char **files, char *str)
 {
-	int i = 0;
-	int j = 0;
-	int k = 0;
-	int t = 0;
+	int		i;
+	int		j;
+	int		k;
+	int		t;
+	int		count;
+	char	**new_files;
 
-	int count = right_side_files_count(files, str);
-	char **new_files = malloc(sizeof(char *) * (count + 1));
+	i = 0;
+	j = 0;
+	k = 0;
+	t = 0;
+	count = right_side_files_count(files, str);
+	new_files = malloc(sizeof(char *) * (count + 1));
 	while (files[i])
 	{
 		j = 0;
