@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 12:04:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 14:03:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	execute_node(t_node *node, char ***env)
 	else
 		exec_builtin(node, *env);
 }
-// cat test.txt | grep e | wc -l | wc -l
-// wc -l | wc -l
-//test2.txt | (wc -l | test | wc -l2)
+
 void	handle_pipes(t_node *node)
 {
 	int	i;
@@ -68,14 +66,15 @@ void	execute_rec(t_node *head, char ***env)
 	i = 0;
 	if (head->connection_count == 1)
 		execute_node(head, env);
-	else if (head->connection_count > 1)
+
+else if (head->connection_count > 1)
+{
+	while (i < head->connection_count)
 	{
-		while (i < head->connection_count)
-		{
-			execute_rec(head->connections[i], env);
-			i++;
-		}
+		execute_rec(head->connections[i], env);
+		i++;
 	}
+}
 }
 int	execute(t_node *head, char ***env)
 {

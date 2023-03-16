@@ -139,6 +139,8 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		inpt = readline("minishell: ");
+		if (inpt == NULL)
+			break ;
 		add_history(inpt);
 		tokens = lexer(inpt);
 		if (tokens == NULL)
