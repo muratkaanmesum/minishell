@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/15 15:00:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 12:04:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	handle_pipes(t_node *node)
 	}
 }
 
-int	execute_rec(t_node *head, char ***env)
+void	execute_rec(t_node *head, char ***env)
 {
 	int	i;
 
