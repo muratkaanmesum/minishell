@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 12:07:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 12:25:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	exec_builtin(t_node *node, char **env)
 		path = find_in_path(node->command->command, env);
 	else
 		path = ft_strdup(node->command->command);
+	access(path, F_OK) == 0 ? printf("found\n") : printf("not found\n");
 	pid = fork();
 	if (pid == 0)
 	{

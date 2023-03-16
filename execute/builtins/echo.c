@@ -46,9 +46,20 @@ int	print_args(t_node *head)
 
 int	echo(t_node *head)
 {
+	int	temp_in;
+	int	temp_out;
+
+	temp_in = dup(0);
+	temp_out = dup(1);
+	dup2(head->in_fd, 0);
+	close(head->in_fd);
+	dup2(head->out_fd, 1);
+	close(head->out_fd);
 	if (does_have_option(head))
 		print_with_option(head);
 	else
 		print_args(head);
+	dup2(temp_in, 0);
+	dup2(temp_out, 1);
 	return (1);
 }
