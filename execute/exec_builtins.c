@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:09:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:02:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,35 @@ char	**modified_args(t_node *node)
 	new_args[i] = NULL;
 	return (new_args);
 }
+void	clear_all_fds(t_node *top)
+{
+	int	i;
 
-void	exec_builtin(t_node *node, char **env)
+	i = 0;
+	if (top->connection_count == 1)
+	{
+		if (top->in_fd != 0)
+			close(top->in_fd);
+		if (top->out_fd != 1)
+			close(top->out_fd);
+	}
+	else
+	{
+		while (i < top->connection_count)
+		{
+			if (i == 0)
+			{
+				if (top->in_fd != 0)
+					close(top->in_fd);
+				if (top->out_fd != 1)
+					close(top->out_fd);
+			}
+			clear_all_fds(top->connections[i]);
+			i++;
+		}
+	}
+}
+void	exec_builtin(t_node *node, char **env, t_node *top)
 {
 	char	*path;
 	int		pid;
@@ -93,16 +120,19 @@ void	exec_builtin(t_node *node, char **env)
 		path = find_in_path(node->command->command, env);
 	else
 		path = ft_strdup(node->command->command);
+	if (access(path, F_OK) == -1)
+	{
+		printf("command not found %s\n", node->command->command);
+		return ; // exit code
+	}
 	pid = fork();
 	if (pid == 0)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
-		clear_all_fds(node);
+		clear_all_fds(top);
 		execve(path, new_args, env);
 	}
-	if (pid == 0)
-		exit(0);
 	free(path);
 	waitpid(pid, &return_value, 0);
 	free_double_ptr(new_args);
