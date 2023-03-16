@@ -115,6 +115,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/utils.c\
                             expander/wildcard/readdir.c\
                           signal.c\
+                          expander/wildcard/ambiguous.c\
 
 
 OBJS        := $(SRCS:.c=.o)
