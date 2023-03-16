@@ -138,7 +138,11 @@ int	main(int argc, char **argv, char **env)
 	new_env = init_env(env);
 	while (1)
 	{
+		signal(SIGINT, &ctrl_c); // SIGINT kullanıcısı tarafından üretilen etkileşimli dikkat sinyali.
+		signal(SIGQUIT, SIG_IGN); // SIG_IGN Sinyal dikkate alınmaz.
 		inpt = readline("minishell: ");
+		write(1, "\033[0m", 4);
+		ctrl_d(inpt);
 		add_history(inpt);
 		tokens = lexer(inpt);
 		if (tokens == NULL)
@@ -156,7 +160,7 @@ int	main(int argc, char **argv, char **env)
 		free_tree(head);
 		free_new_env(new_env);
 		free(inpt);
-		system("leaks minishell");
+		//system("leaks minishell");
 	}
 	return (0);
 }

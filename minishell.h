@@ -3,21 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 19:07:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 11:33:54 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+
+
 enum						e_token
 {
 	I_REDIRECTION,
@@ -112,4 +117,6 @@ void						free_tree(t_node *head);
 void						free_split(char **split);
 int							get_length(char *str);
 
+void						ctrl_c(int sig);
+void						ctrl_d(char *input);
 #endif
