@@ -13,11 +13,16 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <sys/ioctl.h>
+# include <unistd.h>
+
 enum						e_token
 {
 	I_REDIRECTION,
@@ -125,4 +130,6 @@ void						free_split(char **split);
 int							get_length(char *str);
 void						free_double_ptr(char **arr);
 void						free_tokens_str(t_token *token);
+void						ctrl_c(int sig);
+void						ctrl_d(char *input);
 #endif

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
 /*   Updated: 2023/03/16 18:18:35 by mmesum           ###   ########.fr       */
@@ -26,5 +26,6 @@ t_node	*parser(t_token *tokens)
 	execute->top_node = head;
 	handle_connections(head, tokens, execute);
 	assign_operators(head, tokens);
+	// print_token(tokens);
 	return (head);
 }

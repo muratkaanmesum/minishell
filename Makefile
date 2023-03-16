@@ -63,6 +63,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           main.c \
                           free_tree.c \
                           utils.c\
+                          signal.c\
                           lexer/lexer.c\
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\
@@ -100,6 +101,8 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/right_side.c\
                           expander/wildcard/left_side.c\
                           expander/wildcard/middle.c\
+                          expander/wildcard/readdir.c\
+                          expander/wildcard/ambiguous.c\
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
                           expander/wildcard/readdir.c\
@@ -116,6 +119,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/utils.c\
                             execute/exec_builtins.c\
                             execute/handle_files.c\
+
 
 
 

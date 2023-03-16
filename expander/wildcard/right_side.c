@@ -16,8 +16,8 @@ int	is_right_side(char *str, int index)
 {
 	char	*new_str;
 	int		count;
-	int		j;
 
+	count = 0;
 	if (index != 0)
 	{
 		if (str[index - 1] == '*')
@@ -100,7 +100,8 @@ int	right_side_files_count(char **files, char *str)
 				}
 				k = 0;
 			}
-			j++;
+			if (files[i][j] != '\0')
+				j++;
 		}
 		i++;
 	}
@@ -142,7 +143,8 @@ char	**right_side_files(char **files, char *str)
 				}
 				k = 0;
 			}
-			j++;
+			if (files[i][j] != '\0')
+				j++;
 		}
 		i++;
 	}

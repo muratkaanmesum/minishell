@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:33 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/12 19:22:34 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:18:21 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	handle_wildcard(t_node *node)
 
 void	wildcard(t_node *node)
 {
-    handle_wildcard(node);
+	handle_wildcard(node);
+	ambiguous(node);	
 }
-
