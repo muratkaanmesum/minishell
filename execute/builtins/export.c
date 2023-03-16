@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/16 16:20:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:00:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	add_env(char **args, char ***env)
 	*env = new_env;
 }
 
-int	export(char **args, char ***env, t_node *node)
+int	export(char **args, t_node *node)
 {
 	int	pid;
 
@@ -60,13 +60,13 @@ int	export(char **args, char ***env, t_node *node)
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
 		if (args[0] == NULL)
-			print_env(*env, node);
+			print_env(node);
 		else
 		{
 			if (ft_strchr(args[0], '=') == NULL)
 				return (1);
 			else
-				add_env(args, env);
+				add_env(args, &node->execute->env);
 		}
 		exit(0);
 	}

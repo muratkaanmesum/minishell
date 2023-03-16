@@ -143,7 +143,7 @@ int	main(int argc, char **argv, char **env)
 		signal(SIGQUIT, SIG_IGN); // SIG_IGN Sinyal dikkate alınmaz.
 		inpt = readline("minishell: ");
 		write(1, "\033[0m", 4);
-		ctrl_d(inpt);
+		ctrl_d(inpt, new_env);
 		add_history(inpt);
 		tokens = lexer(inpt);
 		if (tokens == NULL)
@@ -153,13 +153,12 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (check_first(tokens) == 1)
 			continue ;
-		head = parser(tokens);
+		head = parser(tokens, new_env);
 		if (head == NULL)
 			continue ;
 		expander(head, new_env);
-		execute(head, &new_env);
+		execute(head);
 		//ree_tree(head, tokens);
-		//free_new_env(new_env);
 		free(inpt);
 	}
 	return (0);

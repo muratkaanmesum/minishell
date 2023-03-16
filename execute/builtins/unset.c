@@ -24,7 +24,7 @@ int	find_env(char **env, char *arg)
 	}
 	return (0);
 }
-int	unset(char **args, char ***env, t_node *node)
+int	unset(char **args, t_node *node)
 {
 	int	i;
 	int	pid;
@@ -37,7 +37,7 @@ int	unset(char **args, char ***env, t_node *node)
 		close_all_fds(node->execute->top_node);
 		i = 0;
 		while (args[i] != NULL)
-			find_env(*env, args[i++]);
+			find_env(node->execute->env, args[i++]);
 		exit(0);
 	}
 	waitpid(pid, NULL, 0);

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:26:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:02:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**modified_args(t_node *node)
 	return (new_args);
 }
 
-void	exec_builtin(t_node *node, char **env)
+void	exec_builtin(t_node *node)
 {
 	char	*path;
 	int		pid;
@@ -91,7 +91,7 @@ void	exec_builtin(t_node *node, char **env)
 	return_value = 0;
 	path = NULL;
 	if (ft_strchr(node->command->command, '/') == NULL)
-		path = find_in_path(node->command->command, env);
+		path = find_in_path(node->command->command, node->execute->env);
 	else
 		path = ft_strdup(node->command->command);
 	if (access(path, F_OK) == -1 || path == NULL)
@@ -108,7 +108,7 @@ void	exec_builtin(t_node *node, char **env)
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
-		execve(path, new_args, env);
+		execve(path, new_args, node->execute->env);
 	}
 	free(path);
 	free_double_ptr(new_args);

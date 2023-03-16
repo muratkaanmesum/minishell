@@ -1,6 +1,6 @@
 #include "../execute.h"
 
-int	print_env(char **env, t_node *node)
+int	print_env(t_node *node)
 {
 	int	i;
 	int	pid;
@@ -12,9 +12,9 @@ int	print_env(char **env, t_node *node)
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
 		i = 0;
-		while (env[i] != NULL)
+		while (node->execute->env[i] != NULL)
 		{
-			printf("%s\n", env[i]);
+			printf("%s\n", node->execute->env[i]);
 			i++;
 		}
 		exit(0);

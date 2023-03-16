@@ -21,7 +21,7 @@ void	change_pwd(char **env, char *buf, char *old_pwd_buff)
 	}
 }
 
-int	cd(char *args, char **env, t_node *node)
+int	cd(char *args, t_node *node)
 {
 	char	buf[1024];
 	char	old_pwd_buff[1024];
@@ -37,7 +37,7 @@ int	cd(char *args, char **env, t_node *node)
 			exit(1);
 		}
 		getcwd(buf, 1024);
-		change_pwd(env, buf, old_pwd_buff);
+		change_pwd(node->execute->env, buf, old_pwd_buff);
 		exit(0);
 	}
 	waitpid(pid, NULL, 0);
