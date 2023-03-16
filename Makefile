@@ -105,7 +105,6 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/ambiguous.c\
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
-                          expander/wildcard/readdir.c\
                           expander/env/assign_env_utils.c\
                           execute/execute.c\
                           execute/utils.c\
