@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
-/*   Updated: 2023/03/14 12:23:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 14:51:59 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_node	*parser(t_token *tokens)
 	head->command = NULL;
 	handle_connections(head, tokens);
 	assign_operators(head, tokens);
+	// print_token(tokens);
 	return (head);
 }

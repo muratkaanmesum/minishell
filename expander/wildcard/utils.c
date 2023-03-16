@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/14 12:30:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 16:08:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,64 @@ char	**get_files(void)
 		i = 0;
 		while ((dir = readdir(d)) != NULL)
 		{
-			files[i] = dir->d_name;
+			files[i] = ft_strdup(dir->d_name);
 			i++;
 		}
-		// closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;
 	return (files);
 }
+int	get_o_count(void)
+{
+	char			buf[1024];
+	DIR				*d;
+	struct dirent	*dir;
+	int				i;
 
+	i = 0;
+	getcwd(buf, 1024);
+	d = opendir(buf); //gelen pwd için
+	if (d)
+	{
+		while ((dir = readdir(d)) != NULL)
+			if (dir->d_type == DT_DIR)
+				i++;
+		closedir(d);
+	}
+	free(dir);
+	return (i);
+}
+
+char	**get_o_files(void) //BUNLARA ARGUMAN VER VE BİR FONSKİYONDA BİRLEŞTİR
+{
+	char buf[1024];
+	DIR *d;
+	struct dirent *dir;
+	int count;
+	char **files;
+	int i;
+
+	getcwd(buf, 1024);
+	count = get_o_count();
+	files = (char **)malloc(sizeof(char *) * (count + 1));
+	d = opendir(buf); //gelen pwd için
+	if (d)
+	{
+		i = 0;
+		while ((dir = readdir(d)) != NULL)
+			if (dir->d_type == DT_DIR)
+			{
+				files[i] = ft_strdup(dir->d_name);
+				i++;
+			}
+		closedir(d);
+	}
+	free(dir);
+	files[i] = NULL;
+	return (files);
+}
 void	print_files(char **files)
 {
 	int	i;

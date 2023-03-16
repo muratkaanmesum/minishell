@@ -11,7 +11,7 @@ NAME        := minishell
 CC        := gcc
 
 #FLAGS    := -fsanitize=address
-#FLAGS       := -g -O0
+FLAGS       := -g -O0
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -63,6 +63,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           main.c \
                           free_tree.c \
                           utils.c\
+                          signal.c\
                           lexer/lexer.c\
                           lexer/lexer_utils.c\
                           lexer/get_token_count.c\
@@ -114,7 +115,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/exit.c\
                             execute/builtins/utils.c\
                             expander/wildcard/readdir.c\
-                          signal.c\
+                          expander/wildcard/ambiguous.c\
 
 
 OBJS        := $(SRCS:.c=.o)
