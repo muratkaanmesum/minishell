@@ -139,7 +139,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal(SIGINT, &ctrl_c); // SIGINT kullanıcısı tarafından üretilen etkileşimli dikkat sinyali.
-		//signal(SIGQUIT, SIG_IGN); // SIG_IGN Sinyal dikkate alınmaz.
+		signal(SIGQUIT, SIG_IGN); // SIG_IGN Sinyal dikkate alınmaz.
 		inpt = readline("minishell: ");
 		write(1, "\033[0m", 4);
 		ctrl_d(inpt);
