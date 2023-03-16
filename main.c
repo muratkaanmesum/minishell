@@ -138,8 +138,8 @@ int	main(int argc, char **argv, char **env)
 	new_env = init_env(env);
 	while (1)
 	{
-		signal(SIGINT, &ctrl_c);
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, &ctrl_c); // SIGINT kullanıcısı tarafından üretilen etkileşimli dikkat sinyali.
+		//signal(SIGQUIT, SIG_IGN); // SIG_IGN Sinyal dikkate alınmaz.
 		inpt = readline("minishell: ");
 		write(1, "\033[0m", 4);
 		ctrl_d(inpt);
