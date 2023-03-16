@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/16 17:49:22 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/16 16:08:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char	**get_files(void)
 		i = 0;
 		while ((dir = readdir(d)) != NULL)
 		{
-			files[i] = dir->d_name;
+			files[i] = ft_strdup(dir->d_name);
 			i++;
 		}
-		// closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;
@@ -72,9 +72,9 @@ int	get_o_count(void)
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
-		if (dir->d_type == DT_DIR)
+			if (dir->d_type == DT_DIR)
 				i++;
-		// closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -99,10 +99,10 @@ char	**get_o_files(void) //BUNLARA ARGUMAN VER VE BİR FONSKİYONDA BİRLEŞTİR
 		while ((dir = readdir(d)) != NULL)
 			if (dir->d_type == DT_DIR)
 			{
-				files[i] = dir->d_name;
+				files[i] = ft_strdup(dir->d_name);
 				i++;
 			}
-		// closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;

@@ -11,7 +11,7 @@ NAME        := minishell
 CC        := gcc
 
 #FLAGS    := -fsanitize=address
-#FLAGS       := -g -O0
+FLAGS       := -g -O0
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
