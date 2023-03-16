@@ -21,23 +21,25 @@ void	change_pwd(char **env, char *buf, char *old_pwd_buff)
 	}
 }
 
-int	cd(char *args, char **env)
+int	cd(char *args, char **env, t_node *node)
 {
 	char	buf[1024];
 	char	old_pwd_buff[1024];
+	int		pid;
 
-	if (args == NULL)
+	pid = fork();
+	if (pid == 0)
 	{
-		printf("cd: no arguments\n");
-		return (1);
+		getcwd(old_pwd_buff, 1024);
+		if (chdir(args) == -1)
+		{
+			printf("cd: no such file or directory: %s\n", args);
+			exit(1);
+		}
+		getcwd(buf, 1024);
+		change_pwd(env, buf, old_pwd_buff);
+		exit(0);
 	}
-	getcwd(old_pwd_buff, 1024);
-	if (chdir(args) == -1)
-	{
-		printf("cd: no such file or directory: %s\n", args);
-		return (1);
-	}
-	getcwd(buf, 1024);
-	change_pwd(env, buf, old_pwd_buff);
+	waitpid(pid, NULL, 0);
 	return (1);
 }

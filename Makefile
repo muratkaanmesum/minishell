@@ -101,8 +101,11 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/right_side.c\
                           expander/wildcard/left_side.c\
                           expander/wildcard/middle.c\
+                          expander/wildcard/readdir.c\
+                          expander/wildcard/ambiguous.c\
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
+                          expander/wildcard/readdir.c\
                           expander/env/assign_env_utils.c\
                           execute/execute.c\
                           execute/utils.c\
@@ -114,8 +117,10 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/unset.c\
                             execute/builtins/exit.c\
                             execute/builtins/utils.c\
-                            expander/wildcard/readdir.c\
-                          expander/wildcard/ambiguous.c\
+                            execute/exec_builtins.c\
+                            execute/handle_files.c\
+
+
 
 
 OBJS        := $(SRCS:.c=.o)

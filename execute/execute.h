@@ -6,19 +6,25 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/13 19:18:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 16:20:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 # include "../minishell.h"
-int	echo(t_node *head);
-int	cd(char *args, char **env);
-int	pwd(char **env);
-int	print_env(char **env);
-int	export(char **args, char ***env);
-int	unset(char **args, char ***env);
-int	get_env_len(char *env);
-int	ft_exit(char **args);
+# include <fcntl.h>
+# include <sys/wait.h>
+int		echo(t_node *head);
+int		cd(char *args, char **env, t_node *node);
+int		pwd(char **env, t_node *node);
+int		print_env(char **env, t_node *node);
+int		export(char **args, char ***env, t_node *node);
+int		unset(char **args, char ***env, t_node *node);
+int		get_env_len(char *env);
+int		ft_exit(char **args);
+void	exec_builtin(t_node *node, char **env);
+void	handle_files(t_node *head);
+void	close_all_fds(t_node *top);
+void	close_node_fds(t_node *node);
 #endif

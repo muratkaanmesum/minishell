@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/14 12:59:27 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:10:58 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	expandWildcard(char *prefix, char *suffix, char **return_files,
 	if (suffix == NULL)
 	{
 		return_files[*index] = prefix;
+		printf("return_files[%d] = %s\n", *index, return_files[*index]);
 		*index += 1;
 		return ;
 	}

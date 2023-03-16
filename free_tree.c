@@ -1,34 +1,5 @@
 #include "minishell.h"
 
-
-
-int	free_token(t_token *tokens)
-{
-	int	i;
-
-	i = 0;
-	while (tokens[i].token != UNKNOWN)
-	{
-		free(tokens[i].str);
-		i++;
-	}
-	free(tokens);
-	return (0);
-}
-
-void	free_command(t_command *command)
-{
-	int	i;
-
-	i = 0;
-	while (i < command->argument_count)
-	{
-		free(command->arguments[i]);
-		i++;
-	}
-	i = 0;
-	free(command->arguments);
-}
 void	free_redirections(t_redirections *redirections)
 {
 	int	i;
@@ -52,33 +23,45 @@ void	free_redirections(t_redirections *redirections)
 	free(redirections);
 }
 
-void	free_simple_command(t_node *node)
+void	free_simple_command(t_command *command)
 {
-	free_command(node->command);
-	free_token(node->tokens);
-	if (node->redirections != NULL)
-		free_redirections(node->redirections);
-}
+	int	i;
 
-void	free_tree(t_node *head)
+	i = 0;
+	while (i < command->argument_count)
+	{
+		free(command->arguments[i]);
+		i++;
+	}
+	i = 0;
+	free(command->arguments);
+	free(command->command);
+	free(command);
+}
+void	free_tree_rec(t_node *head)
 {
 	int	i;
 
 	i = 0;
 	if (head->connection_count == 1)
-		free_simple_command(head);
+		free_simple_command(head->command);
 	else
 	{
 		while (i < head->connection_count)
 		{
-			free_tree(head->connections[i]);
-			free_token(head->tokens);
-			if (head->redirections != NULL)
-				free_redirections(head->redirections);
-			free(head->connections[i]);
+			free_tree_rec(head->connections[i]);
 			i++;
 		}
 	}
+	if (head->redirections != NULL)
+		free_redirections(head->redirections);
 	free(head->connections);
+	free(head->tokens);
 	free(head);
+}
+
+void	free_tree(t_node *head, t_token *tokens)
+{
+	free_tree_rec(head);
+	free_tokens_str(head->tokens);
 }

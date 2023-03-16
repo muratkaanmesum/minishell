@@ -24,12 +24,22 @@ int	find_env(char **env, char *arg)
 	}
 	return (0);
 }
-int	unset(char **args, char ***env)
+int	unset(char **args, char ***env, t_node *node)
 {
 	int	i;
+	int	pid;
 
-	i = 0;
-	while (args[i] != NULL)
-		find_env(*env, args[i++]);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(node->in_fd, 0);
+		dup2(node->out_fd, 1);
+		close_all_fds(node->execute->top_node);
+		i = 0;
+		while (args[i] != NULL)
+			find_env(*env, args[i++]);
+		exit(0);
+	}
+	waitpid(pid, NULL, 0);
 	return (0);
 }

@@ -6,34 +6,33 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 19:07:07 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/16 13:44:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_split(char **split)
+void	free_tokens_str(t_token *token)
 {
 	int	i;
 
 	i = 0;
-	while (split[i] != NULL)
+	while (token[i].token != UNKNOWN)
 	{
-		free(split[i]);
+		free(token[i].str);
 		i++;
 	}
-	free(split);
 }
-
-void	free_new_env(char **env)
+void	free_double_ptr(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (env[i] != NULL)
+	while (arr[i] != NULL)
 	{
-		free(env[i]);
+		free(arr[i]);
 		i++;
 	}
-	free(env);
+	//free last one
+	free(arr);
 }
