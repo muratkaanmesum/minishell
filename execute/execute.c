@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 12:36:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 15:36:03 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	execute_rec(t_node *head)
 			head->is_executed = 1;
 	}
 }
+
 void	exec_all(t_node *head)
 {
 	int	i;
@@ -94,22 +95,17 @@ void	exec_all(t_node *head)
 	{
 		while (i < head->connection_count)
 		{
-			if (!check_priority(head->connections[i]))
-				execute_rec(head->connections[i]);
-			if (i + 1 < head->connection_count)
-			{
-				if (head->connections[i + 1]->left_operator == AND)
-				{
-					if (get_last_execute_code(head) != 0)
-						break ;
-				}
-				else if (head->connections[i + 1]->left_operator == OR)
-				{
-					if (get_last_execute_code(head) == 0)
-						break ;
-				}
-			}
 			exec_all(head->connections[i]);
+			if (head->connections[i]->right_operator == AND)
+			{
+				if (get_last_execute_code(head) != 0)
+					break ;
+			}
+			if (head->connections[i]->right_operator == OR)
+			{
+				if (get_last_execute_code(head) != 1)
+					break ;
+			}
 			i++;
 		}
 	}

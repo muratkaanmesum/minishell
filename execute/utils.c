@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 12:11:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 13:00:18 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	check_priority(t_node *node)
 			return (1);
 		i++;
 	}
+	return (0);
 }
 char	*get_path(char *path)
 {
