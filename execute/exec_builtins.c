@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 04:28:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 06:45:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	exec_builtin(t_node *node)
 
 	new_args = modified_args(node);
 	return_value = 0;
+	printf("fd_in = %d fd_out = %d\n", node->in_fd, node->out_fd);
 	path = NULL;
 	if (ft_strchr(node->command->command, '/') == NULL)
 		path = find_in_path(node->command->command, node->execute->env);

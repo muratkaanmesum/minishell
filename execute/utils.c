@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 05:04:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 06:57:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ void	close_all_fds(t_node *top)
 	}
 }
 
+int	check_priority(t_node *node)
+{
+	int	i;
+
+	i = 0;
+	while (node->tokens[i].token != UNKNOWN)
+	{
+		if (node->tokens[i].token == AND || node->tokens[i].token == OR)
+			return (1);
+		i++;
+	}
+}
 char	*get_path(char *path)
 {
 	char	buff[1024];
