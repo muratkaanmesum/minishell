@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:31:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 15:20:19 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 03:22:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	is_command(t_token *tokens, int start)
 		return (1);
 	if (tokens[start + 1].token != PIPE && tokens[start + 1].token != AND
 		&& tokens[start + 1].token != OR && tokens[start + 1].token != UNKNOWN
-		&& tokens[start + 1].token != CLOSE_PAR)
+		&& tokens[start + 1].token != CLOSE_PAR && tokens[start
+		+ 1].token != I_REDIRECTION && tokens[start + 1].token != O_REDIRECTION
+		&& tokens[start + 1].token != APPEND_RED && tokens[start
+		+ 1].token != HERE_DOC)
 		return (1);
 	return (0);
 }

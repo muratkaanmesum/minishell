@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 17:01:23 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 04:10:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	execute_node(t_node *node)
 		exit(0);
 	else
 		exec_builtin(node);
-	if (node->in_fd > 0)
-		close(node->in_fd);
-	if (node->out_fd > 1)
-		close(node->out_fd);
+	close_node_fds(node);
 }
 
 void	handle_pipes(t_node *node)
@@ -46,8 +43,8 @@ void	handle_pipes(t_node *node)
 		return ;
 	while (i < node->connection_count - 1)
 	{
-		if (node->connections[i]->connection_count == 1 && node->connections[i
-			+ 1]->left_operator == PIPE)
+		if (node->connections[i]->right_operator == PIPE && i
+			+ 1 < node->connection_count)
 		{
 			pipe(fd);
 			node->connections[i]->out_fd = fd[1];
@@ -69,9 +66,13 @@ void	execute_rec(t_node *head)
 
 	i = 0;
 	if (head->connection_count == 1)
+	{
+		//printf("fd_1 = %d fd_2 = %d\n", head->in_fd, head->out_fd);
 		execute_node(head);
+	}
 	else if (head->connection_count > 1)
 	{
+		//printf("fd_1 = %d fd_2 = %d\n", head->in_fd, head->out_fd);
 		while (i < head->connection_count)
 		{
 			execute_rec(head->connections[i]);

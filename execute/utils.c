@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:21:27 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 04:07:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	close_node_fds(t_node *node)
 {
-	if (node->in_fd != 0)
+	if (node->in_fd > 0)
+	{
 		close(node->in_fd);
-	if (node->out_fd != 1)
+		node->in_fd = -1;
+	}
+	if (node->out_fd > 1)
+	{
 		close(node->out_fd);
+		node->in_fd = -1;
+	}
 }
 void	close_all_fds(t_node *top)
 {

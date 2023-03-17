@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 17:02:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 04:21:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	exec_builtin(t_node *node)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (node->in_fd == -1)
+			exit(1);
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
@@ -112,5 +114,5 @@ void	exec_builtin(t_node *node)
 	}
 	free(path);
 	free_double_ptr(new_args);
-	waitpid(pid, &return_value, 0);
+	waitpid(pid, &node->execute->last_exit_code, 0);
 }
