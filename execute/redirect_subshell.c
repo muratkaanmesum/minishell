@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 06:02:08 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 07:24:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 09:32:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	redirect_subshell_rec(t_node *head)
 	{
 		while (i < head->connection_count)
 		{
-			if (head->connections[i]->right_operator != PIPE)
+			if (head->connections[i]->right_operator != PIPE
+				&& head->redirections != NULL)
 				head->connections[i]->in_fd = head->in_fd;
 			redirect_subshell(head->connections[i]);
 			i++;

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 06:57:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:10:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@ void	close_node_fds(t_node *node);
 int		get_last_execute_code(t_node *head);
 void	redirect_subshell(t_node *head);
 int		check_priority(t_node *node);
+void	execute_subshell(t_node *node);
+void	exec_all(t_node *head);
+void	print_all_fds(t_node *node);
+void	execute_node(t_node *node);
 #endif

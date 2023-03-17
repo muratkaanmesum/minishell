@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 04:51:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:32:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	does_priority(t_token *tokens, enum e_token token)
 
 void	check_if_subshell(t_node *head)
 {
+	t_token	*cleared_tokens;
+
 	if (check_parantheses(head->tokens) == 1)
 	{
 		if (is_arithmetic(head->tokens) == 1)
@@ -48,6 +50,9 @@ void	check_if_subshell(t_node *head)
 		{
 			head->tokens = remove_parantheses(head->tokens);
 			head->is_subshell = 1;
+			cleared_tokens = create_redirections(head);
+			if (cleared_tokens != NULL)
+				head->tokens = cleared_tokens;
 		}
 	}
 }

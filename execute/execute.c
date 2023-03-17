@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 07:32:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 10:17:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ void	exec_all(t_node *head)
 	int	i;
 
 	i = 0;
-	if (head->connection_count == 1)
-		execute_rec(head);
+	if (head->is_subshell == 1)
+		execute_subshell(head);
+	else if (head->connection_count == 1)
+		execute_node(head);
 	else if (head->connection_count > 1)
 	{
 		while (i < head->connection_count)
@@ -116,7 +118,7 @@ int	execute(t_node *head)
 {
 	handle_pipes(head);
 	handle_files(head);
-	redirect_subshell(head);
+	//redirect_subshell(head);
 	exec_all(head);
 	close_all_fds(head);
 	return (0);

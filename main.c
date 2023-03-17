@@ -157,7 +157,8 @@ int	main(int argc, char **argv, char **env)
 		if (head == NULL)
 			continue ;
 		expander(head, new_env);
-		execute(head);
+		print_tree(head);
+		//execute(head);
 		//ree_tree(head, tokens);
 		free(inpt);
 	}
