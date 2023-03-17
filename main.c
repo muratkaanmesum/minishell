@@ -158,7 +158,6 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		expander(head, new_env);
 		execute(head);
-		//ree_tree(head, tokens);
 		free(inpt);
 	}
 	return (0);

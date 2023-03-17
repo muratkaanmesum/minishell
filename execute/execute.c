@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 15:36:03 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 16:31:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,33 +60,12 @@ void	handle_pipes(t_node *node)
 	}
 }
 
-void	execute_rec(t_node *head)
-{
-	int	i;
-
-	i = 0;
-	if (head->connection_count == 1)
-	{
-		execute_node(head);
-		head->is_executed = 1;
-	}
-	else if (head->connection_count > 1)
-	{
-		while (i < head->connection_count)
-		{
-			execute_rec(head->connections[i]);
-			i++;
-		}
-		if (i == head->connection_count - 1)
-			head->is_executed = 1;
-	}
-}
-
 void	exec_all(t_node *head)
 {
 	int	i;
 
 	i = 0;
+	printf("exec_all: %d\n",get_last_execute_code(head));
 	if (head->is_subshell == 1)
 		execute_subshell(head);
 	else if (head->connection_count == 1)
@@ -114,7 +93,6 @@ int	execute(t_node *head)
 {
 	handle_pipes(head);
 	handle_files(head);
-	//redirect_subshell(head);
 	exec_all(head);
 	close_all_fds(head);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 15:42:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 16:29:45 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	execute_subshell(t_node *node)
 	pid = fork();
 	if (pid == 0)
 	{
+		dup2(node->in_fd, 0);
+		dup2(node->out_fd, 1);
 		if (node->connection_count == 1)
 			execute_node(node);
 		else if (node->connection_count > 1)

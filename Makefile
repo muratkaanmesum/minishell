@@ -118,7 +118,6 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/utils.c\
                             execute/exec_builtins.c\
                             execute/handle_files.c\
-                            execute/redirect_subshell.c\
                             execute/execute_subshell.c\
 
 
