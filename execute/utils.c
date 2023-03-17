@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 10:17:16 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:11:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	close_node_fds(t_node *node)
 {
+	// printf("closing fds for node fd_in %d fd_out %d\n", node->in_fd,
+	// 		node->out_fd);
 	if (node->in_fd > 0)
 	{
 		close(node->in_fd);
@@ -22,8 +24,9 @@ void	close_node_fds(t_node *node)
 	if (node->out_fd > 1)
 	{
 		close(node->out_fd);
-		node->in_fd = -1;
+		node->out_fd = -1;
 	}
+	// printf("*****\n");
 }
 
 int	get_last_execute_code(t_node *head)
@@ -38,7 +41,7 @@ void	close_all_fds(t_node *top)
 	i = 0;
 	if (top->connection_count == 1)
 		close_node_fds(top);
-	else
+	else if (top->connection_count > 1)
 	{
 		close_node_fds(top);
 		while (i < top->connection_count)
