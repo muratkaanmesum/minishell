@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 04:10:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 05:08:22 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,48 @@ void	execute_rec(t_node *head)
 	i = 0;
 	if (head->connection_count == 1)
 	{
-		//printf("fd_1 = %d fd_2 = %d\n", head->in_fd, head->out_fd);
 		execute_node(head);
+		head->is_executed = 1;
 	}
 	else if (head->connection_count > 1)
 	{
-		//printf("fd_1 = %d fd_2 = %d\n", head->in_fd, head->out_fd);
+		while (i < head->connection_count)
+		{
+			if (head->connections[i]->left_operator == AND
+				|| head->connections[i]->left_operator == OR)
+				break ;
+			execute_rec(head->connections[i]);
+			i++;
+		}
+		if (i == head->connection_count - 1)
+			head->is_executed = 1;
+	}
+}
+void	exec_all(t_node *head)
+{
+	int	i;
+
+	i = 0;
+	if (head->connection_count == 1)
+		execute_rec(head);
+	else if (head->connection_count > 1)
+	{
 		while (i < head->connection_count)
 		{
 			execute_rec(head->connections[i]);
+			if (i + 1 < head->connection_count)
+			{
+				if (head->connections[i + 1]->left_operator == AND)
+				{
+					if (get_last_execute_code(head) != 0)
+						break ;
+				}
+				else if (head->connections[i + 1]->left_operator == OR)
+				{
+					if (get_last_execute_code(head) == 0)
+						break ;
+				}
+			}
 			i++;
 		}
 	}
@@ -84,7 +117,7 @@ int	execute(t_node *head)
 {
 	handle_pipes(head);
 	handle_files(head);
-	execute_rec(head);
+	exec_all(head);
 	close_all_fds(head);
 	return (0);
 }

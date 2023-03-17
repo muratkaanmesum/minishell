@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 04:21:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 04:28:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	exec_builtin(t_node *node)
 	int		return_value;
 	char	**new_args;
 
-	printf("fd_in %d | fd_out %d\n", node->in_fd, node->out_fd);
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;

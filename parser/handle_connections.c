@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 18:17:50 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 04:51:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	assign_head_values(t_node *head, t_token *tokens, t_execute *execute)
 	head->in_fd = STDIN_FILENO;
 	head->out_fd = STDOUT_FILENO;
 	head->execute = execute;
+	head->is_executed = 0;
 }
 
 int	assign_split_type(t_node *head)

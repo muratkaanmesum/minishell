@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:53:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 04:45:12 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_node
 	enum e_token			right_operator;
 	int						in_fd;
 	int						out_fd;
+	int						is_executed;
 	struct s_execute		*execute;
 }							t_node;
 
