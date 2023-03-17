@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 06:02:08 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 06:42:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/17 07:24:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ void	redirect_subshell_rec(t_node *head)
 			i++;
 		}
 	}
-	else if (head->is_subshell == 0)
+	else if (head->connection_count > 0)
 	{
+		while (i < head->connection_count)
+		{
+			redirect_subshell(head->connections[i]);
+			i++;
+		}
 	}
 }
 void	redirect_subshell(t_node *head)
