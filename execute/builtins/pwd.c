@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 05:10:28 by kali              #+#    #+#             */
-/*   Updated: 2023/03/16 16:57:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 05:33:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	pwd(t_node *node)
 			if (ft_strncmp(node->execute->env[i], "PWD=", 4) == 0)
 			{
 				printf("%s\n", node->execute->env[i] + 4);
-				return (1);
+				exit(0);
 			}
 			i++;
 		}
-		exit(0);
+		exit(1);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &node->execute->last_exit_code, 0);
 	return (1);
 }

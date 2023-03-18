@@ -23,6 +23,7 @@ int	is_num(char **args)
 	}
 	return (1);
 }
+
 int	ft_exit(char **args)
 {
 	int	count;

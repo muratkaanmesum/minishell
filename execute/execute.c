@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 16:31:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 05:44:44 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	handle_pipes(t_node *node)
 	}
 	i = 0;
 	while (i < node->connection_count)
-	{
 		handle_pipes(node->connections[i]);
 		i++;
 	}
