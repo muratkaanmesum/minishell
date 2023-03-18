@@ -14,11 +14,11 @@
 
 #include "expander.h"
 
-void	expander(t_node *head, char **env)
+void	expander(t_node *head)
 {
 	t_env	*variables;
 
-	variables = get_env_variables(env);
+	variables = get_env_variables(head->execute->env, head);
 	wildcard(head);
 	handle_env(head, variables);
 	free_env(variables);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:38:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/11 12:38:42 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/18 13:53:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	assign_default_values(int *i, int *in_quote, int *flag)
 void	pass_env(char *str, int start_index, int *i)
 {
 	while (str[*i] != '\0' && str[*i] != '\'' && str[*i] != '"'
-		&& str[*i] != ' ' && (str[*i] != '$' || *i == start_index)
-		&& str[*i] != '?')
+		&& str[*i] != ' ' && (str[*i] != '$' || *i == start_index))
 		(*i)++;
 }

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 13:47:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 13:54:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_env_location(char *str)
 	return (NULL);
 }
 
-t_env	*get_env_variables(char **env)
+t_env	*get_env_variables(char **env, t_node *node)
 {
 	int		i;
 	int		count;
@@ -80,7 +80,7 @@ t_env	*get_env_variables(char **env)
 	i = 0;
 	while (env[count] != NULL)
 		count++;
-	env_variables = malloc(sizeof(t_env) * (count + 1));
+	env_variables = malloc(sizeof(t_env) * (count + 2));
 	while (env[i])
 	{
 		count = 0;
@@ -92,7 +92,9 @@ t_env	*get_env_variables(char **env)
 		free_double_ptr(value);
 		i++;
 	}
-	env_variables[i].name = NULL;
-	env_variables[i].value = NULL;
+	env_variables[i].name = ft_strdup("?");
+	env_variables[i].value = ft_itoa(get_last_execute_code(node));
+	env_variables[i + 1].name = NULL;
+	env_variables[i + 1].value = NULL;
 	return (env_variables);
 }
