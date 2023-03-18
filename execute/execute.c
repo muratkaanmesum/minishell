@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 06:43:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 07:06:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	execute_node(t_node *node)
 {
+	handle_node_files(node);
 	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
 		pwd(node);
 	else if (ft_strncmp(node->command->command, "cd", 2) == 0)
@@ -104,7 +105,7 @@ void	exec_all(t_node *head)
 int	execute(t_node *head)
 {
 	handle_pipes(head);
-	handle_files(head);
+	//handle_files(head);
 	exec_all(head);
 	close_all_fds(head);
 	return (0);

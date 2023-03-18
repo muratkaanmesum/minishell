@@ -25,21 +25,14 @@ int	cd(char *args, t_node *node)
 {
 	char	buf[1024];
 	char	old_pwd_buff[1024];
-	int		pid;
 
-	pid = fork();
-	if (pid == 0)
+	getcwd(old_pwd_buff, 1024);
+	if (chdir(args) == -1)
 	{
-		getcwd(old_pwd_buff, 1024);
-		if (chdir(args) == -1)
-		{
-			printf("cd: no such file or directory: %s\n", args);
-			exit(1);
-		}
-		getcwd(buf, 1024);
-		change_pwd(node->execute->env, buf, old_pwd_buff);
-		exit(0);
+		printf("cd: no such file or directory: %s\n", args);
+		exit(1);
 	}
-	waitpid(pid, NULL, 0);
+	getcwd(buf, 1024);
+	change_pwd(node->execute->env, buf, old_pwd_buff);
 	return (1);
 }
