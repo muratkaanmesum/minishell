@@ -124,18 +124,29 @@ char	**init_env(char **env)
 	return (new_env);
 }
 
+t_execute	*init_execute(char **env)
+{
+	t_execute	*execute_struct;
+
+	execute_struct = malloc(sizeof(t_execute));
+	execute_struct->last_exit_code = 0;
+	execute_struct->env = init_env(env);
+	execute_struct->export = init_env(env);
+	return (execute_struct);
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	char	*inpt;
-	t_token	*tokens;
-	int		i;
-	t_node	*head;
-	char	**new_env;
+	char		*inpt;
+	t_token		*tokens;
+	int			i;
+	t_node		*head;
+	t_execute	*execute_struct;
 
 	if (argc != 1)
 		return (0);
 	(void)argv;
-	new_env = init_env(env);
+	execute_struct = init_execute(env);
 	while (1)
 	{
 		signal(SIGINT, &ctrl_c);
@@ -143,7 +154,7 @@ int	main(int argc, char **argv, char **env)
 		signal(SIGQUIT, SIG_IGN); // SIG_IGN Sinyal dikkate alınmaz.
 		inpt = readline("minishell: ");
 		write(1, "\033[0m", 4);
-		ctrl_d(inpt);
+		ctrl_d(inpt, execute_struct);
 		add_history(inpt);
 		tokens = lexer(inpt);
 		if (tokens == NULL)
@@ -152,14 +163,22 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		if (check_first(tokens) == 1)
+		{
+			free(inpt);
+			free_tokens_str(tokens);
+			free(tokens);
 			continue ;
-		head = parser(tokens);
+		}
+		head = parser(tokens, execute_struct);
 		if (head == NULL)
+		{
+			free(inpt);
+			free_tokens_str(tokens);
+			free(tokens);
 			continue ;
-		expander(head, new_env);
-		execute(head, &new_env);
-		//ree_tree(head, tokens);
-		//free_new_env(new_env);
+		}
+		expander(head, execute_struct->env);
+		execute(head);
 		free(inpt);
 	}
 	return (0);

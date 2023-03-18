@@ -6,13 +6,13 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 05:10:28 by kali              #+#    #+#             */
-/*   Updated: 2023/03/16 16:20:52 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 05:33:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
-int	pwd(char **env, t_node *node)
+int	pwd(t_node *node)
 {
 	int	pid;
 	int	i;
@@ -24,17 +24,17 @@ int	pwd(char **env, t_node *node)
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
 		i = 0;
-		while (env[i] != NULL)
+		while (node->execute->env[i] != NULL)
 		{
-			if (ft_strncmp(env[i], "PWD=", 4) == 0)
+			if (ft_strncmp(node->execute->env[i], "PWD=", 4) == 0)
 			{
-				printf("%s\n", env[i] + 4);
-				return (1);
+				printf("%s\n", node->execute->env[i] + 4);
+				exit(0);
 			}
 			i++;
 		}
-		exit(0);
+		exit(1);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &node->execute->last_exit_code, 0);
 	return (1);
 }

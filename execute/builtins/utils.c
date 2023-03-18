@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:07:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/08 12:08:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 07:26:11 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,20 @@ int	get_env_len(char *env)
 	while (env[i] != '=')
 		i++;
 	return (i);
+}
+
+char	*get_env_value(char **env, char *name)
+{
+	int i;
+	int len;
+
+	i = 0;
+	len = ft_strlen(name);
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], name, len) == 0)
+			return (env[i] + len + 1);
+		i++;
+	}
+	return (NULL);
 }

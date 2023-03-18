@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 16:26:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 12:01:25 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,18 @@ char	**modified_args(t_node *node)
 	return (new_args);
 }
 
-void	exec_builtin(t_node *node, char **env)
+void	exec_builtin(t_node *node)
 {
 	char	*path;
 	int		pid;
 	int		return_value;
 	char	**new_args;
 
-	printf("fd_in %d | fd_out %d\n", node->in_fd, node->out_fd);
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;
 	if (ft_strchr(node->command->command, '/') == NULL)
-		path = find_in_path(node->command->command, env);
+		path = find_in_path(node->command->command, node->execute->env);
 	else
 		path = ft_strdup(node->command->command);
 	if (access(path, F_OK) == -1 || path == NULL)
@@ -105,12 +104,14 @@ void	exec_builtin(t_node *node, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (node->in_fd == -1)
+			exit(1);
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
-		execve(path, new_args, env);
+		execve(path, new_args, node->execute->env);
 	}
 	free(path);
 	free_double_ptr(new_args);
-	waitpid(pid, &return_value, 0);
+	waitpid(pid, &node->execute->last_exit_code, 0);
 }

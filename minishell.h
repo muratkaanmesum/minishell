@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 18:16:35 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 12:16:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_node
 	enum e_token			right_operator;
 	int						in_fd;
 	int						out_fd;
+	int						is_executed;
 	struct s_execute		*execute;
 }							t_node;
 
@@ -78,6 +79,8 @@ typedef struct s_execute
 {
 	int						last_exit_code;
 	struct s_node			*top_node;
+	char					**env;
+	char					**export;
 }							t_execute;
 
 typedef struct s_token
@@ -89,7 +92,7 @@ typedef struct s_token
 	char					*str;
 }							t_token;
 t_token						*lexer(char *str);
-t_node						*parser(t_token *tokens);
+t_node						*parser(t_token *tokens, t_execute *execute);
 t_token						*create_redirections(t_node *node);
 int							command_count(t_token *tokens);
 void						handle_redirection(t_node *node);
@@ -113,7 +116,6 @@ int							get_in_all_tokens(t_token token, t_token *tokens);
 int	left_is_subshell_handle(t_token token,
 							t_token *tokens,
 							int i);
-void						free_new_env(char **env);
 int							parse_error(t_token *tokens);
 void						expander(t_node *head, char **env);
 int							is_arithmetic(t_token *tokens);
@@ -123,7 +125,7 @@ void						print_tree(t_node *head);
 int	handle_split_type(enum e_token split_type,
 						t_node *head,
 						t_token ***split);
-int							execute(t_node *head, char ***env);
+int							execute(t_node *head);
 int							free_token(t_token *tokens);
 void						free_tree(t_node *head, t_token *tokens);
 void						free_split(char **split);
@@ -131,5 +133,6 @@ int							get_length(char *str);
 void						free_double_ptr(char **arr);
 void						free_tokens_str(t_token *token);
 void						ctrl_c(int sig);
-void						ctrl_d(char *input);
+void						ctrl_d(char *input, t_execute *execute);
+void						free_execute(t_execute *execute);
 #endif

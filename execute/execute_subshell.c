@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   execute_subshell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 09:26:23 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 09:26:24 by mmesum           ###   ########.fr       */
+/*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/18 06:43:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execute.h"
+#include "execute.h"
 
-int	print_env(t_node *node)
+void	execute_subshell(t_node *node)
 {
-	int	i;
 	int	pid;
+	int	next_exec_index;
 
+	next_exec_index = 0;
 	pid = fork();
 	if (pid == 0)
 	{
 		dup2(node->in_fd, 0);
 		dup2(node->out_fd, 1);
-		close_all_fds(node->execute->top_node);
-		i = 0;
-		while (node->execute->env[i] != NULL)
+		if (node->connection_count == 1)
+			execute_node(node);
+		else if (node->connection_count > 1)
 		{
-			printf("%s\n", node->execute->env[i]);
-			i++;
+			while (next_exec_index != -1)
+			{
+				exec_all(node->connections[next_exec_index]);
+				close_node_fds(node->connections[next_exec_index]);
+				next_exec_index = handle_priority(node, next_exec_index);
+			}
 		}
-		exit(0);
+		exit(get_last_execute_code(node));
 	}
+	close_all_fds(node);
 	waitpid(pid, &node->execute->last_exit_code, 0);
-	return (1);
 }

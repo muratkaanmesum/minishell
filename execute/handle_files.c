@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 19:04:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 07:09:54 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	handle_infiles(t_redirections *redirections)
 	while (i < redirections->infile_count)
 	{
 		fd = open(redirections->infile[i], O_RDONLY, 0777);
-		if (redirections->infile[i + 1] != NULL)
+		if (redirections->infile[i + 1] != NULL && fd > 0)
 			close(fd);
 		i++;
 	}
@@ -43,7 +43,7 @@ int	handle_outfiles(t_redirections *redirections)
 		else if (redirections->outfile_type[i] == APPEND_RED)
 			fd = open(redirections->outfile[i], O_WRONLY | O_CREAT | O_APPEND,
 					0777);
-		if (redirections->outfile[i + 1] != NULL)
+		if (redirections->outfile[i + 1] != NULL && fd > 1)
 			close(fd);
 		i++;
 	}
@@ -57,10 +57,21 @@ void	handle_node_files(t_node *head)
 
 	in_fd = 0;
 	out_fd = 1;
+	if (head->redirections == NULL)
+		return ;
 	if (head->redirections->infile_count > 0)
 	{
 		in_fd = handle_infiles(head->redirections);
-		if (in_fd > 0)
+		if (in_fd == -1)
+		{
+			//revise this
+			printf("minishell: %s: No such file or directory\n",
+					head->redirections->infile[0]);
+			close_node_fds(head);
+			head->in_fd = -1;
+			return ;
+		}
+		else if (in_fd > 0)
 		{
 			if (head->in_fd != 0)
 				close(head->in_fd);
