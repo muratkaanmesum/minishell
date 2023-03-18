@@ -6,27 +6,22 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
-/*   Updated: 2023/03/17 03:19:16 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 12:12:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_node	*parser(t_token *tokens, char **new_env)
+t_node	*parser(t_token *tokens, t_execute *execute)
 {
-	t_node		*head;
-	t_execute	*execute;
+	t_node	*head;
 
 	if (parse_error(tokens) == 1)
 		return (NULL);
 	head = malloc(sizeof(t_node));
 	head->command = NULL;
-	execute = malloc(sizeof(t_execute));
-	execute->last_exit_code = 0;
 	execute->top_node = head;
-	execute->env = new_env;
 	handle_connections(head, tokens, execute);
 	assign_operators(head, tokens);
-	// print_token(tokens);
 	return (head);
 }

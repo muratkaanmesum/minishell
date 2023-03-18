@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 12:07:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 12:16:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_execute
 	int						last_exit_code;
 	struct s_node			*top_node;
 	char					**env;
+	char					**export;
 }							t_execute;
 
 typedef struct s_token
@@ -91,7 +92,7 @@ typedef struct s_token
 	char					*str;
 }							t_token;
 t_token						*lexer(char *str);
-t_node						*parser(t_token *tokens, char **new_env);
+t_node						*parser(t_token *tokens, t_execute *execute);
 t_token						*create_redirections(t_node *node);
 int							command_count(t_token *tokens);
 void						handle_redirection(t_node *node);
@@ -132,5 +133,6 @@ int							get_length(char *str);
 void						free_double_ptr(char **arr);
 void						free_tokens_str(t_token *token);
 void						ctrl_c(int sig);
-void						ctrl_d(char *input, char **new_env);
+void						ctrl_d(char *input, t_execute *execute);
+void						free_execute(t_execute *execute);
 #endif

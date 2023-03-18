@@ -29,7 +29,6 @@ int	ft_exit(char **args, int last_exit_code)
 	int	count;
 	int	pid;
 
-	printf("last_exit_code: %d\n", last_exit_code);
 	count = get_arg_count(args);
 	if (count == 0)
 		exit(last_exit_code);
