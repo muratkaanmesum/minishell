@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/18 13:42:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 13:42:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	add_env(char *args, t_node *node)
 	}
 	new_env[i] = ft_strdup(args);
 	new_env[i + 1] = NULL;
-	// free_double_ptr(node->execute->env);
 	node->execute->env = new_env;
 }
 
