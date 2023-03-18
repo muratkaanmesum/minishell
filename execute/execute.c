@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 07:06:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 07:54:03 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	execute_node(t_node *node)
 	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
 		pwd(node);
 	else if (ft_strncmp(node->command->command, "cd", 2) == 0)
-		cd(node->command->arguments[0], node);
+		cd(node->command->arguments, node);
 	else if (ft_strncmp(node->command->command, "echo", 4) == 0)
 		echo(node);
 	else if (ft_strncmp(node->command->command, "env", 3) == 0)

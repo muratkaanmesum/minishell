@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 07:05:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 07:54:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 int		echo(t_node *head);
-int		cd(char *args, t_node *node);
+void	cd(char **args, t_node *node);
 int		pwd(t_node *node);
 int		print_env(t_node *node);
 int		export(char **args, t_node *node);
 int		unset(char **args, t_node *node);
 int		get_env_len(char *env);
+char	*get_env_value(char **env, char *name);
 int		ft_exit(char **args);
 void	exec_builtin(t_node *node);
 void	handle_files(t_node *head);
