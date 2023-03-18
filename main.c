@@ -152,10 +152,20 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		if (check_first(tokens) == 1)
+		{
+			free(inpt);
+			free_tokens_str(tokens);
+			free(tokens);
 			continue ;
+		}
 		head = parser(tokens, new_env);
 		if (head == NULL)
+		{
+			free(inpt);
+			free_tokens_str(tokens);
+			free(tokens);
 			continue ;
+		}
 		expander(head, new_env);
 		execute(head);
 		free(inpt);

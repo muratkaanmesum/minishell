@@ -24,15 +24,16 @@ int	is_num(char **args)
 	return (1);
 }
 
-int	ft_exit(char **args)
+int	ft_exit(char **args, int last_exit_code)
 {
 	int	count;
 	int	pid;
 
+	printf("last_exit_code: %d\n", last_exit_code);
 	count = get_arg_count(args);
 	if (count == 0)
-		exit(0);
-	if (is_num(args[0]) == 0)
+		exit(last_exit_code);
+	if (is_num(args) == 0)
 	{
 		printf("exit\nnumeric argument required\n");
 		exit(2);
@@ -42,10 +43,6 @@ int	ft_exit(char **args)
 		printf("exit\nminishell: exit: too many arguments\n");
 		return (1);
 	}
-	else if (is_num(args) == 0)
-	{
-		printf("exit\nnumeric argument required\n");
-		exit(255);
-	}
+	exit(ft_atoi(args[0])); // check this again
 	return (0);
 }

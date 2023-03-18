@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 16:31:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 12:01:25 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	exec_builtin(t_node *node)
 	int		pid;
 	int		return_value;
 	char	**new_args;
-	
+
 	new_args = modified_args(node);
 	return_value = 0;
 	path = NULL;
