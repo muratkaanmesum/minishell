@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 05:44:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 06:43:06 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,50 @@ void	handle_pipes(t_node *node)
 	}
 	i = 0;
 	while (i < node->connection_count)
+	{
 		handle_pipes(node->connections[i]);
 		i++;
 	}
 }
 
+int	handle_priority(t_node *head, int i)
+{
+	while (i + 1 < head->connection_count)
+	{
+		if (head->connections[i + 1]->left_operator == AND)
+		{
+			if (get_last_execute_code(head->connections[i]) == 0)
+				return (i + 1);
+		}
+		else if (head->connections[i + 1]->left_operator == OR)
+		{
+			if (get_last_execute_code(head->connections[i]) != 0)
+				return (i + 1);
+		}
+		else if (head->connections[i + 1]->left_operator == PIPE)
+			return (i + 1);
+		i++;
+	}
+	return (-1);
+}
+
 void	exec_all(t_node *head)
 {
 	int	i;
+	int	next_exec_index;
 
+	next_exec_index = 0;
 	i = 0;
-	printf("exec_all: %d\n",get_last_execute_code(head));
 	if (head->is_subshell == 1)
 		execute_subshell(head);
 	else if (head->connection_count == 1)
 		execute_node(head);
 	else if (head->connection_count > 1)
 	{
-		while (i < head->connection_count)
+		while (next_exec_index != -1)
 		{
-			exec_all(head->connections[i]);
-			if (head->connections[i]->right_operator == AND)
-			{
-				if (get_last_execute_code(head) != 0)
-					break ;
-			}
-			if (head->connections[i]->right_operator == OR)
-			{
-				if (get_last_execute_code(head) != 1)
-					break ;
-			}
-			i++;
+			exec_all(head->connections[next_exec_index]);
+			next_exec_index = handle_priority(head, next_exec_index);
 		}
 	}
 }

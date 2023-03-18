@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 10:10:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 06:21:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	redirect_subshell(t_node *head);
 int		check_priority(t_node *node);
 void	execute_subshell(t_node *node);
 void	exec_all(t_node *head);
+int		handle_priority(t_node *head, int i);
 void	print_all_fds(t_node *node);
 void	execute_node(t_node *node);
 #endif

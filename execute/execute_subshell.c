@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 05:25:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 06:43:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	execute_subshell(t_node *node)
 {
 	int	pid;
-	int	i;
+	int	next_exec_index;
 
-	i = 0;
+	next_exec_index = 0;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -27,21 +27,11 @@ void	execute_subshell(t_node *node)
 			execute_node(node);
 		else if (node->connection_count > 1)
 		{
-			while (i < node->connection_count)
+			while (next_exec_index != -1)
 			{
-				exec_all(node->connections[i]);
-				close_node_fds(node->connections[i]);
-				if (node->connections[i]->right_operator == AND)
-				{
-					if (get_last_execute_code(node) != 0)
-						break ;
-				}
-				if (node->connections[i]->right_operator == OR)
-				{
-					if (get_last_execute_code(node) != 1)
-						break ;
-				}
-				i++;
+				exec_all(node->connections[next_exec_index]);
+				close_node_fds(node->connections[next_exec_index]);
+				next_exec_index = handle_priority(node, next_exec_index);
 			}
 		}
 		exit(get_last_execute_code(node));

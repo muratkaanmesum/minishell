@@ -27,19 +27,24 @@ int	is_num(char **args)
 int	ft_exit(char **args)
 {
 	int	count;
+	int	pid;
 
-	count = get_arg_count(args);
-	if (count == 0)
-		exit(0);
-	else if (count > 1)
+	pid = fork();
+	if (pid == 0)
 	{
-		printf("exit\nminishell: exit: too many arguments\n");
-		return (1);
-	}
-	else if (is_num(args) == 0)
-	{
-		printf("exit\nnumeric argument required\n");
-		exit(255);
+		count = get_arg_count(args);
+		if (count == 0)
+			exit(0);
+		else if (count > 1)
+		{
+			printf("exit\nminishell: exit: too many arguments\n");
+			exit(1);
+		}
+		else if (is_num(args) == 0)
+		{
+			printf("exit\nnumeric argument required\n");
+			exit(255);
+		}
 	}
 	return (0);
 }
