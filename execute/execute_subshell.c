@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/17 16:29:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/18 05:25:44 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	execute_subshell(t_node *node)
 				i++;
 			}
 		}
-		exit(0);
+		exit(get_last_execute_code(node));
 	}
 	close_all_fds(node);
 	waitpid(pid, &node->execute->last_exit_code, 0);
