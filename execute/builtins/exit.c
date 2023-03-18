@@ -29,22 +29,23 @@ int	ft_exit(char **args)
 	int	count;
 	int	pid;
 
-	pid = fork();
-	if (pid == 0)
+	count = get_arg_count(args);
+	if (count == 0)
+		exit(0);
+	if (is_num(args[0]) == 0)
 	{
-		count = get_arg_count(args);
-		if (count == 0)
-			exit(0);
-		else if (count > 1)
-		{
-			printf("exit\nminishell: exit: too many arguments\n");
-			exit(1);
-		}
-		else if (is_num(args) == 0)
-		{
-			printf("exit\nnumeric argument required\n");
-			exit(255);
-		}
+		printf("exit\nnumeric argument required\n");
+		exit(2);
+	}
+	else if (count > 1)
+	{
+		printf("exit\nminishell: exit: too many arguments\n");
+		return (1);
+	}
+	else if (is_num(args) == 0)
+	{
+		printf("exit\nnumeric argument required\n");
+		exit(255);
 	}
 	return (0);
 }
