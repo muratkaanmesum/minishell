@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:32:37 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 06:41:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 08:34:25 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ void	handle_redirection_env(t_node *node, t_env *env)
 	int	i;
 
 	i = 0;
-	while (node->redirections->infile[i] != NULL)
+	while (i < node->redirections->infile_count
+		&& get_env_location(node->redirections->infile[i]) != NULL)
 	{
 		handle_env_infile(node, env, i);
 		i++;
 	}
-	i = 0;
-	while (node->redirections->outfile[i] != NULL)
+	while (i < node->redirections->outfile_count
+		&& get_env_location(node->redirections->outfile[i]) != NULL)
 	{
 		handle_env_outfile(node, env, i);
 		i++;
