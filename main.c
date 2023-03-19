@@ -177,7 +177,7 @@ int	main(int argc, char **argv, char **env)
 			free(tokens);
 			continue ;
 		}
-		expander(head, execute_struct->env);
+		expander(head);
 		execute(head);
 		free(inpt);
 	}

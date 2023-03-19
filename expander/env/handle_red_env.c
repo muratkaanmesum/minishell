@@ -1,62 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_node_env.c                                  :+:      :+:    :+:   */
+/*   handle_red_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 08:12:24 by mmesum           ###   ########.fr       */
+/*   Created: 2023/03/19 06:32:37 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/19 06:41:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expander.h"
 
-void	handle_env_command(t_node *node, t_env *env)
-{
-	char	*str;
-	char	*env_value;
-	int		i;
-
-	str = get_env_location(node->command->command);
-	if (str != NULL)
-		env_value = find_env_variable(str, env);
-	if (env_value == NULL)
-		env_value = "";
-	node->command->command = assign_env(node->command->command, env_value,
-			node);
-}
-
-void	handle_env_arg(t_node *node, t_env *env, int i)
+void	handle_env_infile(t_node *node, t_env *env, int i)
 {
 	char	*str;
 	char	*env_value;
 
-	str = get_env_location(node->command->arguments[i]);
+	str = get_env_location(node->redirections->infile[i]);
 	if (str != NULL)
 		env_value = find_env_variable(str, env);
 	if (env_value == NULL)
 		env_value = "";
-	node->command->arguments[i] = assign_env(node->command->arguments[i],
+	node->redirections->infile[i] = assign_env(node->redirections->infile[i],
 												env_value,
 												node);
 }
 
-void	handle_node_env(t_node *node, t_env *env)
+void	handle_env_outfile(t_node *node, t_env *env, int i)
+{
+	char	*str;
+	char	*env_value;
+
+	str = get_env_location(node->redirections->outfile[i]);
+	if (str != NULL)
+		env_value = find_env_variable(str, env);
+	if (env_value == NULL)
+		env_value = "";
+	node->redirections->outfile[i] = assign_env(node->redirections->outfile[i],
+												env_value,
+												node);
+}
+
+void	handle_redirection_env(t_node *node, t_env *env)
 {
 	int	i;
 
-	while (get_env_location(node->command->command) != NULL)
-		handle_env_command(node, env);
 	i = 0;
-	while (i < node->command->argument_count)
+	while (node->redirections->infile[i] != NULL)
 	{
-		while (get_env_location(node->command->arguments[i]) != NULL)
-			handle_env_arg(node, env, i);
+		handle_env_infile(node, env, i);
 		i++;
 	}
-	if (node->redirections != NULL)
-		handle_redirection_env(node, env);
-	handle_all_exec_code(node);
-	delete_all_quotes(node);
+	i = 0;
+	while (node->redirections->outfile[i] != NULL)
+	{
+		handle_env_outfile(node, env, i);
+		i++;
+	}
 }

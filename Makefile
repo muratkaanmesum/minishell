@@ -94,6 +94,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/assign_env.c\
                           expander/env/handle_node_env.c\
                           expander/env/delete_quotes.c\
+                          expander/env/handle_red_env.c\
                           expander/wildcard/wildcard.c\
                           expander/wildcard/handle_node_wildcard.c\
                           expander/wildcard/args.c\
@@ -106,6 +107,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
                           expander/env/assign_env_utils.c\
+                          expander/env/handle_exec_code.c\
                           execute/execute.c\
                           execute/utils.c\
                           execute/builtins/cd.c\

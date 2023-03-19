@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 13:47:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 07:19:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*find_env_variable(char *value, t_env *env)
 	i = 0;
 	size = 0;
 	while (value[size] != '\0' && value[size] != '\'' && value[size] != '"'
-		&& value[size] != ' ' && value[size] != '$')
+		&& value[size] != ' ' && value[size] != '$' && value[size] != '*')
 		size++;
 	while (env[i].name != NULL)
 	{
@@ -60,6 +60,11 @@ char	*get_env_location(char *str)
 			in_quote = in_quote != 1;
 		if (in_quote == 0 && str[i] == '$')
 		{
+			if (str[i + 1] == '?')
+			{
+				i++;
+				continue ;
+			}
 			if (str[i + 1] == '\0')
 				return (NULL);
 			return (&str[i]);
@@ -69,7 +74,7 @@ char	*get_env_location(char *str)
 	return (NULL);
 }
 
-t_env	*get_env_variables(char **env)
+t_env	*get_env_variables(char **env, t_node *node)
 {
 	int		i;
 	int		count;
