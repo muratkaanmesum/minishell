@@ -1,34 +1,76 @@
 #include "../execute.h"
 
-int	find_env(char **env, char *arg)
+int	find_env(t_node *node, char *arg)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while (env[i] != NULL)
+	while (node->execute->env[i] != NULL)
 	{
-		if (ft_strncmp(env[i], arg, get_env_len(env[i])) == 0)
+		if (ft_strncmp(node->execute->env[i], arg,
+				get_env_len(node->execute->env[i])) == 0)
 		{
-			free(env[i]);
-			while (env[i + 1] != NULL)
+			free(node->execute->env[i]);
+			while (node->execute->env[i + 1] != NULL)
 			{
-				env[i] = env[i + 1];
+				node->execute->env[i] = node->execute->env[i + 1];
 				i++;
 			}
-			env[i] = NULL;
+			node->execute->env[i] = NULL;
 			return (0);
 		}
 		i++;
 	}
 	return (0);
 }
+int	find_export(t_node *node, char *arg)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (node->execute->export[i] != NULL)
+	{
+		if (ft_strncmp(node->execute->export[i], arg,
+				get_env_len(node->execute->export[i])) == 0)
+		{
+			free(node->execute->export[i]);
+			while (node->execute->export[i + 1] != NULL)
+			{
+				node->execute->export[i] = node->execute->export[i + 1];
+				i++;
+			}
+			node->execute->export[i] = NULL;
+			return (0);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	unset_w_fork(char **args, t_node *node)
+{
+	int	i;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		find_env(node, args[i]);
+		find_export(node, args[i]);
+		i++;
+	}
+}
+
 int	unset(char **args, t_node *node)
 {
 	int	i;
 	int	pid;
 
+	if (node->right_operator != PIPE)
+		unset_w_fork(args, node);
 	pid = fork();
 	if (pid == 0)
 	{
