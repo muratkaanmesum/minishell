@@ -6,11 +6,21 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:07:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 07:26:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 10:01:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
+
+int	get_export_count(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	return (i);
+}
 
 int	get_env_len(char *env)
 {
@@ -24,8 +34,8 @@ int	get_env_len(char *env)
 
 char	*get_env_value(char **env, char *name)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = ft_strlen(name);

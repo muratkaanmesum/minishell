@@ -6,21 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 09:33:45 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 09:50:20 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 10:03:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
-
-int	get_env_count(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i] != NULL)
-		i++;
-	return (i);
-}
 
 void	print_export(t_node *node)
 {
@@ -38,14 +28,60 @@ void	print_export(t_node *node)
 		i++;
 	}
 }
+int	check_env_exist(char *args, t_node *node)
+{
+	char	**arr;
+	int		i;
+
+	arr = ft_split(args, '=');
+	i = 0;
+	while (i < get_export_count(node->execute->env))
+	{
+		if (ft_strncmp(node->execute->env[i], arr[0], ft_strlen(arr[0])) == 0)
+		{
+			free(node->execute->env[i]);
+			node->execute->env[i] = ft_strdup(args);
+			free_double_ptr(arr);
+			return (1);
+		}
+		i++;
+	}
+	free_double_ptr(arr);
+	return (0);
+}
+
+int	check_export_exist(char *args, t_node *node)
+{
+	char	**arr;
+	int		i;
+
+	arr = ft_split(args, '=');
+	i = 0;
+	while (i < get_export_count(node->execute->export))
+	{
+		if (ft_strncmp(node->execute->export[i], arr[0],
+				ft_strlen(arr[0])) == 0)
+		{
+			free(node->execute->export[i]);
+			node->execute->export[i] = ft_strdup(args);
+			free_double_ptr(arr);
+			return (1);
+		}
+		i++;
+	}
+	free_double_ptr(arr);
+	return (0);
+}
 
 void	add_export(char *args, t_node *node)
 {
 	int		i;
 	char	**new_export;
 
-	new_export = malloc(sizeof(char *) * (get_env_count(node->execute->export)
-				+ 2));
+	if (check_export_exist(args, node))
+		return ;
+	new_export = malloc(sizeof(char *)
+			* (get_export_count(node->execute->export) + 2));
 	i = 0;
 	while (node->execute->export[i] != NULL)
 	{
@@ -63,7 +99,10 @@ void	add_env(char *args, t_node *node)
 	int		i;
 	char	**new_env;
 
-	new_env = malloc(sizeof(char *) * (get_env_count(node->execute->env) + 2));
+	if (check_env_exist(args, node))
+		return ;
+	new_env = malloc(sizeof(char *) * (get_export_count(node->execute->env)
+				+ 2));
 	i = 0;
 	while (node->execute->env[i])
 	{
