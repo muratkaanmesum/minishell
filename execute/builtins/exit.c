@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/19 13:30:00 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../execute.h"
 
 int	get_arg_count(char **args)
@@ -42,6 +54,6 @@ int	ft_exit(char **args, int last_exit_code)
 		printf("exit\nminishell: exit: too many arguments\n");
 		return (1);
 	}
-	exit(ft_atoi(args[0])); // check this again
+	exit(ft_atoi(args[0]));
 	return (0);
 }

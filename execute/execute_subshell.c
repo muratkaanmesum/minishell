@@ -6,11 +6,17 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 09:53:50 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:15:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+void	assign_dup2(t_node *node)
+{
+	dup2(node->in_fd, 0);
+	dup2(node->out_fd, 1);
+}
 
 void	execute_subshell(t_node *node)
 {
@@ -22,8 +28,7 @@ void	execute_subshell(t_node *node)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(node->in_fd, 0);
-		dup2(node->out_fd, 1);
+		assign_dup2(node);
 		if (node->connection_count == 1)
 			execute_node(node);
 		else if (node->connection_count > 1)

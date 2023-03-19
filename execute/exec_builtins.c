@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 12:44:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:28:26 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int	check_path(char *path, t_node *node)
 	}
 	else if (access(path, F_OK) != 0)
 	{
-		printf("minishell: %s: No such file or directory\n",
-				node->command->command);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(node->command->command, 2);
+		ft_putendl_fd(" : No such file or directory", 2);
 		node->execute->last_exit_code = 127;
 		return (1);
 	}
-
 	return (0);
 }
 
@@ -96,11 +96,9 @@ void	exec_builtin(t_node *node)
 {
 	char	*path;
 	int		pid;
-	int		return_value;
 	char	**new_args;
 
 	new_args = modified_args(node);
-	return_value = 0;
 	path = NULL;
 	if (ft_strchr(node->command->command, '/') == NULL)
 		path = find_in_path(node->command->command, node->execute->env);

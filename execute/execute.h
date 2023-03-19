@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 10:01:43 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:16:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../minishell.h"
 # include <fcntl.h>
 # include <sys/wait.h>
+
 int		echo(t_node *head);
 void	cd(char **args, t_node *node);
 int		pwd(t_node *node);

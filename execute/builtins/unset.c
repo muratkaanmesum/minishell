@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/19 13:15:50 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/19 13:17:01 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../execute.h"
 
 int	find_env(t_node *node, char *arg)
@@ -25,6 +37,7 @@ int	find_env(t_node *node, char *arg)
 	}
 	return (0);
 }
+
 int	find_export(t_node *node, char *arg)
 {
 	int	i;
@@ -79,7 +92,7 @@ int	unset(char **args, t_node *node)
 		close_all_fds(node->execute->top_node);
 		i = 0;
 		while (args[i] != NULL)
-			find_env(node->execute->env, args[i++]);
+			find_env(node, args[i++]);
 		exit(0);
 	}
 	waitpid(pid, NULL, 0);
