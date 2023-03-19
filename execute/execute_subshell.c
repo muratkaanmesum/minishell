@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 06:43:20 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 08:44:45 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute_subshell(t_node *node)
 	int	pid;
 	int	next_exec_index;
 
+	handle_node_files(node);
 	next_exec_index = 0;
 	pid = fork();
 	if (pid == 0)
@@ -34,6 +35,7 @@ void	execute_subshell(t_node *node)
 				next_exec_index = handle_priority(node, next_exec_index);
 			}
 		}
+		close_all_fds(node->execute->top_node);
 		exit(get_last_execute_code(node));
 	}
 	close_all_fds(node);
