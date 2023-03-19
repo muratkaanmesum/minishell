@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:12:43 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 14:34:55 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	handle_infiles(t_redirections *redirections, int *i)
 			return (-1);
 		if (redirections->infile[*i + 1] != NULL && fd > 0)
 			close(fd);
-		i++;
+		*i += 1;
 	}
 	return (fd);
 }
