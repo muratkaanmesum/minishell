@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 17:06:23 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 06:29:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	change_str(char *str, char *env_value, char *new_str)
 			in_quote = in_quote != 1;
 		if (str[i] == '$' && flag == 0 && in_quote == 0)
 		{
+			if (str[i + 1] != '\0' && str[i + 1] == '?')
+			{
+				new_str[index++] = '$';
+				i++;
+				continue ;
+			}
 			start_index = i;
 			flag = 1;
 			assign_env_value(new_str, env_value, &index);
@@ -56,6 +62,12 @@ int	get_node_size(char *str)
 			in_quote = in_quote != 1;
 		if (str[i] == '$' && flag == 0 && in_quote == 0)
 		{
+			if (str[i + 1] != '\0' && str[i + 1] == '?')
+			{
+				node_size++;
+				i++;
+				continue ;
+			}
 			start_index = i;
 			flag = 1;
 			pass_env(str, start_index, &i);

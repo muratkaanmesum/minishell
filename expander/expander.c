@@ -19,7 +19,7 @@ void	expander(t_node *head)
 	t_env	*variables;
 
 	variables = get_env_variables(head->execute->env, head);
-	wildcard(head);
 	handle_env(head, variables);
+	wildcard(head);
 	free_env(variables);
 }

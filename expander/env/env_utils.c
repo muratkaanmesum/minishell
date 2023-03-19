@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 13:54:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 07:19:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*find_env_variable(char *value, t_env *env)
 	i = 0;
 	size = 0;
 	while (value[size] != '\0' && value[size] != '\'' && value[size] != '"'
-		&& value[size] != ' ' && value[size] != '$')
+		&& value[size] != ' ' && value[size] != '$' && value[size] != '*')
 		size++;
 	while (env[i].name != NULL)
 	{
@@ -60,6 +60,11 @@ char	*get_env_location(char *str)
 			in_quote = in_quote != 1;
 		if (in_quote == 0 && str[i] == '$')
 		{
+			if (str[i + 1] == '?')
+			{
+				i++;
+				continue ;
+			}
 			if (str[i + 1] == '\0')
 				return (NULL);
 			return (&str[i]);
@@ -80,7 +85,7 @@ t_env	*get_env_variables(char **env, t_node *node)
 	i = 0;
 	while (env[count] != NULL)
 		count++;
-	env_variables = malloc(sizeof(t_env) * (count + 2));
+	env_variables = malloc(sizeof(t_env) * (count + 1));
 	while (env[i])
 	{
 		count = 0;
@@ -92,9 +97,7 @@ t_env	*get_env_variables(char **env, t_node *node)
 		free_double_ptr(value);
 		i++;
 	}
-	env_variables[i].name = ft_strdup("?");
-	env_variables[i].value = ft_itoa(get_last_execute_code(node));
-	env_variables[i + 1].name = NULL;
-	env_variables[i + 1].value = NULL;
+	env_variables[i].name = NULL;
+	env_variables[i].value = NULL;
 	return (env_variables);
 }
