@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:28:26 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 15:01:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_new_arg(char **arg)
 	}
 }
 
-int	check_path(char *path, t_node *node)
+int	check_path(char *path, t_node *node, char **new_args)
 {
 	if (path == NULL)
 	{
@@ -59,6 +59,8 @@ int	check_path(char *path, t_node *node)
 		ft_putstr_fd(node->command->command, 2);
 		ft_putendl_fd(": command not found", 2);
 		node->execute->last_exit_code = 127;
+		free(path);
+		free_double_ptr(new_args);
 		return (1);
 	}
 	else if (access(path, F_OK) != 0)
@@ -67,6 +69,8 @@ int	check_path(char *path, t_node *node)
 		ft_putstr_fd(node->command->command, 2);
 		ft_putendl_fd(" : No such file or directory", 2);
 		node->execute->last_exit_code = 127;
+		free(path);
+		free_double_ptr(new_args);
 		return (1);
 	}
 	return (0);
@@ -104,7 +108,7 @@ void	exec_builtin(t_node *node)
 		path = find_in_path(node->command->command, node->execute->env);
 	else
 		path = ft_strdup(node->command->command);
-	if (check_path(path, node))
+	if (check_path(path, node, new_args))
 		return ;
 	pid = fork();
 	if (pid == 0)
