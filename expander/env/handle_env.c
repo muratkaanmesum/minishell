@@ -20,7 +20,7 @@ void	assign_node_env(t_node *node, t_env *env)
 	int	i;
 
 	i = 0;
-	if (node->connection_count == 1)
+	if (node->connection_count == 1 && node->is_arithmetic == 0)
 		handle_node_env(node, env);
 	else if (node->connection_count > 1)
 		while (i < node->connection_count)

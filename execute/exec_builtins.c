@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 12:01:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 12:44:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,7 @@ char	*find_in_path(char *command, char **env)
 	char	*tmp;
 	char	*tmp2;
 
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-			break ;
-		i++;
-	}
-	if (env[i] == NULL)
-		return (NULL);
-	path = ft_split(env[i], ':');
+	path = ft_split(get_env_value(env, "PATH"), ':');
 	i = 0;
 	while (path[i])
 	{
@@ -47,6 +38,7 @@ char	*find_in_path(char *command, char **env)
 	free_double_ptr(path);
 	return (NULL);
 }
+
 void	print_new_arg(char **arg)
 {
 	int	i;
@@ -57,6 +49,27 @@ void	print_new_arg(char **arg)
 		printf("%s\n", arg[i]);
 		i++;
 	}
+}
+
+int	check_path(char *path, t_node *node)
+{
+	if (path == NULL)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(node->command->command, 2);
+		ft_putendl_fd(": command not found", 2);
+		node->execute->last_exit_code = 127;
+		return (1);
+	}
+	else if (access(path, F_OK) != 0)
+	{
+		printf("minishell: %s: No such file or directory\n",
+				node->command->command);
+		node->execute->last_exit_code = 127;
+		return (1);
+	}
+
+	return (0);
 }
 
 char	**modified_args(t_node *node)
@@ -93,14 +106,8 @@ void	exec_builtin(t_node *node)
 		path = find_in_path(node->command->command, node->execute->env);
 	else
 		path = ft_strdup(node->command->command);
-	if (access(path, F_OK) == -1 || path == NULL)
-	{
-		printf("command not found %s\n", node->command->command);
-		free(path);
-		free_double_ptr(new_args);
-		close_node_fds(node);
-		return ; // exit code
-	}
+	if (check_path(path, node))
+		return ;
 	pid = fork();
 	if (pid == 0)
 	{
