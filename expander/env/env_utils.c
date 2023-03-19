@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 07:19:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 09:47:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ t_env	*get_env_variables(char **env, t_node *node)
 		while (value[count])
 			count++;
 		env_variables[i].name = ft_strdup(value[0]);
-		env_variables[i].value = ft_strdup(value[1]);
+		if (value[1] == NULL)
+			env_variables[i].value = ft_strdup("");
+		else
+			env_variables[i].value = ft_strdup(value[1]);
 		free_double_ptr(value);
 		i++;
 	}

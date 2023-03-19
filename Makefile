@@ -115,6 +115,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           execute/builtins/pwd.c\
                           execute/builtins/env.c\
                           execute/builtins/export.c\
+                          execute/builtins/export_utils.c\
                             execute/builtins/unset.c\
                             execute/builtins/exit.c\
                             execute/builtins/utils.c\
