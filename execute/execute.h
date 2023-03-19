@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:16:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 14:05:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	add_env(char *args, t_node *node);
 void	add_export(char *args, t_node *node);
 void	print_export(t_node *node);
 int		unset(char **args, t_node *node);
-int		get_env_len(char *env);
 char	*get_env_value(char **env, char *name);
 int		ft_exit(char **args, int last_exit_code);
 void	exec_builtin(t_node *node);
