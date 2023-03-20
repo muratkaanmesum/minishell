@@ -6,9 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/13 17:28:59 by mmesum           ###   ########.fr       */
-
+/*   Updated: 2023/03/20 15:37:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,16 +167,16 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		head = parser(tokens, execute_struct);
-		if (head == NULL)
-		{
-			free(inpt);
-			free_tokens_str(tokens);
-			free(tokens);
-			continue ;
-		}
-		expander(head);
-		execute(head);
-		free_tree(head,tokens);
+		// if (head == NULL)
+		// {
+		// 	free(inpt);
+		// 	free_tokens_str(tokens);
+		// 	free(tokens);
+		// 	continue ;
+		// }
+		// expander(head);
+		// execute(head);
+		free_tree(head, tokens);
 		free(inpt);
 	}
 	return (0);

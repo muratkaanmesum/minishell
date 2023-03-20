@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 19:11:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:41:18 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 	cleared_tokens = create_redirections(head);
 	if (cleared_tokens != NULL)
 		head->tokens = cleared_tokens;
+	if (head->tokens[0].token == UNKNOWN)
+		return (head);
 	if (check_parantheses(head->tokens) == 1)
 		check_if_subshell(head);
 	split_type = assign_split_type(head);
