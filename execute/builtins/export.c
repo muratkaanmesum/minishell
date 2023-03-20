@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/19 13:36:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/20 12:48:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	export_w_fork(char **args, t_node *node)
 			i++;
 		}
 	}
+	return (0);
 }
 
 int	export_fork(char **args, t_node *node)

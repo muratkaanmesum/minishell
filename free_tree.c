@@ -27,11 +27,9 @@ void	free_simple_command(t_command *command)
 {
 	int	i;
 
-	printf("command->command %s\n", command->command);
 	i = 0;
 	while (i < command->argument_count)
 	{
-		printf("command->arguments[%d] %s\n", i, command->arguments[i]);
 		free(command->arguments[i]);
 		i++;
 	}
