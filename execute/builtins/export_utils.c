@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 09:33:45 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 10:03:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:30:10 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	print_export(t_node *node)
 		i++;
 	}
 }
+
 int	check_env_exist(char *args, t_node *node)
 {
 	char	**arr;

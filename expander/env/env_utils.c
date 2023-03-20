@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 09:47:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 14:12:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ t_env	*get_env_variables(char **env, t_node *node)
 
 	count = 0;
 	i = 0;
-	while (env[count] != NULL)
-		count++;
-	env_variables = malloc(sizeof(t_env) * (count + 1));
+	env_variables = malloc(sizeof(t_env) * (get_double_ptr_len(env) + 1));
 	while (env[i])
 	{
 		count = 0;

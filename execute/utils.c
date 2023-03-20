@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 05:56:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 12:27:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	close_node_fds(t_node *node)
 {
-	// printf("closing fds for node fd_in %d fd_out %d\n", node->in_fd,
-	// 		node->out_fd);
 	if (node->in_fd > 0)
 	{
 		close(node->in_fd);
@@ -26,7 +24,6 @@ void	close_node_fds(t_node *node)
 		close(node->out_fd);
 		node->out_fd = -1;
 	}
-	// printf("*****\n");
 }
 
 int	get_last_execute_code(t_node *head)

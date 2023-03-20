@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 14:07:26 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 07:45:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 14:46:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ char	*handle_exec_code(char *str, char *env_value)
 	return (new_str);
 }
 
+void	handle_exec_files(t_node *node, char *last_exec_code)
+{
+	int	i;
+
+	i = -1;
+	while (node->redirections->infile[++i] != NULL)
+		node->redirections->infile[i] = handle_exec_code(
+				node->redirections->infile[i],
+				last_exec_code);
+	i = -1;
+	while (node->redirections->outfile[++i] != NULL)
+		node->redirections->outfile[i] = handle_exec_code(
+				node->redirections->outfile[i],
+				last_exec_code);
+}
+
 void	handle_all_exec_code(t_node *node)
 {
 	int		i;
@@ -72,22 +88,17 @@ void	handle_all_exec_code(t_node *node)
 	last_exec_code = ft_itoa(get_last_execute_code(node));
 	i = -1;
 	node->command->command = handle_exec_code(node->command->command,
-												last_exec_code);
+			last_exec_code);
 	while (node->command->arguments[++i] != NULL)
 		node->command->arguments[i] = handle_exec_code(
-			node->command->arguments[i],
-			last_exec_code);
+				node->command->arguments[i],
+				last_exec_code);
 	i = -1;
 	if (node->redirections == NULL)
+	{
+		free(last_exec_code);
 		return ;
-	while (node->redirections->infile[++i] != NULL)
-		node->redirections->infile[i] = handle_exec_code(
-			node->redirections->infile[i],
-			last_exec_code);
-	i = -1;
-	while (node->redirections->outfile[++i] != NULL)
-		node->redirections->outfile[i] = handle_exec_code(
-			node->redirections->outfile[i],
-			last_exec_code);
+	}
+	handle_exec_files(node, last_exec_code);
 	free(last_exec_code);
 }

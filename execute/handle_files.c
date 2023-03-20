@@ -6,25 +6,38 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 07:09:54 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 14:34:55 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-int	handle_infiles(t_redirections *redirections)
+int	print_infile_error(char *infile, t_node *head)
 {
-	int	i;
+	char	*msg;
+
+	msg = strerror(errno);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(infile, 2);
+	write(2, " ", 1);
+	ft_putendl_fd(msg, 2);
+	head->in_fd = -1;
+	return (-1);
+}
+
+int	handle_infiles(t_redirections *redirections, int *i)
+{
 	int	fd;
 
 	fd = 0;
-	i = 0;
-	while (i < redirections->infile_count)
+	while (*i < redirections->infile_count)
 	{
-		fd = open(redirections->infile[i], O_RDONLY, 0777);
-		if (redirections->infile[i + 1] != NULL && fd > 0)
+		fd = open(redirections->infile[*i], O_RDONLY, 0777);
+		if (fd == -1)
+			return (-1);
+		if (redirections->infile[*i + 1] != NULL && fd > 0)
 			close(fd);
-		i++;
+		*i += 1;
 	}
 	return (fd);
 }
@@ -39,7 +52,8 @@ int	handle_outfiles(t_redirections *redirections)
 	while (i < redirections->outfile_count)
 	{
 		if (redirections->outfile_type[i] == O_REDIRECTION)
-			fd = open(redirections->outfile[i], O_WRONLY | O_CREAT, 0777);
+			fd = open(redirections->outfile[i], O_WRONLY | O_CREAT | O_TRUNC,
+					0777);
 		else if (redirections->outfile_type[i] == APPEND_RED)
 			fd = open(redirections->outfile[i], O_WRONLY | O_CREAT | O_APPEND,
 					0777);
@@ -50,25 +64,19 @@ int	handle_outfiles(t_redirections *redirections)
 	return (fd);
 }
 
-void	handle_node_files(t_node *head)
+void	handle_infile_loop(t_node *head)
 {
 	int	in_fd;
-	int	out_fd;
+	int	i;
 
+	i = 0;
 	in_fd = 0;
-	out_fd = 1;
-	if (head->redirections == NULL)
-		return ;
 	if (head->redirections->infile_count > 0)
 	{
-		in_fd = handle_infiles(head->redirections);
+		in_fd = handle_infiles(head->redirections, &i);
 		if (in_fd == -1)
 		{
-			//revise this
-			printf("minishell: %s: No such file or directory\n",
-					head->redirections->infile[0]);
-			close_node_fds(head);
-			head->in_fd = -1;
+			print_infile_error(head->redirections->infile[i], head);
 			return ;
 		}
 		else if (in_fd > 0)
@@ -78,6 +86,18 @@ void	handle_node_files(t_node *head)
 			head->in_fd = in_fd;
 		}
 	}
+}
+
+void	handle_node_files(t_node *head)
+{
+	int	out_fd;
+	int	i;
+
+	i = 0;
+	out_fd = 1;
+	if (head->redirections == NULL)
+		return ;
+	handle_infile_loop(head);
 	if (head->redirections->outfile_count > 0)
 	{
 		out_fd = handle_outfiles(head->redirections);
@@ -86,27 +106,6 @@ void	handle_node_files(t_node *head)
 			if (head->out_fd != 1)
 				close(head->out_fd);
 			head->out_fd = out_fd;
-		}
-	}
-}
-void	handle_files(t_node *head)
-{
-	int	i;
-
-	i = 0;
-	if (head->connection_count == 1 && head->redirections != NULL)
-	{
-		handle_node_files(head);
-		return ;
-	}
-	else if (head->connection_count > 1)
-	{
-		if (head->redirections != NULL)
-			handle_node_files(head);
-		while (i < head->connection_count)
-		{
-			handle_files(head->connections[i]);
-			i++;
 		}
 	}
 }

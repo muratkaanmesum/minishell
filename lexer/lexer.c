@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:52:33 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/16 18:05:03 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 15:51:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_token	*lexer(char *str)
 		tokens[i].id = i;
 		i++;
 	}
+	tokens[i].str = NULL;
 	free(t_str);
 	return (tokens);
 }

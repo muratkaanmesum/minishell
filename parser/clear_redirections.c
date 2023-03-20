@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:37:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/13 13:57:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 14:48:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ t_token	*clear_redirections(t_node *node)
 	get_new_token(removed_tokens, new_token);
 	if (check_parantheses(node->tokens) == 1)
 		free(removed_tokens);
-	//free(node->tokens);
+	free(node->tokens);
 	return (new_token);
 }

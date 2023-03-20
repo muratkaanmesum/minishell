@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 11:40:35 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 12:46:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	execute_node(t_node *node)
 {
+	if (node->is_arithmetic == 1)
+	{
+		write(1, "minishell: ", 11);
+		ft_putendl_fd("Arithmetic Operator Entered", 1);
+		node->execute->last_exit_code = 2;
+		return ;
+	}
 	handle_node_files(node);
 	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
 		pwd(node);

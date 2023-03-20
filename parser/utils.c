@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/12 14:59:12 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/19 15:41:13 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	is_arithmetic(t_token *tokens)
 
 	i = 1;
 	pass_parantheses(tokens, &i);
-	if (tokens[i].token == UNKNOWN)
+	if (tokens[i].token == CLOSE_PAR && tokens[i + 1].token == UNKNOWN)
 		return (1);
 	return (0);
 }

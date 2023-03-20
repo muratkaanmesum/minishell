@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/19 09:54:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/20 12:48:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	export_w_fork(char **args, t_node *node)
 			i++;
 		}
 	}
+	return (0);
 }
 
 int	export_fork(char **args, t_node *node)
@@ -43,26 +44,10 @@ int	export_fork(char **args, t_node *node)
 	pid = fork();
 	if (pid == 0)
 	{
-		i = 0;
-		dup2(node->in_fd, 0);
-		dup2(node->out_fd, 1);
+		i = -1;
 		close_all_fds(node->execute->top_node);
 		if (args == NULL || args[0] == NULL)
 			print_export(node);
-		else
-		{
-			while (args[i])
-			{
-				if (ft_strchr(args[i], '=') == NULL)
-					add_export(args[i], node);
-				else
-				{
-					add_export(args[i], node);
-					add_env(args[i], node);
-				}
-				i++;
-			}
-		}
 		exit(0);
 	}
 	waitpid(pid, &node->execute->last_exit_code, 0);

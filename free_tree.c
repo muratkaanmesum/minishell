@@ -38,30 +38,41 @@ void	free_simple_command(t_command *command)
 	free(command->command);
 	free(command);
 }
+void	free_all(t_node *head)
+{
+	int	i;
+
+	if (head->redirections != NULL)
+		free_redirections(head->redirections);
+	i = 0;
+	free(head->connections);
+	free_tokens_str(head->tokens);
+	free(head->tokens);
+	free(head);
+}
+
 void	free_tree_rec(t_node *head)
 {
 	int	i;
 
 	i = 0;
 	if (head->connection_count == 1)
+	{
 		free_simple_command(head->command);
-	else
+		free_all(head);
+	}
+	else if (head->connection_count > 1)
 	{
 		while (i < head->connection_count)
 		{
 			free_tree_rec(head->connections[i]);
 			i++;
 		}
+		free_all(head);
 	}
-	if (head->redirections != NULL)
-		free_redirections(head->redirections);
-	free(head->connections);
-	free(head->tokens);
-	free(head);
 }
 
 void	free_tree(t_node *head, t_token *tokens)
 {
 	free_tree_rec(head);
-	free_tokens_str(head->tokens);
 }
