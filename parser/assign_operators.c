@@ -6,18 +6,19 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/17 16:18:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/20 16:20:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	get_right_operator(t_token token, t_token *tokens, int is_subshell)
+int	get_right_operator(t_token token, t_token *tokens, int is_subshell,
+		int is_arithmetic)
 {
 	int	i;
 
 	i = get_in_all_tokens(token, tokens);
-	if (is_subshell == 1)
+	if (is_subshell == 1 || is_arithmetic == 1)
 	{
 		while (tokens[i].token != UNKNOWN && tokens[i].token != PIPE
 			&& tokens[i].token != AND && tokens[i].token != OR)
@@ -38,12 +39,13 @@ int	get_right_operator(t_token token, t_token *tokens, int is_subshell)
 	return (UNKNOWN);
 }
 
-int	get_left_operator(t_token token, t_token *tokens, int is_subshell)
+int	get_left_operator(t_token token, t_token *tokens, int is_subshell,
+		int is_arithmetic)
 {
 	int	i;
 
 	i = get_in_all_tokens(token, tokens);
-	if (is_subshell == 1)
+	if (is_subshell == 1 || is_arithmetic == 1)
 		return (left_is_subshell_handle(token, tokens, i));
 	else
 	{
@@ -70,9 +72,9 @@ void	handle_operators(t_node *head, t_token *tokens)
 		i++;
 	i--;
 	head->right_operator = get_right_operator(head->tokens[i], tokens,
-			head->is_subshell);
+			head->is_subshell, head->is_arithmetic);
 	head->left_operator = get_left_operator(head->tokens[0], tokens,
-			head->is_subshell);
+			head->is_subshell, head->is_arithmetic);
 }
 
 void	assign_operators(t_node *head, t_token *tokens)

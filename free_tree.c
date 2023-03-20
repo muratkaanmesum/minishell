@@ -56,7 +56,7 @@ void	free_tree_rec(t_node *head)
 	int	i;
 
 	i = 0;
-	if (head->connection_count == 1)
+	if (head->connection_count == 1 && head->is_arithmetic == 0)
 	{
 		free_simple_command(head->command);
 		free_all(head);
