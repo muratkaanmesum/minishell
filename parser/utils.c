@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 17:05:18 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/20 19:08:45 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_token	*remove_parantheses(t_token *tokens)
 		}
 		new_split[j - 1].token = UNKNOWN;
 		free_tokens_str(tokens);
-		free(tokens);
 		return (new_split);
 	}
 	return (tokens);
