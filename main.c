@@ -169,15 +169,15 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		head = parser(tokens, execute_struct);
-		// if (head == NULL)
-		// {
-		// 	free(inpt);
-		// 	free_tokens_str(tokens);
-		// 	free(tokens);
-		// 	continue ;
-		// }
-		// expander(head);
-		// execute(head);
+		if (head == NULL)
+		{
+			free(inpt);
+			free_tokens_str(tokens);
+			free(tokens);
+			continue ;
+		}
+		expander(head);
+		execute(head);
 		free_tree(head,tokens);
 		free(inpt);
 	}
