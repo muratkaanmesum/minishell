@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 15:01:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:16:46 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ char	*find_in_path(char *command, char **env)
 	char	**path;
 	char	*tmp;
 	char	*tmp2;
+	char	*path_str;
 
-	path = ft_split(get_env_value(env, "PATH"), ':');
+	path_str = get_env_value(env, "PATH");
+	if (path_str == NULL)
+		return (NULL);
+	path = ft_split(path_str, ':');
 	i = 0;
 	while (path[i])
 	{
