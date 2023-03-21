@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   create_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
 /*   Updated: 2023/03/21 15:33:33 by mmesum           ###   ########.fr       */

@@ -109,6 +109,7 @@ void	exec_all(t_node *head)
 int	execute(t_node *head)
 {
 	handle_pipes(head);
+	handle_heredocs(head);
 	exec_all(head);
 	close_all_fds(head);
 	return (0);

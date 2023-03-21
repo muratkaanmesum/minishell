@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
 /*   Updated: 2023/03/21 12:27:16 by mmesum           ###   ########.fr       */
@@ -39,5 +39,5 @@ void	execute_node(t_node *node);
 int		get_export_count(char **env);
 int		check_errors(t_node *node);
 char	*check_in_path(char *command, char *path);
-
+void	handle_heredocs(t_node *node);
 #endif

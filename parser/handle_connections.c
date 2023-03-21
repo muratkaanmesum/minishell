@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
 /*   Updated: 2023/03/21 15:33:35 by mmesum           ###   ########.fr       */
