@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 06:39:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 06:42:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*heredoc_str(t_node *node, int i)
 	char			*ret;
 	char			*new_line;
 
-	// printf("!%u\n", node->redirections->infile_type[i]);
-	// printf("infile count %d\n", node->redirections->infile_count);
 	ret = "";
 	new_line = "\n";
 	while (1)
