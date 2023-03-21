@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 08:12:58 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:17:31 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void		assign_default_values(int *i, int *in_quote, int *flag);
 void		pass_env(char *str, int start_index, int *i);
 void		handle_all_exec_code(t_node *node);
 void		handle_redirection_env(t_node *node, t_env *env);
+int			check_env_stop(char *str, int i);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 12:31:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 12:34:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ char	*find_in_path(char *command, char **env)
 	{
 		val = check_in_path(command, path[i]);
 		if (val != NULL)
+		{
+			free_double_ptr(path);
 			return (val);
+		}
 		i++;
 	}
 	free_double_ptr(path);
