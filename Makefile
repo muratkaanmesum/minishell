@@ -61,6 +61,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           libft/ft_isalpha.c \
                           libft/ft_calloc.c \
                           main.c \
+                          main_utils.c \
                           free_tree.c \
                           utils.c\
                           signal.c\
@@ -88,6 +89,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/assign_operators.c\
                             parser/connection_utils.c\
                             parser/operators_utils.c\
+                            parser/handle_only_red.c\
                           expander/expander.c\
                           expander/env/handle_env.c\
                           expander/env/env_utils.c\
@@ -122,7 +124,9 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/exec_builtins.c\
                             execute/handle_files.c\
                             execute/execute_subshell.c\
+                            execute/execute_node_utils.c\
                             execute/handle_heredocs.c\
+
 
 
 

@@ -6,11 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:41:00 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/14 13:58:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:33:45 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 void	handle_command(t_node *node)
 {

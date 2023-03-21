@@ -6,11 +6,11 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 11:04:16 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:33:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 int	does_priority(t_token *tokens, enum e_token token)
 {
@@ -67,6 +67,8 @@ void	assign_head_values(t_node *head, t_token *tokens, t_execute *execute)
 	head->out_fd = STDOUT_FILENO;
 	head->execute = execute;
 	head->is_executed = 0;
+	head->left_operator = UNKNOWN_TOKEN;
+	head->right_operator = UNKNOWN_TOKEN;
 }
 
 int	assign_split_type(t_node *head)
@@ -94,22 +96,15 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 	cleared_tokens = create_redirections(head);
 	if (cleared_tokens != NULL)
 		head->tokens = cleared_tokens;
+	if (head->tokens[0].token == UNKNOWN)
+		return (head);
 	if (check_parantheses(head->tokens) == 1)
 		check_if_subshell(head);
 	split_type = assign_split_type(head);
 	if (handle_split_type(split_type, head, &split) == 0)
 		return (head);
 	i = 0;
-	if (split != NULL)
-	{
-		while (i < connection_count(head->tokens, split_type))
-		{
-			head->connections[i] = handle_connections(malloc(sizeof(t_node)),
-														split[i],
-														execute);
-			i++;
-		}
-		free(split);
-	}
+	assign_connections(head, split_type, split, execute);
+	free(split);
 	return (head);
 }

@@ -6,11 +6,20 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 14:12:40 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:27:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expander.h"
+
+int	check_env_stop(char *str, int i)
+{
+	if (str[i] != '\0' && str[i] != '\'' && str[i] != '"' && str[i] != ' '
+		&& str[i] != '$' && str[i] != '*' && str[i] != '.' && str[i] != ':'
+		&& str[i] != '/' && str[i] != ',')
+		return (1);
+	return (0);
+}
 
 void	free_env(t_env *env)
 {
@@ -35,8 +44,7 @@ char	*find_env_variable(char *value, t_env *env)
 		value++;
 	i = 0;
 	size = 0;
-	while (value[size] != '\0' && value[size] != '\'' && value[size] != '"'
-		&& value[size] != ' ' && value[size] != '$' && value[size] != '*')
+	while (check_env_stop(value, size))
 		size++;
 	while (env[i].name != NULL)
 	{

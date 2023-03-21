@@ -6,11 +6,11 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 11:05:24 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:33:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 int	does_include(t_token *tokens)
 {
@@ -27,6 +27,17 @@ int	does_include(t_token *tokens)
 			i++;
 	}
 	return (0);
+}
+
+void	check_if_only_red(t_token *token, t_node *node)
+{
+	if (token[0].token == UNKNOWN)
+	{
+		node->connection_count = 1;
+		free_tokens_str(node->tokens);
+		node->connections = malloc(sizeof(t_node *));
+		node->command = NULL;
+	}
 }
 
 t_token	*create_redirections(t_node *node)
@@ -46,6 +57,7 @@ t_token	*create_redirections(t_node *node)
 		node->redirections = malloc(sizeof(t_redirections));
 		handle_redirection(node);
 		token = clear_redirections(node);
+		check_if_only_red(token, node);
 		return (token);
 	}
 	else

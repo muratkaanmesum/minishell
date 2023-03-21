@@ -6,80 +6,80 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 15:41:13 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:34:09 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
-void	print_token(t_token *token)
-{
-	int	i;
+// void	print_token(t_token *token)
+// {
+// 	int	i;
 
-	i = 0;
-	while (token[i].token != UNKNOWN)
-	{
-		printf("value: %s id : %d token : ", token[i].str, token[i].id);
-		switch (token[i].token)
-		{
-		case PIPE:
-			printf("PIPE\n");
-			break ;
-		case UNKNOWN:
-			printf("UNKNOWN\n");
-			break ;
-		case I_REDIRECTION:
-			printf("I_REDIRECTION\n");
-			break ;
-		case O_REDIRECTION:
-			printf("O_REDIRECTION\n");
-			break ;
-		case APPEND_RED:
-			printf("APPEND_RED\n");
-			break ;
-		case HERE_DOC:
-			printf("HERE_DOC\n");
-			break ;
-		case COMMAND:
-			printf("COMMAND\n");
-			break ;
-		case ARG:
-			printf("ARG\n");
-			break ;
-		case OPTION:
-			printf("OPTION\n");
-			break ;
-		case AND:
-			printf("AND\n");
-			break ;
-		case OR:
-			printf("OR\n");
-			break ;
-		case ENV_COMMAND:
-			printf("ENV_COMMAND\n");
-			break ;
-		case ENV:
-			printf("ENV\n");
-			break ;
-		case RED_FILE:
-			printf("RED_FILE\n");
-			break ;
-		case OPEN_PAR:
-			printf("OPEN_PAR\n");
-			break ;
-		case CLOSE_PAR:
-			printf("CLOSE_PAR\n");
-			break ;
-		case UNKNOWN_TOKEN:
-			printf("UNKNOWN_TOKEN\n");
-			break ;
-		default:
-			printf("UNKNOWN\n");
-			break ;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (token[i].token != UNKNOWN)
+// 	{
+// 		printf("value: %s id : %d token : ", token[i].str, token[i].id);
+// 		switch (token[i].token)
+// 		{
+// 		case PIPE:
+// 			printf("PIPE\n");
+// 			break ;
+// 		case UNKNOWN:
+// 			printf("UNKNOWN\n");
+// 			break ;
+// 		case I_REDIRECTION:
+// 			printf("I_REDIRECTION\n");
+// 			break ;
+// 		case O_REDIRECTION:
+// 			printf("O_REDIRECTION\n");
+// 			break ;
+// 		case APPEND_RED:
+// 			printf("APPEND_RED\n");
+// 			break ;
+// 		case HERE_DOC:
+// 			printf("HERE_DOC\n");
+// 			break ;
+// 		case COMMAND:
+// 			printf("COMMAND\n");
+// 			break ;
+// 		case ARG:
+// 			printf("ARG\n");
+// 			break ;
+// 		case OPTION:
+// 			printf("OPTION\n");
+// 			break ;
+// 		case AND:
+// 			printf("AND\n");
+// 			break ;
+// 		case OR:
+// 			printf("OR\n");
+// 			break ;
+// 		case ENV_COMMAND:
+// 			printf("ENV_COMMAND\n");
+// 			break ;
+// 		case ENV:
+// 			printf("ENV\n");
+// 			break ;
+// 		case RED_FILE:
+// 			printf("RED_FILE\n");
+// 			break ;
+// 		case OPEN_PAR:
+// 			printf("OPEN_PAR\n");
+// 			break ;
+// 		case CLOSE_PAR:
+// 			printf("CLOSE_PAR\n");
+// 			break ;
+// 		case UNKNOWN_TOKEN:
+// 			printf("UNKNOWN_TOKEN\n");
+// 			break ;
+// 		default:
+// 			printf("UNKNOWN\n");
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// }
 
 t_token	*remove_parantheses(t_token *tokens)
 {
@@ -97,9 +97,11 @@ t_token	*remove_parantheses(t_token *tokens)
 		while (j < i - 1)
 		{
 			new_split[j - 1] = tokens[j];
+			new_split[j - 1].str = ft_strdup(tokens[j].str);
 			j++;
 		}
 		new_split[j - 1].token = UNKNOWN;
+		free_tokens_str(tokens);
 		return (new_split);
 	}
 	return (tokens);
@@ -145,4 +147,19 @@ int	is_arithmetic(t_token *tokens)
 	if (tokens[i].token == CLOSE_PAR && tokens[i + 1].token == UNKNOWN)
 		return (1);
 	return (0);
+}
+
+void	assign_connections(t_node *head, enum e_token split_type,
+		t_token **split, t_execute *execute)
+{
+	int	i;
+
+	i = 0;
+	while (i < connection_count(head->tokens, split_type))
+	{
+		head->connections[i] = handle_connections(malloc(sizeof(t_node)),
+													split[i],
+													execute);
+		i++;
+	}
 }
