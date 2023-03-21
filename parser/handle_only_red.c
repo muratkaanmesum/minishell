@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:38:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 12:31:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:31:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,13 @@ static void	assign_red_operators(t_node *node, int start_index, int last_index,
 	else
 		node->right_operator = tokens[last_index].token;
 }
-
+static int	pass_to_priority(t_token *tokens, int *last_index)
+{
+	while (tokens[*last_index].token != PIPE && tokens[*last_index].token != AND
+		&& tokens[*last_index].token != OR
+		&& tokens[*last_index].token != UNKNOWN)
+		(*last_index)++;
+}
 void	handle_only_red(t_node *node, t_token *tokens)
 {
 	static int	i;
@@ -66,10 +72,7 @@ void	handle_only_red(t_node *node, t_token *tokens)
 	last_index = 0;
 	while (tokens[start_index].token != UNKNOWN)
 	{
-		while (tokens[last_index].token != PIPE
-			&& tokens[last_index].token != AND && tokens[last_index].token != OR
-			&& tokens[last_index].token != UNKNOWN)
-			last_index++;
+		pass_to_priority(tokens, &last_index);
 		red = check_if_only_red(tokens, start_index, last_index);
 		if (i == count && red)
 		{

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 15:41:18 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:37:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 	if (handle_split_type(split_type, head, &split) == 0)
 		return (head);
 	i = 0;
-	if (split != NULL)
-	{
-		while (i < connection_count(head->tokens, split_type))
-		{
-			head->connections[i] = handle_connections(malloc(sizeof(t_node)),
-														split[i],
-														execute);
-			i++;
-		}
-		free(split);
-	}
+	assign_connections(head, split_type, split, execute);
+	free(split);
 	return (head);
 }

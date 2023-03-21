@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 19:08:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:36:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,4 +147,19 @@ int	is_arithmetic(t_token *tokens)
 	if (tokens[i].token == CLOSE_PAR && tokens[i + 1].token == UNKNOWN)
 		return (1);
 	return (0);
+}
+
+void	assign_connections(t_node *head, enum e_token split_type,
+		t_token **split, t_execute *execute)
+{
+	int	i;
+
+	i = 0;
+	while (i < connection_count(head->tokens, split_type))
+	{
+		head->connections[i] = handle_connections(malloc(sizeof(t_node)),
+				split[i],
+				execute);
+		i++;
+	}
 }

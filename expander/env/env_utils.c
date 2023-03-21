@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:26:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:27:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	check_env_stop(char *str, int i)
 		return (1);
 	return (0);
 }
+
 void	free_env(t_env *env)
 {
 	int	i;
