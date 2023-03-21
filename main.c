@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 11:21:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:25:05 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	print_tree(t_node *head)
 		if (head->command == NULL)
 		{
 			print_token(head->tokens);
+			printf("left_operator %d  right_operator %d\n", head->left_operator,
+					head->right_operator);
+			printf("\n****NULL*****\n");
 			return ;
 		}
 		printf("command : %s ", head->command->command);
@@ -130,6 +133,7 @@ t_execute	*init_execute(char **env)
 	execute_struct->last_exit_code = 0;
 	execute_struct->env = init_env(env);
 	execute_struct->export = init_env(env);
+	execute_struct->only_red_count = 0;
 	return (execute_struct);
 }
 

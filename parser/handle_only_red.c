@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:38:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:42:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:16:01 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ static int	pass_to_priority(t_token *tokens, int *last_index)
 
 void	handle_only_red(t_node *node, t_token *tokens)
 {
-	static int	i;
-	int			start_index;
-	int			last_index;
-	int			count;
-	int			red;
+	int	start_index;
+	int	last_index;
+	int	count;
+	int	red;
 
 	count = 0;
 	start_index = 0;
@@ -76,7 +75,7 @@ void	handle_only_red(t_node *node, t_token *tokens)
 	{
 		pass_to_priority(tokens, &last_index);
 		red = check_if_only_red(tokens, start_index, last_index);
-		if (i == count && red)
+		if (node->execute->only_red_count == count && red)
 		{
 			assign_red_operators(node, start_index, last_index, tokens);
 			break ;
@@ -90,5 +89,5 @@ void	handle_only_red(t_node *node, t_token *tokens)
 		if (tokens[last_index].token != UNKNOWN)
 			last_index++;
 	}
-	i++;
+	node->execute->only_red_count++;
 }

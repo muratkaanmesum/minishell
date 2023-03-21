@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 13:47:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:04:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	handle_operators(t_node *head, t_token *tokens)
 	if (i == 0)
 	{
 		handle_only_red(head, tokens);
-		printf("left %d right %d\n", head->left_operator, head->right_operator);
 		return ;
 	}
 	i--;
@@ -81,7 +80,6 @@ void	handle_operators(t_node *head, t_token *tokens)
 			head->is_subshell, head->is_arithmetic);
 	head->left_operator = get_left_operator(head->tokens[0], tokens,
 			head->is_subshell, head->is_arithmetic);
-	printf("left %d right %d\n", head->left_operator, head->right_operator);
 }
 
 void	assign_operators(t_node *head, t_token *tokens)
