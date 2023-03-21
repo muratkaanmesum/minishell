@@ -6,58 +6,55 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 21:09:03 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 12:52:54 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-void	heredoc_str(t_node *node, int i)
+char	*heredoc_str(t_node *node, int i)
 {
-	char	*str;
+	enum e_token	*in_type;
+	char			*str;
+	char			*ret;
+	char			*new_line;
 
+	// printf("!%u\n", node->redirections->infile_type[i]);
+	// printf("infile count %d\n", node->redirections->infile_count);
+	ret = "";
+	new_line = "\n";
 	while (1)
 	{
 		str = readline(">");
-		printf("%s\n", str);
 		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
 			break ;
+		ret = ft_strjoin(ret, str);
+		ret = ft_strjoin(ret, new_line);
 	}
+	return (ret);
 }
 
 void	handle_node_heredoc(t_node *node)
 {
-	int	i;
+	int		i;
+	int		fd[2];
+	char	*ret_str;
 
-	/*
-		1) infile sayısı kadar dön
-		2) readline ile kelimeleri al + join ile \n ekle ve birleştir
-		3) fd[2] aç, pipe'la
-		4) fd[1] e yaz
-		5) fd[0] dan okunur
-		6) in_fd != 0 (yani pipe'lanmıştır o zaman close yap)
-	*/
-	// int fd[2];
-	// while(i < count)
-	// {
-	// 	heredoc_loop();
-	// }
-	// while(1){
-	// 	char *str = readline(">");
-	// 	//join
-	// 	BREAK;
-	// }
-	// if()
-	// pipe(fd);
-	// fd[0];
-	// write(fd[1],str,ft_strlen(str));
-	// if(in_fd != 0)
-	// 	close(fd);
-	// 	node->in_fd = fd[0];
 	i = 0;
-	while (i < node->redirections->infile_count)
+	//printf("count %d\n",node->redirections->infile_count);
+	while (i < node->redirections->infile_count
+		&& node->redirections->infile_type[i] == 2)
 	{
-		heredoc_str(node, i);
+		ret_str = heredoc_str(node, i);
+		printf("--> %s", ret_str);
+		write(fd[1], &ret_str, ft_strlen(ret_str));
+		if (node->in_fd != 0)
+			close(fd);
+		pipe(fd);
+		node->out_fd = fd[1];
+		node->in_fd = fd[0];
+		printf("in fd %d\n", node->in_fd);
+		printf("out fd %d\n", node->out_fd);
 		i++;
 	}
 	// printf("---\n");
