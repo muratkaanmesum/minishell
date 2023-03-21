@@ -6,205 +6,105 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/15 06:45:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 18:31:42 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-int quotes_control(char *command)
+void	handle_forcommand_option(t_command *command, t_com *com)
 {
-	int i = 0;
-	int start = 0,end = 0;
-	while(command[i])
+	com->count = 0;
+	com->count = countWildcard(NULL, com->str, &com->count);
+	if (com->count >= 1)
 	{
-		if (command[i] == '\'' || command[i] == '"')
-		{
-			start = i;
-			i++;
-			while(command[i] != '\'' && command[i] != '"')
-				i++;
-			end = i;
-		}
-		i++;
+		com->command_files = malloc(sizeof(char *) * (com->count + 1));
+		expandWildcard(NULL, com->str, com->command_files, &com->index);
+		com->command_files[com->index] = NULL;
+		if (com->command_files == NULL)
+			return ;
+		command->command = com->command_files[0];
+		add_command_to_arg(command, com->command_files);
 	}
-	while(start < end)
-	{
-		if (command[start] == '*')
-			return (0);
-		start++;
-	}
-	return (1);
 }
 
-
-void	fix_str(char *str)
+void	handle_forcommand(t_command *command, t_com *com)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '*' && str[i + 1] == '*')
-		{
-			i++;
-			continue ;
-		}
-		str[j] = str[i];
-		i++;
-		j++;
-	}
-	str[j] = '\0';
-}
-
-char	*delete_quote(char *str)
-{
-	char	*new_str;
-	int		i;
-	int		j;
-
-	new_str = malloc(sizeof(char) * (get_length(str) + 1));
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\'' || str[i] == '"')
-			i++;
-		else
-		{
-			new_str[j] = str[i];
-			i++;
-			j++;
-		}
-	}
-	new_str[j] = '\0';
-	return (new_str);
-}
-
-void add_command_to_arg(t_command *command,char **files)
-{
-	if (files == NULL)
-		return ;
-	int count_files = files_count(files);
-	int total_arg = count_files - 1 + command->argument_count;
-	char **new_args = malloc(sizeof(char*) * (total_arg + 1));
-	int i = 1;
-	int k = 0;
-	while(i < count_files)
-	{
-		new_args[k] = ft_strdup(files[i]);
-		i++;
-		k++;
-	}
-	int j = 0;
-	while(j < command->argument_count)
-	{
-		new_args[k] = ft_strdup(command->arguments[j]);
-		k++;
-		j++;
-	}
-	new_args[k] = NULL;
-	command->argument_count = total_arg;
-	//free(command->arguments); // içindekileri de freele
-	command->arguments = new_args;
-}
-
-void	handle_forcommand(t_command *command)
-{
-	char		**files;
-	char		buf[1024];
-	static char	*prefix;
-	int count;
-	int index = 0;
-
-
+	com->index = 0;
 	fix_str(command->command);
 	if (quotes_control(command->command) == 1)
 	{
-		char *str = delete_quote(command->command);
-		if (is_asterisk(str) && asterisk_slash(str) == 0)
+		com->str = delete_quote(command->command);
+		if (is_asterisk(com->str) && asterisk_slash(com->str) == 0)
 		{
-			files = just_asterisk(str);
-
-			int count_files = files_count(files);
-			if (files[0] == NULL)
-				return;
-				if(files[0] != NULL)
-				command->command = files[0];
-			add_command_to_arg(command,files);
+			com->files = just_asterisk(com->str);
+			com->count_files = files_count(com->files);
+			if (com->files[0] == NULL)
+				return ;
+			if (com->files[0] != NULL)
+				command->command = com->files[0];
+			add_command_to_arg(command, com->files);
 		}
-		else if (asterisk_slash(str) == 1)
-		{
-			count = 0;
-			count = countWildcard(NULL, str,&count);
-			if (count >= 1)
-			{
-				char **command_files = malloc(sizeof(char *) * (count + 1));
-				expandWildcard(NULL,str,command_files,&index);
-				command_files[index] = NULL;
-				if(command_files == NULL)
-					return;
-					command->command = command_files[0];
-					add_command_to_arg(command,command_files);
-			}
-		}
-		free(str);
-
+		else if (asterisk_slash(com->str) == 1)
+			handle_forcommand_option(command, com);
+		free(com->str);
 	}
 }
 
-void	handle_forarg(t_command *command)
+void	handle_forarg_option(t_command *command, t_arg *arg)
 {
-	char	**match_files;
-	int		i;
-	int count;
-
-	i = 0;
-	count = 0;
-	while (i < command->argument_count)
+	arg->count = countWildcard(NULL, arg->str, &arg->count);
+	if (arg->count >= 1)
 	{
-		if (quotes_control(command->arguments[i]) == 1)
+		arg->index = 0;
+		arg->arg_files = malloc(sizeof(char *) * (arg->count + 1));
+		expandWildcard(NULL, arg->str, arg->arg_files, &arg->index);
+		arg->arg_files[arg->count] = NULL;
+		match_arg_files(arg->arg_files, command, arg->i);
+	}
+}
+
+void	handle_forarg(t_command *command, t_arg *arg)
+{
+	arg->i = 0;
+	arg->count = 0;
+	while (arg->i < command->argument_count)
+	{
+		if (quotes_control(command->arguments[arg->i]) == 1)
 		{
-			char *str = delete_quote(command->arguments[i]);
-			if (is_asterisk(str)
-				&& asterisk_slash(str) == 0)
+			arg->str = delete_quote(command->arguments[arg->i]);
+			if (is_asterisk(arg->str) && asterisk_slash(arg->str) == 0)
 			{
-				fix_str(str);
-				match_files = just_asterisk(str);
-				match_files = sort_files(match_files, str);
-				match_arg_files(match_files, command, i);
+				fix_str(arg->str);
+				arg->match_files = just_asterisk(arg->str);
+				arg->match_files = sort_files(arg->match_files, arg->str);
+				match_arg_files(arg->match_files, command, arg->i);
 			}
-			if (asterisk_slash(str) == 1)
-			{
-				count = countWildcard(NULL, str,&count);
-				if (count >= 1)
-				{
-					int index = 0;
-					char **arg_files = malloc(sizeof(char *) * (count + 1));
-					expandWildcard(NULL,str,arg_files,&index);
-					arg_files[count] = NULL;
-					match_arg_files(arg_files,command,i);
-				}
-			}
-			free(str);
+			if (asterisk_slash(arg->str) == 1)
+				handle_forarg_option(command, arg);
+			free(arg->str);
 		}
-		i++;
+		arg->i++;
 	}
 }
 
 void	handle_node_wildcard(t_node *node)
 {
-	if(node->command->command[0] == '/')
-		return;
-	int i = 0;
-	while(node->command->arguments[i])
+	t_com	*com;
+	t_arg	*arg;
+	int		i;
+
+	com = malloc(sizeof(t_com) * 1);
+	arg = malloc(sizeof(t_arg) * 1);
+	if (node->command->command[0] == '/')
+		return ;
+	i = 0;
+	while (node->command->arguments[i])
 	{
-		if(node->command->arguments[i][0] == '/')
-			return;
+		if (node->command->arguments[i][0] == '/')
+			return ;
 		i++;
 	}
-	handle_forcommand(node->command);
-	handle_forarg(node->command);
+	handle_forcommand(node->command, com);
+	handle_forarg(node->command, arg);
 }

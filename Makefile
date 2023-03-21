@@ -10,8 +10,8 @@
 NAME        := minishell
 CC        := gcc
 
-#FLAGS    := -fsanitize=address
-FLAGS       := -g -O0
+# FLAGS    := -fsanitize=address
+# FLAGS       := -g -O0
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -106,6 +106,8 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/ambiguous.c\
                           expander/wildcard/match_arg_files.c\
                           expander/wildcard/command_file.c\
+                          expander/wildcard/handle_node_utils.c\
+                          expander/wildcard/command_to_arg.c\
                           expander/env/assign_env_utils.c\
                           expander/env/handle_exec_code.c\
                           execute/execute.c\
