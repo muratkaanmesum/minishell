@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredocs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 12:52:54 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 06:39:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*heredoc_str(t_node *node, int i)
 		str = readline(">");
 		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
 			break ;
-		ret = ft_strjoin(ret, str);
+		ret = ft_strjoin(ret, str); //libft join
 		ret = ft_strjoin(ret, new_line);
 	}
 	return (ret);
@@ -39,25 +39,31 @@ void	handle_node_heredoc(t_node *node)
 	int		i;
 	int		fd[2];
 	char	*ret_str;
+	int		pid;
 
 	i = 0;
-	//printf("count %d\n",node->redirections->infile_count);
-	while (i < node->redirections->infile_count
-		&& node->redirections->infile_type[i] == 2)
+	while (i < node->redirections->infile_count)
 	{
-		ret_str = heredoc_str(node, i);
-		printf("--> %s", ret_str);
-		write(fd[1], &ret_str, ft_strlen(ret_str));
-		if (node->in_fd != 0)
-			close(fd);
-		pipe(fd);
-		node->out_fd = fd[1];
-		node->in_fd = fd[0];
-		printf("in fd %d\n", node->in_fd);
-		printf("out fd %d\n", node->out_fd);
+		if (node->redirections->infile_type[i] == HERE_DOC)
+		{
+			pipe(fd);
+			ret_str = heredoc_str(node, i);
+			pid = fork();
+			if (pid == 0)
+			{
+				write(fd[1], ret_str, ft_strlen(ret_str));
+				close(fd[1]);
+				close_all_fds(node->execute->top_node);
+				if (node->in_fd != 0)
+					close(node->in_fd);
+				exit(0);
+			}
+			node->in_fd = fd[0];
+			close(fd[1]);
+			waitpid(pid, NULL, 0);
+		}
 		i++;
 	}
-	// printf("---\n");
 }
 
 void	handle_heredocs(t_node *node)

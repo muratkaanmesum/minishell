@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 12:37:06 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 06:03:44 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	execute(t_node *head)
 {
 	handle_pipes(head);
 	handle_heredocs(head);
-	// exec_all(head);
-	// close_all_fds(head);
+	exec_all(head);
+	close_all_fds(head);
 	return (0);
 }
