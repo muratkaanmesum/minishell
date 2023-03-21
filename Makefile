@@ -123,6 +123,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/exec_builtins.c\
                             execute/handle_files.c\
                             execute/execute_subshell.c\
+                            execute/execute_node_utils.c\
 
 
 

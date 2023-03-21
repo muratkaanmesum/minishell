@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 14:11:03 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 12:27:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,7 @@ int		handle_priority(t_node *head, int i);
 void	print_all_fds(t_node *node);
 void	execute_node(t_node *node);
 int		get_export_count(char **env);
+int		check_errors(t_node *node);
+char	*check_in_path(char *command, char *path);
+
 #endif
