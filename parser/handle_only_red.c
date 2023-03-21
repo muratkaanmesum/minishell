@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:38:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:31:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:42:06 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	assign_red_operators(t_node *node, int start_index, int last_index,
 	else
 		node->right_operator = tokens[last_index].token;
 }
+
 static int	pass_to_priority(t_token *tokens, int *last_index)
 {
 	while (tokens[*last_index].token != PIPE && tokens[*last_index].token != AND
@@ -59,6 +60,7 @@ static int	pass_to_priority(t_token *tokens, int *last_index)
 		&& tokens[*last_index].token != UNKNOWN)
 		(*last_index)++;
 }
+
 void	handle_only_red(t_node *node, t_token *tokens)
 {
 	static int	i;

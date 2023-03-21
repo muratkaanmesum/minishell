@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:36:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 13:44:18 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,8 @@ void	assign_connections(t_node *head, enum e_token split_type,
 	while (i < connection_count(head->tokens, split_type))
 	{
 		head->connections[i] = handle_connections(malloc(sizeof(t_node)),
-				split[i],
-				execute);
+													split[i],
+													execute);
 		i++;
 	}
 }
