@@ -61,6 +61,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           libft/ft_isalpha.c \
                           libft/ft_calloc.c \
                           main.c \
+                          main_utils.c \
                           free_tree.c \
                           utils.c\
                           signal.c\

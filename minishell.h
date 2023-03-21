@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 14:36:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:11:05 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,4 +147,9 @@ void	assign_connections(t_node *head,
 						t_token **split,
 						t_execute *execute);
 int							get_token_len(t_token *tokens);
+void						exec_rest(t_node *head, t_token *tokens,
+								char *input);
+int							parse_error_free(t_node *head, t_token *tokens,
+								char *inpt);
+int							first_check_free(t_token *tokens, char *inpt);
 #endif

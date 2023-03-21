@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:01:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:12:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,29 +137,6 @@ t_execute	*init_execute(char **env)
 	return (execute_struct);
 }
 
-int	parse_error_free(t_node *head, t_token *tokens, char *inpt)
-{
-	if (head == NULL)
-	{
-		free(inpt);
-		free_tokens_str(tokens);
-		free(tokens);
-		return (1);
-	}
-	return (0);
-}
-
-int	first_check_free(t_token *tokens, char *inpt)
-{
-	if (check_first(tokens) == 1)
-	{
-		free(inpt);
-		free_tokens_str(tokens);
-		free(tokens);
-		return (1);
-	}
-}
-
 void	main_loop(t_execute *execute_struct)
 {
 	char	*input;
@@ -185,12 +162,10 @@ void	main_loop(t_execute *execute_struct)
 		head = parser(tokens, execute_struct);
 		if (parse_error_free(head, tokens, input) == 1)
 			continue ;
-		expander(head);
-		execute(head);
-		free_tree(head, tokens);
-		free(input);
+		exec_rest(head, tokens, input);
 	}
 }
+
 int	main(int argc, char **argv, char **env)
 {
 	t_execute	*execute_struct;
