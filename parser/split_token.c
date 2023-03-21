@@ -6,11 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/19 15:48:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:34:06 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 int	connection_count(t_token *tokens, enum e_token token)
 {
@@ -27,7 +27,7 @@ int	connection_count(t_token *tokens, enum e_token token)
 		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			count++;
 		else if (token == -1 && (tokens[i].token == AND
-				|| tokens[i].token == OR))
+					|| tokens[i].token == OR))
 			count++;
 		if (tokens[i].token != UNKNOWN)
 			i++;
@@ -72,7 +72,7 @@ int	split_token_count(t_token *tokens, enum e_token token)
 		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			break ;
 		else if (token == -1 && (tokens[i].token == AND
-				|| tokens[i].token == OR))
+					|| tokens[i].token == OR))
 			break ;
 		if (tokens[i].token != UNKNOWN)
 			i++;

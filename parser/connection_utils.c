@@ -6,11 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:33:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 14:30:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:33:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "parser.h"
 
 int	handle_split_type(enum e_token split_type, t_node *head, t_token ***split)
 {

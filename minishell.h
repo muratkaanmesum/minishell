@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:11:05 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:32:06 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,44 +94,16 @@ typedef struct s_token
 }							t_token;
 t_token						*lexer(char *str);
 t_node						*parser(t_token *tokens, t_execute *execute);
-t_token						*create_redirections(t_node *node);
-int							command_count(t_token *tokens);
-void						handle_redirection(t_node *node);
-int	connection_count(t_token *tokens,
-						enum e_token token);
-int							get_split_tokens(t_token *tokens);
-void						assign_values(t_token *tokens, enum e_token token,
-								int *i, t_token **split);
-t_token						**split_token(t_token *tokens, enum e_token token);
-int							check_parantheses(t_token *tokens);
-t_node						*handle_connections(t_node *head, t_token *tokens,
-								t_execute *execute);
-void						pass_parantheses(t_token *tokens, int *i);
-t_token						*remove_parantheses(t_token *tokens);
 void						print_token(t_token *token);
-int							does_priority(t_token *tokens, enum e_token token);
-t_token						*clear_redirections(t_node *node);
-void						handle_simple_command(t_node *node);
-void						assign_operators(t_node *head, t_token *tokens);
-int							get_in_all_tokens(t_token token, t_token *tokens);
-int	left_is_subshell_handle(t_token token,
-							t_token *tokens,
-							int i);
 int							parse_error(t_token *tokens);
 void						expander(t_node *head);
 int							is_arithmetic(t_token *tokens);
 int							check_first(t_token *tokens);
 void						wildcard(t_node *node);
 void						print_tree(t_node *head);
-int	handle_split_type(enum e_token split_type,
-						t_node *head,
-						t_token ***split);
 int							get_last_execute_code(t_node *head);
-;
 int							execute(t_node *head);
-int							free_token(t_token *tokens);
 void						free_tree(t_node *head, t_token *tokens);
-void						free_split(char **split);
 int							get_length(char *str);
 void						free_double_ptr(char **arr);
 void						free_tokens_str(t_token *token);
@@ -140,12 +112,6 @@ void						ctrl_d(char *input, t_execute *execute);
 void						free_execute(t_execute *execute);
 int							get_env_len(char *env);
 int							get_double_ptr_len(char **arr);
-void						copy_token(t_token *dest, t_token src);
-void						handle_only_red(t_node *node, t_token *tokens);
-void	assign_connections(t_node *head,
-						enum e_token split_type,
-						t_token **split,
-						t_execute *execute);
 int							get_token_len(t_token *tokens);
 void						exec_rest(t_node *head, t_token *tokens,
 								char *input);

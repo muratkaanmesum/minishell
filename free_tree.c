@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_tree.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/21 15:24:57 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/21 15:25:02 by mmesum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	free_redirections(t_redirections *redirections)
@@ -40,6 +52,7 @@ void	free_simple_command(t_command *command)
 	free(command->command);
 	free(command);
 }
+
 void	free_all(t_node *head)
 {
 	int	i;
