@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:16:13 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/16 20:29:22 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:36:48 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ void	take_one_file(t_node *node, int in_or, int index, int key)
 	char	**files;
 	int		count;
 
-	// if (in_or == 1)
-	// 	printf("BAS infile sonuc %s\n", node->redirections->infile[index]);
-	// else if (in_or == 2)
-	// 	printf("BAS outfile sonuc %s\n", node->redirections->outfile[index]);
 	count = 0;
 	if (key == 1 && in_or == 1)
 	{
@@ -70,10 +66,6 @@ void	take_one_file(t_node *node, int in_or, int index, int key)
 			node->redirections->outfile[index] = files[0];
 		}
 	}
-	// if (in_or == 1)
-	// 	printf("SON infile sonuc %s\n", node->redirections->infile[index]);
-	// else if (in_or == 2)
-	// 	printf("SON outfile sonuc %s\n", node->redirections->outfile[index]);
 }
 
 void	is_ambiguous(t_node *node)
