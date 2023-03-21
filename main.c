@@ -178,7 +178,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		expander(head);
 		execute(head);
-		free_tree(head,tokens);
+		//free_tree(head,tokens);
 		free(inpt);
 	}
 	return (0);
