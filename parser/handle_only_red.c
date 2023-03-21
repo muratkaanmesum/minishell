@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:38:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 14:16:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:37:46 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ int	check_if_only_red(t_token *tokens, int start_index, int end_index)
 	return (1);
 }
 
-int	get_token_len(t_token *tokens)
+void	assign_red_values(int *start_index, int *last_index, int *count,
+		t_token *tokens)
 {
-	int	i;
-
-	i = 0;
-	while (tokens[i].token != UNKNOWN)
-		i++;
-	return (i);
+	if (*last_index + 1 > get_token_len(tokens))
+		*start_index = get_token_len(tokens);
+	else
+		*start_index = *last_index + 1;
+	if (tokens[*last_index].token != UNKNOWN)
+		(*last_index)++;
 }
 
 static void	assign_red_operators(t_node *node, int start_index, int last_index,
@@ -82,12 +83,7 @@ void	handle_only_red(t_node *node, t_token *tokens)
 		}
 		if (red == 1)
 			count++;
-		if (last_index + 1 > get_token_len(tokens))
-			start_index = get_token_len(tokens);
-		else
-			start_index = last_index + 1;
-		if (tokens[last_index].token != UNKNOWN)
-			last_index++;
+		assign_red_values(&start_index, &last_index, &count, tokens);
 	}
 	node->execute->only_red_count++;
 }

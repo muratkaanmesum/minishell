@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connection_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:33:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/11 13:26:22 by kali             ###   ########.fr       */
+/*   Updated: 2023/03/21 14:30:17 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,14 @@ int	handle_split_type(enum e_token split_type, t_node *head, t_token ***split)
 		return (0);
 	}
 	return (0);
+}
+
+int	get_token_len(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i].token != UNKNOWN)
+		i++;
+	return (i);
 }

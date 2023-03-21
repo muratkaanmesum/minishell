@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 08:50:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:40:05 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ int	does_include(t_token *tokens)
 	return (0);
 }
 
+void	check_if_only_red(t_token *token, t_node *node)
+{
+	if (token[0].token == UNKNOWN)
+	{
+		node->connection_count = 1;
+		free_tokens_str(node->tokens);
+		node->connections = malloc(sizeof(t_node *));
+		node->command = NULL;
+	}
+}
+
 t_token	*create_redirections(t_node *node)
 {
 	t_redirections	*red;
@@ -46,13 +57,7 @@ t_token	*create_redirections(t_node *node)
 		node->redirections = malloc(sizeof(t_redirections));
 		handle_redirection(node);
 		token = clear_redirections(node);
-		if (token[0].token == UNKNOWN)
-		{
-			node->connection_count = 1;
-			free_tokens_str(node->tokens);
-			node->connections = malloc(sizeof(t_node *));
-			node->command = NULL;
-		}
+		check_if_only_red(token, node);
 		return (token);
 	}
 	else
