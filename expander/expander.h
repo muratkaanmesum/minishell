@@ -6,13 +6,14 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:17:31 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:51:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANDER_H
 # define EXPANDER_H
 # include "../minishell.h"
+
 typedef struct s_env
 {
 	char	*name;

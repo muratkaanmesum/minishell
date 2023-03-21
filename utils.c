@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 08:31:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 14:54:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	free_double_ptr(char **arr)
 		free(arr[i]);
 		i++;
 	}
-	//free last one
 	free(arr);
 }
 

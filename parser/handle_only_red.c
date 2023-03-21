@@ -6,13 +6,13 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:38:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 14:37:46 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 15:06:10 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_if_only_red(t_token *tokens, int start_index, int end_index)
+int	check_only_if_red(t_token *tokens, int start_index, int end_index)
 {
 	int	i;
 
@@ -75,7 +75,7 @@ void	handle_only_red(t_node *node, t_token *tokens)
 	while (tokens[start_index].token != UNKNOWN)
 	{
 		pass_to_priority(tokens, &last_index);
-		red = check_if_only_red(tokens, start_index, last_index);
+		red = check_only_if_red(tokens, start_index, last_index);
 		if (node->execute->only_red_count == count && red)
 		{
 			assign_red_operators(node, start_index, last_index, tokens);
