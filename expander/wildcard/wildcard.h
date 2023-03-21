@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 18:58:05 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/21 20:37:05 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void		fix_str(char *str);
 int			quotes_control(char *command);
 void		command_to_arg_files(t_command *command, char **new_args,
 				int count_files, char **files);
+char		**get_w_dot_files(void);
 #endif

@@ -6,50 +6,11 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/15 06:06:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 20:37:53 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
-
-int	search_files_count(char **files, char *find)
-{
-	int	i;
-	int	j;
-	int	k;
-	int	total;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	total = 0;
-	while (files[i] != NULL)
-	{
-		j = 0;
-		while (files[i][j])
-		{
-			k = 0;
-			if (files[i][j] == find[k])
-			{
-				while (find[k] == files[i][j])
-				{
-					j++;
-					k++;
-					if (find[k] == '\0')
-					{
-						total++;
-						printf("totati arttıran dosay :%s\n", files[i]);
-					}
-					if (files[i][j] == '\0')
-						break ;
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-	return (total);
-}
 
 char	**take_file(char **files, char *command)
 {
@@ -80,57 +41,6 @@ char	**take_file(char **files, char *command)
 		if (command[i] != '\0')
 			i++;
 	}
-	return (files);
-}
-int	get_w_path_count(void)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				i;
-
-	i = 0;
-	getcwd(buf, 1024);
-	d = opendir(buf); //gelen pwd için
-	if (d)
-	{
-		while ((dir = readdir(d)) != NULL)
-			if (dir->d_name[0] != '.')
-				i++;
-		// closedir(d);
-	}
-	free(dir);
-	return (i);
-}
-
-char	**get_w_dot_files(void)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				count;
-	char			**files;
-	int				i;
-
-	getcwd(buf, 1024);
-	count = get_w_path_count();
-	files = (char **)malloc(sizeof(char *) * (count + 1));
-	d = opendir(buf); //gelen pwd için
-	if (d)
-	{
-		i = 0;
-		while ((dir = readdir(d)) != NULL)
-		{
-			if (dir->d_name[0] != '.')
-			{
-				files[i] = ft_strdup(dir->d_name);
-				i++;
-			}
-		}
-		closedir(d);
-	}
-	free(dir);
-	files[i] = NULL;
 	return (files);
 }
 
