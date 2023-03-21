@@ -11,7 +11,7 @@ NAME        := minishell
 CC        := gcc
 
 #FLAGS    := -fsanitize=address
-#FLAGS       := -g -O0
+FLAGS       := -g -O0
 
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
@@ -88,6 +88,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/assign_operators.c\
                             parser/connection_utils.c\
                             parser/operators_utils.c\
+                            parser/handle_only_red.c\
                           expander/expander.c\
                           expander/env/handle_env.c\
                           expander/env/env_utils.c\

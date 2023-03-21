@@ -27,6 +27,8 @@ void	free_simple_command(t_command *command)
 {
 	int	i;
 
+	if (command == NULL)
+		return ;
 	i = 0;
 	while (i < command->argument_count)
 	{

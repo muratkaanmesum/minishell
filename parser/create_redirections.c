@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 15:40:16 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 08:50:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ t_token	*create_redirections(t_node *node)
 		node->redirections = malloc(sizeof(t_redirections));
 		handle_redirection(node);
 		token = clear_redirections(node);
-		// free_tokens_str(node->tokens);
-		// free(node->tokens);
+		if (token[0].token == UNKNOWN)
+		{
+			node->connection_count = 1;
+			free_tokens_str(node->tokens);
+			node->connections = malloc(sizeof(t_node *));
+			node->command = NULL;
+		}
 		return (token);
 	}
 	else

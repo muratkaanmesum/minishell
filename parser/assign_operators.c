@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/20 16:20:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 11:52:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void	handle_operators(t_node *head, t_token *tokens)
 	i = 0;
 	while (head->tokens[i].token != UNKNOWN)
 		i++;
+	if (i == 0)
+	{
+		handle_only_red(head, tokens);
+		return ;
+	}
 	i--;
 	head->right_operator = get_right_operator(head->tokens[i], tokens,
 			head->is_subshell, head->is_arithmetic);

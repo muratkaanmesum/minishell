@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 14:13:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 11:02:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,7 @@ void						ctrl_c(int sig);
 void						ctrl_d(char *input, t_execute *execute);
 void						free_execute(t_execute *execute);
 int							get_env_len(char *env);
-int						get_double_ptr_len(char **arr);
+int							get_double_ptr_len(char **arr);
+void						copy_token(t_token *dest, t_token src);
+void						handle_only_red(t_node *node, t_token *tokens);
 #endif

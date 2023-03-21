@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:37:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/20 16:25:15 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/21 08:31:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	get_new_token(t_token *removed_tokens, t_token *new_token)
 		if (removed_tokens[i].token == CLOSE_PAR)
 			open_count--;
 		if (open_count > 0)
-			new_token[j++] = removed_tokens[i];
+			copy_token(&new_token[j++], removed_tokens[i]);
 		else if (open_count == 0 && is_printable(removed_tokens[i]) == 0)
-			new_token[j++] = removed_tokens[i];
+			copy_token(&new_token[j++], removed_tokens[i]);
 		i++;
 	}
 	new_token[j].token = UNKNOWN;
@@ -85,6 +85,5 @@ t_token	*clear_redirections(t_node *node)
 	get_new_token(removed_tokens, new_token);
 	if (check_parantheses(node->tokens) == 1)
 		free(removed_tokens);
-	free(node->tokens);
 	return (new_token);
 }
