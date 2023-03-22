@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 05:58:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 06:05:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,3 +243,6 @@ void	expandWildcard(char *prefix, char *suffix, char **return_files,
 	}
 	return ;
 }
+
+
+//echo *ex*der*

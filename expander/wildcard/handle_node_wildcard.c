@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 05:55:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 06:13:09 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,13 +179,13 @@ void	handle_forarg(t_command *command)
 			if (asterisk_slash(str) == 1)
 			{
 				countWildcard(NULL, str,&count);
-				printf("%d\n",count);
 				if (count >= 1)
 				{
 					int index = 0;
 					char **arg_files = malloc(sizeof(char *) * (count + 1));
 					expandWildcard(NULL,str,arg_files,&index);
 					arg_files[count] = NULL;
+
 					match_arg_files(arg_files,command,i);
 				}
 			}

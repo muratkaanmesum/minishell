@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/15 06:06:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 06:29:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,10 @@ char	**sort_files(char **files, char *str)
 		}
 		if (str[m] == '\0')
 			count++;
+
 		i++;
 	}
+	printf("%d\n", count);
 	sorted_files = malloc(sizeof(char *) * (count + 1));
 	i = 0;
 	m = 0;

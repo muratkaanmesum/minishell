@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:24 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 19:46:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 06:24:58 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	search_str(char *file, char *str)
 		}
 		if (count == ft_strlen(str))
 			return (1);
-		i++;
+		if (file[i] != '\0')
+			i++;
 		j = 0;
 		count = 0;
 	}
