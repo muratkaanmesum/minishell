@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 20:37:05 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/22 12:12:29 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		**middle_files(char **files, char *str);
 void		match_arg_files(char **files, t_command *command, int i);
 void		print_arg(char **arg);
 char		**just_asterisk(char *command);
-char		**sort_files(char **files, char *str);
+void sort_files(char **files, char *str);
 char		**command_file(char *prefix, char *suffix, char *path);
 char		**take_file(char **files, char *command);
 int			countWildcard(char *prefix, char *suffix, int *count);

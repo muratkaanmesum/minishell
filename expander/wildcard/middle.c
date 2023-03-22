@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   middle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:24 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/13 19:46:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 11:13:49 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char	**middle_files(char **files, char *str)
 		}
 		i++;
 	}
-	free(files);
+	//free(files);
 	new_files[k] = NULL;
 	return (new_files);
 }

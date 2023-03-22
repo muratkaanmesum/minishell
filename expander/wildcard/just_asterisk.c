@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 20:45:38 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/22 12:11:58 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,13 @@ char	**just_asterisk(char *command)
 	return (my_files);
 }
 
-char	**sort_files(char **files, char *str)
+char	**sorted_files_fun(int j, int count, char **files, char *str)
 {
-	int		i;
-	int		m;
-	int		j;
-	int		count;
 	char	**sorted_files;
 	int		x;
+	int		i;
+	int		m;
 
-	i = 0;
-	m = 0;
-	j = 0;
-	count = 0;
-	while (files[i])
-	{
-		m = 0;
-		j = 0;
-		while (files[i][j])
-		{
-			if (str[m] == files[i][j++])
-				m++;
-			if (str[m] == '*')
-				m++;
-		}
-		if (str[m] == '\0')
-			count++;
-		i++;
-	}
 	sorted_files = malloc(sizeof(char *) * (count + 1));
 	i = 0;
 	m = 0;
@@ -110,4 +89,33 @@ char	**sort_files(char **files, char *str)
 	}
 	sorted_files[x] = NULL;
 	return (sorted_files);
+}
+
+void	sort_files(char **files, char *str)
+{
+	int	i;
+	int	m;
+	int	j;
+	int	count;
+
+	i = 0;
+	m = 0;
+	j = 0;
+	count = 0;
+	while (files[i])
+	{
+		m = 0;
+		j = 0;
+		while (files[i][j])
+		{
+			if (str[m] == files[i][j++])
+				m++;
+			if (str[m] == '*')
+				m++;
+		}
+		if (str[m] == '\0')
+			count++;
+		i++;
+	}
+	sorted_files_fun(j, count, files, str);
 }
