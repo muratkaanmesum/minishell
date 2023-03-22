@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:08:05 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:19:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	check_errors(t_node *node)
 		write(2, "minishell: ", 11);
 		ft_putendl_fd("Arithmetic Operator Entered", 2);
 		close_node_fds(node);
+		node->execute->last_exit_code = 1;
 		return (1);
 	}
 	handle_node_files(node);

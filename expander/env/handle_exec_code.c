@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 14:07:26 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 14:46:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:19:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	handle_all_exec_code(t_node *node)
 	int		i;
 	char	*last_exec_code;
 
-	last_exec_code = ft_itoa(get_last_execute_code(node));
+	last_exec_code = ft_itoa(node->execute->last_exit_code);
 	i = -1;
 	node->command->command = handle_exec_code(node->command->command,
 			last_exec_code);
