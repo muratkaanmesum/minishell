@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 07:19:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 07:20:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,16 +150,6 @@ char	**just_asterisk(char *command)
 	return (my_files);
 }
 
-char	**return_func(char *str)
-{
-	char	**new_arr;
-
-	new_arr = malloc(2 * (sizeof(char *)));
-	new_arr[0] = str;
-	new_arr[1] = NULL;
-	return (new_arr);
-}
-
 char	**sort_files(char **files, char *str)
 {
 	int		i;
@@ -176,9 +166,7 @@ char	**sort_files(char **files, char *str)
 	while (files[i])
 	{
 		m = 0;
-		//echo *ex*der*
-		//exho *der*ex*
-		//expander
+
 		j = 0;
 		while (files[i][j])
 		{
@@ -198,10 +186,7 @@ char	**sort_files(char **files, char *str)
 			count++;
 		i++;
 	}
-	printf("count :%d\n", count);
-	printf("str[%d] :%c\n", m, str[m]);
-	// // if (count == 0)
-	// // 	return (return_func(str));
+
 	sorted_files = malloc(sizeof(char *) * (count + 1));
 	i = 0;
 	m = 0;
@@ -217,8 +202,8 @@ char	**sort_files(char **files, char *str)
 				m++;
 			if (str[m] == files[i][j])
 			{
-				m++; //m ->3
-				j++; //j->2
+				m++;
+				j++;
 			}
 			if (files[i][j] && files[i][j] != str[m])
 				j++;
