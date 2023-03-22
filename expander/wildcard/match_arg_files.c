@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/14 12:33:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:30:58 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	match_without_dot(char **files, t_command *command, int i)
 	{
 		while (k < i)
 		{
-			new_args[k] = command->arguments[k];
+			new_args[k] = ft_strdup(command->arguments[k]);
 			k++;
 		}
 		m = 0;
@@ -83,17 +83,19 @@ void	match_without_dot(char **files, t_command *command, int i)
 		{
 			if (files[m][0] != '.')
 			{
-				new_args[k + file_count] = files[m];
+				new_args[k + file_count] = ft_strdup(files[m]);
 				file_count++;
 			}
 			m++;
 		}
 		while (command->arguments[k + 1])
 		{
-			new_args[k + file_count] = command->arguments[k + 1];
+			new_args[k + file_count] = ft_strdup(command->arguments[k + 1]);
 			k++;
 		}
 		new_args[k + file_count] = NULL;
+		free_double_ptr(command->arguments);
+		free_double_ptr(files);
 		command->arguments = new_args;
 		command->argument_count = k + file_count;
 	}
@@ -120,22 +122,25 @@ void	match_arg_files(char **files, t_command *command, int i)
 	{
 		while (k < i)
 		{
-			new_args[k] = command->arguments[k];
+			new_args[k] = ft_strdup(command->arguments[k]);
 			k++;
 		}
 		m = 0;
 		while (m < match_files_count)
 		{
-			new_args[k + m] = files[m];
+			new_args[k + m] = ft_strdup(files[m]);
 			m++;
 		}
 		while (command->arguments[k + 1])
 		{
-			new_args[k + m] = command->arguments[k + 1];
+			new_args[k + m] = ft_strdup(command->arguments[k + 1]);
 			k++;
 		}
 		new_args[k + m] = NULL;
+		free_double_ptr(command->arguments);
+		free_double_ptr(files);
 		command->arguments = new_args;
+
 		command->argument_count = k + m;
 	}
 }

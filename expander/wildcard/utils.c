@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/16 16:08:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:16:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_path_count(void)
 	{
 		while ((dir = readdir(d)) != NULL)
 			i++;
-		// closedir(d);
+		 closedir(d);
 	}
 	free(dir);
 	return (i);
