@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/14 13:02:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 06:00:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ char	**get_w_dot_files2(char *path, unsigned char d_type)
 			{
 				if (dir->d_name[0] != '.' && dir->d_type == d_type)
 				{
-					files[i] = dir->d_name;
+					files[i] = ft_strdup(dir->d_name);
 					i++;
 				}
 			}
@@ -169,11 +169,12 @@ char	**get_w_dot_files2(char *path, unsigned char d_type)
 			{
 				if (dir->d_name[0] != '.')
 				{
-					files[i] = dir->d_name;
+					files[i] = ft_strdup(dir->d_name);
 					i++;
 				}
 			}
 		}
+		closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;

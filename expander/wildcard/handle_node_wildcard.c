@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_wildcard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/15 06:45:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 05:55:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,8 @@ void	handle_forarg(t_command *command)
 			}
 			if (asterisk_slash(str) == 1)
 			{
-				count = countWildcard(NULL, str,&count);
+				countWildcard(NULL, str,&count);
+				printf("%d\n",count);
 				if (count >= 1)
 				{
 					int index = 0;

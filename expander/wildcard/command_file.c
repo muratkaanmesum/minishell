@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/19 10:29:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 05:58:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,11 @@ int	countWildcard(char *prefix, char *suffix, int *count)
 	if (ft_strchr(data, '/') != NULL)
 	{
 		data = edit_data(data);
-		files = get_dir(path);
+		if (data[0] == '.')
+			files = get_dir(path);
+		else
+			files = get_w_dot_files2(path, DT_DIR);
+		//files = get_dir(path);
 		files = take_file(files, data);
 	}
 	else
