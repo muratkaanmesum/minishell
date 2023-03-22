@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 06:00:42 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:32:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	get_all_count(char *path)
 	{
 		while ((dir = readdir(d)) != NULL)
 			i++;
-		// closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -100,10 +100,10 @@ char	**get_all(char *path)
 		i = 0;
 		while ((dir = readdir(d)) != NULL)
 		{
-			files[i] = dir->d_name;
+			files[i] = ft_strdup(dir->d_name);
 			i++;
 		}
-		//closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	files[i] = NULL;
@@ -133,7 +133,7 @@ int	get_w_path_count2(char *path, unsigned char d_type)
 				if (dir->d_name[0] != '.')
 					i++;
 			}
-		// closedir(d);
+		 closedir(d);
 	}
 	free(dir);
 	return (i);

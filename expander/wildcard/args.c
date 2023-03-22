@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 07:20:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:41:13 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	**take_file(char **files, char *command)
 {
 	int		i;
 	char	*str;
+	char	**new_files;
 
 	i = 0;
 	while (command[i])
@@ -64,23 +65,25 @@ char	**take_file(char **files, char *command)
 			if (is_left_side(command, i))
 			{
 				str = left_side(command, &i);
-				files = left_side_files(files, str);
+				new_files = left_side_files(files, str);
 			}
 			if (is_middle(command, i))
 			{
 				str = middle(command, &i);
-				files = middle_files(files, str);
+				new_files = middle_files(files, str);
 			}
 			if (is_right_side(command, i))
 			{
 				str = right_side(command, &i);
-				files = right_side_files(files, str);
+				new_files = right_side_files(files, str);
 			}
+			free(str);
 		}
 		if (command[i] != '\0')
 			i++;
 	}
-	return (files);
+	free_double_ptr(files);
+	return (new_files);
 }
 int	get_w_path_count(void)
 {
@@ -91,13 +94,13 @@ int	get_w_path_count(void)
 
 	i = 0;
 	getcwd(buf, 1024);
-	d = opendir(buf); //gelen pwd için
+	d = opendir(buf);
 	if (d)
 	{
 		while ((dir = readdir(d)) != NULL)
 			if (dir->d_name[0] != '.')
 				i++;
-		// closedir(d);
+		closedir(d);
 	}
 	free(dir);
 	return (i);
@@ -166,7 +169,6 @@ char	**sort_files(char **files, char *str)
 	while (files[i])
 	{
 		m = 0;
-
 		j = 0;
 		while (files[i][j])
 		{
@@ -186,7 +188,6 @@ char	**sort_files(char **files, char *str)
 			count++;
 		i++;
 	}
-
 	sorted_files = malloc(sizeof(char *) * (count + 1));
 	i = 0;
 	m = 0;

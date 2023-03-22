@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 06:05:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:45:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*edit_data(char *data)
 		i++;
 	}
 	new_data[i] = '\0';
+	free(data);
 	return (new_data);
 }
 
@@ -106,6 +107,7 @@ char	*new_path(char *path, char *prefix)
 		j++;
 	}
 	new_path[i] = '\0';
+	free(path);
 	return (new_path);
 }
 
@@ -168,8 +170,8 @@ int	countWildcard(char *prefix, char *suffix, int *count)
 		return (1);
 	}
 	data = find_data(suffix);
-	path = getcwd(buf, 1024);
-	path = add_slash(path);
+	getcwd(buf, 1024);
+	path = add_slash(buf);
 	path = new_path(path, prefix);
 	if (ft_strchr(data, '/') != NULL)
 	{
@@ -178,7 +180,6 @@ int	countWildcard(char *prefix, char *suffix, int *count)
 			files = get_dir(path);
 		else
 			files = get_w_dot_files2(path, DT_DIR);
-		//files = get_dir(path);
 		files = take_file(files, data);
 	}
 	else
@@ -186,6 +187,7 @@ int	countWildcard(char *prefix, char *suffix, int *count)
 		files = get_all(path);
 		files = take_file(files, data);
 	}
+	free(path);
 	suffix = cut_suffix(suffix);
 	i = 0;
 	while (files[i])
@@ -194,6 +196,8 @@ int	countWildcard(char *prefix, char *suffix, int *count)
 		countWildcard(files[i], suffix, count);
 		i++;
 	}
+	free_double_ptr(files);
+	free(data);
 	return (*count);
 }
 
@@ -208,7 +212,7 @@ void	expandWildcard(char *prefix, char *suffix, char **return_files,
 
 	if (suffix == NULL)
 	{
-		return_files[*index] = prefix;
+		return_files[*index] = ft_strdup(prefix);
 		*index += 1;
 		return ;
 	}
@@ -233,6 +237,7 @@ void	expandWildcard(char *prefix, char *suffix, char **return_files,
 			files = get_w_dot_files2(path, 100);
 		files = take_file(files, data);
 	}
+	free(path);
 	suffix = cut_suffix(suffix);
 	i = 0;
 	while (files[i])
@@ -241,8 +246,9 @@ void	expandWildcard(char *prefix, char *suffix, char **return_files,
 		expandWildcard(files[i], suffix, return_files, index);
 		i++;
 	}
+	free_double_ptr(files);
+	free(data);
 	return ;
 }
-
 
 //echo *ex*der*

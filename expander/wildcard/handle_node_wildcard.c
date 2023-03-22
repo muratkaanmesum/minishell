@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 06:39:26 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:12:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ void	handle_forarg(t_command *command)
 					char **arg_files = malloc(sizeof(char *) * (count + 1));
 					expandWildcard(NULL,str,arg_files,&index);
 					arg_files[count] = NULL;
-
 					match_arg_files(arg_files,command,i);
+					free(arg_files);
 				}
 			}
 			free(str);
