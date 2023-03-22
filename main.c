@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:25:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:27:04 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	main_loop(t_execute *execute_struct)
 	{
 		signal(SIGINT, &ctrl_c);
 		signal(SIGQUIT, SIG_IGN);
-		execute_struct->input = readline("minishell: ");
+		input = readline("minishell: ");
 		write(1, "\033[0m", 4);
 		ctrl_d(input, execute_struct);
 		add_history(input);
