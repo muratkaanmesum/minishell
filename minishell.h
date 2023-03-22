@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 14:13:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:04:00 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ void						ctrl_c(int sig);
 void						ctrl_d(char *input, t_execute *execute);
 void						free_execute(t_execute *execute);
 int							get_env_len(char *env);
-int						get_double_ptr_len(char **arr);
+int							get_double_ptr_len(char **arr);
+int							quotes_control(char *command);
 #endif
