@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:32:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:25:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_execute
 	char					**env;
 	char					**export;
 	int						only_red_count;
+	char					*input;
 }							t_execute;
 
 typedef struct s_token
