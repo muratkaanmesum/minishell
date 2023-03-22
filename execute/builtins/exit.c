@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:40:26 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:44:22 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ int	is_num(char **args)
 }
 int	free_exit(t_node *node, int exit_code)
 {
-	free_tree(node->execute->top_node);
+	t_node	*top_node;
+
+	top_node = node->execute->top_node;
 	free_execute(node->execute);
+	free_tree(top_node);
+	exit(exit_code);
 }
 int	ft_exit(t_node *node, int last_exit_code)
 {
