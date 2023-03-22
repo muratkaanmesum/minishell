@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/20 15:59:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:07:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_infiles(t_redirections *redirections, int *i)
 	fd = 0;
 	while (*i < redirections->infile_count)
 	{
-		if(redirections[*i].infile_type == I_REDIRECTION)
+		if (redirections->infile_type[*i] == I_REDIRECTION)
 			fd = open(redirections->infile[*i], O_RDONLY, 0777);
 		if (fd == -1)
 			return (-1);
