@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 09:24:24 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 09:24:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:58:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	print_args(t_node *head)
 int	echo(t_node *head)
 {
 	int	pid;
-
 	pid = fork();
 	if (pid == 0)
 	{

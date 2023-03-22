@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 14:34:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:46:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,24 +143,27 @@ void	main_loop(t_execute *execute_struct)
 	t_node	*head;
 	t_token	*tokens;
 
-	signal(SIGINT, &ctrl_c);
-	signal(SIGQUIT, SIG_IGN);
-	execute_struct->input = ft_strdup("echo ex*der*");
-	write(1, "\033[0m", 4);
-	ctrl_d(execute_struct);
-	// add_history(execute_struct->input);
-	tokens = lexer(execute_struct->input);
-	if (tokens == NULL)
+	while (1)
 	{
-		free(execute_struct->input);
-		return ;
+		signal(SIGINT, &ctrl_c);
+		signal(SIGQUIT, SIG_IGN);
+		execute_struct->input = readline("minishell: ");
+		write(1, "\033[0m", 4);
+		ctrl_d(execute_struct);
+		add_history(execute_struct->input);
+		tokens = lexer(execute_struct->input);
+		if (tokens == NULL)
+		{
+			free(execute_struct->input);
+			continue ;
+		}
+		if (first_check_free(tokens, execute_struct->input) == 1)
+			continue ;
+		head = parser(tokens, execute_struct);
+		if (parse_error_free(head, tokens, execute_struct->input) == 1)
+			continue ;
+		exec_rest(head, tokens);
 	}
-	if (first_check_free(tokens, execute_struct->input) == 1)
-		return ;
-	head = parser(tokens, execute_struct);
-	if (parse_error_free(head, tokens, execute_struct->input) == 1)
-		return ;
-	exec_rest(head, tokens);
 }
 
 int	main(int argc, char **argv, char **env)
