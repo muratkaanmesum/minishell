@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 14:54:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:29:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	free_execute(t_execute *execute)
 	while (execute->export[i] != NULL)
 		free(execute->export[i++]);
 	free(execute->export);
+	free(execute->input);
 	free(execute);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:57 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:25:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:31:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	free_tree_rec(t_node *head)
 	}
 }
 
-void	free_tree(t_node *head, t_token *tokens)
+void	free_tree(t_node *head)
 {
 	free_tree_rec(head);
 }

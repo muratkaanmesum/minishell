@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:26:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:38:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execute_node(t_node *node)
 	else if (ft_strncmp(node->command->command, "unset", 5) == 0)
 		unset(node->command->arguments, node);
 	else if (ft_strncmp(node->command->command, "exit", 4) == 0)
-		ft_exit(node->command->arguments, get_last_execute_code(node));
+		ft_exit(node, get_last_execute_code(node));
 	else
 		exec_builtin(node);
 	close_node_fds(node);
