@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 07:59:18 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/22 08:08:05 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	check_errors(t_node *node)
 		close_node_fds(node);
 		return (1);
 	}
+	handle_node_files(node);
 	if (node->command == NULL)
 	{
 		close_node_fds(node);
