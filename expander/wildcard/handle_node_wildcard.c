@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 17:06:41 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:29:59 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	handle_forarg(t_command *command, t_arg *arg, t_sort *sort)
 				fix_str(arg->str);
 				arg->match_files = just_asterisk(arg->str);
 				arg->match_files = sort_files(arg->match_files, arg->str, sort);
-				// diğer yerlerde de kullan!!
 				match_arg_files(arg->match_files, command, arg->i, match);
 			}
 			if (asterisk_slash(arg->str) == 1)

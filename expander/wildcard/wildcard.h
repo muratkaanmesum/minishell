@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 17:08:03 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:37:21 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ typedef struct s_match
 	int		count;
 
 }			t_match;
+
+typedef struct s_ambiguous
+{
+	int		i;
+	int		in_or;
+	int		index;
+	int		key;
+}			t_amb;
 
 void		handle_node_wildcard(t_node *node);
 int			is_asterisk(char *str);
