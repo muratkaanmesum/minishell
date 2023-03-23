@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:16:13 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 18:01:30 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:40:14 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	take_one_file_out(t_node *node, int in_or, int index, int key)
 			node->redirections->infile[index] = files[0];
 		}
 	}
-	take_file_out_op(node, in_or, index, key);
+	take_one_file_out_op(node, in_or, index, key);
 }
 
 void	take_one_file_op(t_node *node, int in_or, int index, int key)

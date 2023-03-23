@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 18:02:40 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:41:05 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,9 @@ void		command_to_arg_files(t_command *command, char **new_args,
 				int count_files, char **files);
 char		**get_w_dot_files(void);
 int			files_w_dot_count(char **files);
+char		*cut_suffix(char *suffix);
+char		*new_path(char *path, char *prefix);
+char		*add_slash(char *path);
+char		*edit_data(char *data);
+char		*find_data(char *suffix);
 #endif
