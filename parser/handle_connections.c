@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:02:15 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:36:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	assign_split_type(t_node *head)
 		split_type = -1;
 	else if (does_priority(head->tokens, PIPE) == 1)
 		split_type = PIPE;
-	else if(check_parantheses(head->tokens) == 1)
+	else if (check_parantheses(head->tokens) == 1)
 		split_type = -2;
 	else
 		split_type = UNKNOWN;
@@ -84,10 +84,11 @@ int	assign_split_type(t_node *head)
 
 t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 {
-	t_token			**split;
-	int				i;
-	enum e_token	split_type;
-	t_token			*cleared_tokens;
+	t_token	**split;
+	int		i;
+	int		split_type;
+	t_token	*cleared_tokens;
+
 	//((wc -l && wc -l) < main.c)
 	split_type = -5;
 	assign_head_values(head, tokens, execute);
@@ -103,6 +104,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 		return (head);
 	i = 0;
 	assign_connections(head, split_type, split, execute);
-	free(split);
+	if(split_type != -2)
+		free(split);
 	return (head);
 }
