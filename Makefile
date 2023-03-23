@@ -10,9 +10,9 @@
 NAME        := minishell
 CC        := gcc
 
-#FLAGS    := -fsanitize=address
+FLAGS    := -fsanitize=address
 #FLAGS       := -Wall -Wextra -Werror
-FLAGS := -g 
+#FLAGS := -g
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################

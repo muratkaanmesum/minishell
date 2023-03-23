@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 11:31:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 11:34:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	main_loop(t_execute *execute_struct)
 
 	signal(SIGINT, &ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
-	execute_struct->input = ft_strdup("cat  mai*.c | wc -l && cat *.c | wc -l && echo ex*der");
+	execute_struct->input = ft_strdup("(cat  mai*.c | wc -l && cat *.c | wc -l && echo ex*der && (wc -l main.c))");
 		write(1, "\033[0m", 4);
 	ctrl_d(execute_struct);
 	tokens = lexer(execute_struct->input);
