@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 13:44:23 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:23:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ void add_command_to_arg(t_command *command,char **files)
 	}
 	new_args[k] = NULL;
 	command->argument_count = total_arg;
-	//free(command->arguments); // içindekileri de freele
+	free_double_ptr(command->arguments);
 	command->arguments = new_args;
+	free_double_ptr(files);
 }
 
 void	handle_forcommand(t_command *command)
@@ -131,8 +132,10 @@ void	handle_forcommand(t_command *command)
 			int count_files = files_count(files);
 			if (files[0] == NULL)
 				return;
-				if(files[0] != NULL)
-				command->command = files[0];
+				if(files[0] != NULL){
+					free(command->command);
+				command->command = ft_strdup(files[0]);
+				}
 			add_command_to_arg(command,files);
 		}
 		else if (asterisk_slash(str) == 1)
