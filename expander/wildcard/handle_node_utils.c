@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:33:35 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 19:59:30 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:17:23 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	quotes_control_return(char *command, int start, int end)
 
 int	quotes_control(char *command)
 {
-	// printf("\nQUOTES CONTROL gelen ilk command %s\n\n",command);
 	int	i;
 	int	start;
 	int	end;
