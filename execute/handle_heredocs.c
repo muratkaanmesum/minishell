@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:13:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:11:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	handle_heredocs(t_node *node)
 {
 	int	i;
 
-	if (node->connection_count == 1 && node->redirections != NULL)
+	if (node->connection_count == 0 && node->redirections != NULL)
 		handle_node_heredoc(node);
-	else if (node->connection_count > 1)
+	else if (node->connection_count >= 1)
 	{
 		i = 0;
 		while (i < node->connection_count)

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 12:27:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:11:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	close_all_fds(t_node *top)
 	int	i;
 
 	i = 0;
-	if (top->connection_count == 1)
+	if (top->connection_count == 0)
 		close_node_fds(top);
-	else if (top->connection_count > 1)
+	else if (top->connection_count >= 1)
 	{
 		close_node_fds(top);
 		while (i < top->connection_count)
@@ -73,7 +73,7 @@ void	print_all_fds(t_node *node)
 	int	i;
 
 	i = 0;
-	if (node->connection_count == 1)
+	if (node->connection_count == 0)
 	{
 		printf("in_fd: %d, out_fd: %d\n", node->in_fd, node->out_fd);
 	}

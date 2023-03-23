@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 03:09:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:00:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,15 @@ void	assign_connections(t_node *head, enum e_token split_type,
 {
 	int	i;
 
+	if (split_type == -2)
+	{
+		t_token *cleared_tokens = remove_parantheses(head->tokens);
+		head->connections = malloc(sizeof(t_node *));
+		head->connections[0] = handle_connections(malloc(sizeof(t_node)),
+													cleared_tokens,
+													execute);
+		return ;
+	}
 	i = 0;
 	while (i < connection_count(head->tokens, split_type))
 	{

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 14:59:07 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:11:26 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	handle_pipes(t_node *node)
 	int	fd[2];
 
 	i = 0;
-	if (node->connection_count == 1)
+	if (node->connection_count == 0)
 		return ;
 	while (i < node->connection_count - 1)
 	{
@@ -94,9 +94,9 @@ void	exec_all(t_node *head)
 	i = 0;
 	if (head->is_subshell == 1)
 		execute_subshell(head);
-	else if (head->connection_count == 1)
+	else if (head->connection_count == 0)
 		execute_node(head);
-	else if (head->connection_count > 1)
+	else if (head->connection_count >= 1)
 	{
 		while (next_exec_index != -1)
 		{

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 15:34:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:05:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	connection_count(t_token *tokens, enum e_token token)
 	i = 0;
 	open_count = 0;
 	count = 0;
+	if(token == UNKNOWN)
+		return (0);
 	while (tokens[i].token != UNKNOWN)
 	{
 		pass_parantheses(tokens, &i);

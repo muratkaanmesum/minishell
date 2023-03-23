@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:15:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:11:07 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	execute_subshell(t_node *node)
 	if (pid == 0)
 	{
 		assign_dup2(node);
-		if (node->connection_count == 1)
+		if (node->connection_count == 0)
 			execute_node(node);
-		else if (node->connection_count > 1)
+		else if (node->connection_count >= 1)
 		{
 			while (next_exec_index != -1)
 			{
