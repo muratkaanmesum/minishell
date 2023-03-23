@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:38:38 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 18:46:18 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 18:49:55 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,14 @@ char	*new_path(char *path, char *prefix)
 	if (prefix[0] == '/')
 		j++;
 	while (j < len_prefix)
-	{
-		new_path[i] = prefix[j];
-		i++;
-		j++;
-	}
+		new_path[i++] = prefix[j++];
 	new_path[i] = '\0';
 	return (new_path);
 }
 
 char	*cut_suffix(char *suffix)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (suffix[i] != '/' && suffix[i] != '\0')
