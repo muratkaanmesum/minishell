@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 14:34:06 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:08:03 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,18 @@ typedef struct s_sort
 	int		x;
 }			t_sort;
 
+typedef struct s_match
+{
+	int		match_files_count;
+	int		new_len;
+	char	**new_args;
+	int		k;
+	int		m;
+	int		file_count;
+	int		count;
+
+}			t_match;
+
 void		handle_node_wildcard(t_node *node);
 int			is_asterisk(char *str);
 int			asterisk_slash(char *str);
@@ -67,10 +79,11 @@ void		print_files(char **files);
 char		**right_side_files(char **files, char *str);
 char		**left_side_files(char **files, char *str);
 char		**middle_files(char **files, char *str);
-void		match_arg_files(char **files, t_command *command, int i);
+void		match_arg_files(char **files, t_command *command, int i,
+				t_match *match);
 void		print_arg(char **arg);
 char		**just_asterisk(char *command);
-char		**sort_files(char **files, char *str,t_sort *sort);
+char		**sort_files(char **files, char *str, t_sort *sort);
 char		**command_file(char *prefix, char *suffix, char *path);
 char		**take_file(char **files, char *command);
 int			countWildcard(char *prefix, char *suffix, int *count);
@@ -93,4 +106,5 @@ int			quotes_control(char *command);
 void		command_to_arg_files(t_command *command, char **new_args,
 				int count_files, char **files);
 char		**get_w_dot_files(void);
+int			files_w_dot_count(char **files);
 #endif

@@ -6,124 +6,90 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 15:22:05 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:27:32 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-int	files_count(char **files)
+void	mutual_len(t_match *match, t_command *command, int i)
 {
-	int	i;
-
-	i = 0;
-	if (files[0] == 0)
-		return (0);
-	while (files[i])
-		i++;
-	return (i);
-}
-
-int	files_w_dot_count(char **files)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	if (files[0] == 0)
-		return (0);
-	while (files[i])
+	while (match->k < i)
 	{
-		if (files[i][0] != '.')
-			count++;
-		i++;
+		match->new_args[match->k] = command->arguments[match->k];
+		match->k++;
 	}
-	return (count);
+	match->m = 0;
 }
 
-void	match_without_dot(char **files, t_command *command, int i)
+void	mutual_equalization(t_match *match, t_command *command)
 {
-	int		count;
-	int		new_len;
-	char	**new_args;
-	int		k;
-	int		m;
-	int		file_count;
+	match->new_args[match->k + match->m] = NULL;
+	command->arguments = match->new_args;
+	command->argument_count = match->k + match->m;
+}
 
-	file_count = 0;
-	m = 0;
-	k = 0;
-	count = 0;
-	count = files_w_dot_count(files);
-	new_len = command->argument_count + count;
-	new_args = malloc(sizeof(char *) * (new_len));
-	k = 0;
+void	assign_match_values(t_match *match, t_command *command, char **files)
+{
+	match->file_count = 0;
+	match->k = 0;
+	match->count = 0;
+	match->count = files_w_dot_count(files);
+	match->new_len = command->argument_count + match->count;
+	match->new_args = malloc(sizeof(char *) * (match->new_len));
+}
+
+void	match_without_dot(char **files, t_command *command, int i,
+		t_match *match)
+{
+	assign_match_values(match, command, files);
 	if (files[0] != NULL)
 	{
-		while (k < i)
+		mutual_len(match, command, i);
+		while (match->m < match->count)
 		{
-			new_args[k] = command->arguments[k];
-			k++;
-		}
-		m = 0;
-		while (m < count)
-		{
-			if (files[m][0] != '.')
+			if (files[match->m][0] != '.')
 			{
-				new_args[k + file_count] = files[m];
-				file_count++;
+				match->new_args[match->k + match->file_count] = files[match->m];
+				match->file_count++;
 			}
-			m++;
+			match->m++;
 		}
-		while (command->arguments[k + 1])
+		while (command->arguments[match->k + 1])
 		{
-			new_args[k + file_count] = command->arguments[k + 1];
-			k++;
+			match->new_args[match->k
+				+ match->file_count] = command->arguments[match->k + 1];
+			match->k++;
 		}
-		new_args[k + file_count] = NULL;
-		command->arguments = new_args;
-		command->argument_count = k + file_count;
+		mutual_equalization(match, command);
 	}
 }
 
-void	match_arg_files(char **files, t_command *command, int i)
+void	match_arg_files(char **files, t_command *command, int i, t_match *match)
 {
-	int		match_files_count;
-	int		new_len;
-	char	**new_args;
-	int		k;
-	int		m;
-
 	if (command->arguments[i][0] != '.')
 	{
-		match_without_dot(files, command, i);
+		match_without_dot(files, command, i, match);
 		return ;
 	}
-	match_files_count = files_count(files);
-	new_len = command->argument_count + match_files_count;
-	new_args = malloc(sizeof(char *) * (new_len));
-	k = 0;
+	match->match_files_count = files_count(files);
+	match->new_len = command->argument_count + match->match_files_count;
+	match->new_args = malloc(sizeof(char *) * (match->new_len));
+	match->k = 0;
 	if (files[0] != NULL)
 	{
-		while (k < i)
+		mutual_len(match, command, i);
+		while (match->m < match->match_files_count)
 		{
-			new_args[k] = command->arguments[k];
-			k++;
+			match->new_args[match->k + match->m] = files[match->m];
+			match->m++;
 		}
-		m = 0;
-		while (m < match_files_count)
+		while (command->arguments[match->k + 1])
 		{
-			new_args[k + m] = files[m];
-			m++;
+			match->new_args[match->k + match->m] = command->arguments[match->k
+				+ 1];
+			match->k++;
 		}
-		while (command->arguments[k + 1])
-		{
-			new_args[k + m] = command->arguments[k + 1];
-			k++;
-		}
-		new_args[k + m] = NULL;
-		command->arguments = new_args;
-		command->argument_count = k + m;
+		mutual_equalization(match, command);
 	}
 }

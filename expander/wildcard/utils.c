@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 20:31:56 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:00:48 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,34 @@ int	asterisk_slash(char *str)
 	if (ft_strchr(str, '*') != NULL && ft_strchr(str, '/') != NULL)
 		return (1);
 	return (0);
+}
+
+int	files_count(char **files)
+{
+	int	i;
+
+	i = 0;
+	if (files[0] == 0)
+		return (0);
+	while (files[i])
+		i++;
+	return (i);
+}
+
+int	files_w_dot_count(char **files)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (files[0] == 0)
+		return (0);
+	while (files[i])
+	{
+		if (files[i][0] != '.')
+			count++;
+		i++;
+	}
+	return (count);
 }

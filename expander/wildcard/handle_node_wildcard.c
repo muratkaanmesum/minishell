@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 14:34:01 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:06:41 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 	}
 }
 
-void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort)
+void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
+		t_match *match)
 {
 	arg->count = countWildcard(NULL, arg->str, &arg->count);
 	if (arg->count >= 1)
@@ -60,14 +61,17 @@ void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort)
 		arg->arg_files = malloc(sizeof(char *) * (arg->count + 1));
 		expandWildcard(NULL, arg->str, arg->arg_files, &arg->index);
 		arg->arg_files[arg->count] = NULL;
-		match_arg_files(arg->arg_files, command, arg->i);
+		match_arg_files(arg->arg_files, command, arg->i, match);
 	}
 }
 
 void	handle_forarg(t_command *command, t_arg *arg, t_sort *sort)
 {
+	t_match	*match;
+
 	arg->i = 0;
 	arg->count = 0;
+	match = malloc(sizeof(t_match) * 1);
 	while (arg->i < command->argument_count)
 	{
 		if (quotes_control(command->arguments[arg->i]) == 1)
@@ -78,11 +82,11 @@ void	handle_forarg(t_command *command, t_arg *arg, t_sort *sort)
 				fix_str(arg->str);
 				arg->match_files = just_asterisk(arg->str);
 				arg->match_files = sort_files(arg->match_files, arg->str, sort);
-					// diğer yerlerde de kullan!!
-				match_arg_files(arg->match_files, command, arg->i);
+				// diğer yerlerde de kullan!!
+				match_arg_files(arg->match_files, command, arg->i, match);
 			}
 			if (asterisk_slash(arg->str) == 1)
-				handle_forarg_option(command, arg, sort);
+				handle_forarg_option(command, arg, sort, match);
 			free(arg->str);
 		}
 		arg->i++;

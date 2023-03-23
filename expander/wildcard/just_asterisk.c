@@ -6,30 +6,30 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 15:20:55 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:55:04 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-void	take_file_opt(char **files, char *command, char *str, int i)
-{
-	if (is_left_side(command, i))
-	{
-		str = left_side(command, &i);
-		files = left_side_files(files, str);
-	}
-	if (is_middle(command, i))
-	{
-		str = middle(command, &i);
-		files = middle_files(files, str);
-	}
-	if (is_right_side(command, i))
-	{
-		str = right_side(command, &i);
-		files = right_side_files(files, str);
-	}
-}
+// void	take_file_opt(char **files, char *command, char *str, int i)
+// {
+// 	if (is_left_side(command, i))
+// 	{
+// 		str = left_side(command, &i);
+// 		files = left_side_files(files, str);
+// 	}
+// 	if (is_middle(command, i))
+// 	{
+// 		str = middle(command, &i);
+// 		files = middle_files(files, str);
+// 	}
+// 	if (is_right_side(command, i))
+// 	{
+// 		str = right_side(command, &i);
+// 		files = right_side_files(files, str);
+// 	}
+// }
 
 char	**take_file(char **files, char *command)
 {
