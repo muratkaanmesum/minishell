@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 11:17:19 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 15:22:05 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@ int	files_count(char **files)
 	while (files[i])
 		i++;
 	return (i);
-}
-
-void	print_arg(char **arg)
-{
-	int	k;
-
-	k = 0;
-	while (arg[k])
-	{
-		printf(" %s  ", arg[k]);
-		k++;
-	}
 }
 
 int	files_w_dot_count(char **files)

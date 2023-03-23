@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:24 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 11:13:49 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:26:29 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int	search_str(char *file, char *str)
 		}
 		if (count == ft_strlen(str))
 			return (1);
-		i++;
+		if (file[i] != '\0')
+			i++;
 		j = 0;
 		count = 0;
 	}
 	return (0);
 }
-
 int	middle_files_count(char **files, char *str)
 {
 	int	count;
