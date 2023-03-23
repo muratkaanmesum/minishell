@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
-/*   Updated: 2023/03/23 10:01:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 11:58:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_node	*parser(t_token *tokens, t_execute *execute)
 	execute->top_node = head;
 	handle_connections(head, tokens, execute);
 	assign_operators(head, tokens);
+	free_all_node_tokens(head);
 	head->execute->only_red_count = 0;
 	return (head);
 }

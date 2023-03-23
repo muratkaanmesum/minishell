@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:57 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 10:12:34 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 11:58:52 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	free_all(t_node *head)
 	i = 0;
 	if (head->connections != NULL)
 		free(head->connections);
-	free_tokens_str(head->tokens);
 	free(head);
 }
 

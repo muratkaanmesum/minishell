@@ -6,13 +6,13 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 10:18:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:28:26 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_tokens_str(t_token *token)
+void	free_tokens(t_token *token)
 {
 	int	i;
 
@@ -26,7 +26,8 @@ void	free_tokens_str(t_token *token)
 		}
 		i++;
 	}
-	free(token);
+	if (token != NULL)
+		free(token);
 }
 
 void	free_double_ptr(char **arr)
