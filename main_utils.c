@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:09:51 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 13:46:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:52:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	exec_rest(t_node *head, t_token *tokens)
 {
 	expander(head);
 	execute(head);
-	free_execute(head->execute);
-	// free(head->execute->input);
+	free(head->execute->input);
 	free_tree(head);
 }
