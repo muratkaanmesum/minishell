@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:36:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:55:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ void	handle_infile_loop(t_node *head)
 void	handle_node_files(t_node *head)
 {
 	int	out_fd;
-	int	i;
 
-	i = 0;
 	out_fd = 1;
 	if (head->redirections == NULL)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:11:26 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:52:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,9 @@ int	handle_priority(t_node *head, int i)
 
 void	exec_all(t_node *head)
 {
-	int	i;
 	int	next_exec_index;
 
 	next_exec_index = 0;
-	i = 0;
 	if (head->is_subshell == 1)
 		execute_subshell(head);
 	else if (head->connection_count == 0)

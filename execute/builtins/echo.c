@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 09:24:24 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 13:49:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:53:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	does_have_option(t_node *node)
 {
-	int	i;
-
-	i = 0;
 	if (node->command->argument_count == 0)
 		return (0);
 	if (ft_strncmp(node->command->arguments[0], "-n",
@@ -64,7 +61,6 @@ int	echo(t_node *head)
 	pid = fork();
 	if (pid == 0)
 	{
-		t_node *top_node = head->execute->top_node;
 		dup2(head->in_fd, 0);
 		dup2(head->out_fd, 1);
 		close_all_fds(head);

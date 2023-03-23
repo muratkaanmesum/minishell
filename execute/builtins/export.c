@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/20 12:48:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:54:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int	export_w_fork(char **args, t_node *node)
 int	export_fork(char **args, t_node *node)
 {
 	int	pid;
-	int	i;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		i = -1;
 		close_all_fds(node->execute->top_node);
 		if (args == NULL || args[0] == NULL)
 			print_export(node);
@@ -56,10 +54,6 @@ int	export_fork(char **args, t_node *node)
 
 int	export(char **args, t_node *node)
 {
-	int	pid;
-	int	i;
-
-	i = 0;
 	if (node->right_operator != PIPE)
 		node->execute->last_exit_code = export_w_fork(args, node);
 	else

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:56:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:55:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*heredoc_str(t_node *node, int i)
 {
-	enum e_token	*in_type;
 	char			*str;
 	char			*ret;
 	char			*new_line;

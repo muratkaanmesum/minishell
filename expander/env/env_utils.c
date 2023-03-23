@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:27:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:45:55 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*get_env_location(char *str)
 	return (NULL);
 }
 
-t_env	*get_env_variables(char **env, t_node *node)
+t_env	*get_env_variables(char **env)
 {
 	int		i;
 	int		count;

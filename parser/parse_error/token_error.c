@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:31:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 14:49:29 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:43:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ int	is_command(t_token *tokens, int start)
 int	token_error(t_token *tokens)
 {
 	int	i;
-	int	ret;
 
 	i = 0;
-	ret = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
 		if (tokens[i].token == CLOSE_PAR)

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:15:50 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:17:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:54:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 int	find_env(t_node *node, char *arg)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = 0;
 	while (node->execute->env[i] != NULL)
 	{
 		if (ft_strncmp(node->execute->env[i], arg,
@@ -41,10 +39,8 @@ int	find_env(t_node *node, char *arg)
 int	find_export(t_node *node, char *arg)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = 0;
 	while (node->execute->export[i] != NULL)
 	{
 		if (ft_strncmp(node->execute->export[i], arg,

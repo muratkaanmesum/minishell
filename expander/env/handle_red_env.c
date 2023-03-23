@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:32:37 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:39:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:48:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	handle_env_infile(t_node *node, t_env *env, int i)
 	if (env_value == NULL)
 		env_value = "";
 	node->redirections->infile[i] = assign_env(node->redirections->infile[i],
-			env_value,
-			node);
+			env_value);
 }
 
 void	handle_env_outfile(t_node *node, t_env *env, int i)
@@ -38,8 +37,7 @@ void	handle_env_outfile(t_node *node, t_env *env, int i)
 	if (env_value == NULL)
 		env_value = "";
 	node->redirections->outfile[i] = assign_env(node->redirections->outfile[i],
-			env_value,
-			node);
+			env_value);
 }
 
 void	handle_redirection_env(t_node *node, t_env *env)

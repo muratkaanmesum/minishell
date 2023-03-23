@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:44:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:54:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	free_exit(t_node *node, int exit_code)
 int	ft_exit(t_node *node, int last_exit_code)
 {
 	int		count;
-	int		pid;
 	char	**args;
 
 	args = node->command->arguments;

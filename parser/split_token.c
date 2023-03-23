@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/23 14:39:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:43:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	connection_count(t_token *tokens, enum e_token token)
 {
 	int	count;
-	int	open_count;
 	int	i;
 
 	i = 0;
-	open_count = 0;
 	count = 0;
 	if (token == UNKNOWN)
 		return (0);
@@ -62,11 +60,9 @@ void	pass_parantheses_count(t_token *tokens, int *i, int *token_count)
 int	split_token_count(t_token *tokens, enum e_token token)
 {
 	int	i;
-	int	open_count;
 	int	token_count;
 
 	i = 0;
-	open_count = 0;
 	token_count = 0;
 	while (tokens[i].token != UNKNOWN)
 	{
