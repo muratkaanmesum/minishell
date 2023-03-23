@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:57 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 13:15:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:11:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	free_tree_rec(t_node *head)
 	int	i;
 
 	i = 0;
-	if (head->connection_count == 1 && head->is_arithmetic == 0)
+	if (head->connection_count == 0 && head->is_arithmetic == 0)
 	{
 		free_simple_command(head->command);
 		free_all(head);
 	}
-	else if (head->connection_count > 1)
+	else if (head->connection_count >= 1)
 	{
 		while (i < head->connection_count)
 		{

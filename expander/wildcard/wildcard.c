@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:33 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 08:56:40 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:11:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	handle_wildcard(t_node *node)
 {
 	int	i;
 
-	if (node->connection_count == 1 && node->is_arithmetic == 0
+	if (node->connection_count == 0 && node->is_arithmetic == 0
 		&& node->command != NULL)
 		handle_node_wildcard(node);
-	else if (node->connection_count > 1)
+	else if (node->connection_count >= 1)
 	{
 		i = 0;
 		while (i < node->connection_count)

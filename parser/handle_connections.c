@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 03:53:46 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:02:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ void	check_if_subshell(t_node *head)
 			head->is_arithmetic = 1;
 		else
 		{
-			head->tokens = remove_parantheses(head->tokens);
 			head->is_subshell = 1;
-			cleared_tokens = create_redirections(head);
-			if (cleared_tokens != NULL)
-				head->tokens = cleared_tokens;
 		}
 	}
 }
@@ -79,6 +75,8 @@ int	assign_split_type(t_node *head)
 		split_type = -1;
 	else if (does_priority(head->tokens, PIPE) == 1)
 		split_type = PIPE;
+	else if(check_parantheses(head->tokens) == 1)
+		split_type = -2;
 	else
 		split_type = UNKNOWN;
 	return (split_type);
@@ -90,7 +88,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 	int				i;
 	enum e_token	split_type;
 	t_token			*cleared_tokens;
-
+	//((wc -l && wc -l) < main.c)
 	split_type = -5;
 	assign_head_values(head, tokens, execute);
 	cleared_tokens = create_redirections(head);

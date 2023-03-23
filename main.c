@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 04:19:58 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:10:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_tree(t_node *head)
 	int	j;
 
 	i = 0;
-	if (head->connection_count == 1)
+	if (head->connection_count == 0)
 	{
 		j = 0;
 		if (head->command == NULL)
@@ -157,13 +157,11 @@ void	main_loop(t_execute *execute_struct)
 			free(execute_struct->input);
 			continue ;
 		}
-		// print_token(tokens);
 		if (first_check_free(tokens, execute_struct->input) == 1)
 			continue ;
 		head = parser(tokens, execute_struct);
 		if (parse_error_free(head, tokens, execute_struct->input) == 1)
 			continue ;
-			print_tree(head);
 		 exec_rest(head, tokens);
 	}
 }
