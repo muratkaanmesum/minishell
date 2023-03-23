@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/23 09:01:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 10:18:46 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	connection_count(t_token *tokens, enum e_token token)
 	i = 0;
 	open_count = 0;
 	count = 0;
-	if(token == UNKNOWN)
+	if (token == UNKNOWN)
 		return (0);
 	while (tokens[i].token != UNKNOWN)
 	{
@@ -100,6 +100,8 @@ void	assign_values(t_token *tokens, enum e_token token, int *i,
 					+ 1));
 		while (j < split_token_count(start, token))
 		{
+			if (tokens[t_index].token == UNKNOWN)
+				break ;
 			copy_token(&split[*i][j], tokens[t_index]);
 			t_index++;
 			j++;

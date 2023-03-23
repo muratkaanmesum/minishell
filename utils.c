@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 08:57:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 10:18:10 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,6 @@ void	copy_token(t_token *dest, t_token src)
 	dest->end_index = src.end_index;
 	if (src.str != NULL)
 		dest->str = ft_strdup(src.str);
+	else
+		dest->str = NULL;
 }
