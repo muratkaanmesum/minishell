@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:09:51 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:27:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 15:19:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	parse_error_free(t_node *head, t_token *tokens, char *inpt)
 	{
 		free(inpt);
 		free_tokens(tokens);
-		free(tokens);
 		return (1);
 	}
 	return (0);
