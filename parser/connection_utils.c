@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:33:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/23 05:36:50 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 10:06:11 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	handle_split_type(enum e_token split_type, t_node *head, t_token ***split)
 {
 	head->connection_count = connection_count(head->tokens, split_type);
 	if (connection_count(head->tokens, split_type) != 0)
-		head->connections = malloc(sizeof(t_node *)
-				* connection_count(head->tokens, split_type));
+		head->connections = malloc(sizeof(t_node *) * head->connection_count);
+	else
+		head->connections = NULL;
 	if (split_type != UNKNOWN && head->is_arithmetic != 1 && split_type != -2)
 	{
 		*split = split_token(head->tokens, split_type);

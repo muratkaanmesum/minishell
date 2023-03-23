@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:36:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 09:52:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 	int		i;
 	int		split_type;
 	t_token	*cleared_tokens;
-
-	//((wc -l && wc -l) < main.c)
+	
 	split_type = -5;
 	assign_head_values(head, tokens, execute);
 	cleared_tokens = create_redirections(head);

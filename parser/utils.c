@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:00:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 10:06:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,11 @@ t_token	*remove_parantheses(t_token *tokens)
 		new_split = malloc(sizeof(t_token) * (i - 1));
 		while (j < i - 1)
 		{
-			new_split[j - 1] = tokens[j];
-			new_split[j - 1].str = ft_strdup(tokens[j].str);
+			copy_token(&new_split[j - 1], tokens[j]);
 			j++;
 		}
 		new_split[j - 1].token = UNKNOWN;
-		free_tokens_str(tokens);
+		// free_tokens_str(tokens);
 		return (new_split);
 	}
 	return (tokens);
@@ -152,12 +151,12 @@ int	is_arithmetic(t_token *tokens)
 void	assign_connections(t_node *head, enum e_token split_type,
 		t_token **split, t_execute *execute)
 {
-	int	i;
+	int		i;
+	t_token	*cleared_tokens;
 
 	if (split_type == -2)
 	{
-		t_token *cleared_tokens = remove_parantheses(head->tokens);
-		head->connections = malloc(sizeof(t_node *));
+		cleared_tokens = remove_parantheses(head->tokens);
 		head->connections[0] = handle_connections(malloc(sizeof(t_node)),
 													cleared_tokens,
 													execute);

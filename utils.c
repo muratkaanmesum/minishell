@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:29:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 08:57:02 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ void	free_tokens_str(t_token *token)
 	i = 0;
 	while (token[i].token != UNKNOWN)
 	{
-		free(token[i].str);
+		if (token[i].str != NULL)
+		{
+			free(token[i].str);
+			token[i].str = NULL;
+		}
 		i++;
 	}
+	free(token);
 }
 
 void	free_double_ptr(char **arr)
@@ -69,5 +74,6 @@ void	copy_token(t_token *dest, t_token src)
 	dest->id = src.id;
 	dest->start_index = src.start_index;
 	dest->end_index = src.end_index;
-	dest->str = ft_strdup(src.str);
+	if (src.str != NULL)
+		dest->str = ft_strdup(src.str);
 }
