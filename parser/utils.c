@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 13:18:07 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:28:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	is_arithmetic(t_token *tokens)
 	return (0);
 }
 
-void	assign_connections(t_node *head, enum e_token split_type,
+void	assign_connections(t_node *head, int split_type,
 		t_token **split, t_execute *execute)
 {
 	int		i;

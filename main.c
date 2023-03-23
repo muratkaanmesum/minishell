@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 13:52:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:27:01 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ t_execute	*init_execute(char **env)
 
 void	main_loop(t_execute *execute_struct)
 {
-	char	*input;
 	t_node	*head;
 	t_token	*tokens;
 

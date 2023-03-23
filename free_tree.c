@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:57 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:06:09 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:37:04 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	free_simple_command(t_command *command)
 	i = 0;
 	while (i < command->argument_count)
 	{
-		printf("freeing = %s\n", command->arguments[i]);
 		free(command->arguments[i]);
 		i++;
 	}
@@ -56,11 +55,8 @@ void	free_simple_command(t_command *command)
 
 void	free_all(t_node *head)
 {
-	int	i;
-
 	if (head->redirections != NULL)
 		free_redirections(head->redirections);
-	i = 0;
 	if (head->connections != NULL)
 		free(head->connections);
 	free(head);

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:26:07 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:36:29 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:31:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ t_token	*clear_redirections(t_node *node);
 void	handle_simple_command(t_node *node);
 void	assign_operators(t_node *head, t_token *tokens);
 int		get_in_all_tokens(t_token token, t_token *tokens);
-int		left_is_subshell_handle(t_token token,
-			t_token *tokens,
-			int i);
-int		handle_split_type(enum e_token split_type,
-			t_node *head,
-			t_token ***split);
+int	left_is_subshell_handle(t_token token,
+							t_token *tokens,
+							int i);
+int	handle_split_type(enum e_token split_type,
+						t_node *head,
+						t_token ***split);
 void	handle_only_red(t_node *node, t_token *tokens);
 void	copy_token(t_token *dest, t_token src);
-void	assign_connections(t_node *head,
-			enum e_token split_type,
-			t_token **split,
+void	assign_connections(t_node *head, int split_type, t_token **split,
 			t_execute *execute);
 #endif

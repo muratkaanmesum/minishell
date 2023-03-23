@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 13:31:04 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:28:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	check_if_only_red(t_token *token, t_node *node)
 
 t_token	*create_redirections(t_node *node)
 {
-	t_redirections	*red;
 	enum e_token	split_type;
 	t_token			*token;
 

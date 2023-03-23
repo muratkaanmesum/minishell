@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 13:17:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:27:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void						free_execute(t_execute *execute);
 int							get_env_len(char *env);
 int							get_double_ptr_len(char **arr);
 int							get_token_len(t_token *tokens);
-void						exec_rest(t_node *head, t_token *tokens);
+void						exec_rest(t_node *head);
 int							parse_error_free(t_node *head, t_token *tokens,
 								char *inpt);
 int							first_check_free(t_token *tokens, char *inpt);
