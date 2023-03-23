@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:11:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 05:56:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*heredoc_str(t_node *node, int i)
 			break ;
 		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
 			break ;
-		ret = ft_strjoin(ret, str); //libft join
+		ret = ft_strjoin(ret, str);
 		ret = ft_strjoin(ret, new_line);
 	}
 	return (ret);
