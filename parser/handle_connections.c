@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:34:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:40:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	does_priority(t_token *tokens, enum e_token token)
 	while (tokens[i].token != UNKNOWN)
 	{
 		pass_parantheses(tokens, &i);
-		if ((tokens[i].token == AND || tokens[i].token == OR) && token == -1
+		if ((tokens[i].token == AND || tokens[i].token == OR) && token == 100
 			&& tokens[i].token != UNKNOWN)
 			return (1);
 		else if (tokens[i].token == token && tokens[i].token != UNKNOWN)
@@ -67,12 +67,12 @@ int	assign_split_type(t_node *head)
 {
 	int	split_type;
 
-	if (does_priority(head->tokens, -1) == 1)
-		split_type = -1;
+	if (does_priority(head->tokens, 100) == 1)
+		split_type = 100;
 	else if (does_priority(head->tokens, PIPE) == 1)
 		split_type = PIPE;
 	else if (check_parantheses(head->tokens) == 1)
-		split_type = -2;
+		split_type = 200;
 	else
 		split_type = UNKNOWN;
 	return (split_type);
@@ -97,7 +97,7 @@ t_node	*handle_connections(t_node *head, t_token *tokens, t_execute *execute)
 	if (handle_split_type(split_type, head, &split) == 0)
 		return (head);
 	assign_connections(head, split_type, split, execute);
-	if (split_type != -2)
+	if (split_type != 200)
 		free(split);
 	return (head);
 }

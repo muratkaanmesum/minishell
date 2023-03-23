@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:28:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:40:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,13 @@ int	is_arithmetic(t_token *tokens)
 	return (0);
 }
 
-void	assign_connections(t_node *head, int split_type,
-		t_token **split, t_execute *execute)
+void	assign_connections(t_node *head, int split_type, t_token **split,
+		t_execute *execute)
 {
 	int		i;
 	t_token	*cleared_tokens;
 
-	if (split_type == -2)
+	if (split_type == 200)
 	{
 		cleared_tokens = remove_parantheses(head->tokens);
 		head->connections[0] = handle_connections(malloc(sizeof(t_node)),

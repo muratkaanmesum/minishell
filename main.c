@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:27:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:40:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	main_loop(t_execute *execute_struct)
 		head = parser(tokens, execute_struct);
 		if (parse_error_free(head, tokens, execute_struct->input) == 1)
 			continue ;
-		 exec_rest(head, tokens);
+		 exec_rest(head);
 	}
 }
 

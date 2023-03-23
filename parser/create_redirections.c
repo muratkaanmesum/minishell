@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:28:16 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:39:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_token	*create_redirections(t_node *node)
 	enum e_token	split_type;
 	t_token			*token;
 
-	if (does_priority(node->tokens, -1) == 1)
-		split_type = -1;
+	if (does_priority(node->tokens, 100) == 1)
+		split_type = 100;
 	else if (does_priority(node->tokens, PIPE) == 1)
 		split_type = PIPE;
 	else
