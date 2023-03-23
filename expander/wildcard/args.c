@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 14:28:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 11:26:52 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	**take_file(char **files, char *command)
 {
 	int		i;
 	char	*str;
-	char	**new_files;
 
 	i = 0;
 	while (command[i])
@@ -65,25 +64,24 @@ char	**take_file(char **files, char *command)
 			if (is_left_side(command, i))
 			{
 				str = left_side(command, &i);
-				new_files = left_side_files(files, str);
+				files = left_side_files(files, str);
 			}
-			if (is_middle(command, i))
+			else if (is_middle(command, i))
 			{
 				str = middle(command, &i);
-				new_files = middle_files(files, str);
+				files = middle_files(files, str);
 			}
-			if (is_right_side(command, i))
+			else if (is_right_side(command, i))
 			{
 				str = right_side(command, &i);
-				new_files = right_side_files(files, str);
+				files = right_side_files(files, str);
 			}
 			free(str);
 		}
 		if (command[i] != '\0')
 			i++;
 	}
-	free_double_ptr(files);
-	return (new_files);
+	return (files);
 }
 int	get_w_path_count(void)
 {
