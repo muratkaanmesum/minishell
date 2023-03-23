@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 19:18:08 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:23:06 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ char	**just_asterisk(char *command)
 	return (my_files);
 }
 
-char **sort_files(char **files, char *str)
+char	**sort_files(char **files, char *str)
 {
-	char	**sorted_files;
 	int		i;
 	int		m;
 	int		j;
 	int		count;
+	char	**sorted_files;
 	int		x;
 
 	i = 0;
@@ -79,11 +79,18 @@ char **sort_files(char **files, char *str)
 		j = 0;
 		while (files[i][j])
 		{
-			if (str[m] == files[i][j++])
-				m++;
 			if (str[m] == '*')
 				m++;
+			if (str[m] == files[i][j])
+			{
+				m++;
+				j++;
+			}
+			if (files[i][j] && files[i][j] != str[m])
+				j++;
 		}
+		if (str[m] == '*')
+			m++;
 		if (str[m] == '\0')
 			count++;
 		i++;
@@ -99,11 +106,18 @@ char **sort_files(char **files, char *str)
 		j = 0;
 		while (files[i][j])
 		{
-			if (str[m] == files[i][j++])
-				m++;
 			if (str[m] == '*')
 				m++;
+			if (str[m] == files[i][j])
+			{
+				m++;
+				j++;
+			}
+			if (files[i][j] && files[i][j] != str[m])
+				j++;
 		}
+		if (str[m] == '*')
+			m++;
 		if (str[m] == '\0')
 			sorted_files[x++] = files[i];
 		i++;
