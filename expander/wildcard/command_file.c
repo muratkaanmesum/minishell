@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 18:38:29 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:16:24 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,36 @@ char	*prefix_add_file(char *prefix, char *file)
 	new_prefix[i++] = '/';
 	j = 0;
 	while (j < len_file)
-	{
-		new_prefix[i] = file[j];
-		j++;
-		i++;
-	}
+		new_prefix[i++] = file[j++];
 	new_prefix[i] = '\0';
 	return (new_prefix);
 }
 
-int	countWildcard(char *prefix, char *suffix, int *count)
+char	**mutual_wildcard(char *data, char *path)
+{
+	char	**files;
+
+	if (ft_strchr(data, '/') != NULL)
+	{
+		data = edit_data(data);
+		if (data[0] == '.')
+			files = get_dir(path);
+		else
+			files = get_w_dot_files2(path, DT_DIR);
+		files = take_file(files, data);
+	}
+	else
+	{
+		if (data[0] == '.')
+			files = get_all(path);
+		else
+			files = get_w_dot_files2(path, 100);
+		files = take_file(files, data);
+	}
+	return (files);
+}
+
+int	count_wildcard(char *prefix, char *suffix, int *count)
 {
 	char	*data;
 	char	buf[1024];
@@ -60,29 +80,19 @@ int	countWildcard(char *prefix, char *suffix, int *count)
 	path = getcwd(buf, 1024);
 	path = add_slash(path);
 	path = new_path(path, prefix);
-	if (ft_strchr(data, '/') != NULL)
-	{
-		data = edit_data(data);
-		files = get_dir(path);
-		files = take_file(files, data);
-	}
-	else
-	{
-		files = get_all(path);
-		files = take_file(files, data);
-	}
+	files = mutual_wildcard(data, path);
 	suffix = cut_suffix(suffix);
 	i = 0;
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
-		countWildcard(files[i], suffix, count);
+		count_wildcard(files[i], suffix, count);
 		i++;
 	}
 	return (*count);
 }
 
-void	expandWildcard(char *prefix, char *suffix, char **return_files,
+void	expand_wildcard(char *prefix, char *suffix, char **return_files,
 		int *index)
 {
 	char	*data;
@@ -101,29 +111,13 @@ void	expandWildcard(char *prefix, char *suffix, char **return_files,
 	path = getcwd(buf, 1024);
 	path = add_slash(path);
 	path = new_path(path, prefix);
-	if (ft_strchr(data, '/') != NULL)
-	{
-		data = edit_data(data);
-		if (data[0] == '.')
-			files = get_dir(path);
-		else
-			files = get_w_dot_files2(path, DT_DIR);
-		files = take_file(files, data);
-	}
-	else
-	{
-		if (data[0] == '.')
-			files = get_all(path);
-		else
-			files = get_w_dot_files2(path, 100);
-		files = take_file(files, data);
-	}
+	files = mutual_wildcard(data, path);
 	suffix = cut_suffix(suffix);
 	i = 0;
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
-		expandWildcard(files[i], suffix, return_files, index);
+		expand_wildcard(files[i], suffix, return_files, index);
 		i++;
 	}
 	return ;

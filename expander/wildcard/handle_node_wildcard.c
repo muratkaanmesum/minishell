@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 17:29:59 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 20:48:05 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
 {
 	com->count = 0;
-	com->count = countWildcard(NULL, com->str, &com->count);
+	com->count = count_wildcard(NULL, com->str, &com->count);
 	if (com->count >= 1)
 	{
 		com->command_files = malloc(sizeof(char *) * (com->count + 1));
-		expandWildcard(NULL, com->str, com->command_files, &com->index);
+		expand_wildcard(NULL, com->str, com->command_files, &com->index);
 		com->command_files[com->index] = NULL;
 		if (com->command_files == NULL)
 			return ;
@@ -54,12 +54,12 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
 		t_match *match)
 {
-	arg->count = countWildcard(NULL, arg->str, &arg->count);
+	arg->count = count_wildcard(NULL, arg->str, &arg->count);
 	if (arg->count >= 1)
 	{
 		arg->index = 0;
 		arg->arg_files = malloc(sizeof(char *) * (arg->count + 1));
-		expandWildcard(NULL, arg->str, arg->arg_files, &arg->index);
+		expand_wildcard(NULL, arg->str, arg->arg_files, &arg->index);
 		arg->arg_files[arg->count] = NULL;
 		match_arg_files(arg->arg_files, command, arg->i, match);
 	}

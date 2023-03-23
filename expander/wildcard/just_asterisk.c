@@ -6,37 +6,28 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 16:55:04 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:52:27 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-// void	take_file_opt(char **files, char *command, char *str, int i)
-// {
-// 	if (is_left_side(command, i))
-// 	{
-// 		str = left_side(command, &i);
-// 		files = left_side_files(files, str);
-// 	}
-// 	if (is_middle(command, i))
-// 	{
-// 		str = middle(command, &i);
-// 		files = middle_files(files, str);
-// 	}
-// 	if (is_right_side(command, i))
-// 	{
-// 		str = right_side(command, &i);
-// 		files = right_side_files(files, str);
-// 	}
-// }
+void	clean_files_operators(t_files *files)
+{
+	files->i = 0;
+	files->j = 0;
+	files->k = 0;
+	files->t = 0;
+}
 
 char	**take_file(char **files, char *command)
 {
 	int		i;
 	char	*str;
+	t_files	*f_arg;
 
 	i = 0;
+	f_arg = malloc(sizeof(t_files) * 1);
 	while (command[i])
 	{
 		if (command[i] != '\0')
@@ -44,7 +35,7 @@ char	**take_file(char **files, char *command)
 			if (is_left_side(command, i))
 			{
 				str = left_side(command, &i);
-				files = left_side_files(files, str);
+				files = left_side_files(files, str, f_arg);
 			}
 			if (is_middle(command, i))
 			{
@@ -54,7 +45,7 @@ char	**take_file(char **files, char *command)
 			if (is_right_side(command, i))
 			{
 				str = right_side(command, &i);
-				files = right_side_files(files, str);
+				files = right_side_files(files, str,f_arg);
 			}
 		}
 		if (command[i] != '\0')
@@ -65,9 +56,9 @@ char	**take_file(char **files, char *command)
 
 char	**just_asterisk(char *command)
 {
-	int count;
-	char **my_files;
-	int i;
+	int		count;
+	char	**my_files;
+	int		i;
 
 	if (command[0] == '.')
 		my_files = get_files();

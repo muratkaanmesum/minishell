@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 18:41:05 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:55:35 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ typedef struct s_match
 
 }			t_match;
 
+typedef struct s_side_files
+{
+	int		count;
+	char	**new_files;
+	int		i;
+	int		j;
+	int		k;
+	int		t;
+}			t_files;
+
 void		handle_node_wildcard(t_node *node);
 int			is_asterisk(char *str);
 int			asterisk_slash(char *str);
@@ -76,8 +86,8 @@ char		*left_side(char *str, int *index);
 int			is_middle(char *str, int index);
 char		*middle(char *str, int *index);
 void		print_files(char **files);
-char		**right_side_files(char **files, char *str);
-char		**left_side_files(char **files, char *str);
+char		**right_side_files(char **files, char *str,t_files *f_arg);
+char		**left_side_files(char **files, char *str, t_files *f_arg);
 char		**middle_files(char **files, char *str);
 void		match_arg_files(char **files, t_command *command, int i,
 				t_match *match);
@@ -86,12 +96,12 @@ char		**just_asterisk(char *command);
 char		**sort_files(char **files, char *str, t_sort *sort);
 char		**command_file(char *prefix, char *suffix, char *path);
 char		**take_file(char **files, char *command);
-int			countWildcard(char *prefix, char *suffix, int *count);
+int			count_wildcard(char *prefix, char *suffix, int *count);
 int			get_dir_count(char *path);
 char		**get_dir(char *path);
 int			get_all_count(char *path);
 char		**get_all(char *path);
-void		expandWildcard(char *prefix, char *suffix, char **return_files,
+void		expand_wildcard(char *prefix, char *suffix, char **return_files,
 				int *index);
 int			files_count(char **files);
 char		**get_w_dot_files2(char *path, unsigned char d_type);
@@ -112,4 +122,5 @@ char		*new_path(char *path, char *prefix);
 char		*add_slash(char *path);
 char		*edit_data(char *data);
 char		*find_data(char *suffix);
+void		clean_files_operators(t_files *files);
 #endif
