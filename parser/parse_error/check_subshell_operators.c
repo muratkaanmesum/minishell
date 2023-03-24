@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:25:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 15:42:12 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 03:11:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,26 @@ int	check_missing_operator(t_token *tokens)
 			{
 				printf("minishell : syntax error near unexpected token `%s'\n",
 						tokens[i + 1].str);
+				return (1);
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_empty_subshell(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i].token != UNKNOWN)
+	{
+		if (tokens[i].token == OPEN_PAR)
+		{
+			if (tokens[i + 1].token == CLOSE_PAR)
+			{
+				printf("minishell : syntax error near unexpected token `)'\n");
 				return (1);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 15:55:03 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 15:24:13 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 03:16:58 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	check_operators(t_token *tokens)
 	if(check_missing_operator(tokens) == 1)
 		return (1);
 	if(check_subshell_operators(tokens) == 1)
+		return (1);
+	if(check_empty_subshell(tokens) == 1)
 		return (1);
 	return (0);
 }

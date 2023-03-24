@@ -6,13 +6,23 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/23 14:54:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 04:44:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
 
-int	export_w_fork(char **args, t_node *node)
+int	check_identifier(char *arg)
+{
+	if (ft_isalpha(arg[0]) || arg[0] == '_')
+		return (1);
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd("': not a valid identifier", 2);
+	return (0);
+}
+
+void	export_w_fork(char **args, t_node *node)
 {
 	int	i;
 
@@ -23,6 +33,12 @@ int	export_w_fork(char **args, t_node *node)
 	{
 		while (args[i])
 		{
+			if (check_identifier(args[i]) == 0)
+			{
+				i++;
+				node->execute->last_exit_code = 1;
+				continue ;
+			}
 			if (ft_strchr(args[i], '=') == NULL)
 				add_export(args[i], node);
 			else
@@ -30,10 +46,11 @@ int	export_w_fork(char **args, t_node *node)
 				add_export(args[i], node);
 				add_env(args[i], node);
 			}
+			node->execute->last_exit_code = 0;
 			i++;
 		}
 	}
-	return (0);
+	return ;
 }
 
 int	export_fork(char **args, t_node *node)
@@ -52,11 +69,11 @@ int	export_fork(char **args, t_node *node)
 	return (0);
 }
 
-int	export(char **args, t_node *node)
+void	export(char **args, t_node *node)
 {
 	if (node->right_operator != PIPE)
-		node->execute->last_exit_code = export_w_fork(args, node);
+		export_w_fork(args, node);
 	else
 		export_fork(args, node);
-	return (0);
+	return ;
 }

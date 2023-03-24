@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:42:16 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/22 08:29:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 04:13:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ void	ctrl_c(int sig)
 
 void	ctrl_d(t_execute *execute)
 {
+	int	last_exec_code;
+
+	last_exec_code = execute->last_exit_code;
 	if (!execute->input)
 	{
 		printf("\nexit\n");
 		free_execute(execute);
-		exit(1);
+		exit(last_exec_code);
 	}
 }

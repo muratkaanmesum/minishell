@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
-/*   Updated: 2023/03/23 15:20:44 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 04:56:10 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_node	*parser(t_token *tokens, t_execute *execute)
 	t_token	*cpy_token;
 
 	if (parse_error(tokens) == 1)
+	{
+		execute->last_exit_code = 2;
 		return (NULL);
+	}
 	cpy_token = copy_all_tokens(tokens);
 	head = malloc(sizeof(t_node));
 	head->command = NULL;
