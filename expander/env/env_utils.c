@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:45:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 16:10:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,34 @@ char	*find_env_variable(char *value, t_env *env)
 	}
 	return (NULL);
 }
-
+int	check_inside_quote(char *str, int *i)
+{
+	char c = str[*i];
+	(*i)++;
+	while (str[*i] != '\0' && str[*i] != '"')
+	{
+		if (str[*i] == '$')
+			return (1);
+		(*i)++;
+	}
+	return (0);
+}
 char	*get_env_location(char *str)
 {
 	int	i;
-	int	in_quote;
+	int	single_quote;
+	int	double_quote;
 
-	i = 0;
-	in_quote = 0;
+	assign_default_values(&i, &single_quote, &double_quote);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
-			in_quote = in_quote != 1;
-		if (in_quote == 0 && str[i] == '$')
+			single_quote = single_quote != 1;
+		else if (str[i] == '"')
+			double_quote = double_quote != 1;
+		if (double_quote == 1)
+			check_inside_quote(str, &i);
+		if (single_quote == 0 && str[i] == '$')
 		{
 			if (str[i + 1] == '?')
 			{
@@ -77,7 +92,8 @@ char	*get_env_location(char *str)
 				return (NULL);
 			return (&str[i]);
 		}
-		i++;
+		if (str[i] != '\0')
+			i++;
 	}
 	return (NULL);
 }

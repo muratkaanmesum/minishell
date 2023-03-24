@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:09:51 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/24 15:44:40 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 16:00:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	first_check_free(t_token *tokens, char *inpt)
 void	exec_rest(t_node *head)
 {
 	expander(head);
+	printf("head->command %s\n", head->command->command);
 	// execute(head);
 	free(head->execute->input);
 	free_tree(head);
