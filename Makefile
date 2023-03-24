@@ -110,6 +110,9 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/sort_files.c\
                           expander/wildcard/command_file_utils.c\
                           expander/wildcard/command_to_arg.c\
+                          expander/wildcard/readdir_path.c\
+                          expander/wildcard/readdir_w_dot_path.c\
+                          expander/wildcard/readdir_w_dot.c\
                           expander/env/assign_env_utils.c\
                           expander/env/handle_exec_code.c\
                           execute/execute.c\
