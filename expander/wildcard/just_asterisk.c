@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 21:52:27 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/24 11:51:02 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**take_file(char **files, char *command)
 			if (is_right_side(command, i))
 			{
 				str = right_side(command, &i);
-				files = right_side_files(files, str,f_arg);
+				files = right_side_files(files, str, f_arg);
 			}
 		}
 		if (command[i] != '\0')
