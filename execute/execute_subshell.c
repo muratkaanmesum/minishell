@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 15:26:40 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 16:16:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	check_file_status(char *path, t_node *node, char **new_args)
 		free_double_ptr(new_args);
 		return (1);
 	}
+	return (0);
 }
 
 void	assign_dup2(t_node *node)
