@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 09:24:24 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 09:24:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:53:39 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	does_have_option(t_node *node)
 {
-	int	i;
-
-	i = 0;
 	if (node->command->argument_count == 0)
 		return (0);
 	if (ft_strncmp(node->command->arguments[0], "-n",

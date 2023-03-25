@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 12:25:03 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 12:57:13 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**get_files(void)
 	}
 	free(get->dir);
 	get->files[get->i] = NULL;
-	return (get->files);
+	return (files);
 }
 
 int	get_o_count(void)

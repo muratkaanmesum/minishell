@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:24:57 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:25:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:37:04 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,10 @@ void	free_simple_command(t_command *command)
 
 void	free_all(t_node *head)
 {
-	int	i;
-
 	if (head->redirections != NULL)
 		free_redirections(head->redirections);
-	i = 0;
-	free(head->connections);
-	free_tokens_str(head->tokens);
-	free(head->tokens);
+	if (head->connections != NULL)
+		free(head->connections);
 	free(head);
 }
 
@@ -71,12 +67,12 @@ void	free_tree_rec(t_node *head)
 	int	i;
 
 	i = 0;
-	if (head->connection_count == 1 && head->is_arithmetic == 0)
+	if (head->connection_count == 0 && head->is_arithmetic == 0)
 	{
 		free_simple_command(head->command);
 		free_all(head);
 	}
-	else if (head->connection_count > 1)
+	else if (head->connection_count >= 1)
 	{
 		while (i < head->connection_count)
 		{
@@ -87,7 +83,7 @@ void	free_tree_rec(t_node *head)
 	}
 }
 
-void	free_tree(t_node *head, t_token *tokens)
+void	free_tree(t_node *head)
 {
 	free_tree_rec(head);
 }

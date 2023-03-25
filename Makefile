@@ -10,9 +10,9 @@
 NAME        := minishell
 CC        := gcc
 
-FLAGS    := -fsanitize=address
-# FLAGS       := -g -O0
-
+#FLAGS    := -fsanitize=address
+#FLAGS       := -Wall -Wextra -Werror
+FLAGS := -g
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -86,6 +86,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           parser/parse_error/token_error.c\
                           parser/parse_error/check_first.c\
                           parser/parse_error/check_operators.c\
+                          parser/parse_error/check_subshell_operators.c\
                           parser/assign_operators.c\
                             parser/connection_utils.c\
                             parser/operators_utils.c\
@@ -127,6 +128,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           execute/builtins/export_utils.c\
                             execute/builtins/unset.c\
                             execute/builtins/exit.c\
+                            execute/builtins/exit_utils.c\
                             execute/builtins/utils.c\
                             execute/exec_builtins.c\
                             execute/handle_files.c\

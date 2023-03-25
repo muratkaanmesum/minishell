@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:26:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:52:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execute_node(t_node *node)
 	else if (ft_strncmp(node->command->command, "unset", 5) == 0)
 		unset(node->command->arguments, node);
 	else if (ft_strncmp(node->command->command, "exit", 4) == 0)
-		ft_exit(node->command->arguments, get_last_execute_code(node));
+		ft_exit(node, get_last_execute_code(node));
 	else
 		exec_builtin(node);
 	close_node_fds(node);
@@ -41,7 +41,7 @@ void	handle_pipes(t_node *node)
 	int	fd[2];
 
 	i = 0;
-	if (node->connection_count == 1)
+	if (node->connection_count == 0)
 		return ;
 	while (i < node->connection_count - 1)
 	{
@@ -87,16 +87,14 @@ int	handle_priority(t_node *head, int i)
 
 void	exec_all(t_node *head)
 {
-	int	i;
 	int	next_exec_index;
 
 	next_exec_index = 0;
-	i = 0;
 	if (head->is_subshell == 1)
 		execute_subshell(head);
-	else if (head->connection_count == 1)
+	else if (head->connection_count == 0)
 		execute_node(head);
-	else if (head->connection_count > 1)
+	else if (head->connection_count >= 1)
 	{
 		while (next_exec_index != -1)
 		{

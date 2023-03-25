@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiguous.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:16:13 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/24 10:24:19 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 12:41:58 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	take_one_file_out_op(t_node *node, int in_or, int index, int key)
 		if (count == 1)
 		{
 			count = 0;
-			expand_wildcard(NULL, node->redirections->outfile[index], files,
+			expandWildcard(NULL, node->redirections->outfile[index], files,
 				&count);
 			free(node->redirections->outfile[index]);
 			node->redirections->outfile[index] = files[0];
@@ -43,12 +43,9 @@ void	take_one_file_out(t_node *node, int in_or, int index, int key)
 	if (key == 2 && in_or == 1)
 	{
 		files = get_o_files();
-		count = count_wildcard(NULL, node->redirections->infile[index], &count);
+		count = countWildcard(NULL, node->redirections->infile[index], &count);
 		if (count == 1)
 		{
-			count = 0;
-			expand_wildcard(NULL, node->redirections->infile[index], files,
-				&count);
 			free(node->redirections->infile[index]);
 			node->redirections->infile[index] = files[0];
 		}

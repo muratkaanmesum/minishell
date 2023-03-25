@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:13:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:55:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*heredoc_str(t_node *node, int i)
 {
-	enum e_token	*in_type;
 	char			*str;
 	char			*ret;
 	char			*new_line;
@@ -28,7 +27,7 @@ char	*heredoc_str(t_node *node, int i)
 			break ;
 		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
 			break ;
-		ret = ft_strjoin(ret, str); //libft join
+		ret = ft_strjoin(ret, str);
 		ret = ft_strjoin(ret, new_line);
 	}
 	return (ret);
@@ -70,9 +69,9 @@ void	handle_heredocs(t_node *node)
 {
 	int	i;
 
-	if (node->connection_count == 1 && node->redirections != NULL)
+	if (node->connection_count == 0 && node->redirections != NULL)
 		handle_node_heredoc(node);
-	else if (node->connection_count > 1)
+	else if (node->connection_count >= 1)
 	{
 		i = 0;
 		while (i < node->connection_count)

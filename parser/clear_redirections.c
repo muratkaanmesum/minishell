@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_redirections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 10:37:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 15:33:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:43:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	count_redirections(t_token *tokens)
 
 t_token	*clear_redirections(t_node *node)
 {
-	int		i;
-	int		j;
 	int		all;
 	t_token	*new_token;
 	t_token	*removed_tokens;
@@ -79,7 +77,6 @@ t_token	*clear_redirections(t_node *node)
 	all = 0;
 	while (removed_tokens[all].token != UNKNOWN)
 		all++;
-	i = 0;
 	new_token = malloc(sizeof(t_token) * (all
 				- count_redirections(removed_tokens) + 1));
 	get_new_token(removed_tokens, new_token);

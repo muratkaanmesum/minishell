@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 12:56:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:17:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:55:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	handle_infiles(t_redirections *redirections, int *i)
 			fd = open(redirections->infile[*i], O_RDONLY, 0777);
 		if (fd == -1)
 			return (-1);
-		if (redirections->infile_type[*i + 1] == HERE_DOC && fd > 1)
+		if ( *i + 1 < redirections->infile_count && redirections->infile_type[*i + 1] == HERE_DOC && fd > 1)
 		{
 			close(fd);
 			fd = -2;
@@ -97,9 +97,7 @@ void	handle_infile_loop(t_node *head)
 void	handle_node_files(t_node *head)
 {
 	int	out_fd;
-	int	i;
 
-	i = 0;
 	out_fd = 1;
 	if (head->redirections == NULL)
 		return ;

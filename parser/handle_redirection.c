@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:55:12 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:33:42 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:30:11 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	handle_input(t_node *node)
 		if (node->tokens[i].token == I_REDIRECTION
 			|| node->tokens[i].token == HERE_DOC)
 		{
-			node->redirections->infile[index] = node->tokens[i + 1].str;
+			node->redirections->infile[index] = ft_strdup(node->tokens[i
+					+ 1].str);
 			node->redirections->infile_type[index] = node->tokens[i].token;
 			index++;
 		}

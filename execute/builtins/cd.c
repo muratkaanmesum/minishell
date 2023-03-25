@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 07:46:00 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/18 08:28:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 04:15:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	cd(char **args, t_node *node)
 {
 	char	buf[1024];
 	char	old_pwd_buff[1024];
-	int		stdout_fd;
 	char	*str;
 
 	if (check_arg_count(args, node) == 0)
@@ -83,7 +82,7 @@ void	cd(char **args, t_node *node)
 		ft_putstr_fd(" ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putchar_fd('\n', 2);
-		node->execute->last_exit_code = 0;
+		node->execute->last_exit_code = 1;
 		return ;
 	}
 	getcwd(buf, 1024);

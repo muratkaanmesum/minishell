@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   match_arg_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 17:27:32 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 12:53:29 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	match_without_dot(char **files, t_command *command, int i,
 		{
 			if (files[match->m][0] != '.')
 			{
-				match->new_args[match->k + match->file_count] = files[match->m];
+				match->new_args[match->k
+					+ match->file_count] = ft_strdup(files[match->m]);
 				match->file_count++;
 			}
 			match->m++;
@@ -58,9 +59,12 @@ void	match_without_dot(char **files, t_command *command, int i,
 		while (command->arguments[match->k + 1])
 		{
 			match->new_args[match->k
-				+ match->file_count] = command->arguments[match->k + 1];
+				+ match->file_count] = ft_strdup(command->arguments[match->k
+					+ 1]);
 			match->k++;
 		}
+		free_double_ptr(command->arguments);
+		free_double_ptr(files);
 		mutual_equalization(match, command);
 	}
 }
@@ -81,15 +85,17 @@ void	match_arg_files(char **files, t_command *command, int i, t_match *match)
 		mutual_len(match, command, i);
 		while (match->m < match->match_files_count)
 		{
-			match->new_args[match->k + match->m] = files[match->m];
+			match->new_args[match->k + match->m] = ft_strdup(files[match->m]);
 			match->m++;
 		}
 		while (command->arguments[match->k + 1])
 		{
-			match->new_args[match->k + match->m] = command->arguments[match->k
-				+ 1];
+			match->new_args[match->k
+				+ match->m] = ft_strdup(command->arguments[match->k + 1]);
 			match->k++;
 		}
+		free_double_ptr(command->arguments);
+		free_double_ptr(files);
 		mutual_equalization(match, command);
 	}
 }

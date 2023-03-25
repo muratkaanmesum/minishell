@@ -6,22 +6,28 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 17:19:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 14:54:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:28:26 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_tokens_str(t_token *token)
+void	free_tokens(t_token *token)
 {
 	int	i;
 
 	i = 0;
 	while (token[i].token != UNKNOWN)
 	{
-		free(token[i].str);
+		if (token[i].str != NULL)
+		{
+			free(token[i].str);
+			token[i].str = NULL;
+		}
 		i++;
 	}
+	if (token != NULL)
+		free(token);
 }
 
 void	free_double_ptr(char **arr)
@@ -59,6 +65,7 @@ void	free_execute(t_execute *execute)
 	while (execute->export[i] != NULL)
 		free(execute->export[i++]);
 	free(execute->export);
+	free(execute->input);
 	free(execute);
 }
 
@@ -68,5 +75,8 @@ void	copy_token(t_token *dest, t_token src)
 	dest->id = src.id;
 	dest->start_index = src.start_index;
 	dest->end_index = src.end_index;
-	dest->str = ft_strdup(src.str);
+	if (src.str != NULL)
+		dest->str = ft_strdup(src.str);
+	else
+		dest->str = NULL;
 }

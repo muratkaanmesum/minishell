@@ -6,11 +6,21 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:26:19 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 03:47:25 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execute.h"
+
+int	free_exit(t_node *node, int exit_code)
+{
+	t_node	*top_node;
+
+	top_node = node->execute->top_node;
+	free_execute(node->execute);
+	free_tree(top_node);
+	exit(exit_code);
+}
 
 int	get_arg_count(char **args)
 {
@@ -22,38 +32,42 @@ int	get_arg_count(char **args)
 	return (i);
 }
 
-int	is_num(char **args)
+void	ft_exit_fork(t_node *node, int last_exit_code)
 {
-	int	i;
+	int		count;
+	char	**args;
+	int		pid;
 
-	i = 0;
-	while (args[0][i])
+	args = node->command->arguments;
+	pid = fork();
+	if (pid == 0)
 	{
-		if (!ft_isdigit(args[0][i]))
-			return (0);
-		i++;
+		count = get_arg_count(args);
+		if (count == 0)
+			exit(last_exit_code);
+		check_exit_errors(node, args, count);
+		free_exit(node, ft_atoi(args[0]));
 	}
-	return (1);
+	waitpid(pid, &node->execute->last_exit_code, 0);
+	return ;
 }
 
-int	ft_exit(char **args, int last_exit_code)
+void	ft_exit(t_node *node, int last_exit_code)
 {
-	int	count;
-	int	pid;
+	int		count;
+	char	**args;
 
+	args = node->command->arguments;
+	if (node->left_operator == PIPE || node->right_operator == PIPE)
+	{
+		(ft_exit_fork(node, last_exit_code));
+		return ;
+	}
 	count = get_arg_count(args);
 	if (count == 0)
 		exit(last_exit_code);
-	if (is_num(args) == 0)
-	{
-		printf("exit\nnumeric argument required\n");
-		exit(2);
-	}
-	else if (count > 1)
-	{
-		printf("exit\nminishell: exit: too many arguments\n");
-		return (1);
-	}
-	exit(ft_atoi(args[0]));
-	return (0);
+	if (check_exit_errors(node, args, count))
+		return ;
+	free_exit(node, ft_atoi(args[0]));
+	return ;
 }

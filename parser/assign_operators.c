@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 15:33:20 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:51:55 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_left_operator(t_token token, t_token *tokens, int is_subshell,
 
 	i = get_in_all_tokens(token, tokens);
 	if (is_subshell == 1 || is_arithmetic == 1)
-		return (left_is_subshell_handle(token, tokens, i));
+		return (left_is_subshell_handle(tokens, i));
 	else
 	{
 		while (i >= 0 && tokens[i].token != UNKNOWN && tokens[i].token != PIPE
@@ -86,7 +86,7 @@ void	assign_operators(t_node *head, t_token *tokens)
 {
 	int	i;
 
-	if (head->connection_count == 1)
+	if (head->connection_count == 0)
 	{
 		handle_operators(head, tokens);
 		return ;

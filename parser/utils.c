@@ -6,80 +6,80 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:59:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:34:09 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:40:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// void	print_token(t_token *token)
-// {
-// 	int	i;
+void	print_token(t_token *token)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (token[i].token != UNKNOWN)
-// 	{
-// 		printf("value: %s id : %d token : ", token[i].str, token[i].id);
-// 		switch (token[i].token)
-// 		{
-// 		case PIPE:
-// 			printf("PIPE\n");
-// 			break ;
-// 		case UNKNOWN:
-// 			printf("UNKNOWN\n");
-// 			break ;
-// 		case I_REDIRECTION:
-// 			printf("I_REDIRECTION\n");
-// 			break ;
-// 		case O_REDIRECTION:
-// 			printf("O_REDIRECTION\n");
-// 			break ;
-// 		case APPEND_RED:
-// 			printf("APPEND_RED\n");
-// 			break ;
-// 		case HERE_DOC:
-// 			printf("HERE_DOC\n");
-// 			break ;
-// 		case COMMAND:
-// 			printf("COMMAND\n");
-// 			break ;
-// 		case ARG:
-// 			printf("ARG\n");
-// 			break ;
-// 		case OPTION:
-// 			printf("OPTION\n");
-// 			break ;
-// 		case AND:
-// 			printf("AND\n");
-// 			break ;
-// 		case OR:
-// 			printf("OR\n");
-// 			break ;
-// 		case ENV_COMMAND:
-// 			printf("ENV_COMMAND\n");
-// 			break ;
-// 		case ENV:
-// 			printf("ENV\n");
-// 			break ;
-// 		case RED_FILE:
-// 			printf("RED_FILE\n");
-// 			break ;
-// 		case OPEN_PAR:
-// 			printf("OPEN_PAR\n");
-// 			break ;
-// 		case CLOSE_PAR:
-// 			printf("CLOSE_PAR\n");
-// 			break ;
-// 		case UNKNOWN_TOKEN:
-// 			printf("UNKNOWN_TOKEN\n");
-// 			break ;
-// 		default:
-// 			printf("UNKNOWN\n");
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (token[i].token != UNKNOWN)
+	{
+		printf("value: %s id : %d token : ", token[i].str, token[i].id);
+		switch (token[i].token)
+		{
+		case PIPE:
+			printf("PIPE\n");
+			break ;
+		case UNKNOWN:
+			printf("UNKNOWN\n");
+			break ;
+		case I_REDIRECTION:
+			printf("I_REDIRECTION\n");
+			break ;
+		case O_REDIRECTION:
+			printf("O_REDIRECTION\n");
+			break ;
+		case APPEND_RED:
+			printf("APPEND_RED\n");
+			break ;
+		case HERE_DOC:
+			printf("HERE_DOC\n");
+			break ;
+		case COMMAND:
+			printf("COMMAND\n");
+			break ;
+		case ARG:
+			printf("ARG\n");
+			break ;
+		case OPTION:
+			printf("OPTION\n");
+			break ;
+		case AND:
+			printf("AND\n");
+			break ;
+		case OR:
+			printf("OR\n");
+			break ;
+		case ENV_COMMAND:
+			printf("ENV_COMMAND\n");
+			break ;
+		case ENV:
+			printf("ENV\n");
+			break ;
+		case RED_FILE:
+			printf("RED_FILE\n");
+			break ;
+		case OPEN_PAR:
+			printf("OPEN_PAR\n");
+			break ;
+		case CLOSE_PAR:
+			printf("CLOSE_PAR\n");
+			break ;
+		case UNKNOWN_TOKEN:
+			printf("UNKNOWN_TOKEN\n");
+			break ;
+		default:
+			printf("UNKNOWN\n");
+			break ;
+		}
+		i++;
+	}
+}
 
 t_token	*remove_parantheses(t_token *tokens)
 {
@@ -96,12 +96,10 @@ t_token	*remove_parantheses(t_token *tokens)
 		new_split = malloc(sizeof(t_token) * (i - 1));
 		while (j < i - 1)
 		{
-			new_split[j - 1] = tokens[j];
-			new_split[j - 1].str = ft_strdup(tokens[j].str);
+			copy_token(&new_split[j - 1], tokens[j]);
 			j++;
 		}
 		new_split[j - 1].token = UNKNOWN;
-		free_tokens_str(tokens);
 		return (new_split);
 	}
 	return (tokens);
@@ -149,11 +147,20 @@ int	is_arithmetic(t_token *tokens)
 	return (0);
 }
 
-void	assign_connections(t_node *head, enum e_token split_type,
-		t_token **split, t_execute *execute)
+void	assign_connections(t_node *head, int split_type, t_token **split,
+		t_execute *execute)
 {
-	int	i;
+	int		i;
+	t_token	*cleared_tokens;
 
+	if (split_type == 200)
+	{
+		cleared_tokens = remove_parantheses(head->tokens);
+		head->connections[0] = handle_connections(malloc(sizeof(t_node)),
+													cleared_tokens,
+													execute);
+		return ;
+	}
 	i = 0;
 	while (i < connection_count(head->tokens, split_type))
 	{

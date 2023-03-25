@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:27:04 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/24 04:53:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 // 	int	j;
 
 // 	i = 0;
-// 	if (head->connection_count == 1)
+// 	if (head->connection_count == 0)
 // 	{
 // 		j = 0;
 // 		if (head->command == NULL)
@@ -93,7 +93,7 @@
 // 		{
 // 			if (i == 0)
 // 			{
-// 				// 	print_token(head->tokens);
+// 					print_token(head->tokens);
 // 				if (head->redirections != NULL)
 // 					print_redirections(head->redirections);
 // 				printf("\n*************\n");
@@ -139,7 +139,6 @@ t_execute	*init_execute(char **env)
 
 void	main_loop(t_execute *execute_struct)
 {
-	char	*input;
 	t_node	*head;
 	t_token	*tokens;
 
@@ -147,22 +146,22 @@ void	main_loop(t_execute *execute_struct)
 	{
 		signal(SIGINT, &ctrl_c);
 		signal(SIGQUIT, SIG_IGN);
-		input = readline("minishell: ");
+		execute_struct->input = readline("minishell: ");
 		write(1, "\033[0m", 4);
-		ctrl_d(input, execute_struct);
-		add_history(input);
-		tokens = lexer(input);
+		ctrl_d(execute_struct);
+		add_history(execute_struct->input);
+		tokens = lexer(execute_struct->input);
 		if (tokens == NULL)
 		{
-			free(input);
+			free(execute_struct->input);
 			continue ;
 		}
-		if (first_check_free(tokens, input) == 1)
+		if (first_check_free(tokens, execute_struct->input) == 1)
 			continue ;
 		head = parser(tokens, execute_struct);
-		if (parse_error_free(head, tokens, input) == 1)
+		if (parse_error_free(head, tokens, execute_struct->input) == 1)
 			continue ;
-		exec_rest(head, tokens, input);
+		exec_rest(head);
 	}
 }
 

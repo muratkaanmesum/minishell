@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:49 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 14:49:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 15:25:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,4 @@ int	open_parantheses(t_token *tokens)
 		return (2);
 	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 12:23:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 12:46:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*prefix_add_file(char *prefix, char *file)
 	while (j < len_file)
 		new_prefix[i++] = file[j++];
 	new_prefix[i] = '\0';
+	free(file);
 	return (new_prefix);
 }
 
@@ -89,6 +90,8 @@ int	count_wildcard(char *prefix, char *suffix, int *count)
 		count_wildcard(files[i], suffix, count);
 		i++;
 	}
+	free_double_ptr(files);
+	free(data);
 	return (*count);
 }
 
@@ -103,7 +106,7 @@ void	expand_wildcard(char *prefix, char *suffix, char **return_files,
 
 	if (suffix == NULL)
 	{
-		return_files[*index] = prefix;
+		return_files[*index] = ft_strdup(prefix);
 		*index += 1;
 		return ;
 	}
@@ -120,8 +123,7 @@ void	expand_wildcard(char *prefix, char *suffix, char **return_files,
 		expand_wildcard(files[i], suffix, return_files, index);
 		i++;
 	}
+	free_double_ptr(files);
+	free(data);
 	return ;
 }
-
-
-//echo *ex*der*

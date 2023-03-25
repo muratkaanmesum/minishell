@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   right_side.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:29 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 22:04:22 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 12:59:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	right_side_opt(char **files, char *str, t_files *f_arg)
 		f_arg->k++;
 		if (files[f_arg->i][f_arg->j] == '\0' && str[f_arg->k] == '\0')
 		{
-			f_arg->new_files[f_arg->t] = files[f_arg->i];
+			f_arg->new_files[f_arg->t] = ft_strdup(files[f_arg->i]);
 			f_arg->t++;
 		}
 	}
@@ -136,6 +136,7 @@ char	**right_side_files(char **files, char *str, t_files *f_arg)
 		}
 		f_arg->i++;
 	}
+	free_double_ptr(files);
 	f_arg->new_files[f_arg->t] = NULL;
 	return (f_arg->new_files);
 }

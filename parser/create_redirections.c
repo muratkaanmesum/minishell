@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 15:33:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:39:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_if_only_red(t_token *token, t_node *node)
 	if (token[0].token == UNKNOWN)
 	{
 		node->connection_count = 1;
-		free_tokens_str(node->tokens);
+		free_tokens(node->tokens);
 		node->connections = malloc(sizeof(t_node *));
 		node->command = NULL;
 	}
@@ -42,12 +42,11 @@ void	check_if_only_red(t_token *token, t_node *node)
 
 t_token	*create_redirections(t_node *node)
 {
-	t_redirections	*red;
 	enum e_token	split_type;
 	t_token			*token;
 
-	if (does_priority(node->tokens, -1) == 1)
-		split_type = -1;
+	if (does_priority(node->tokens, 100) == 1)
+		split_type = 100;
 	else if (does_priority(node->tokens, PIPE) == 1)
 		split_type = PIPE;
 	else
@@ -58,6 +57,7 @@ t_token	*create_redirections(t_node *node)
 		handle_redirection(node);
 		token = clear_redirections(node);
 		check_if_only_red(token, node);
+		free_tokens(node->tokens);
 		return (token);
 	}
 	else

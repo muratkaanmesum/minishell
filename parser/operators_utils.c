@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:10:27 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 15:33:49 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 14:44:07 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_in_all_tokens(t_token token, t_token *tokens)
 	return (-1);
 }
 
-int	left_is_subshell_handle(t_token token, t_token *tokens, int i)
+int	left_is_subshell_handle(t_token *tokens, int i)
 {
 	while (i >= 0 && tokens[i].token != UNKNOWN && tokens[i].token != PIPE
 		&& tokens[i].token != AND && tokens[i].token != OR)
