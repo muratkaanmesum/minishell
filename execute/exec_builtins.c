@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 16:58:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 17:25:29 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	print_new_arg(char **arg)
 	}
 }
 
-
-
 char	**modified_args(t_node *node)
 {
 	char	**new_args;
@@ -60,6 +58,7 @@ char	**modified_args(t_node *node)
 
 	i = 1;
 	j = 0;
+	
 	new_args = malloc(sizeof(char *) * (node->command->argument_count + 2));
 	new_args[0] = ft_strdup(node->command->command);
 	while (j < node->command->argument_count)
