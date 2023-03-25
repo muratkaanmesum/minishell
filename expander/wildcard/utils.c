@@ -3,111 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:31 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/16 16:08:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 17:00:48 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-int	get_path_count(void)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				i;
-
-	i = 0;
-	getcwd(buf, 1024);
-	d = opendir(buf); //gelen pwd için
-	if (d)
-	{
-		while ((dir = readdir(d)) != NULL)
-			i++;
-		// closedir(d);
-	}
-	free(dir);
-	return (i);
-}
-
-char	**get_files(void)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				count;
-	char			**files;
-	int				i;
-
-	getcwd(buf, 1024);
-	count = get_path_count();
-	files = (char **)malloc(sizeof(char *) * (count + 1));
-	d = opendir(buf); //gelen pwd için
-	if (d)
-	{
-		i = 0;
-		while ((dir = readdir(d)) != NULL)
-		{
-			files[i] = ft_strdup(dir->d_name);
-			i++;
-		}
-		closedir(d);
-	}
-	free(dir);
-	files[i] = NULL;
-	return (files);
-}
-int	get_o_count(void)
-{
-	char			buf[1024];
-	DIR				*d;
-	struct dirent	*dir;
-	int				i;
-
-	i = 0;
-	getcwd(buf, 1024);
-	d = opendir(buf); //gelen pwd için
-	if (d)
-	{
-		while ((dir = readdir(d)) != NULL)
-			if (dir->d_type == DT_DIR)
-				i++;
-		closedir(d);
-	}
-	free(dir);
-	return (i);
-}
-
-char	**get_o_files(void) //BUNLARA ARGUMAN VER VE BİR FONSKİYONDA BİRLEŞTİR
-{
-	char buf[1024];
-	DIR *d;
-	struct dirent *dir;
-	int count;
-	char **files;
-	int i;
-
-	getcwd(buf, 1024);
-	count = get_o_count();
-	files = (char **)malloc(sizeof(char *) * (count + 1));
-	d = opendir(buf); //gelen pwd için
-	if (d)
-	{
-		i = 0;
-		while ((dir = readdir(d)) != NULL)
-			if (dir->d_type == DT_DIR)
-			{
-				files[i] = ft_strdup(dir->d_name);
-				i++;
-			}
-		closedir(d);
-	}
-	free(dir);
-	files[i] = NULL;
-	return (files);
-}
 void	print_files(char **files)
 {
 	int	i;
@@ -137,4 +41,34 @@ int	asterisk_slash(char *str)
 	if (ft_strchr(str, '*') != NULL && ft_strchr(str, '/') != NULL)
 		return (1);
 	return (0);
+}
+
+int	files_count(char **files)
+{
+	int	i;
+
+	i = 0;
+	if (files[0] == 0)
+		return (0);
+	while (files[i])
+		i++;
+	return (i);
+}
+
+int	files_w_dot_count(char **files)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (files[0] == 0)
+		return (0);
+	while (files[i])
+	{
+		if (files[i][0] != '.')
+			count++;
+		i++;
+	}
+	return (count);
 }

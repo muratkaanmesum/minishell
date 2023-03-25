@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_side.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:19 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/14 12:33:42 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:49:14 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,83 +63,68 @@ char	*left_side(char *str, int *index)
 	return (NULL);
 }
 
-int	left_side_files_count(char **files, char *str)
+void	left_side_files_count(char **files, char *str, t_files *f_arg)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	count;
-
-	count = 0;
-	k = 0;
-	i = 0;
-	j = 0;
-	while (files[i])
+	clean_files_operators(f_arg);
+	f_arg->count = 0;
+	while (files[f_arg->i])
 	{
-		j = 0;
-		while (str[j])
+		f_arg->j = 0;
+		while (str[f_arg->j])
 		{
-			if (files[i][0] == str[0])
+			if (files[f_arg->i][0] == str[0])
 			{
-				while (files[i][j] == str[k] && files[i][j] != '\0'
-					&& str[k] != '\0')
+				while (files[f_arg->i][f_arg->j] == str[f_arg->k]
+					&& files[f_arg->i][f_arg->j] != '\0'
+					&& str[f_arg->k] != '\0')
 				{
-					j++;
-					k++;
+					f_arg->j++;
+					f_arg->k++;
 				}
-				if (str[k] == '\0')
-					count++;
+				if (str[f_arg->k] == '\0')
+					f_arg->count++;
 			}
-			k = 0;
-			if (str[j] != '\0')
-				j++;
+			f_arg->k = 0;
+			if (str[f_arg->j] != '\0')
+				f_arg->j++;
 		}
-		i++;
+		f_arg->i++;
 	}
-	return (count);
 }
 
-char	**left_side_files(char **files, char *str)
+void	left_side_option(char **files, char *str, t_files *f_arg)
 {
-	int		count;
-	char	**new_files;
-	int		i;
-	int		j;
-	int		k;
-	int		t;
-
-	count = left_side_files_count(files, str);
-	new_files = malloc(sizeof(char *) * (count + 1));
-	t = 0;
-	i = 0;
-	k = 0;
-	j = 0;
-	while (files[i])
+	f_arg->j = 0;
+	while (files[f_arg->i][f_arg->j] == str[f_arg->k]
+		&& files[f_arg->i][f_arg->j] != '\0' && str[f_arg->k] != '\0')
 	{
-		k = 0;
-		while (str[k])
-		{
-			if (files[i][0] == str[0])
-			{
-				j = 0;
-				while (files[i][j] == str[k] && files[i][j] != '\0'
-					&& str[k] != '\0')
-				{
-					j++;
-					k++;
-				}
-				if (str[k] == '\0')
-				{
-					new_files[t] = files[i];
-					t++;
-				}
-			}
-			if (str[k] != '\0')
-				k++;
-		}
-		i++;
+		f_arg->j++;
+		f_arg->k++;
 	}
-	free(files);
-	new_files[t] = NULL;
-	return (new_files);
+	if (str[f_arg->k] == '\0')
+	{
+		f_arg->new_files[f_arg->t] = files[f_arg->i];
+		f_arg->t++;
+	}
+}
+
+char	**left_side_files(char **files, char *str, t_files *f_arg)
+{
+	left_side_files_count(files, str, f_arg);
+	f_arg->new_files = malloc(sizeof(char *) * (f_arg->count + 1));
+	clean_files_operators(f_arg);
+	while (files[f_arg->i])
+	{
+		f_arg->k = 0;
+		while (str[f_arg->k])
+		{
+			if (files[f_arg->i][0] == str[0])
+				left_side_option(files, str, f_arg);
+			if (str[f_arg->k] != '\0')
+				f_arg->k++;
+		}
+		f_arg->i++;
+	}
+	f_arg->new_files[f_arg->t] = NULL;
+	return (f_arg->new_files);
 }
