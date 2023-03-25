@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 20:10:07 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 20:11:02 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ void	handle_env_arg(t_node *node, t_env *env, int i)
 {
 	char	*str;
 	char	*env_value;
-	// printf("gelen %s\n",node->command->arguments[0]);
 	str = get_env_location(node->command->arguments[i]);
-	// printf("str %s\n",str);
 	if (str != NULL)
 		env_value = find_env_variable(str, env);
 	if (env_value == NULL)
@@ -55,5 +53,5 @@ void	handle_node_env(t_node *node, t_env *env)
 	if (node->redirections != NULL)
 		handle_redirection_env(node, env);
 	handle_all_exec_code(node);
-	// delete_all_quotes(node);
+	delete_all_quotes(node);
 }

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:38:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/21 13:27:46 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 22:12:50 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expander.h"
-
+//echo asd'"$USER"'asd'$PATH'
+//asd"$USER"'asd'$PATH''
 void	assign_env_value(char *new_str, char *env_value, int *index)
 {
 	int	i;

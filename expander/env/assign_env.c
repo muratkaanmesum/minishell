@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 20:09:22 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 20:51:01 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	pass_single_quote_add(char *str, int *i, char *new_str, int *index)
 	new_str[(*index)++] = str[(*i)++];
 	while (str[*i] != '\'')
 		new_str[(*index)++] = str[(*i)++];
-	new_str[(*index)++] = str[(*i)++];
+	if (str[*i])
+		new_str[(*index)++] = str[(*i)++];
 }
 void	change_str(char *str, char *env_value, char *new_str)
 {
