@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/25 12:43:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:00:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ void	delete_all_quotes(t_node *node)
 	while (node->command->arguments[++i] != NULL)
 	{
 		if (quotes_control(node->command->arguments[i]) == 1)
-			node->command->arguments[i] = delete_quotes(node->command->arguments[i],
-														node);
+			node->command->arguments[i] = delete_quotes(node->command->arguments[i]);
 	}
 	i = -1;
 	if (node->redirections == NULL)

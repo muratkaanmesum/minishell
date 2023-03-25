@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:39:50 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:23:45 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_token	*create_redirections(t_node *node)
 		handle_redirection(node);
 		token = clear_redirections(node);
 		check_if_only_red(token, node);
-		free_tokens(node->tokens);
 		return (token);
 	}
 	else

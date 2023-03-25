@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir_w_dot_path.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:23:50 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/24 11:49:29 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:14:02 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_wdot_files_process(t_get *get, unsigned char d_type)
 	{
 		if (get->dir->d_name[0] != '.' && get->dir->d_type == d_type)
 		{
-			get->files[get->i] = get->dir->d_name;
+			get->files[get->i] = ft_strdup(get->dir->d_name);
 			get->i++;
 		}
 	}
@@ -61,7 +61,7 @@ void	get_wdot_files_process(t_get *get, unsigned char d_type)
 	{
 		if (get->dir->d_name[0] != '.')
 		{
-			get->files[get->i] = get->dir->d_name;
+			get->files[get->i] = ft_strdup(get->dir->d_name);
 			get->i++;
 		}
 	}
