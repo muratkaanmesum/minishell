@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 13:28:12 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 14:11:53 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	assign_arg(t_lexer_args *args)
 		if (args->index - 1 < 0 && args->is_redirection != 1)
 			args->counter++;
 		else if (args->tokens[args->index - 1].token != RED_FILE
-			&& args->is_redirection != 1)
+				&& args->is_redirection != 1)
 			args->counter++;
 		args->tokens[args->index].start_index = args->i;
 		assign_token(args);
