@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 18:33:05 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 18:41:25 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,17 @@ void	handle_env_arg(t_node *node, t_env *env, int i)
 void	handle_node_env(t_node *node, t_env *env)
 {
 	int	i;
-	printf("%s\n",get_env_location(node->command->command));
-	while (get_env_location(node->command->command) != NULL)
+	// while (get_env_location(node->command->command) != NULL)
 		handle_env_command(node, env);
-	i = 0;
-	while (i < node->command->argument_count)
-	{
-		while (get_env_location(node->command->arguments[i]) != NULL)
-			handle_env_arg(node, env, i);
-		i++;
-	}
-	if (node->redirections != NULL)
-		handle_redirection_env(node, env);
-	handle_all_exec_code(node);
-	delete_all_quotes(node);
+	// i = 0;
+	// while (i < node->command->argument_count)
+	// {
+	// 	while (get_env_location(node->command->arguments[i]) != NULL)
+	// 		handle_env_arg(node, env, i);
+	// 	i++;
+	// }
+	// if (node->redirections != NULL)
+	// 	handle_redirection_env(node, env);
+	// handle_all_exec_code(node);
+	// delete_all_quotes(node);
 }
