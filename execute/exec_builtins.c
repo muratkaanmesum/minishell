@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 16:16:06 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 16:58:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,7 @@ void	print_new_arg(char **arg)
 	}
 }
 
-int	check_path(char *path, t_node *node, char **new_args)
-{
-	if (path == NULL)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(node->command->command, 2);
-		ft_putendl_fd(": command not found", 2);
-		node->execute->last_exit_code = 127;
-		free(path);
-		free_double_ptr(new_args);
-		return (1);
-	}
-	if (check_file_status(path, node, new_args))
-		return (1);
-	return (0);
-}
+
 
 char	**modified_args(t_node *node)
 {

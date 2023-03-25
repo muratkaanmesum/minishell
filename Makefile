@@ -135,6 +135,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/execute_subshell.c\
                             execute/execute_node_utils.c\
                             execute/handle_heredocs.c\
+                            execute/check_path.c\
 
 
 
