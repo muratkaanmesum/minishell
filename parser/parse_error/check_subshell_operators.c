@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_subshell_operators.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:25:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 14:12:30 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 17:19:18 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	check_subshell_operators(t_token *tokens)
 		return (1);
 	if (check_end(tokens) == 1)
 		return (1);
+	return 0;
 }
 
 int	check_missing_operator(t_token *tokens)
