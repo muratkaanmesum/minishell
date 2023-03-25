@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/24 04:40:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 15:26:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ int		get_export_count(char **env);
 int		check_errors(t_node *node);
 char	*check_in_path(char *command, char *path);
 void	handle_heredocs(t_node *node);
+int		check_file_status(char *path, t_node *node, char **new_args);
 #endif
