@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/24 16:10:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 18:32:33 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ char	*find_env_variable(char *value, t_env *env)
 }
 int	check_inside_quote(char *str, int *i)
 {
-	char c = str[*i];
+	char	c;
+
+	c = str[*i];
 	(*i)++;
 	while (str[*i] != '\0' && str[*i] != '"')
 	{
@@ -66,22 +68,30 @@ int	check_inside_quote(char *str, int *i)
 	}
 	return (0);
 }
+
+void	pass_single_quote(char *str, int *i)
+{
+	(*i)++;
+	while (str[*i] != '\0' && str[*i] != '\'')
+		(*i)++;
+	if (str[*i + 1] != '\0')
+		(*i)++;
+}
+
 char	*get_env_location(char *str)
 {
 	int	i;
-	int	single_quote;
-	int	double_quote;
+	int	flag;
 
-	assign_default_values(&i, &single_quote, &double_quote);
+	flag = 0;
+	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\'')
-			single_quote = single_quote != 1;
-		else if (str[i] == '"')
-			double_quote = double_quote != 1;
-		if (double_quote == 1)
-			check_inside_quote(str, &i);
-		if (single_quote == 0 && str[i] == '$')
+		if (str[i] == '\'' && flag == 0)
+			pass_single_quote(str, &i);
+		if (str[i] == '"')
+			flag = !flag;
+		if (str[i] == '$')
 		{
 			if (str[i + 1] == '?')
 			{
@@ -97,7 +107,8 @@ char	*get_env_location(char *str)
 	}
 	return (NULL);
 }
-
+//ls -la
+//ls -la
 t_env	*get_env_variables(char **env)
 {
 	int		i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:42:16 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:33:34 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 15:54:32 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ctrl_d(t_execute *execute)
 	{
 		printf("\nexit\n");
 		free_execute(execute);
-		system("leaks minishell");
+		// system("leaks minishell");
 		exit(last_exec_code);
 	}
 }

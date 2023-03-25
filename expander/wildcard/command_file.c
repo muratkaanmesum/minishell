@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 12:46:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 16:15:57 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*prefix_add_file(char *prefix, char *file)
 	while (j < len_file)
 		new_prefix[i++] = file[j++];
 	new_prefix[i] = '\0';
-	free(file);
+	// free(file);
 	return (new_prefix);
 }
 
@@ -78,20 +78,22 @@ int	count_wildcard(char *prefix, char *suffix, int *count)
 		return (1);
 	}
 	data = find_data(suffix);
-	path = getcwd(buf, 1024);
-	path = add_slash(path);
+	getcwd(buf, 1024);
+	path = add_slash(buf);
 	path = new_path(path, prefix);
 	files = mutual_wildcard(data, path);
 	suffix = cut_suffix(suffix);
 	i = 0;
+	// free(path);
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
 		count_wildcard(files[i], suffix, count);
+		// free(suffix);
 		i++;
 	}
-	free_double_ptr(files);
-	free(data);
+	// free_double_ptr(files);
+	// free(data);
 	return (*count);
 }
 
@@ -111,19 +113,21 @@ void	expand_wildcard(char *prefix, char *suffix, char **return_files,
 		return ;
 	}
 	data = find_data(suffix);
-	path = getcwd(buf, 1024);
-	path = add_slash(path);
+	getcwd(buf, 1024);
+	path = add_slash(buf);
 	path = new_path(path, prefix);
 	files = mutual_wildcard(data, path);
 	suffix = cut_suffix(suffix);
 	i = 0;
+	// free(path);
 	while (files[i])
 	{
 		files[i] = prefix_add_file(prefix, files[i]);
 		expand_wildcard(files[i], suffix, return_files, index);
+		// free(suffix);
 		i++;
 	}
-	free_double_ptr(files);
-	free(data);
+	// free_double_ptr(files);
+	// free(data);
 	return ;
 }

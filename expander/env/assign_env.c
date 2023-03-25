@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/24 11:28:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 17:54:47 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*assign_env(char *str, char *env_value)
 	int		node_size;
 
 	node_size = get_node_size(str);
+	printf("node size %d\n",node_size);
 	value_size = (int)ft_strlen(env_value);
 	new_str = malloc(sizeof(char) * (value_size + node_size + 1));
 	change_str(str, env_value, new_str);

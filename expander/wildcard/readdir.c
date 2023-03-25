@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:52:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 15:22:31 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ char	**get_files(void)
 			get->i++;
 		}
 	}
-		closedir(get->d);
+	closedir(get->d);
 	free(get->dir);
 	get->files[get->i] = NULL;
+	free(get);
 	return (get->files);
 }
 
@@ -85,7 +86,7 @@ int	get_o_count(void)
 				i++;
 		}
 	}
-		closedir(d);
+	closedir(d);
 	free(dir);
 	return (i);
 }

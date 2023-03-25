@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_side.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:19 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:14:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 16:16:48 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char	**left_side_files(char **files, char *str, t_files *f_arg)
 		}
 		f_arg->i++;
 	}
-	free_double_ptr(files);
+	// free_double_ptr(files);
 	f_arg->new_files[f_arg->t] = NULL;
 	return (f_arg->new_files);
 }

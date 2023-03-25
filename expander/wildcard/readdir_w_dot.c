@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir_w_dot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:16:56 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:52:27 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 15:31:32 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_w_path_count(void)
 	free(get->dir);
 	closedir(get->d);
 	free(get);
-	return (get->i);
+	return (i);
 }
 
 void	get_wdot_process(t_get *get)
