@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 12:47:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 14:01:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 			if (com->files[0] == NULL)
 				return ;
 			if (com->files[0] != NULL)
-				command->command = com->files[0];
+			{
+				free(command->command);
+				command->command = ft_strdup(com->files[0]);
+			}
 			add_command_to_arg(command, com->files);
 		}
 		else if (asterisk_slash(com->str) == 1)
@@ -90,6 +93,7 @@ void	handle_forarg(t_command *command, t_arg *arg, t_sort *sort)
 		}
 		arg->i++;
 	}
+	free(match);
 }
 
 void	handle_node_wildcard(t_node *node)
@@ -113,4 +117,7 @@ void	handle_node_wildcard(t_node *node)
 	}
 	handle_forcommand(node->command, com, sort);
 	handle_forarg(node->command, arg, sort);
+	free(com);
+	free(arg);
+	free(sort);
 }

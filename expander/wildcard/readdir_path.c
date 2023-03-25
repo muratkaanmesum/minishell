@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:43:15 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/24 11:42:17 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:50:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_dir_count(char *path)
 				i++;
 		}
 	}
+	closedir(d);
 	free(dir);
 	return (i);
 }
@@ -55,14 +56,17 @@ char	**get_dir(char *path)
 				break ;
 			if (get->dir->d_type == DT_DIR)
 			{
-				get->files[get->i] = get->dir->d_name;
+				get->files[get->i] = ft_strdup(get->dir->d_name);
 				get->i++;
 			}
 		}
 	}
+	closedir(get->d);
+	char **files = get->files;
 	free(get->dir);
 	get->files[get->i] = NULL;
-	return (get->files);
+	free(get);
+	return (files);
 }
 
 int	get_all_count(char *path)
@@ -84,6 +88,7 @@ int	get_all_count(char *path)
 			i++;
 		}
 	}
+	closedir(d);
 	free(dir);
 	return (i);
 }
@@ -105,11 +110,14 @@ char	**get_all(char *path)
 			get->dir = readdir(get->d);
 			if (get->dir == NULL)
 				break ;
-			get->files[get->i] = get->dir->d_name;
+			get->files[get->i] = ft_strdup(get->dir->d_name);
 			get->i++;
 		}
 	}
+	closedir(get->d);
+	char **files = get->files;
 	free(get->dir);
 	get->files[get->i] = NULL;
-	return (get->files);
+	free(get);
+	return (files);
 }

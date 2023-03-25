@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:16:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:58:46 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	match_without_dot(char **files, t_command *command, int i,
 					+ 1]);
 			match->k++;
 		}
-		// free_double_ptr(command->arguments);
-		// free_double_ptr(files);
+		free_double_ptr(command->arguments);
+		free_double_ptr(files);
 		mutual_equalization(match, command);
 	}
 }

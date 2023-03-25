@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:23:50 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:14:02 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:49:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ int	get_w_path_count2(char *path, unsigned char d_type)
 			get_wpcount2_process(get, d_type);
 		}
 	}
+	closedir(get->d);
+	int i = get->i;
 	free(get->dir);
-	return (get->i);
+	free(get);
+	return (i);
 }
 
 void	get_wdot_files_process(t_get *get, unsigned char d_type)
@@ -85,8 +88,12 @@ char	**get_w_dot_files2(char *path, unsigned char d_type)
 				break ;
 			get_wdot_files_process(get, d_type);
 		}
+
 	}
+	closedir(get->d);
+	char **files = get->files;
 	free(get->dir);
 	get->files[get->i] = NULL;
-	return (get->files);
+	free(get);
+	return (files);
 }

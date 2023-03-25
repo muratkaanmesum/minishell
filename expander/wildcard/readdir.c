@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:01:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:52:45 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	get_path_count(void)
 			i++;
 		}
 	}
+	closedir(d);
 	free(dir);
 	return (i);
 }
@@ -56,8 +57,8 @@ char	**get_files(void)
 			get->files[get->i] = ft_strdup(get->dir->d_name);
 			get->i++;
 		}
-		closedir(get->d);
 	}
+		closedir(get->d);
 	free(get->dir);
 	get->files[get->i] = NULL;
 	return (get->files);
@@ -83,8 +84,8 @@ int	get_o_count(void)
 			if (dir->d_type == DT_DIR)
 				i++;
 		}
-		closedir(d);
 	}
+		closedir(d);
 	free(dir);
 	return (i);
 }
@@ -117,8 +118,8 @@ char	**get_o_files(void)
 	{
 		get->i = 0;
 		get_o_files_process(get);
-		closedir(get->d);
 	}
+	closedir(get->d);
 	free(get->dir);
 	get->files[get->i] = NULL;
 	return (get->files);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:08:20 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/23 15:12:36 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:54:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	ret_sort_files(char **files, char *str, t_sort *sort)
 		if (str[sort->m] == '*')
 			sort->m++;
 		if (str[sort->m] == '\0')
-			sort->sorted_files[sort->x++] = files[sort->i];
+			sort->sorted_files[sort->x++] = ft_strdup(files[sort->i]);
 		sort->i++;
 	}
 	sort->sorted_files[sort->x] = NULL;
+	free_double_ptr(files);
 }
 
 char	**sort_files(char **files, char *str, t_sort *sort)

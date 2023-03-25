@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:12:13 by kali              #+#    #+#             */
-/*   Updated: 2023/03/25 13:24:54 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 13:30:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	handle_operators(t_node *head, t_token *tokens)
 		i++;
 	if (i == 0)
 	{
-		getchar();
 		handle_only_red(head, tokens);
 		return ;
 	}
@@ -92,7 +91,7 @@ void	assign_operators(t_node *head, t_token *tokens)
 		handle_operators(head, tokens);
 		return ;
 	}
-	else
+	else if (head->connection_count > 0)
 	{
 		handle_operators(head, tokens);
 		i = -1;
