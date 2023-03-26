@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/26 14:57:13 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 15:01:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	get_new_str(char *new_str, char *str)
 				}
 			}
 		}
-		if (str[i] && j < get_length(str))
+		if (str[i] && j < get_length(str) && ft_strlen(str) > 0)
 		{
 			new_str[j] = str[i];
 			j++;
