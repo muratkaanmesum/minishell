@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 14:58:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 14:24:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*check_in_path(char *command, char *path)
 int	check_ambigious(t_node *node)
 {
 	int	i;
-	if(node->redirections == NULL)
+
+	if (node->redirections == NULL)
 		return (0);
 	i = 0;
 	while (node->redirections->infile[i] != NULL)
@@ -77,6 +78,7 @@ int	check_errors(t_node *node)
 		return (1);
 	}
 	handle_node_files(node);
+	expander(node);
 	if (node->command == NULL)
 	{
 		close_node_fds(node);
