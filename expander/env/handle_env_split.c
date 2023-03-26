@@ -6,12 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 07:39:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 07:58:37 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:18:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expander.h"
-
 
 void	handle_env_split(t_node *node)
 {

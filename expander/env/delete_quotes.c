@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/25 22:39:47 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:19:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ void	get_new_str(char *new_str, char *str)
 				}
 			}
 		}
-		// if (j < get_length(str))
 		if (str[i] && j < get_length(str))
 		{
 			new_str[j] = str[i];
@@ -199,6 +198,7 @@ char	*delete_quotes(char *str)
 	free(str);
 	return (new_str);
 }
+
 void	delete_all_quotes(t_node *node)
 {
 	int	i;

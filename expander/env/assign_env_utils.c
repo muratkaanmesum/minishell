@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:38:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/25 22:12:50 by eablak           ###   ########.fr       */
-r
+/*   Updated: 2023/03/26 12:18:05 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expander.h"
-//echo asd'"$USER"'asd'$PATH'
-//asd"$USER"'asd'$PATH''
+
 void	assign_env_value(char *new_str, char *env_value, int *index)
 {
 	int	i;
@@ -35,6 +33,6 @@ void	pass_env(char *str, int start_index, int *i)
 	while (str[*i] != '\0' && str[*i] != '\'' && str[*i] != '"'
 		&& str[*i] != ' ' && str[*i] != '*' && str[*i] != '.' && str[*i] != ':'
 		&& str[*i] != '/' && str[*i] != ',' && str[*i] != '?' && (str[*i] != '$'
-			|| *i == start_index))
+		|| *i == start_index))
 		(*i)++;
 }

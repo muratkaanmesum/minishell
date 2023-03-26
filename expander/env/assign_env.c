@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 20:51:01 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:19:48 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	check_exec_val(char *str, int *i, char *new_str, int *index)
 	}
 	return (0);
 }
+
 void	pass_single_quote_add(char *str, int *i, char *new_str, int *index)
 {
 	new_str[(*index)++] = str[(*i)++];
@@ -31,6 +32,7 @@ void	pass_single_quote_add(char *str, int *i, char *new_str, int *index)
 	if (str[*i])
 		new_str[(*index)++] = str[(*i)++];
 }
+
 void	change_str(char *str, char *env_value, char *new_str)
 {
 	int	i;
@@ -72,6 +74,7 @@ int	handle_node_exec(char *str, int *i, int *node_size)
 	}
 	return (0);
 }
+
 void	pass_single_quote_count(char *str, int *i, int *node_size)
 {
 	(*node_size)++;
@@ -87,6 +90,7 @@ void	pass_single_quote_count(char *str, int *i, int *node_size)
 		(*i)++;
 	}
 }
+
 int	get_node_size(char *str)
 {
 	int	i;
