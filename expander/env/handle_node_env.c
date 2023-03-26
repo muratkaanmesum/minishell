@@ -53,5 +53,6 @@ void	handle_node_env(t_node *node, t_env *env)
 	if (node->redirections != NULL)
 		handle_redirection_env(node, env);
 	handle_all_exec_code(node);
+	handle_env_split(node);
 	delete_all_quotes(node);
 }

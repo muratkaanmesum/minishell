@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   command_file_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:38:38 by eablak            #+#    #+#             */
 /*   Updated: 2023/03/25 16:15:17 by eablak           ###   ########.fr       */
@@ -103,7 +103,7 @@ char	*new_path(char *path, char *prefix)
 	while (j < len_prefix)
 		new_path[i++] = prefix[j++];
 	new_path[i] = '\0';
-	// free(path);
+	free(path);
 	return (new_path);
 }
 

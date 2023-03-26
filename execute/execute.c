@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:52:56 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 11:58:47 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	execute_node(t_node *node)
 {
+	int	i;
+
 	if (check_errors(node))
 		return ;
 	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
@@ -33,6 +35,9 @@ void	execute_node(t_node *node)
 	else
 		exec_builtin(node);
 	close_node_fds(node);
+	i = 0;
+	while (i++ < 200000)
+		;
 }
 
 void	handle_pipes(t_node *node)
@@ -101,14 +106,21 @@ void	exec_all(t_node *head)
 			exec_all(head->connections[next_exec_index]);
 			next_exec_index = handle_priority(head, next_exec_index);
 		}
+		while (waitpid(-1, &head->execute->last_exit_code, 0) > 0)
+			;
 	}
+	if (head->is_subshell == 1)
+		waitpid(-1, &head->execute->last_exit_code, 0);
 }
 
 int	execute(t_node *head)
 {
 	handle_pipes(head);
 	handle_heredocs(head);
-	exec_all(head);
+	if (head->connection_count == 0)
+		exec_single_command(head);
+	else
+		exec_all(head);
 	close_all_fds(head);
 	return (0);
 }

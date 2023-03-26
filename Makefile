@@ -12,7 +12,7 @@ CC        := gcc
 
 # FLAGS    := -fsanitize=address
 #FLAGS       := -Wall -Wextra -Werror
-#FLAGS := -g
+FLAGS := -g
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -98,6 +98,8 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/handle_node_env.c\
                           expander/env/delete_quotes.c\
                           expander/env/handle_red_env.c\
+                          expander/env/handle_env_split.c\
+                          expander/env/handle_node_env_split.c\
                           expander/wildcard/wildcard.c\
                           expander/wildcard/handle_node_wildcard.c\
                           expander/wildcard/just_asterisk.c\
@@ -130,11 +132,13 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/exit.c\
                             execute/builtins/exit_utils.c\
                             execute/builtins/utils.c\
+                            execute/exec_single_command.c\
                             execute/exec_builtins.c\
                             execute/handle_files.c\
                             execute/execute_subshell.c\
                             execute/execute_node_utils.c\
                             execute/handle_heredocs.c\
+                            execute/check_path.c\
 
 
 

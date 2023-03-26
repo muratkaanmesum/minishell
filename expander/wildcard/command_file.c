@@ -52,6 +52,7 @@ char	**mutual_wildcard(char *data, char *path)
 		else
 			files = get_w_dot_files2(path, DT_DIR);
 		files = take_file(files, data);
+		free(data);
 	}
 	else
 	{
@@ -61,6 +62,7 @@ char	**mutual_wildcard(char *data, char *path)
 			files = get_w_dot_files2(path, 100);
 		files = take_file(files, data);
 	}
+	free(path);
 	return (files);
 }
 

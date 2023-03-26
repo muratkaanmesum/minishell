@@ -25,6 +25,9 @@ void	ctrl_c(int sig)
 	(void)sig;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	ctrl_d(t_execute *execute)
@@ -36,7 +39,6 @@ void	ctrl_d(t_execute *execute)
 	{
 		printf("\nexit\n");
 		free_execute(execute);
-		// system("leaks minishell");
 		exit(last_exec_code);
 	}
 }

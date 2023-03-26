@@ -27,7 +27,7 @@ void	take_one_file_out_op(t_node *node, int in_or, int index, int key)
 		{
 			count = 0;
 			expand_wildcard(NULL, node->redirections->outfile[index], files,
-				&count);
+					&count);
 			free(node->redirections->outfile[index]);
 			node->redirections->outfile[index] = files[0];
 		}
@@ -49,6 +49,8 @@ void	take_one_file_out(t_node *node, int in_or, int index, int key)
 			free(node->redirections->infile[index]);
 			node->redirections->infile[index] = files[0];
 		}
+		else
+			free_double_ptr(files);
 	}
 	take_one_file_out_op(node, in_or, index, key);
 }
@@ -88,6 +90,8 @@ void	take_one_file(t_node *node, int in_or, int index, int key)
 			free(node->redirections->infile[index]);
 			node->redirections->infile[index] = files[0];
 		}
+		else
+			free_double_ptr(files);
 	}
 	take_one_file_op(node, in_or, index, key);
 	take_one_file_out(node, in_or, index, key);

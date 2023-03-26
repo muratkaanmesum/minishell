@@ -40,6 +40,7 @@ int	get_path_count(void)
 char	**get_files(void)
 {
 	t_get	*get;
+	char	**files;
 
 	get = malloc(sizeof(t_get) * 1);
 	getcwd(get->buf, 1024);
@@ -60,9 +61,10 @@ char	**get_files(void)
 	}
 	closedir(get->d);
 	free(get->dir);
+	files = get->files;
 	get->files[get->i] = NULL;
 	free(get);
-	return (get->files);
+	return (files);
 }
 
 int	get_o_count(void)
@@ -109,6 +111,7 @@ void	get_o_files_process(t_get *get)
 char	**get_o_files(void)
 {
 	t_get	*get;
+	char	**files;
 
 	get = malloc(sizeof(t_get) * 1);
 	getcwd(get->buf, 1024);
@@ -122,6 +125,8 @@ char	**get_o_files(void)
 	}
 	closedir(get->d);
 	free(get->dir);
+	files = get->files;
 	get->files[get->i] = NULL;
-	return (get->files);
+	free(get);
+	return (files);
 }

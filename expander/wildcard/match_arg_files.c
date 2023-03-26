@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:22 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 16:17:08 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/26 10:11:36 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	match_without_dot(char **files, t_command *command, int i,
 		// free_double_ptr(command->arguments);
 		// free_double_ptr(files);
 		mutual_equalization(match, command);
+	}
+	else
+	{
+		free_double_ptr(files);
+		free(match->new_args);
 	}
 }
 

@@ -21,6 +21,7 @@ typedef struct s_env
 }			t_env;
 void		handle_env(t_node *node, t_env *variables);
 t_env		*get_env_variables(char **env);
+
 char		*find_env_variable(char *value, t_env *env);
 char		*get_env_location(char *str);
 char		*assign_env(char *str, char *env_value);
@@ -33,6 +34,8 @@ void		assign_default_values(int *i, int *in_quote, int *flag);
 void		pass_env(char *str, int start_index, int *i);
 void		handle_all_exec_code(t_node *node);
 void		handle_redirection_env(t_node *node, t_env *env);
+void		handle_env_split(t_node *node);
+void		handle_node_env_split(t_node *node);
 int			check_env_stop(char *str, int i);
 void		pass_single_quote(char *str, int *i);
 #endif

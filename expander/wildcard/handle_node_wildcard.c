@@ -23,7 +23,8 @@ void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
 		com->command_files[com->index] = NULL;
 		if (com->command_files == NULL)
 			return ;
-		command->command = com->command_files[0];
+			free(command->command);
+		command->command = ft_strdup(com->command_files[0]);
 		add_command_to_arg(command, com->command_files);
 	}
 }

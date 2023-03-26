@@ -16,7 +16,7 @@ int	check_env_stop(char *str, int i)
 {
 	if (str[i] != '\0' && str[i] != '\'' && str[i] != '"' && str[i] != ' '
 		&& str[i] != '$' && str[i] != '*' && str[i] != '.' && str[i] != ':'
-		&& str[i] != '/' && str[i] != ',')
+		&& str[i] != '/' && str[i] != ',' && str[i] != '?')
 		return (1);
 	return (0);
 }
