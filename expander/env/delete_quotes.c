@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/26 12:19:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 14:57:13 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ int	get_length(char *str)
 	int	only_qutoes;
 	int	ret;
 
-	only_qutoes = 0;
-	i = 0;
-	minus_count = 0;
+	assign_default_values(&i, &minus_count, &only_qutoes);
+	ret = 0;
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -128,10 +127,8 @@ void	get_new_str(char *new_str, char *str)
 					new_str[j] = str[i];
 					j++;
 					i++;
-					if (str[i] == '\'')
-					{
+					if (str[i] == '\'' || str[i] == '"')
 						i++;
-					}
 				}
 			}
 		}
@@ -182,7 +179,7 @@ void	get_new_str(char *new_str, char *str)
 			i++;
 		}
 		else
-			break;
+			break ;
 	}
 	new_str[j] = '\0';
 }
@@ -192,7 +189,9 @@ char	*delete_quotes(char *str)
 	char	*new_str;
 	int		i;
 	int		j;
+	int		val;
 
+	val = get_length(str);
 	new_str = malloc(sizeof(char) * get_length(str));
 	get_new_str(new_str, str);
 	free(str);
