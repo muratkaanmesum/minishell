@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 08:00:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 18:35:50 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void		handle_redirection_env(t_node *node, t_env *env);
 void		handle_env_split(t_node *node);
 void		handle_node_env_split(t_node *node);
 int			check_env_stop(char *str, int i);
+void		pass_single_quote(char *str, int *i);
 #endif

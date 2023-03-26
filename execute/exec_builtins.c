@@ -3,10 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 06:09:21 by mmesum           ###   ########.fr       */
+
+/*   Updated: 2023/03/25 17:19:26 by eablak           ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +95,7 @@ void	exec_builtin(t_node *node)
 		dup2(node->out_fd, 1);
 		close_all_fds(node->execute->top_node);
 		execve(path, new_args, node->execute->env);
+		exit(1);
 	}
 	free(path);
 	free_double_ptr(new_args);

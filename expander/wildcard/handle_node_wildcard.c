@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_wildcard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/26 10:31:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/25 16:50:44 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
 {
 	com->count = 0;
-	com->count = count_wildcard(NULL, com->str, &com->count);
+	com->count = count_wildcard(NULL, ft_strdup(com->str), &com->count);
 	if (com->count >= 1)
 	{
 		com->command_files = malloc(sizeof(char *) * (com->count + 1));
-		expand_wildcard(NULL, com->str, com->command_files, &com->index);
+		expand_wildcard(NULL, ft_strdup(com->str), com->command_files, &com->index);
 		com->command_files[com->index] = NULL;
 		if (com->command_files == NULL)
 			return ;
@@ -40,25 +40,27 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 		{
 			com->files = just_asterisk(com->str);
 			com->count_files = files_count(com->files);
+			
 			if (com->files[0] == NULL)
 				return ;
 			if (com->files[0] != NULL)
 			{
-				free(command->command);
+				// free(command->command);
 				command->command = ft_strdup(com->files[0]);
+				
 			}
 			add_command_to_arg(command, com->files);
 		}
 		else if (asterisk_slash(com->str) == 1)
 			handle_forcommand_option(command, com, sort);
-		free(com->str);
+		// free(com->str);
 	}
 }
 
 void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
 		t_match *match)
 {
-	arg->count = count_wildcard(NULL, arg->str, &arg->count);
+	arg->count = count_wildcard(NULL, ft_strdup(arg->str), &arg->count);
 	if (arg->count >= 1)
 	{
 		arg->index = 0;
@@ -90,11 +92,11 @@ void	handle_forarg(t_command *command, t_arg *arg, t_sort *sort)
 			}
 			if (asterisk_slash(arg->str) == 1)
 				handle_forarg_option(command, arg, sort, match);
-			free(arg->str);
+			// free(arg->str);
 		}
 		arg->i++;
 	}
-	free(match);
+	// free(match);
 }
 
 void	handle_node_wildcard(t_node *node)
@@ -118,7 +120,7 @@ void	handle_node_wildcard(t_node *node)
 	}
 	handle_forcommand(node->command, com, sort);
 	handle_forarg(node->command, arg, sort);
-	free(com);
-	free(arg);
-	free(sort);
+	// free(com);
+	// free(arg);
+	// free(sort);
 }
