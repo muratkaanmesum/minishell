@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_to_arg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:58:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/21 20:26:45 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/26 10:19:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	add_command_to_arg(t_command *command, char **files)
 	new_args = malloc(sizeof(char *) * (total_arg + 1));
 	command_to_arg_files(command, new_args, count_files, files);
 	command->argument_count = total_arg;
+	free_double_ptr(command->arguments);
 	command->arguments = new_args;
 }

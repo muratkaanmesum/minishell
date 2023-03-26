@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:09:51 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 09:11:41 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 10:14:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	first_check_free(t_token *tokens, char *inpt)
 void	exec_rest(t_node *head)
 {
 	expander(head);
-	// execute(head);
+	execute(head);
 	free_execute(head->execute);
 	free_tree(head);
 }
