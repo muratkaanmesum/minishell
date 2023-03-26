@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:46:11 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 18:43:02 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/26 13:56:26 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	expander(t_node *head)
 
 	variables = get_env_variables(head->execute->env);
 	handle_env(head, variables);
-	// wildcard(head);
+	wildcard(head);
 	free_env(variables);
 }

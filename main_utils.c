@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:09:51 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 20:10:16 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/26 14:14:32 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	first_check_free(t_token *tokens, char *inpt)
 
 void	exec_rest(t_node *head)
 {
-	expander(head);
 	execute(head);
 	free(head->execute->input);
 	free_tree(head);
