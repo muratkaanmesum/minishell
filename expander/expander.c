@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:46:11 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 13:56:26 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 15:03:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	expander(t_node *head)
 	t_env	*variables;
 
 	variables = get_env_variables(head->execute->env);
-	handle_env(head, variables);
+	handle_node_env(head, variables);
 	wildcard(head);
 	free_env(variables);
 }
