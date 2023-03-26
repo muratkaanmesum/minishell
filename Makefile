@@ -98,6 +98,8 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/handle_node_env.c\
                           expander/env/delete_quotes.c\
                           expander/env/handle_red_env.c\
+                          expander/env/handle_env_split.c\
+                          expander/env/handle_node_env_split.c\
                           expander/wildcard/wildcard.c\
                           expander/wildcard/handle_node_wildcard.c\
                           expander/wildcard/just_asterisk.c\
