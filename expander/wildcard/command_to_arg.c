@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:58:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/26 10:19:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 10:22:53 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	command_to_arg_files(t_command *command, char **new_args,
 		k++;
 		j++;
 	}
+	free_double_ptr(files);
 	new_args[k] = NULL;
 }
 
