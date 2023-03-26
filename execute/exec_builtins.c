@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 17:25:29 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 06:09:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**modified_args(t_node *node)
 
 	i = 1;
 	j = 0;
-	
 	new_args = malloc(sizeof(char *) * (node->command->argument_count + 2));
 	new_args[0] = ft_strdup(node->command->command);
 	while (j < node->command->argument_count)
@@ -97,5 +96,4 @@ void	exec_builtin(t_node *node)
 	}
 	free(path);
 	free_double_ptr(new_args);
-	waitpid(pid, &node->execute->last_exit_code, 0);
 }

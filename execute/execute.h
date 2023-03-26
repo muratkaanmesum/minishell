@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 16:59:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 07:28:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		check_exit_errors(t_node *node, char **args, int count);
 int		free_exit(t_node *node, int exit_code);
 void	ft_exit(t_node *node, int last_exit_code);
 void	exec_builtin(t_node *node);
+void	exec_single_command(t_node *node);
 void	handle_node_files(t_node *head);
 void	close_all_fds(t_node *top);
 void	close_node_fds(t_node *node);

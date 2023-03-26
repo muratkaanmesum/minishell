@@ -10,9 +10,9 @@
 NAME        := minishell
 CC        := gcc
 
-FLAGS    := -fsanitize=address
+#FLAGS    := -fsanitize=address
 #FLAGS       := -Wall -Wextra -Werror
-#FLAGS := -g
+FLAGS := -g
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -130,6 +130,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/exit.c\
                             execute/builtins/exit_utils.c\
                             execute/builtins/utils.c\
+                            execute/exec_single_command.c\
                             execute/exec_builtins.c\
                             execute/handle_files.c\
                             execute/execute_subshell.c\
