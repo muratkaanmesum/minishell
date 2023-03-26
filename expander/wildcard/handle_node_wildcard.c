@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 14:01:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 10:31:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
 		com->command_files[com->index] = NULL;
 		if (com->command_files == NULL)
 			return ;
-		command->command = com->command_files[0];
+			free(command->command);
+		command->command = ft_strdup(com->command_files[0]);
 		add_command_to_arg(command, com->command_files);
 	}
 }

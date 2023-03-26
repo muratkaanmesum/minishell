@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   handle_env_split.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 17:40:20 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 17:20:47 by mmesum           ###   ########.fr       */
+/*   Created: 2023/03/26 07:39:31 by mmesum            #+#    #+#             */
+/*   Updated: 2023/03/26 07:58:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../expander.h"
 
-long	ft_atoi(const char *str)
+
+void	handle_env_split(t_node *node)
 {
-	int		i;
-	int		neg;
-	long	sayi;
+	int	i;
 
 	i = 0;
-	neg = 1;
-	sayi = 0;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (node->connection_count == 0)
+		handle_node_env_split(node);
+	else if (node->connection_count >= 1)
 	{
-		if (str[i] == '-')
-			neg *= -1;
-		i++;
+		while (i < node->connection_count)
+			handle_env_split(node->connections[i++]);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		sayi = sayi * 10 + (str[i] - 48);
-		i++;
-	}
-	return (sayi * neg);
 }

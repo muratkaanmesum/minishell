@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:42:16 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:33:34 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 06:23:40 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	ctrl_c(int sig)
 	(void)sig;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	ctrl_d(t_execute *execute)
@@ -36,7 +39,6 @@ void	ctrl_d(t_execute *execute)
 	{
 		printf("\nexit\n");
 		free_execute(execute);
-		system("leaks minishell");
 		exit(last_exec_code);
 	}
 }

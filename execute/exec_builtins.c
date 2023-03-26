@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/21 12:34:24 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 06:09:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,6 @@ void	print_new_arg(char **arg)
 		printf("%s\n", arg[i]);
 		i++;
 	}
-}
-
-int	check_path(char *path, t_node *node, char **new_args)
-{
-	if (path == NULL)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(node->command->command, 2);
-		ft_putendl_fd(": command not found", 2);
-		node->execute->last_exit_code = 127;
-		free(path);
-		free_double_ptr(new_args);
-		return (1);
-	}
-	else if (access(path, F_OK) != 0)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(node->command->command, 2);
-		ft_putendl_fd(" : No such file or directory", 2);
-		node->execute->last_exit_code = 127;
-		free(path);
-		free_double_ptr(new_args);
-		return (1);
-	}
-	return (0);
 }
 
 char	**modified_args(t_node *node)
@@ -121,5 +96,4 @@ void	exec_builtin(t_node *node)
 	}
 	free(path);
 	free_double_ptr(new_args);
-	waitpid(pid, &node->execute->last_exit_code, 0);
 }

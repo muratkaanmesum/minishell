@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:11:07 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 07:30:01 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	execute_subshell(t_node *node)
 				close_node_fds(node->connections[next_exec_index]);
 				next_exec_index = handle_priority(node, next_exec_index);
 			}
+			while (waitpid(-1, &node->execute->last_exit_code, 0) > 0)
+				;
 		}
 		close_all_fds(node->execute->top_node);
 		exit(get_last_execute_code(node));
