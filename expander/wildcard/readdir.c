@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:52:45 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 09:07:50 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	get_path_count(void)
 char	**get_files(void)
 {
 	t_get	*get;
+	char	**files;
 
 	get = malloc(sizeof(t_get) * 1);
 	getcwd(get->buf, 1024);
@@ -58,10 +59,12 @@ char	**get_files(void)
 			get->i++;
 		}
 	}
-		closedir(get->d);
+	closedir(get->d);
 	free(get->dir);
+	files = get->files;
 	get->files[get->i] = NULL;
-	return (get->files);
+	free(get);
+	return (files);
 }
 
 int	get_o_count(void)
@@ -85,7 +88,7 @@ int	get_o_count(void)
 				i++;
 		}
 	}
-		closedir(d);
+	closedir(d);
 	free(dir);
 	return (i);
 }
@@ -108,6 +111,7 @@ void	get_o_files_process(t_get *get)
 char	**get_o_files(void)
 {
 	t_get	*get;
+	char	**files;
 
 	get = malloc(sizeof(t_get) * 1);
 	getcwd(get->buf, 1024);
@@ -121,6 +125,8 @@ char	**get_o_files(void)
 	}
 	closedir(get->d);
 	free(get->dir);
+	files = get->files;
 	get->files[get->i] = NULL;
-	return (get->files);
+	free(get);
+	return (files);
 }

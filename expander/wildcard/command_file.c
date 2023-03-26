@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 12:46:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/26 09:04:11 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	**mutual_wildcard(char *data, char *path)
 		else
 			files = get_w_dot_files2(path, DT_DIR);
 		files = take_file(files, data);
+		free(data);
+		free(path);
 	}
 	else
 	{
@@ -78,8 +80,8 @@ int	count_wildcard(char *prefix, char *suffix, int *count)
 		return (1);
 	}
 	data = find_data(suffix);
-	path = getcwd(buf, 1024);
-	path = add_slash(path);
+	getcwd(buf, 1024);
+	path = add_slash(buf);
 	path = new_path(path, prefix);
 	files = mutual_wildcard(data, path);
 	suffix = cut_suffix(suffix);
