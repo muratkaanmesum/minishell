@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 18:32:33 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:50:19 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*find_env_variable(char *value, t_env *env)
 		size++;
 	while (env[i].name != NULL)
 	{
-		if (ft_strncmp(value, env[i].name, size) == 0)
+		if (ft_strncmp(value, env[i].name, ft_strlen(env[i].name)) == 0)
 			return (env[i].value);
 		i++;
 	}

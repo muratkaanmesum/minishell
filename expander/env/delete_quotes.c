@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/26 14:57:13 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:55:57 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_length(char *str)
 		if (str[i] != '\0')
 			i++;
 	}
-	ret = ft_strlen(str) - (minus_count * 2) - (only_qutoes * 2) + 1;
+	ret = ft_strlen(str) - (minus_count * 2) + 1;
 	return (ret);
 }
 
@@ -192,7 +192,7 @@ char	*delete_quotes(char *str)
 	int		val;
 
 	val = get_length(str);
-	new_str = malloc(sizeof(char) * get_length(str));
+	new_str = malloc(sizeof(char) * (val));
 	get_new_str(new_str, str);
 	free(str);
 	return (new_str);
