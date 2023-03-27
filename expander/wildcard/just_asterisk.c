@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   just_asterisk.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 14:02:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 20:37:52 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,57 @@ void	clean_files_operators(t_files *files)
 	files->t = 0;
 }
 
+void	assign_t_asterisk(t_asterisk *t, char *str, char **files,
+		char *command)
+{
+	t->str = str;
+	t->files = files;
+	t->command = command;
+}
+
+void	handle_all(t_asterisk *t, t_files *f_arg)
+{
+	if (is_left_side(t->command, t->i))
+	{
+		t->str = left_side(t->command, &(t->i));
+		t->files = left_side_files(t->files, t->str, f_arg);
+	}
+	if (is_middle(t->command, t->i))
+	{
+		t->str = middle(t->command, &(t->i));
+		t->files = middle_files(t->files, t->str);
+	}
+	if (is_right_side(t->command, t->i))
+	{
+		t->str = right_side(t->command, &(t->i));
+		t->files = right_side_files(t->files, t->str, f_arg);
+	}
+}
+
 char	**take_file(char **files, char *command)
 {
-	int		i;
-	char	*str;
-	t_files	*f_arg;
+	int			i;
+	char		*str;
+	t_files		*f_arg;
+	t_asterisk	*t;
 
 	i = 0;
 	f_arg = malloc(sizeof(t_files) * 1);
+	t = malloc(sizeof(t_asterisk) * 1);
+	t->i = 0;
+	assign_t_asterisk(t, str, files, command);
 	while (command[i])
 	{
 		if (command[i] != '\0')
 		{
-			if (is_left_side(command, i))
-			{
-				str = left_side(command, &i);
-				files = left_side_files(files, str, f_arg);
-			}
-			if (is_middle(command, i))
-			{
-				str = middle(command, &i);
-				files = middle_files(files, str);
-			}
-			if (is_right_side(command, i))
-			{
-				str = right_side(command, &i);
-				files = right_side_files(files, str, f_arg);
-			}
-			free(str);
+			handle_all(t, f_arg);
+			free(t->str);
 		}
 		if (command[i] != '\0')
 			i++;
 	}
+	files = t->files;
+	free(t);
 	free(f_arg);
 	return (files);
 }
