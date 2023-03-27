@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 13:06:25 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 16:05:34 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
 		com->command_files = malloc(sizeof(char *) * (com->count + 1));
 		expand_wildcard(NULL, com->str, com->command_files, &com->index);
 		com->command_files[com->index] = NULL;
-		if (com->command_files == NULL)
+		if (com->command_files == NULL || com->command_files[0] == NULL)
 			return ;
 		free(command->command);
 		command->command = ft_strdup(com->command_files[0]);
@@ -39,6 +39,7 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 		if (is_asterisk(com->str) && asterisk_slash(com->str) == 0)
 		{
 			com->files = just_asterisk(com->str);
+			com->files = sort_files(com->files, com->str, sort);
 			com->count_files = files_count(com->files);
 			if (com->files[0] == NULL)
 				return ;
@@ -55,6 +56,7 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 	}
 }
 
+
 void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
 		t_match *match)
 {
@@ -65,6 +67,7 @@ void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
 		arg->arg_files = malloc(sizeof(char *) * (arg->count + 1));
 		expand_wildcard(NULL, arg->str, arg->arg_files, &arg->index);
 		arg->arg_files[arg->count] = NULL;
+		arg->arg_files = sort_files(arg->arg_files,arg->str,sort);
 		match_arg_files(arg->arg_files, command, arg->i, match);
 	}
 }

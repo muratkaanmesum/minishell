@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 13:22:35 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 13:23:59 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	count_wildcard(char *prefix, char *suffix, int *count)
 	wild = malloc(sizeof(t_wild) * 1);
 	if (suffix == NULL)
 	{
+		free(wild);
 		*count += 1;
 		return (1);
 	}
@@ -105,6 +106,7 @@ void	expand_wildcard(char *prefix, char *suffix, char **return_files,
 	{
 		return_files[*index] = ft_strdup(prefix);
 		*index += 1;
+		free(wild);
 		return ;
 	}
 	wild->data = find_data(suffix);
