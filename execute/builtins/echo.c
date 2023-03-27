@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 09:24:24 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:53:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 06:30:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int	echo(t_node *head)
 			print_args(head);
 		exit(0);
 	}
-	waitpid(pid, &head->execute->last_exit_code, 0);
 	return (0);
 }

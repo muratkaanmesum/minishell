@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:15:50 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:54:40 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 06:31:55 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ int	unset(char **args, t_node *node)
 			find_env(node, args[i++]);
 		exit(0);
 	}
-	waitpid(pid, NULL, 0);
 	return (0);
 }

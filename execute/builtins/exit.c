@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/24 03:47:25 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 06:31:13 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_exit(t_node *node, int last_exit_code)
 	}
 	count = get_arg_count(args);
 	if (count == 0)
-		exit(last_exit_code);
+		exit(last_exit_code % 256);
 	if (check_exit_errors(node, args, count))
 		return ;
 	free_exit(node, ft_atoi(args[0]));
