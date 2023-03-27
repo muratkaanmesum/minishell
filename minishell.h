@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 12:32:38 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 11:06:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <string.h>
 # include <sys/ioctl.h>
 # include <unistd.h>
-
+int							val = 0;
 enum						e_token
 {
 	I_REDIRECTION,
@@ -112,7 +112,7 @@ void						ctrl_c(int sig);
 void						ctrl_d(t_execute *execute);
 void						free_execute(t_execute *execute);
 int							get_env_len(char *env);
-int								get_double_ptr_len(char **arr);
+int							get_double_ptr_len(char **arr);
 int							get_token_len(t_token *tokens);
 void						exec_rest(t_node *head);
 int							parse_error_free(t_node *head, t_token *tokens,
