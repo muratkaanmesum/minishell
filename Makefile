@@ -175,7 +175,7 @@ all:		${NAME}
 bonus:		all
 
 clean:
-			@ ${RM} *.o */*.o */*/*.o
+			@ ${RM} *.o */*.o */*/*.o */*/*/*.o
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
 fclean:		clean
