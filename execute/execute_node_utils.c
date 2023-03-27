@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 14:24:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 09:40:31 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	check_errors(t_node *node)
 		node->execute->last_exit_code = 1;
 		return (1);
 	}
+	expander(node);
 	if (check_ambigious(node) == 1)
 	{
 		close_node_fds(node);
@@ -78,7 +79,6 @@ int	check_errors(t_node *node)
 		return (1);
 	}
 	handle_node_files(node);
-	expander(node);
 	if (node->command == NULL)
 	{
 		close_node_fds(node);
