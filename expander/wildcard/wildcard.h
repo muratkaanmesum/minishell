@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 14:54:48 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 16:32:58 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,4 +142,10 @@ char				*add_slash(char *path);
 char				*edit_data(char *data);
 char				*find_data(char *suffix);
 void				clean_files_operators(t_files *files);
+void				match_without_dot(char **files, t_command *command, int i,
+						t_match *match);
+void				mutual_len(t_match *match, t_command *command, int i);
+void				mutual_equalization(t_match *match, t_command *command);
+void				assign_match_values(t_match *match, t_command *command,
+						char **files);
 #endif

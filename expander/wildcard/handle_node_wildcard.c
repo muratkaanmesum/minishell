@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 16:05:34 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 16:29:28 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 	}
 }
 
-
 void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
 		t_match *match)
 {
@@ -67,7 +66,6 @@ void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
 		arg->arg_files = malloc(sizeof(char *) * (arg->count + 1));
 		expand_wildcard(NULL, arg->str, arg->arg_files, &arg->index);
 		arg->arg_files[arg->count] = NULL;
-		arg->arg_files = sort_files(arg->arg_files,arg->str,sort);
 		match_arg_files(arg->arg_files, command, arg->i, match);
 	}
 }

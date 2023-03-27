@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:00 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 13:23:59 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 16:28:40 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ char	**mutual_wildcard(char *data, char *path)
 	return (files);
 }
 
+void	path_processes(t_wild *wild, char *prefix)
+{
+	wild->path = getcwd(wild->buf, 1024);
+	wild->path = add_slash(wild->path);
+	wild->path = new_path(wild->path, prefix);
+}
+
 int	count_wildcard(char *prefix, char *suffix, int *count)
 {
 	t_wild	*wild;
@@ -78,9 +85,7 @@ int	count_wildcard(char *prefix, char *suffix, int *count)
 		return (1);
 	}
 	wild->data = find_data(suffix);
-	getcwd(wild->buf, 1024);
-	wild->path = add_slash(wild->buf);
-	wild->path = new_path(wild->path, prefix);
+	path_processes(wild, prefix);
 	wild->files = mutual_wildcard(wild->data, wild->path);
 	suffix = cut_suffix(suffix);
 	wild->i = 0;
@@ -110,9 +115,7 @@ void	expand_wildcard(char *prefix, char *suffix, char **return_files,
 		return ;
 	}
 	wild->data = find_data(suffix);
-	wild->path = getcwd(wild->buf, 1024);
-	wild->path = add_slash(wild->path);
-	wild->path = new_path(wild->path, prefix);
+	path_processes(wild, prefix);
 	wild->files = mutual_wildcard(wild->data, wild->path);
 	suffix = cut_suffix(suffix);
 	wild->i = 0;

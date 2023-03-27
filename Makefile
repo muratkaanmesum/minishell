@@ -105,19 +105,23 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/wildcard/just_asterisk.c\
                           expander/wildcard/utils.c\
                           expander/wildcard/right_side.c\
+                          expander/wildcard/right_side_utils.c\
                           expander/wildcard/left_side.c\
                           expander/wildcard/middle.c\
-                          expander/wildcard/readdir.c\
+                          expander/wildcard/read_files/readdir.c\
+                          expander/wildcard/read_files/readdir_o.c\
                           expander/wildcard/ambiguous.c\
                           expander/wildcard/match_arg_files.c\
+                          expander/wildcard/match_without_dot.c\
                           expander/wildcard/command_file.c\
                           expander/wildcard/handle_node_utils.c\
                           expander/wildcard/sort_files.c\
                           expander/wildcard/command_file_utils.c\
                           expander/wildcard/command_to_arg.c\
-                          expander/wildcard/readdir_path.c\
-                          expander/wildcard/readdir_w_dot_path.c\
-                          expander/wildcard/readdir_w_dot.c\
+                          expander/wildcard/read_files/readdir_path.c\
+                          expander/wildcard/read_files/readdir_path_dir.c\
+                          expander/wildcard/read_files/readdir_w_dot_path.c\
+                          expander/wildcard/read_files/readdir_w_dot.c\
                           expander/env/assign_env_utils.c\
                           expander/env/handle_exec_code.c\
                           execute/execute.c\
