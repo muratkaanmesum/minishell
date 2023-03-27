@@ -71,13 +71,6 @@ char	**modified_args(t_node *node)
 	new_args[i] = NULL;
 	return (new_args);
 }
-void	sig_handler(int signo)
-{
-	if (signo == SIGINT)
-	{
-		printf("INSIDE SIGINT\n");
-	}
-}
 
 void	exec_builtin(t_node *node)
 {

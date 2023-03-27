@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 06:30:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 07:07:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,15 @@ void	exec_all(t_node *head)
 		waitpid(-1, &head->execute->last_exit_code, 0);
 }
 
+void	sig_handler(int sig)
+{
+	(void)sig;
+	printf("child terminated\n");
+}
+
 int	execute(t_node *head)
 {
+	signal(SIGCHLD, sig_handler);
 	handle_pipes(head);
 	handle_heredocs(head);
 	if (head->connection_count == 0)

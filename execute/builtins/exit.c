@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 06:51:31 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 07:31:11 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	ft_exit_fork(t_node *node, int last_exit_code)
 
 void	ft_exit(t_node *node, int last_exit_code)
 {
-	int		count;
-	char	**args;
+	int			count;
+	char		**args;
+	long long	val;
 
 	args = node->command->arguments;
 	if (node->left_operator == PIPE || node->right_operator == PIPE)
@@ -69,6 +70,7 @@ void	ft_exit(t_node *node, int last_exit_code)
 		exit(last_exit_code % 256);
 	if (check_exit_errors(node, args, count))
 		return ;
-	free_exit(node, ft_atoi(args[0]));
+	val = ft_atoi(args[0]);
+	free_exit(node, val);
 	return ;
 }

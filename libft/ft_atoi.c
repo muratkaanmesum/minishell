@@ -6,17 +6,17 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:40:20 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 17:20:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 07:29:29 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
-	int		i;
-	int		neg;
-	long	sayi;
+	int			i;
+	int			neg;
+	long long	sayi;
 
 	i = 0;
 	neg = 1;
