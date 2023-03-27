@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 13:18:37 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:59:37 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	free_exit(t_node *node, int exit_code)
 	top_node = node->execute->top_node;
 	free_execute(node->execute);
 	free_tree(top_node);
-	system("leaks minishell");
+	// system("leaks minishell");
 	exit(exit_code);
 }
 
