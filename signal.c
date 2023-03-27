@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:42:16 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 15:54:32 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 13:07:19 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ctrl_c(int sig)
 	(void)sig;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -39,6 +39,7 @@ void	ctrl_d(t_execute *execute)
 	{
 		printf("\nexit\n");
 		free_execute(execute);
+		// system("leaks minishell");
 		exit(last_exec_code);
 	}
 }

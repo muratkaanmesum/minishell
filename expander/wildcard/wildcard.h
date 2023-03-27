@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/24 10:57:01 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 13:15:23 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,15 @@ typedef struct s_get_files
 	char			**files;
 	int				i;
 }					t_get;
+
+typedef struct s_wildcard
+{
+	char			*data;
+	char			buf[1024];
+	char			*path;
+	char			**files;
+	int				i;
+}					t_wild;
 
 void				handle_node_wildcard(t_node *node);
 int					is_asterisk(char *str);
