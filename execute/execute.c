@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 14:24:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 12:51:50 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	handle_priority(t_node *head, int i)
 void	exec_all(t_node *head)
 {
 	int	next_exec_index;
-
+	
 	next_exec_index = 0;
 	if (head->is_subshell == 1)
 		execute_subshell(head);
@@ -112,6 +112,7 @@ void	exec_all(t_node *head)
 	if (head->is_subshell == 1)
 		waitpid(-1, &head->execute->last_exit_code, 0);
 }
+
 
 int	execute(t_node *head)
 {

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 05:10:28 by kali              #+#    #+#             */
-/*   Updated: 2023/03/18 05:33:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 06:31:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ int	pwd(t_node *node)
 		}
 		exit(1);
 	}
-	waitpid(pid, &node->execute->last_exit_code, 0);
 	return (1);
 }

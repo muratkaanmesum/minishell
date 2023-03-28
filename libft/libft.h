@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:18:54 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 17:20:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 07:28:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int					ft_tolower(int c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-long				ft_atoi(const char *str);
+long long			ft_atoi(const char *str);
 void				*ft_calloc(size_t count, size_t size);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strdup(const char *s1);

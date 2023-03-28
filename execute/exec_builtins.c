@@ -78,6 +78,7 @@ void	exec_builtin(t_node *node)
 	int		pid;
 	char	**new_args;
 
+
 	new_args = modified_args(node);
 	path = NULL;
 	if (ft_strchr(node->command->command, '/') == NULL)

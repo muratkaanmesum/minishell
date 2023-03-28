@@ -19,7 +19,7 @@ int	free_exit(t_node *node, int exit_code)
 	top_node = node->execute->top_node;
 	free_execute(node->execute);
 	free_tree(top_node);
-	// system("leaks minishell");
+	printf("exit\n");
 	exit(exit_code);
 }
 
@@ -55,8 +55,9 @@ void	ft_exit_fork(t_node *node, int last_exit_code)
 
 void	ft_exit(t_node *node, int last_exit_code)
 {
-	int		count;
-	char	**args;
+	int			count;
+	char		**args;
+	long long	val;
 
 	args = node->command->arguments;
 	if (node->left_operator == PIPE || node->right_operator == PIPE)
@@ -66,9 +67,10 @@ void	ft_exit(t_node *node, int last_exit_code)
 	}
 	count = get_arg_count(args);
 	if (count == 0)
-		exit(last_exit_code);
+		exit(last_exit_code % 256);
 	if (check_exit_errors(node, args, count))
 		return ;
-	free_exit(node, ft_atoi(args[0]));
+	val = ft_atoi(args[0]);
+	free_exit(node, val);
 	return ;
 }
