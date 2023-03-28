@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_wildcard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/26 10:31:21 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 16:29:28 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
 		com->command_files = malloc(sizeof(char *) * (com->count + 1));
 		expand_wildcard(NULL, com->str, com->command_files, &com->index);
 		com->command_files[com->index] = NULL;
-		if (com->command_files == NULL)
+		if (com->command_files == NULL || com->command_files[0] == NULL)
 			return ;
-			free(command->command);
+		free(command->command);
 		command->command = ft_strdup(com->command_files[0]);
 		add_command_to_arg(command, com->command_files);
 	}
@@ -39,6 +39,7 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 		if (is_asterisk(com->str) && asterisk_slash(com->str) == 0)
 		{
 			com->files = just_asterisk(com->str);
+			com->files = sort_files(com->files, com->str, sort);
 			com->count_files = files_count(com->files);
 			if (com->files[0] == NULL)
 				return ;

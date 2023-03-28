@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiguous.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:16:13 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/26 09:07:03 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 13:10:14 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	take_one_file_out_op(t_node *node, int in_or, int index, int key)
 		{
 			count = 0;
 			expand_wildcard(NULL, node->redirections->outfile[index], files,
-					&count);
+				&count);
 			free(node->redirections->outfile[index]);
 			node->redirections->outfile[index] = files[0];
 		}

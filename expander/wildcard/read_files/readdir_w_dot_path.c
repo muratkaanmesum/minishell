@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   readdir_w_dot_path.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:23:50 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:49:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 16:58:33 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wildcard.h"
+#include "../wildcard.h"
 
 void	get_wpcount2_process(t_get *get, unsigned char d_type)
 {
@@ -29,6 +29,7 @@ void	get_wpcount2_process(t_get *get, unsigned char d_type)
 int	get_w_path_count2(char *path, unsigned char d_type)
 {
 	t_get	*get;
+	int		i;
 
 	get = malloc(sizeof(t_get) * 1);
 	get->i = 0;
@@ -44,7 +45,7 @@ int	get_w_path_count2(char *path, unsigned char d_type)
 		}
 	}
 	closedir(get->d);
-	int i = get->i;
+	i = get->i;
 	free(get->dir);
 	free(get);
 	return (i);
@@ -73,6 +74,7 @@ void	get_wdot_files_process(t_get *get, unsigned char d_type)
 char	**get_w_dot_files2(char *path, unsigned char d_type)
 {
 	t_get	*get;
+	char	**files;
 
 	get = malloc(sizeof(t_get) * 1);
 	get->count = get_w_path_count2(path, d_type);
@@ -88,10 +90,9 @@ char	**get_w_dot_files2(char *path, unsigned char d_type)
 				break ;
 			get_wdot_files_process(get, d_type);
 		}
-
 	}
 	closedir(get->d);
-	char **files = get->files;
+	files = get->files;
 	free(get->dir);
 	get->files[get->i] = NULL;
 	free(get);

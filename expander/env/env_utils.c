@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 18:32:33 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/27 15:08:51 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*find_env_variable(char *value, t_env *env)
 {
 	int	i;
 	int	size;
+	int	used_size;
 
 	if (value[0] == '$')
 		value++;
@@ -48,7 +49,11 @@ char	*find_env_variable(char *value, t_env *env)
 		size++;
 	while (env[i].name != NULL)
 	{
-		if (ft_strncmp(value, env[i].name, size) == 0)
+		if (ft_strlen(env[i].name) > size)
+			used_size = ft_strlen(env[i].name);
+		else
+			used_size = size;
+		if (ft_strncmp(value, env[i].name, used_size) == 0)
 			return (env[i].value);
 		i++;
 	}
