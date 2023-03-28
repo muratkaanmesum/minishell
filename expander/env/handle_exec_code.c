@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 14:07:26 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/22 08:19:43 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:21:00 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	get_str_count(char *str, char *env_value)
 
 	count = 0;
 	i = 0;
+	in_quote = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
@@ -71,13 +72,13 @@ void	handle_exec_files(t_node *node, char *last_exec_code)
 	i = -1;
 	while (node->redirections->infile[++i] != NULL)
 		node->redirections->infile[i] = handle_exec_code(
-				node->redirections->infile[i],
-				last_exec_code);
+			node->redirections->infile[i],
+			last_exec_code);
 	i = -1;
 	while (node->redirections->outfile[++i] != NULL)
 		node->redirections->outfile[i] = handle_exec_code(
-				node->redirections->outfile[i],
-				last_exec_code);
+			node->redirections->outfile[i],
+			last_exec_code);
 }
 
 void	handle_all_exec_code(t_node *node)
@@ -88,11 +89,11 @@ void	handle_all_exec_code(t_node *node)
 	last_exec_code = ft_itoa(node->execute->last_exit_code);
 	i = -1;
 	node->command->command = handle_exec_code(node->command->command,
-			last_exec_code);
+												last_exec_code);
 	while (node->command->arguments[++i] != NULL)
 		node->command->arguments[i] = handle_exec_code(
-				node->command->arguments[i],
-				last_exec_code);
+			node->command->arguments[i],
+			last_exec_code);
 	i = -1;
 	if (node->redirections == NULL)
 	{
