@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:37:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 08:43:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:14:38 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	check_if_only_red(t_token *token, t_node *node)
 	if (token[0].token == UNKNOWN)
 	{
 		node->connection_count = 0;
-		free_tokens(node->tokens);
 		node->connections = malloc(sizeof(t_node *));
 		node->command = NULL;
 	}
