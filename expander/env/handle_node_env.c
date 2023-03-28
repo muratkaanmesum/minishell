@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 17:29:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 20:02:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,4 @@ void	handle_node_env(t_node *node, t_env *env)
 		handle_redirection_env(node, env);
 	handle_all_exec_code(node);
 	handle_env_split(node);
-	delete_all_quotes(node);
 }

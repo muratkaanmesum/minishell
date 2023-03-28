@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 13:23:20 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 19:10:22 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ void	execute_node(t_node *node)
 	else
 		exec_builtin(node);
 	close_node_fds(node);
-	i = 0;
-	while (i++ < 200000)
-		;
 }
 
 void	handle_pipes(t_node *node)
