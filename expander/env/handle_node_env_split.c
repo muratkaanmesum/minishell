@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_env_split.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 07:59:14 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 15:10:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:17:51 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	pass_quotes(char *str, int *i)
 	char	quote;
 
 	quote = str[*i];
-	(*i)++;
+	if (str[*i] != '\0')
+		(*i)++;
 	while (str[*i] != quote && str[*i] != '\0')
 		(*i)++;
-	(*i)++;
+	if (str[*i] != '\0')
+		(*i)++;
 }
 
 int	check_outside_quotes(char *str)
@@ -30,7 +32,7 @@ int	check_outside_quotes(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\'' || str[i] == '\"')
+		if ((str[i] == '\'' || str[i] == '\"') && str[i] != '\0')
 			pass_quotes(str, &i);
 		if (str[i] == ' ')
 			return (1);

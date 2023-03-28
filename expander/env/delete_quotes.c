@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/28 12:40:21 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:11:55 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ void	get_new_str(char *new_str, char *str)
 				}
 			}
 		}
+		if(str[i] == '\'' || str[i] == '"')
+			i++;
 		if (str[i] && j < get_length(str))
 		{
 			new_str[j] = str[i];
@@ -200,7 +202,7 @@ char	*delete_quotes(char *str)
 
 void	delete_all_quotes(t_node *node)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	node->command->command = delete_quotes(node->command->command);
