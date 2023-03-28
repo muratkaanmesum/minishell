@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 12:00:41 by kali              #+#    #+#             */
-/*   Updated: 2023/03/25 14:12:21 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:55:07 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	connection_count(t_token *tokens, enum e_token token)
 		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			count++;
 		else if (token == 100 && (tokens[i].token == AND
-					|| tokens[i].token == OR))
+				|| tokens[i].token == OR))
 			count++;
 		if (tokens[i].token != UNKNOWN)
 			i++;
@@ -70,7 +70,7 @@ int	split_token_count(t_token *tokens, enum e_token token)
 		if (tokens[i].token == token && tokens[i].token != UNKNOWN)
 			break ;
 		else if (token == 100 && (tokens[i].token == AND
-					|| tokens[i].token == OR))
+				|| tokens[i].token == OR))
 			break ;
 		if (tokens[i].token != UNKNOWN)
 			i++;

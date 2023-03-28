@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_subshell_operators.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 15:25:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 17:19:18 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:57:44 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_end(t_token *tokens)
 		if (tokens[i].token == CLOSE_PAR)
 		{
 			if (i - 1 >= 0 && (tokens[i - 1].token == PIPE || tokens[i
-					- 1].token == AND || tokens[i - 1].token == OR))
+						- 1].token == AND || tokens[i - 1].token == OR))
 			{
 				printf("minishell : syntax error near unexpected token `|'\n");
 				return (1);
@@ -60,7 +60,7 @@ int	check_subshell_operators(t_token *tokens)
 		return (1);
 	if (check_end(tokens) == 1)
 		return (1);
-	return 0;
+	return (0);
 }
 
 int	check_missing_operator(t_token *tokens)
@@ -73,10 +73,10 @@ int	check_missing_operator(t_token *tokens)
 		if (tokens[i].token == OPEN_PAR)
 		{
 			if (i - 1 >= 0 && tokens[i - 1].token != PIPE && tokens[i
-				- 1].token != AND && tokens[i - 1].token != OR)
+					- 1].token != AND && tokens[i - 1].token != OR)
 			{
 				printf("minishell : syntax error near unexpected token `%s'\n",
-						tokens[i + 1].str);
+					tokens[i + 1].str);
 				return (1);
 			}
 		}
