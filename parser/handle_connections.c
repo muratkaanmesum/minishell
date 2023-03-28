@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_connections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:12:15 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/25 14:12:13 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:27:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	assign_head_values(t_node *head, t_token *tokens, t_execute *execute)
 	head->in_fd = STDIN_FILENO;
 	head->out_fd = STDOUT_FILENO;
 	head->execute = execute;
-	head->is_executed = 0;
 	head->left_operator = UNKNOWN_TOKEN;
 	head->right_operator = UNKNOWN_TOKEN;
 }
