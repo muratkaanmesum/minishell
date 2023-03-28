@@ -101,6 +101,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/handle_env_split.c\
                           expander/env/handle_node_env_split.c\
                           expander/env/change_str.c\
+                          expander/env/get_env_utils.c\
                           expander/env/get_new_str.c\
                           expander/env/new_str_utils.c\
                           expander/wildcard/wildcard.c\
