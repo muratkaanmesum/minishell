@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 13:57:20 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 14:35:03 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ int			check_env_stop(char *str, int i);
 void		pass_single_quote(char *str, int *i);
 void		change_str(char *str, char *env_value, char *new_str);
 void		get_new_str(char *new_str, char *str);
+void		single_quotes(t_new_str *new, char *str, char *new_str);
+void		double_quotes(t_new_str *new, char *str, char *new_str);
 #endif
