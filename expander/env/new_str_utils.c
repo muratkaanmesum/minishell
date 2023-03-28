@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:34:42 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 15:27:06 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:51:19 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	double_quotes_op(t_new_str *new, char *str, char *new_str)
 {
-	if (new->outside_double == 1 && str[new->i])
+	if (new->outside_double == 1)
 	{
 		new->i = new->keep + 1;
 		while (str[new->i] != '\0' && str[new->i] != '"')
@@ -23,7 +23,8 @@ void	double_quotes_op(t_new_str *new, char *str, char *new_str)
 			new->j++;
 			new->i++;
 		}
-		new->i++;
+		if (str[new->i] != '\0')
+			new->i++;
 	}
 	else
 	{
@@ -69,8 +70,7 @@ void	single_quotes_op(t_new_str *new, char *str, char *new_str)
 		{
 			new_str[new->j] = str[new->i];
 			new->j++;
-			if (str[new->i] != '\0')
-				new->i++;
+			new->i++;
 		}
 		if (str[new->i] != '\0')
 			new->i++;

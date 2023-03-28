@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:55:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 15:41:32 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:49:51 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void	get_new_str(char *new_str, char *str)
 			break ;
 	}
 	new_str[new->j] = '\0';
-
 }
