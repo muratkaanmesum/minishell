@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 07:59:14 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 08:07:33 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 15:10:55 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pass_quotes(char *str, int *i)
 
 	quote = str[*i];
 	(*i)++;
-	while (str[*i] != quote)
+	while (str[*i] != quote && str[*i] != '\0')
 		(*i)++;
 	(*i)++;
 }

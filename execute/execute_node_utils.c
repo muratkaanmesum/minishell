@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute_node_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
 /*   Updated: 2023/03/27 09:40:31 by mmesum           ###   ########.fr       */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:25:54 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 12:19:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/27 21:46:07 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_exec_val(char *str, int *i, char *new_str, int *index)
 void	pass_single_quote_add(char *str, int *i, char *new_str, int *index)
 {
 	new_str[(*index)++] = str[(*i)++];
-	while (str[*i] != '\'')
+	while (str[*i] != '\'' && str[*i] != '\0')
 		new_str[(*index)++] = str[(*i)++];
 	if (str[*i])
 		new_str[(*index)++] = str[(*i)++];

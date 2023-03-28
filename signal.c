@@ -39,6 +39,7 @@ void	ctrl_d(t_execute *execute)
 	{
 		printf("\nexit\n");
 		free_execute(execute);
+		// system("leaks minishell");
 		exit(last_exec_code);
 	}
 }
