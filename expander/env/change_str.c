@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:34:06 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 13:47:34 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:52:07 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ void	pass_single_quote_add(char *str, int *i, char *new_str, int *index)
 		new_str[(*index)++] = str[(*i)++];
 }
 
+int	handle_val(t_str *holder, char *str, char *new_str, char *env_value)
+{
+	if (check_exec_val(str, &(holder->i), new_str, &holder->index))
+		return (1);
+	holder->start_index = holder->i;
+	holder->flag = 1;
+	assign_env_value(new_str, env_value, &holder->index);
+	pass_env(str, holder->start_index, &(holder->i));
+	return (0);
+}
+
 void	change_str(char *str, char *env_value, char *new_str)
 {
 	t_str	*holder;
@@ -48,14 +59,8 @@ void	change_str(char *str, char *env_value, char *new_str)
 		if (str[holder->i] == '"')
 			holder->q_flag = !holder->q_flag;
 		if (str[holder->i] == '$' && holder->flag == 0)
-		{
-			if (check_exec_val(str, &(holder->i), new_str, &holder->index))
+			if (handle_val(holder, str, new_str, env_value))
 				continue ;
-			holder->start_index = holder->i;
-			holder->flag = 1;
-			assign_env_value(new_str, env_value, &holder->index);
-			pass_env(str, holder->start_index, &(holder->i));
-		}
 		if (str[holder->i] != '\0')
 			new_str[(holder->index)++] = str[(holder->i)++];
 	}
