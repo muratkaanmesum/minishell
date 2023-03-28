@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 18:16:54 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:45:47 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ void	clean_files_operators(t_files *files)
 	files->t = 0;
 }
 
-void	assign_t_asterisk(t_asterisk *t, char *str, char **files,
+void	assign_t_asterisk(t_asterisk *t, char **files,
 		char *command)
 {
-	t->str = str;
 	t->files = files;
 	t->command = command;
 }
@@ -49,25 +48,22 @@ void	handle_all(t_asterisk *t, t_files *f_arg)
 
 char	**take_file(char **files, char *command)
 {
-	int			i;
-	char		*str;
 	t_files		*f_arg;
 	t_asterisk	*t;
 
-	i = 0;
 	f_arg = malloc(sizeof(t_files) * 1);
 	t = malloc(sizeof(t_asterisk) * 1);
 	t->i = 0;
-	assign_t_asterisk(t, str, files, command);
-	while (command[i])
+	assign_t_asterisk(t, files, command);
+	while (t->command[t->i])
 	{
-		if (command[i] != '\0')
+		if (command[t->i] != '\0')
 		{
 			handle_all(t, f_arg);
 			free(t->str);
 		}
-		if (command[i] != '\0')
-			i++;
+		if (command[t->i] != '\0')
+			(t->i)++;
 	}
 	files = t->files;
 	free(t);
