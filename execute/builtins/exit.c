@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:29:59 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 21:59:37 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 12:54:41 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_exit(t_node *node, int last_exit_code)
 	}
 	count = get_arg_count(args);
 	if (count == 0)
-		exit(last_exit_code % 256);
+		free_exit(node, last_exit_code % 256);
 	if (check_exit_errors(node, args, count))
 		return ;
 	val = ft_atoi(args[0]);
