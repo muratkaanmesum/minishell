@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredocs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:55:19 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:29:38 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*heredoc_str(t_node *node, int i)
 {
-	char			*str;
-	char			*ret;
-	char			*new_line;
+	char	*str;
+	char	*ret;
+	char	*new_line;
 
 	ret = "";
 	new_line = "\n";
@@ -31,6 +31,16 @@ char	*heredoc_str(t_node *node, int i)
 		ret = ft_strjoin(ret, new_line);
 	}
 	return (ret);
+}
+
+void	heredoc_write(char *ret_str, t_node *node, int fd[2])
+{
+	write(fd[1], ret_str, ft_strlen(ret_str));
+	close(fd[1]);
+	close_all_fds(node->execute->top_node);
+	if (node->in_fd != 0)
+		close(node->in_fd);
+	exit(0);
 }
 
 void	handle_node_heredoc(t_node *node)
@@ -49,14 +59,7 @@ void	handle_node_heredoc(t_node *node)
 			ret_str = heredoc_str(node, i);
 			pid = fork();
 			if (pid == 0)
-			{
-				write(fd[1], ret_str, ft_strlen(ret_str));
-				close(fd[1]);
-				close_all_fds(node->execute->top_node);
-				if (node->in_fd != 0)
-					close(node->in_fd);
-				exit(0);
-			}
+				heredoc_write(ret_str, node, fd);
 			node->in_fd = fd[0];
 			close(fd[1]);
 			waitpid(pid, NULL, 0);

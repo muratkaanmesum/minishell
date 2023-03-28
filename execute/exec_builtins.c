@@ -6,9 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:18 by mmesum            #+#    #+#             */
-
-/*   Updated: 2023/03/25 17:19:26 by eablak           ###   ########.fr       */
-
+/*   Updated: 2023/03/28 13:23:09 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +70,22 @@ char	**modified_args(t_node *node)
 	return (new_args);
 }
 
+void	exec_node(t_node *node, char *path, char **new_args)
+{
+	if (node->in_fd == -1)
+		exit(1);
+	dup2(node->in_fd, 0);
+	dup2(node->out_fd, 1);
+	close_all_fds(node->execute->top_node);
+	execve(path, new_args, node->execute->env);
+	exit(1);
+}
+
 void	exec_builtin(t_node *node)
 {
 	char	*path;
 	int		pid;
 	char	**new_args;
-
 
 	new_args = modified_args(node);
 	path = NULL;
@@ -89,15 +97,7 @@ void	exec_builtin(t_node *node)
 		return ;
 	pid = fork();
 	if (pid == 0)
-	{
-		if (node->in_fd == -1)
-			exit(1);
-		dup2(node->in_fd, 0);
-		dup2(node->out_fd, 1);
-		close_all_fds(node->execute->top_node);
-		execve(path, new_args, node->execute->env);
-		exit(1);
-	}
+		exec_node(node, path, new_args);
 	free(path);
 	free_double_ptr(new_args);
 }

@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 09:40:31 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:25:44 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ char	*check_in_path(char *command, char *path)
 	return (NULL);
 }
 
+int	handle_outfile_ambg(t_node *node)
+{
+	int	i;
+
+	i = 0;
+	while (node->redirections->outfile[i] != NULL)
+	{
+		if (strchr(node->redirections->outfile[i], '*') != NULL)
+		{
+			write(2, "minishell:*: ", 11);
+			ft_putendl_fd("ambiguous redirect", 2);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_ambigious(t_node *node)
 {
 	int	i;
@@ -47,17 +65,8 @@ int	check_ambigious(t_node *node)
 		}
 		i++;
 	}
-	i = 0;
-	while (node->redirections->outfile[i] != NULL)
-	{
-		if (strchr(node->redirections->outfile[i], '*') != NULL)
-		{
-			write(2, "minishell:*: ", 11);
-			ft_putendl_fd("ambiguous redirect", 2);
-			return (1);
-		}
-		i++;
-	}
+	if (handle_outfile_ambg(node) == 1)
+		return (1);
 	return (0);
 }
 

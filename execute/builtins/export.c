@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:21:32 by kali              #+#    #+#             */
-/*   Updated: 2023/03/26 08:27:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:32:10 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ int	check_identifier(char *arg)
 	ft_putstr_fd(arg, 2);
 	ft_putendl_fd("': not a valid identifier", 2);
 	return (0);
+}
+
+void	add_to(char **args, t_node *node, int i)
+{
+	if (ft_strchr(args[i], '=') == NULL)
+		add_export(args[i], node);
+	else
+	{
+		add_export(args[i], node);
+		add_env(args[i], node);
+	}
 }
 
 void	export_w_fork(char **args, t_node *node)
@@ -39,13 +50,7 @@ void	export_w_fork(char **args, t_node *node)
 				node->execute->last_exit_code = 1;
 				continue ;
 			}
-			if (ft_strchr(args[i], '=') == NULL)
-				add_export(args[i], node);
-			else
-			{
-				add_export(args[i], node);
-				add_env(args[i], node);
-			}
+			add_to(args, node, i);
 			node->execute->last_exit_code = 0;
 			i++;
 		}
