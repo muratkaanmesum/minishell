@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/28 13:11:55 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 14:13:37 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	quotes_include_quotes(char *str, int *i, int key)
 	}
 	while (str[*i] != itself && str[*i])
 	{
+		if (str[*i + 1] == opposite)
+			*i += 1;
 		if (str[*i] == opposite)
 			return (1);
 		(*i)++;
@@ -76,114 +78,6 @@ int	get_length(char *str)
 	}
 	ret = ft_strlen(str) - (minus_count * 2) + 1;
 	return (ret);
-}
-
-void	get_new_str(char *new_str, char *str)
-{
-	int	i;
-	int	keep;
-	int	j;
-	int	outside_double;
-	int	outside_single;
-
-	i = 0;
-	j = 0;
-	outside_double = 0;
-	outside_double = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-		{
-			outside_single = 0;
-			keep = i;
-			i++;
-			while (str[i] != '\'' && str[i])
-			{
-				if (str[i] == '"')
-					outside_single = 1;
-				i++;
-			}
-			if (outside_single == 1)
-			{
-				i = keep + 1;
-				while (str[i] != '\'')
-				{
-					new_str[j] = str[i];
-					j++;
-					i++;
-					if (str[i] == '\'')
-					{
-						i++;
-						break ;
-					}
-				}
-			}
-			else
-			{
-				i = keep;
-				i++;
-				while (str[i] != '\'' && str[i])
-				{
-					new_str[j] = str[i];
-					j++;
-					i++;
-					if (str[i] == '\'' || str[i] == '"')
-						i++;
-				}
-			}
-		}
-		if (str[i] == '"')
-		{
-			outside_double = 0;
-			keep = i;
-			i++;
-			while (str[i] != '"' && str[i])
-			{
-				if (str[i] == '\'')
-					outside_double = 1;
-				i++;
-			}
-			if (outside_double == 1)
-			{
-				i = keep + 1;
-				while (str[i] != '"')
-				{
-					new_str[j] = str[i];
-					j++;
-					i++;
-					if (str[i] == '"')
-					{
-						i++;
-						break ;
-					}
-				}
-			}
-			else
-			{
-				i = keep;
-				i++;
-				while (str[i] != '"' && str[i])
-				{
-					new_str[j] = str[i];
-					j++;
-					i++;
-					if (str[i] == '"')
-						i++;
-				}
-			}
-		}
-		if(str[i] == '\'' || str[i] == '"')
-			i++;
-		if (str[i] && j < get_length(str))
-		{
-			new_str[j] = str[i];
-			j++;
-			i++;
-		}
-		else
-			break ;
-	}
-	new_str[j] = '\0';
 }
 
 char	*delete_quotes(char *str)

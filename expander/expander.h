@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:52:46 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 13:43:05 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 13:57:20 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ typedef struct s_str
 	int		start_index;
 
 }			t_str;
+
+typedef struct s_new_str
+{
+	int		i;
+	int		keep;
+	int		j;
+	int		outside_double;
+	int		outside_single;
+
+}			t_new_str;
 void		handle_env(t_node *node, t_env *variables);
 t_env		*get_env_variables(char **env);
 char		*find_env_variable(char *value, t_env *env);
@@ -47,4 +57,5 @@ void		handle_node_env_split(t_node *node);
 int			check_env_stop(char *str, int i);
 void		pass_single_quote(char *str, int *i);
 void		change_str(char *str, char *env_value, char *new_str);
+void		get_new_str(char *new_str, char *str);
 #endif

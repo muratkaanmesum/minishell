@@ -1,0 +1,134 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_new_str.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 13:55:26 by eablak            #+#    #+#             */
+/*   Updated: 2023/03/28 14:28:28 by eablak           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../expander.h"
+
+void	double_quotes_op(t_new_str *new, char *str, char *new_str)
+{
+	if (new->outside_double == 1)
+	{
+		new->i = new->keep + 1;
+		while (str[new->i] != '"')
+		{
+			new_str[new->j] = str[new->i];
+			new->j++;
+			new->i++;
+		}
+		new->i++;
+	}
+	else
+	{
+		new->i = new->keep;
+		new->i++;
+		while (str[new->i] != '"' && str[new->i])
+		{
+			new_str[new->j] = str[new->i];
+			new->j++;
+			new->i++;
+			if (str[new->i] == '"')
+				new->i++;
+		}
+	}
+}
+
+void	double_quotes(t_new_str *new, char *str, char *new_str)
+{
+	if (str[new->i] == '"')
+	{
+		new->outside_double = 0;
+		new->keep = new->i;
+		new->i++;
+		while (str[new->i] != '"' && str[new->i])
+		{
+			if (str[new->i] == '\'')
+				new->outside_double = 1;
+			new->i++;
+		}
+		double_quotes_op(new, str, new_str);
+	}
+}
+void	single_quotes_op(t_new_str *new, char *str, char *new_str)
+{
+	if (new->outside_single == 1)
+	{
+		new->i = new->keep + 1;
+		while (str[new->i] != '\'')
+		{
+			new_str[new->j] = str[new->i];
+			new->j++;
+			new->i++;
+		}
+		new->i++;
+	}
+	else
+	{
+		new->i = new->keep;
+		new->i++;
+		while (str[new->i] != '\'' && str[new->i])
+		{
+			new_str[new->j] = str[new->i];
+			new->j++;
+			new->i++;
+			if (str[new->i] == '\'' || str[new->i] == '"')
+				new->i++;
+		}
+	}
+}
+void	single_quotes(t_new_str *new, char *str, char *new_str)
+{
+	if (str[new->i] == '\'')
+	{
+		new->outside_single = 0;
+		new->keep = new->i;
+		new->i++;
+		while (str[new->i] != '\'' && str[new->i])
+		{
+			if (str[new->i] == '"')
+				new->outside_single = 1;
+			new->i++;
+		}
+		single_quotes_op(new, str, new_str);
+	}
+}
+
+void	get_new_str(char *new_str, char *str)
+{
+	t_new_str	*new;
+
+	new = malloc(sizeof(t_new_str));
+	new->i = 0;
+	new->j = 0;
+	new->outside_double = 0;
+	new->outside_double = 0;
+	while (str[new->i])
+	{
+		single_quotes(new, str, new_str);
+		double_quotes(new, str, new_str);
+		if (str[new->i] == '\'' || str[new->i] == '"')
+			new->i++;
+		if (str[new->i] && new->j < get_length(str))
+		{
+			if ((str[new->i] == '\'' && str[new->i - 1] == '\'')
+				|| (str[new->i] == '"' && str[new->i - 1] == '"'))
+				new->i++;
+			else
+			{
+				new_str[new->j] = str[new->i];
+				new->j++;
+				new->i++;
+			}
+		}
+		else
+			break ;
+	}
+	new_str[new->j] = '\0';
+}

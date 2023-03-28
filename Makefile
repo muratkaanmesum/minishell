@@ -12,7 +12,7 @@ CC        := gcc
 
 FLAGS    := -fsanitize=address
 #FLAGS       := -Wall -Wextra -Werror
-#FLAGS := -g
+FLAGS := -g
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
@@ -101,6 +101,7 @@ SRCS        :=            libft/ft_isalnum.c \
                           expander/env/handle_env_split.c\
                           expander/env/handle_node_env_split.c\
                           expander/env/change_str.c\
+                          expander/env/get_new_str.c\
                           expander/wildcard/wildcard.c\
                           expander/wildcard/handle_node_wildcard.c\
                           expander/wildcard/just_asterisk.c\
