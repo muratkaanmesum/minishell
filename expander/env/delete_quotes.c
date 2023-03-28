@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/27 22:00:11 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/28 12:40:21 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,6 @@ char	*delete_quotes(char *str)
 	int		j;
 	int		val;
 
-	printf("str %s\n",str);
 	val = get_length(str);
 	new_str = malloc(sizeof(char) * (val));
 	get_new_str(new_str, str);
