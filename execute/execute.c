@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/27 11:09:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 12:51:50 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,7 @@ int	handle_priority(t_node *head, int i)
 void	exec_all(t_node *head)
 {
 	int	next_exec_index;
-
-	if(val == 1)
-	{
-		val = 0;
-		return ;
-	}
+	
 	next_exec_index = 0;
 	if (head->is_subshell == 1)
 		execute_subshell(head);
@@ -118,15 +113,9 @@ void	exec_all(t_node *head)
 		waitpid(-1, &head->execute->last_exit_code, 0);
 }
 
-void	sig_handler(int sig)
-{
-	(void)sig;
-	val = 1;
-}
 
 int	execute(t_node *head)
 {
-	signal(SIGINT, sig_handler);
 	handle_pipes(head);
 	handle_heredocs(head);
 	if (head->connection_count == 0)
