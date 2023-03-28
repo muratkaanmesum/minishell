@@ -6,105 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 10:36:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:00:03 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	print_redirections(t_redirections *redirection)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	printf("--------\n");
-// 	while (i < redirection->infile_count)
-// 	{
-// 		printf("infile: %s ", redirection->infile[i]);
-// 		switch (redirection->infile_type[i])
-// 		{
-// 		case I_REDIRECTION:
-// 			printf("I_REDIRECTION\n");
-// 			break ;
-// 		case HERE_DOC:
-// 			printf("HERE_DOC\n");
-// 			break ;
-// 		default:
-// 			printf("UNKNOWN\n");
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < redirection->outfile_count)
-// 	{
-// 		printf("outfile: %s ", redirection->outfile[i]);
-// 		switch (redirection->outfile_type[i])
-// 		{
-// 		case O_REDIRECTION:
-// 			printf("O_REDIRECTION\n");
-// 			break ;
-// 		case APPEND_RED:
-// 			printf("APPEND_RED\n");
-// 			break ;
-// 		default:
-// 			printf("UNKNOWN\n");
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// }
-// void	print_tree(t_node *head)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	if (head->connection_count == 0)
-// 	{
-// 		j = 0;
-// 		if (head->command == NULL)
-// 		{
-// 			print_token(head->tokens);
-// 			printf("left_operator %d  right_operator %d\n", head->left_operator,
-// 					head->right_operator);
-// 			printf("\n****NULL*****\n");
-// 			return ;
-// 		}
-// 		printf("command : %s ", head->command->command);
-// 		printf("\n");
-// 		while (j < head->command->argument_count)
-// 		{
-// 			printf("argument : %s \n", head->command->arguments[j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		j = 0;
-// 		if (head->redirections != NULL)
-// 			print_redirections(head->redirections);
-// 		printf("\n*************\n");
-// 		printf("left_operator : %d\n", head->left_operator);
-// 		printf("right_operator : %d\n", head->right_operator);
-// 		printf("\n*************\n");
-// 		return ;
-// 	}
-// 	else
-// 		while (i < head->connection_count)
-// 		{
-// 			if (i == 0)
-// 			{
-// 					print_token(head->tokens);
-// 				if (head->redirections != NULL)
-// 					print_redirections(head->redirections);
-// 				printf("\n*************\n");
-// 				printf("left_operator : %d\n", head->left_operator);
-// 				printf("right_operator : %d\n", head->right_operator);
-// 				printf("\n*************\n");
-// 			}
-// 			print_tree(head->connections[i]);
-// 			i++;
-// 		}
-// }
 
 char	**init_env(char **env)
 {
