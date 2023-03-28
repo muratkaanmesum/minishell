@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/28 20:03:00 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:47:10 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ char	*delete_quotes(char *str)
 void	delete_all_quotes(t_node *node)
 {
 	int	i;
-
+	if(node->command == NULL)
+		return;
 	i = -1;
 	node->command->command = delete_quotes(node->command->command);
 	while (node->command->arguments[++i] != NULL)

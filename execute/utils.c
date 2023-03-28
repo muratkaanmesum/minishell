@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:11:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:30:11 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ void	close_node_fds(t_node *node)
 
 int	get_last_execute_code(t_node *head)
 {
-	int	res;
-
-	res = (((head->execute->last_exit_code) & 0xff00) >> 8);
-	return (res);
+	if (head->execute->last_exit_code != 0)
+		return (1);
+	return (0);
 }
 
 void	close_all_fds(t_node *top)
