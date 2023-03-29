@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_wildcard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/29 16:41:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:47:16 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard.h"
 
-void	handle_forcommand_option(t_command *command, t_com *com, t_sort *sort)
+void	handle_forcommand_option(t_command *command, t_com *com)
 {
 	com->count = 0;
 	com->count = count_wildcard(NULL, com->str, &com->count);
@@ -51,13 +51,12 @@ void	handle_forcommand(t_command *command, t_com *com, t_sort *sort)
 			add_command_to_arg(command, com->files);
 		}
 		else if (asterisk_slash(com->str) == 1)
-			handle_forcommand_option(command, com, sort);
+			handle_forcommand_option(command, com);
 		free(com->str);
 	}
 }
 
-void	handle_forarg_option(t_command *command, t_arg *arg, t_sort *sort,
-		t_match *match)
+void	handle_forarg_option(t_command *command, t_arg *arg, t_match *match)
 {
 	arg->count = count_wildcard(NULL, arg->str, &arg->count);
 	if (arg->count >= 1)
@@ -90,7 +89,7 @@ void	handle_forarg(t_command *command, t_arg *arg, t_sort *sort)
 				match_arg_files(arg->match_files, command, arg->i, match);
 			}
 			if (asterisk_slash(arg->str) == 1)
-				handle_forarg_option(command, arg, sort, match);
+				handle_forarg_option(command, arg, match);
 			free(arg->str);
 		}
 		arg->i++;

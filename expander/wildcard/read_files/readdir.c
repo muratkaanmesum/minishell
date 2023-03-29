@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 17:00:40 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:58:34 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	get_path_count(void)
 	int				i;
 
 	i = 0;
+	
 	getcwd(buf, 1024);
 	d = opendir(buf);
 	if (d)
@@ -31,7 +32,7 @@ int	get_path_count(void)
 				break ;
 			i++;
 		}
-	}
+	}	
 	closedir(d);
 	free(dir);
 	return (i);
