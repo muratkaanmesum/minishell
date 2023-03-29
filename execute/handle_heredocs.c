@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 18:01:57 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:20:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	heredoc_write(char *ret_str, t_node *node, int fd[2])
 		close_all_fds(node->execute->top_node);
 		close(fd[0]);
 		close(fd[1]);
-		exit(0);
+		exit(1);
 	}
 	write(fd[1], ret_str, ft_strlen(ret_str));
 	close(fd[1]);
@@ -95,7 +95,9 @@ void	handle_node_heredoc(t_node *node)
 	int		fd[2];
 	char	*ret_str;
 	int		pid;
+	int		val;
 
+	val = 0;
 	i = 0;
 	while (i < node->redirections->infile_count)
 	{
@@ -109,13 +111,12 @@ void	handle_node_heredoc(t_node *node)
 				ret_str = heredoc_str(node, i);
 				heredoc_write(ret_str, node, fd);
 			}
-			if (g_exit_code == 1)
-			{
-				waitpid(pid, NULL, 0);
-				return ;
-			}
-			node->in_fd = fd[0];
-			close(fd[1]);
+			else
+				waitpid(pid, &val, 0);
+			if (val == 256)
+				g_exit_code = 1;
+			if (g_exit_code == 0)
+				node->in_fd = fd[0];
 		}
 		i++;
 	}

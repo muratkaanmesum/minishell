@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 18:00:48 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:20:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,14 @@ int	execute(t_node *head)
 	handle_pipes(head);
 	handle_heredocs(head);
 	if (g_exit_code == 1)
+	{
+		g_exit_code = 0;
 		return (0);
+	}
 	if (head->connection_count == 0)
 		exec_single_command(head);
 	else
 		exec_all(head);
 	close_all_fds(head);
-	g_exit_code = 0;
 	return (0);
 }
