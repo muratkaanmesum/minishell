@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredocs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 13:29:38 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 14:58:01 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+	int		index;
+
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
+	i = 0;
+	index = 0;
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	while (s1[index] != '\0')
+		str[i++] = s1[index++];
+	index = 0;
+	while (s2[index] != '\0')
+		str[i++] = s2[index++];
+	str[i] = '\0';
+	free(s1);
+	return (str);
+}
 
 char	*heredoc_str(t_node *node, int i)
 {
@@ -18,7 +44,7 @@ char	*heredoc_str(t_node *node, int i)
 	char	*ret;
 	char	*new_line;
 
-	ret = "";
+	ret = NULL;
 	new_line = "\n";
 	while (1)
 	{
@@ -26,9 +52,13 @@ char	*heredoc_str(t_node *node, int i)
 		if (str == NULL)
 			break ;
 		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
+		{
+			free(str);
 			break ;
-		ret = ft_strjoin(ret, str);
-		ret = ft_strjoin(ret, new_line);
+		}
+		ret = ft_strjoin_free(ret, str);
+		free(str);
+		ret = ft_strjoin_free(ret, new_line);
 	}
 	return (ret);
 }
@@ -63,6 +93,7 @@ void	handle_node_heredoc(t_node *node)
 			node->in_fd = fd[0];
 			close(fd[1]);
 			waitpid(pid, NULL, 0);
+			free(ret_str);
 		}
 		i++;
 	}

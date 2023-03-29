@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:08:55 by kali              #+#    #+#             */
-/*   Updated: 2023/03/28 18:05:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 14:53:41 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_node	*parser(t_token *tokens, t_execute *execute)
 
 	if (parse_error(tokens) == 1)
 	{
-		execute->last_exit_code = 2;
+		execute->last_exit_code = 258;
 		return (NULL);
 	}
 	cpy_token = copy_all_tokens(tokens);

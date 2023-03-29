@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_wildcard.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:17 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 16:29:28 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 15:15:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,6 @@ void	handle_node_wildcard(t_node *node)
 	t_sort	*sort;
 	int		i;
 
-	com = malloc(sizeof(t_com) * 1);
-	arg = malloc(sizeof(t_arg) * 1);
-	sort = malloc(sizeof(t_sort) * 1);
 	if (node->command->command[0] == '/')
 		return ;
 	i = 0;
@@ -117,6 +114,9 @@ void	handle_node_wildcard(t_node *node)
 			return ;
 		i++;
 	}
+	com = malloc(sizeof(t_com) * 1);
+	arg = malloc(sizeof(t_arg) * 1);
+	sort = malloc(sizeof(t_sort) * 1);
 	handle_forcommand(node->command, com, sort);
 	handle_forarg(node->command, arg, sort);
 	free(com);

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 19:10:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 14:59:28 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void	exec_all(t_node *head)
 			;
 	}
 	if (head->is_subshell == 1)
+		waitpid(-1, &head->execute->last_exit_code, 0);
+	if (head->right_operator != PIPE)
 		waitpid(-1, &head->execute->last_exit_code, 0);
 }
 
