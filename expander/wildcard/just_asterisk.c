@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:07 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 18:45:47 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:19:08 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,12 @@ char	**take_file(char **files, char *command)
 
 char	**just_asterisk(char *command)
 {
-	int		count;
 	char	**my_files;
-	int		i;
 
 	if (command[0] == '.')
 		my_files = get_files();
 	else
 		my_files = get_w_dot_files();
-	count = get_path_count();
-	i = 0;
 	my_files = take_file(my_files, command);
 	return (my_files);
 }

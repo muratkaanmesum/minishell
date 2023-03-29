@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 20:40:17 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:17:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ char	*find_env_variable(char *value, t_env *env)
 
 int	check_inside_quote(char *str, int *i)
 {
-	char	c;
 
-	c = str[*i];
 	(*i)++;
 	while (str[*i] != '\0' && str[*i] != '"')
 	{
