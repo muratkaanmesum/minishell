@@ -140,6 +140,7 @@ SRCS        :=            libft/ft_isalnum.c \
                             execute/builtins/exit.c\
                             execute/builtins/exit_utils.c\
                             execute/builtins/utils.c\
+                            execute/heredoc_utils.c\
                             execute/exec_single_command.c\
                             execute/exec_builtins.c\
                             execute/handle_files.c\

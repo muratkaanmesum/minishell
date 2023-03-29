@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:11:27 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/26 07:28:51 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:27:22 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ int		check_errors(t_node *node);
 char	*check_in_path(char *command, char *path);
 void	handle_heredocs(t_node *node);
 int		check_path(char *path, t_node *node, char **new_args);
+void	heredoc_handler(int sig);
+void	handle_heredoc(t_node *node, int i, char *ret_str, int fd[2]);
 #endif
