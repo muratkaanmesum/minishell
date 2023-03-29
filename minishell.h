@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 17:26:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 17:46:16 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <string.h>
 # include <sys/ioctl.h>
 # include <unistd.h>
+
+extern int					g_exit_code;
 
 enum						e_token
 {

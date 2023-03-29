@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 14:57:17 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 17:48:03 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@
 // 		}
 // }
 
+int			g_exit_code;
+
 char	**init_env(char **env)
 {
 	int		i;
@@ -232,6 +234,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_execute	*execute_struct;
 
+	printf("%d", g_exit_code);
 	if (argc != 1)
 		return (0);
 	(void)argv;
