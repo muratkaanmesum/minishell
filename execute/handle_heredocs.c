@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredocs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 18:29:08 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 21:09:48 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	handle_node_heredoc(t_node *node)
 	int		pid;
 
 	i = 0;
+	ret_str = NULL;
 	while (i < node->redirections->infile_count)
 	{
 		if (node->redirections->infile_type[i] == HERE_DOC)

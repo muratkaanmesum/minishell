@@ -6,7 +6,7 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:54:09 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 16:58:30 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 21:13:12 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	get_o_count(void)
 {
+	int	i;
+
 	char			buf[1024];
 	DIR				*d;
 	struct dirent	*dir;
-	int				i;
-
 	i = 0;
 	getcwd(buf, 1024);
 	d = opendir(buf);
