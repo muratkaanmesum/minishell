@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:25:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 18:29:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:27:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*heredoc_str(t_node *node, int i)
 	new_line = "\n";
 	while (1)
 	{
-		if (g_exit_code == 1)
+		if (g_execute->exit_code == 1)
 			break ;
 		str = readline(">");
 		if (str == NULL)
@@ -67,7 +67,7 @@ char	*heredoc_str(t_node *node, int i)
 
 void	heredoc_write(char *ret_str, t_node *node, int fd[2])
 {
-	if (g_exit_code == 1)
+	if (g_execute->exit_code == 1)
 	{
 		close_all_fds(node->execute->top_node);
 		close(fd[0]);
@@ -86,7 +86,7 @@ void	heredoc_write(char *ret_str, t_node *node, int fd[2])
 void	heredoc_handler(int sig)
 {
 	(void)sig;
-	g_exit_code = 1;
+	g_execute->exit_code = 1;
 }
 
 void	handle_heredoc(t_node *node, int i, char *ret_str, int fd[2])

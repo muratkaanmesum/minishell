@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredocs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 21:09:48 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:27:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	handle_node_heredoc(t_node *node)
 			if (pid == 0)
 				handle_heredoc(node, i, ret_str, fd);
 			else
-				waitpid(pid, &g_exit_code, 0);
-			if (g_exit_code == 256)
-				g_exit_code = 1;
-			if (g_exit_code == 0)
+				waitpid(pid, &g_execute->exit_code, 0);
+			if (g_execute->exit_code == 256)
+				g_execute->exit_code = 1;
+			if (g_execute->exit_code == 0)
 				node->in_fd = fd[0];
 			close(fd[1]);
 		}
