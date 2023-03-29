@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:52 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 15:44:32 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:09:15 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_before_subshell(t_token *tokens, int i)
 	if (i - 1 < 0)
 		return (0);
 	if (tokens[i - 1].token != PIPE && tokens[i - 1].token == AND && tokens[i
-		- 1].token == OR)
+			- 1].token == OR)
 		return (1);
 	return (0);
 }

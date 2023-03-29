@@ -6,13 +6,11 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:19:30 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 18:25:22 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:05:56 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
-
 
 char	*check_in_path(char *command, char *path)
 {

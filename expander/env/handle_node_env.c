@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 20:02:42 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:08:37 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void	handle_env_arg(t_node *node, t_env *env, int i)
 void	handle_node_env(t_node *node, t_env *env)
 {
 	int	i;
-	if(node->command == NULL)
-		return;
+
+	if (node->command == NULL)
+		return ;
 	while (get_env_location(node->command->command) != NULL)
 		handle_env_command(node, env);
 	i = 0;
