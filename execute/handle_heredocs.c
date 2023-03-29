@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 18:20:27 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:21:21 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	handle_node_heredoc(t_node *node)
 				g_exit_code = 1;
 			if (g_exit_code == 0)
 				node->in_fd = fd[0];
+			close(fd[1]);
 		}
 		i++;
 	}
