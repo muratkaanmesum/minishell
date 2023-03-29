@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 14:58:01 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:01:57 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (str);
 }
 
+void	func(int sig)
+{
+	(void)sig;
+	g_exit_code = 1;
+}
+
 char	*heredoc_str(t_node *node, int i)
 {
 	char	*str;
@@ -48,6 +54,8 @@ char	*heredoc_str(t_node *node, int i)
 	new_line = "\n";
 	while (1)
 	{
+		if (g_exit_code == 1)
+			break ;
 		str = readline(">");
 		if (str == NULL)
 			break ;
@@ -65,11 +73,19 @@ char	*heredoc_str(t_node *node, int i)
 
 void	heredoc_write(char *ret_str, t_node *node, int fd[2])
 {
+	if (g_exit_code == 1)
+	{
+		close_all_fds(node->execute->top_node);
+		close(fd[0]);
+		close(fd[1]);
+		exit(0);
+	}
 	write(fd[1], ret_str, ft_strlen(ret_str));
 	close(fd[1]);
 	close_all_fds(node->execute->top_node);
 	if (node->in_fd != 0)
 		close(node->in_fd);
+	free(ret_str);
 	exit(0);
 }
 
@@ -86,14 +102,20 @@ void	handle_node_heredoc(t_node *node)
 		if (node->redirections->infile_type[i] == HERE_DOC)
 		{
 			pipe(fd);
-			ret_str = heredoc_str(node, i);
 			pid = fork();
 			if (pid == 0)
+			{
+				signal(SIGINT, func);
+				ret_str = heredoc_str(node, i);
 				heredoc_write(ret_str, node, fd);
+			}
+			if (g_exit_code == 1)
+			{
+				waitpid(pid, NULL, 0);
+				return ;
+			}
 			node->in_fd = fd[0];
 			close(fd[1]);
-			waitpid(pid, NULL, 0);
-			free(ret_str);
 		}
 		i++;
 	}
