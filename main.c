@@ -6,11 +6,169 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 18:15:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 12:20:30 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+// void	print_token(t_token *token)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (token[i].token != UNKNOWN)
+// 	{
+// 		printf("value: %s id : %d token : ", token[i].str, token[i].id);
+// 		switch (token[i].token)
+// 		{
+// 		case PIPE:
+// 			printf("PIPE\n");
+// 			break ;
+// 		case UNKNOWN:
+// 			printf("UNKNOWN\n");
+// 			break ;
+// 		case I_REDIRECTION:
+// 			printf("I_REDIRECTION\n");
+// 			break ;
+// 		case O_REDIRECTION:
+// 			printf("O_REDIRECTION\n");
+// 			break ;
+// 		case APPEND_RED:
+// 			printf("APPEND_RED\n");
+// 			break ;
+// 		case HERE_DOC:
+// 			printf("HERE_DOC\n");
+// 			break ;
+// 		case COMMAND:
+// 			printf("COMMAND\n");
+// 			break ;
+// 		case ARG:
+// 			printf("ARG\n");
+// 			break ;
+// 		case OPTION:
+// 			printf("OPTION\n");
+// 			break ;
+// 		case AND:
+// 			printf("AND\n");
+// 			break ;
+// 		case OR:
+// 			printf("OR\n");
+// 			break ;
+// 		case ENV_COMMAND:
+// 			printf("ENV_COMMAND\n");
+// 			break ;
+// 		case ENV:
+// 			printf("ENV\n");
+// 			break ;
+// 		case RED_FILE:
+// 			printf("RED_FILE\n");
+// 			break ;
+// 		case OPEN_PAR:
+// 			printf("OPEN_PAR\n");
+// 			break ;
+// 		case CLOSE_PAR:
+// 			printf("CLOSE_PAR\n");
+// 			break ;
+// 		case UNKNOWN_TOKEN:
+// 			printf("UNKNOWN_TOKEN\n");
+// 			break ;
+// 		default:
+// 			printf("UNKNOWN\n");
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// }
+// void	print_redirections(t_redirections *redirection)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	printf("--------\n");
+// 	while (i < redirection->infile_count)
+// 	{
+// 		printf("infile: %s ", redirection->infile[i]);
+// 		switch (redirection->infile_type[i])
+// 		{
+// 		case I_REDIRECTION:
+// 			printf("I_REDIRECTION\n");
+// 			break ;
+// 		case HERE_DOC:
+// 			printf("HERE_DOC\n");
+// 			break ;
+// 		default:
+// 			printf("UNKNOWN\n");
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < redirection->outfile_count)
+// 	{
+// 		printf("outfile: %s ", redirection->outfile[i]);
+// 		switch (redirection->outfile_type[i])
+// 		{
+// 		case O_REDIRECTION:
+// 			printf("O_REDIRECTION\n");
+// 			break ;
+// 		case APPEND_RED:
+// 			printf("APPEND_RED\n");
+// 			break ;
+// 		default:
+// 			printf("UNKNOWN\n");
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// }
+// void	print_tree(t_node *head)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	if (head->connection_count == 0)
+// 	{
+// 		j = 0;
+// 		if (head->command == NULL)
+// 		{
+// 			print_token(head->tokens);
+// 			return ;
+// 		}
+// 		printf("command : %s ", head->command->command);
+// 		printf("\n");
+// 		while (j < head->command->argument_count)
+// 		{
+// 			printf("argument : %s \n", head->command->arguments[j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		j = 0;
+// 		if (head->redirections != NULL)
+// 			print_redirections(head->redirections);
+// 		printf("\n*************\n");
+// 		printf("left_operator : %d\n", head->left_operator);
+// 		printf("right_operator : %d\n", head->right_operator);
+// 		printf("\n*************\n");
+// 		return ;
+// 	}
+// 	else
+// 		while (i < head->connection_count)
+// 		{
+// 			if (i == 0)
+// 			{
+// 				// 	print_token(head->tokens);
+// 				if (head->redirections != NULL)
+// 					print_redirections(head->redirections);
+// 				printf("\n*************\n");
+// 				printf("left_operator : %d\n", head->left_operator);
+// 				printf("right_operator : %d\n", head->right_operator);
+// 				printf("\n*************\n");
+// 			}
+// 			print_tree(head->connections[i]);
+// 			i++;
+// 		}
+// }
 
 char	**init_env(char **env)
 {
