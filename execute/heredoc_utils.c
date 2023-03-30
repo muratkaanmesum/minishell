@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:25:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 16:27:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:48:59 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (str);
 }
 
+int	len_str(char *arg, char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	i = ft_strlen(arg);
+	j = ft_strlen(str);
+	if (i >= j)
+		return (i);
+	else
+		return (j);
+}
+
 char	*heredoc_str(t_node *node, int i)
 {
 	char	*str;
@@ -53,7 +68,8 @@ char	*heredoc_str(t_node *node, int i)
 		str = readline(">");
 		if (str == NULL)
 			break ;
-		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
+		if (ft_strncmp(str, node->redirections->infile[i],
+				len_str(node->redirections->infile[i], str)) == 0)
 		{
 			free(str);
 			break ;

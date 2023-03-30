@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 05:22:49 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 16:27:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:19:42 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,25 @@ void	execute_node(t_node *node)
 {
 	if (check_errors(node))
 		return ;
-	if (ft_strncmp(node->command->command, "pwd", 3) == 0)
+	if (ft_strncmp(node->command->command, "pwd", check_size(node, "pwd")) == 0)
 		pwd(node);
-	else if (ft_strncmp(node->command->command, "cd", 2) == 0)
+	else if (ft_strncmp(node->command->command, "cd", check_size(node,
+				"cd")) == 0)
 		cd(node->command->arguments, node);
-	else if (ft_strncmp(node->command->command, "echo", 4) == 0)
+	else if (ft_strncmp(node->command->command, "echo", check_size(node,
+				"echo")) == 0)
 		echo(node);
-	else if (ft_strncmp(node->command->command, "env", 3) == 0)
+	else if (ft_strncmp(node->command->command, "env", check_size(node,
+				"env")) == 0)
 		print_env(node);
-	else if (ft_strncmp(node->command->command, "export", 6) == 0)
+	else if (ft_strncmp(node->command->command, "export", check_size(node,
+				"export")) == 0)
 		export(node->command->arguments, node);
-	else if (ft_strncmp(node->command->command, "unset", 5) == 0)
+	else if (ft_strncmp(node->command->command, "unset", check_size(node,
+				"unset")) == 0)
 		unset(node->command->arguments, node);
-	else if (ft_strncmp(node->command->command, "exit", 4) == 0)
+	else if (ft_strncmp(node->command->command, "exit", check_size(node,
+				"exit")) == 0)
 		ft_exit(node, get_last_execute_code(node));
 	else
 		exec_builtin(node);

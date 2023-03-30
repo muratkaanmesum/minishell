@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir_o.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:54:09 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/29 21:13:12 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:20:23 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	get_o_count(void)
 {
-	int	i;
-
+	int				i;
 	char			buf[1024];
 	DIR				*d;
 	struct dirent	*dir;
+
 	i = 0;
 	getcwd(buf, 1024);
 	d = opendir(buf);
@@ -34,7 +34,6 @@ int	get_o_count(void)
 		}
 	}
 	closedir(d);
-	free(dir);
 	return (i);
 }
 

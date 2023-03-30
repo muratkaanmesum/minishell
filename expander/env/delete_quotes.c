@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 05:26:17 by kali              #+#    #+#             */
-/*   Updated: 2023/03/29 16:18:40 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 09:59:27 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	quotes_include_quotes(char *str, int *i, int key)
 	char	itself;
 	char	opposite;
 
+	itself = '\0';
 	if (str[*i] != '\0')
 		*i += 1;
 	if (key == 1)

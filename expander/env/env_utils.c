@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:53:41 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 16:17:59 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:20:49 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	*find_env_variable(char *value, t_env *env)
 
 int	check_inside_quote(char *str, int *i)
 {
-
 	(*i)++;
 	while (str[*i] != '\0' && str[*i] != '"')
 	{

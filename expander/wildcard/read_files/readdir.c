@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:26 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/29 21:12:29 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:09:19 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	get_path_count(void)
 	int				i;
 
 	i = 0;
-	
 	getcwd(buf, 1024);
 	d = opendir(buf);
 	if (d)
@@ -32,9 +31,8 @@ int	get_path_count(void)
 				break ;
 			i++;
 		}
-	}	
-	closedir(d);
-	free(dir);
+		closedir(d);
+	}
 	return (i);
 }
 

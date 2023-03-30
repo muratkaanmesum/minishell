@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_node_env.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:09:13 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 20:43:07 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:21:01 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	handle_env_arg(t_node *node, t_env *env, int i)
 	if (env_value == NULL)
 		env_value = "";
 	node->command->arguments[i] = assign_env(node->command->arguments[i],
-												env_value);
+			env_value);
 }
 
 void	handle_node_env(t_node *node, t_env *env)

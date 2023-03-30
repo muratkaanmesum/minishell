@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 15:30:11 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:17:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,10 @@ char	*get_path(char *path)
 	return (ft_strdup(buff));
 }
 
-void	print_all_fds(t_node *node)
+int	check_size(t_node *node, char *command)
 {
-	int	i;
-
-	i = 0;
-	if (node->connection_count == 0)
-	{
-		printf("in_fd: %d, out_fd: %d\n", node->in_fd, node->out_fd);
-	}
+	if (ft_strlen(command) > ft_strlen(node->command->command))
+		return (ft_strlen(command));
 	else
-	{
-		while (i < node->connection_count)
-		{
-			if (i == 0)
-				printf("in_fd: %d, out_fd: %d\n", node->in_fd, node->out_fd);
-			print_all_fds(node->connections[i]);
-			i++;
-		}
-	}
+		return (ft_strlen(node->command->command));
 }

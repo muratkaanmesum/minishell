@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:43:15 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/29 16:19:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:09:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	get_all_count(char *path)
 		}
 	}
 	closedir(d);
-	free(dir);
 	return (i);
 }
 
