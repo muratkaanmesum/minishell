@@ -6,11 +6,13 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:41:43 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 18:15:39 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:19:34 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_execute	*g_execute;
 
 char	**init_env(char **env)
 {
@@ -31,19 +33,16 @@ char	**init_env(char **env)
 	return (new_env);
 }
 
-t_execute	*init_execute(char **env)
+void	init_execute(char **env)
 {
-	t_execute	*execute_struct;
-
-	execute_struct = malloc(sizeof(t_execute));
-	execute_struct->last_exit_code = 0;
-	execute_struct->env = init_env(env);
-	execute_struct->export = init_env(env);
-	execute_struct->only_red_count = 0;
-	return (execute_struct);
+	g_execute = malloc(sizeof(t_execute));
+	g_execute->last_exit_code = 0;
+	g_execute->env = init_env(env);
+	g_execute->export = init_env(env);
+	g_execute->only_red_count = 0;
 }
 
-void	main_loop(t_execute *execute_struct)
+void	main_loop(void)
 {
 	t_node	*head;
 	t_token	*tokens;
@@ -52,19 +51,19 @@ void	main_loop(t_execute *execute_struct)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		execute_struct->input = readline("minishell: ");
-		add_history(execute_struct->input);
-		ctrl_d(execute_struct);
-		tokens = lexer(execute_struct->input);
+		g_execute->input = readline("minishell: ");
+		add_history(g_execute->input);
+		ctrl_d(g_execute);
+		tokens = lexer(g_execute->input);
 		if (tokens == NULL)
 		{
-			free(execute_struct->input);
+			free(g_execute->input);
 			continue ;
 		}
-		if (first_check_free(tokens, execute_struct->input) == 1)
+		if (first_check_free(tokens, g_execute->input) == 1)
 			continue ;
-		head = parser(tokens, execute_struct);
-		if (parse_error_free(head, tokens, execute_struct->input) == 1)
+		head = parser(tokens, g_execute);
+		if (parse_error_free(head, tokens, g_execute->input) == 1)
 			continue ;
 		exec_rest(head);
 	}
@@ -72,12 +71,10 @@ void	main_loop(t_execute *execute_struct)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_execute	*execute_struct;
-
 	if (argc != 1)
 		return (0);
 	(void)argv;
-	execute_struct = init_execute(env);
-	main_loop(execute_struct);
+	init_execute(env);
+	main_loop();
 	return (0);
 }

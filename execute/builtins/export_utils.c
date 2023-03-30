@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 09:33:45 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/19 13:30:10 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:32:33 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	print_export(t_node *node)
 	{
 		arr = ft_split(node->execute->export[i], '=');
 		if (arr[1] == NULL)
-			arr[1] = ft_strdup("");
-		printf("declare -x %s=\"%s\"\n", arr[0], arr[1]);
+			printf("declare -x %s=\"\"\n", arr[0]);
+		else
+			printf("declare -x %s=\"%s\"\n", arr[0], arr[1]);
 		free_double_ptr(arr);
 		i++;
 	}

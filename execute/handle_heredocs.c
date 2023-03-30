@@ -6,41 +6,25 @@
 /*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 13:29:38 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/30 11:34:06 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-char	*heredoc_str(t_node *node, int i)
+int	len_str(char *arg, char *str)
 {
-	char	*str;
-	char	*ret;
-	char	*new_line;
+	int	i;
+	int	j;
 
-	ret = "";
-	new_line = "\n";
-	while (1)
-	{
-		str = readline(">");
-		if (str == NULL)
-			break ;
-		if (ft_strncmp(str, node->redirections->infile[i], ft_strlen(str)) == 0)
-			break ;
-		ret = ft_strjoin(ret, str);
-		ret = ft_strjoin(ret, new_line);
-	}
-	return (ret);
-}
-
-void	heredoc_write(char *ret_str, t_node *node, int fd[2])
-{
-	write(fd[1], ret_str, ft_strlen(ret_str));
-	close(fd[1]);
-	close_all_fds(node->execute->top_node);
-	if (node->in_fd != 0)
-		close(node->in_fd);
-	exit(0);
+	i = 0;
+	j = 0;
+	i = ft_strlen(arg);
+	j = ft_strlen(str);
+	if (i >= j)
+		return (i);
+	else
+		return (j);
 }
 
 void	handle_node_heredoc(t_node *node)
@@ -51,18 +35,22 @@ void	handle_node_heredoc(t_node *node)
 	int		pid;
 
 	i = 0;
+	ret_str = NULL;
 	while (i < node->redirections->infile_count)
 	{
 		if (node->redirections->infile_type[i] == HERE_DOC)
 		{
 			pipe(fd);
-			ret_str = heredoc_str(node, i);
 			pid = fork();
 			if (pid == 0)
-				heredoc_write(ret_str, node, fd);
-			node->in_fd = fd[0];
+				handle_heredoc(node, i, ret_str, fd);
+			else
+				waitpid(pid, &g_execute->exit_code, 0);
+			if (g_execute->exit_code == 256)
+				g_execute->exit_code = 1;
+			if (g_execute->exit_code == 0)
+				node->in_fd = fd[0];
 			close(fd[1]);
-			waitpid(pid, NULL, 0);
 		}
 		i++;
 	}

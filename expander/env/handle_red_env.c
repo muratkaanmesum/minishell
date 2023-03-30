@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_red_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 06:32:37 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 14:48:28 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:45:50 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	handle_env_infile(t_node *node, t_env *env, int i)
 	char	*str;
 	char	*env_value;
 
+	str = NULL;
+	env_value = NULL;
 	str = get_env_location(node->redirections->infile[i]);
 	if (str != NULL)
 		env_value = find_env_variable(str, env);
@@ -31,6 +33,8 @@ void	handle_env_outfile(t_node *node, t_env *env, int i)
 	char	*str;
 	char	*env_value;
 
+	str = NULL;
+	env_value = NULL;
 	str = get_env_location(node->redirections->outfile[i]);
 	if (str != NULL)
 		env_value = find_env_variable(str, env);

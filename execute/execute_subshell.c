@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_subshell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:49:55 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 13:27:16 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:21:31 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ void	exec_connections(t_node *node)
 void	execute_subshell(t_node *node)
 {
 	int	pid;
-	int	next_exec_index;
 
 	handle_node_files(node);
-	next_exec_index = 0;
 	pid = fork();
 	if (pid == 0)
 	{

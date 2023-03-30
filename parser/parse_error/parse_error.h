@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 16:29:48 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/24 03:12:30 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/28 15:37:24 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ int		check_operators(t_token *tokens);
 int		check_missing_operator(t_token *tokens);
 int		check_subshell_operators(t_token *tokens);
 int		check_empty_subshell(t_token *tokens);
+int		check_before_subshell(t_token *tokens, int i);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   right_side_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:02:36 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/28 18:25:15 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:48:12 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	is_right_side(char *str, int index)
 {
-	char	*new_str;
 	int		count;
 
 	count = 0;
@@ -56,6 +55,7 @@ char	*right_side(char *str, int *index)
 	int		j;
 
 	count = 0;
+	new_str = NULL;
 	if (*index != 0)
 	{
 		if (str[*index - 1] == '*')

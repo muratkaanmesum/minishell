@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:47:38 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/28 17:26:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:24:14 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <string.h>
 # include <sys/ioctl.h>
 # include <unistd.h>
+
+extern struct s_execute		*g_execute;
 
 enum						e_token
 {
@@ -82,6 +84,7 @@ typedef struct s_execute
 	char					**export;
 	int						only_red_count;
 	char					*input;
+	int						exit_code;
 }							t_execute;
 
 typedef struct s_token

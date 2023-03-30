@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   middle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:24 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 12:54:52 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:48:51 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	search_str(char *file, char *str)
 			i++;
 			count++;
 		}
-		if (count == ft_strlen(str))
+		if (count == (int)ft_strlen(str))
 			return (1);
 		if (file[i] != '\0')
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   left_side.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 19:22:19 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/25 13:14:55 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:48:32 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	is_left_side(char *str, int index)
 {
 	int		count;
-	char	*ret_str;
-	int		j;
 
 	count = 0;
 	if (index == 0)

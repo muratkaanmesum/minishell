@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readdir_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:43:15 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/27 16:58:34 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:09:43 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	get_all_count(char *path)
 {
-	char			buf[1024];
 	DIR				*d;
 	struct dirent	*dir;
 	int				i;
@@ -32,7 +31,6 @@ int	get_all_count(char *path)
 		}
 	}
 	closedir(d);
-	free(dir);
 	return (i);
 }
 

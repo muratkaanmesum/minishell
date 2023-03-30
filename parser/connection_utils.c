@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connection_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 11:33:38 by kali              #+#    #+#             */
-/*   Updated: 2023/03/25 14:12:11 by eablak           ###   ########.fr       */
+/*   Updated: 2023/03/29 12:27:35 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	handle_split_type(enum e_token split_type, t_node *head, t_token ***split)
 		head->connections = malloc(sizeof(t_node *) * head->connection_count);
 	else
 		head->connections = NULL;
+	if (head->is_arithmetic == 1)
+	{
+		head->connection_count = 0;
+		return (0);
+	}
 	if (split_type != UNKNOWN && head->is_arithmetic != 1 && split_type != 200)
 	{
 		*split = split_token(head->tokens, split_type);

@@ -6,7 +6,7 @@
 /*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 17:48:31 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/23 05:11:36 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:17:20 by mmesum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ void	close_node_fds(t_node *node)
 
 int	get_last_execute_code(t_node *head)
 {
-	int	res;
-
-	res = (((head->execute->last_exit_code) & 0xff00) >> 8);
-	return (res);
+	if (head->execute->last_exit_code != 0)
+		return (1);
+	return (0);
 }
 
 void	close_all_fds(t_node *top)
@@ -68,23 +67,10 @@ char	*get_path(char *path)
 	return (ft_strdup(buff));
 }
 
-void	print_all_fds(t_node *node)
+int	check_size(t_node *node, char *command)
 {
-	int	i;
-
-	i = 0;
-	if (node->connection_count == 0)
-	{
-		printf("in_fd: %d, out_fd: %d\n", node->in_fd, node->out_fd);
-	}
+	if (ft_strlen(command) > ft_strlen(node->command->command))
+		return (ft_strlen(command));
 	else
-	{
-		while (i < node->connection_count)
-		{
-			if (i == 0)
-				printf("in_fd: %d, out_fd: %d\n", node->in_fd, node->out_fd);
-			print_all_fds(node->connections[i]);
-			i++;
-		}
-	}
+		return (ft_strlen(node->command->command));
 }
