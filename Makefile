@@ -155,7 +155,7 @@ SRCS        :=            libft/ft_isalnum.c \
 OBJS        := $(SRCS:.c=.o)
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I/Users/eablak/readline/include/
 
 ################################################################################
 #                                  Makefile  objs                              #
@@ -172,10 +172,10 @@ RM		    := rm -f
 
 ${NAME}:	${OBJS}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			${CC} ${FLAGS} -o ${NAME} ${OBJS} -lreadline
+			${CC} ${FLAGS} -o ${NAME} ${OBJS} -I/Users/eablak/readline/include/ -L/Users/eablak/readline/lib/ -lreadline
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
-all:		${NAME}
+all: ${NAME}
 
 bonus:		all
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:42:16 by eablak            #+#    #+#             */
-/*   Updated: 2023/03/30 10:12:29 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 11:20:27 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ctrl_c(int sig)
 	(void)sig;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	g_execute->last_exit_code = 1;
