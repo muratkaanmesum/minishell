@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:25:29 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/30 10:51:53 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 11:34:05 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,6 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	str[i] = '\0';
 	free(s1);
 	return (str);
-}
-
-int	len_str(char *arg, char *str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	i = ft_strlen(arg);
-	j = ft_strlen(str);
-	if (i >= j)
-		return (i);
-	else
-		return (j);
 }
 
 char	*heredoc_str(t_node *node, int i)

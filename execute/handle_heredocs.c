@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredocs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmesum <mmesum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eablak <eablak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:31:36 by mmesum            #+#    #+#             */
-/*   Updated: 2023/03/29 16:27:14 by mmesum           ###   ########.fr       */
+/*   Updated: 2023/03/30 11:34:06 by eablak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+
+int	len_str(char *arg, char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	i = ft_strlen(arg);
+	j = ft_strlen(str);
+	if (i >= j)
+		return (i);
+	else
+		return (j);
+}
 
 void	handle_node_heredoc(t_node *node)
 {
